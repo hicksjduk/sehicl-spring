@@ -3,22 +3,24 @@ package uk.org.sehicl.website.template;
 import java.io.IOException;
 import java.io.Writer;
 
-public abstract class TemplateBase<T>
+import uk.org.sehicl.website.page.Page;
+
+public class Template
 {
-    private final String templateName;
+    private final Page page;
     
-    public TemplateBase(String templateName)
+    public Template(Page page)
     {
-        this.templateName = templateName;
+        this.page = page;
     }
 
-    public void process(T data, Writer writer)
+    public void process(Writer writer)
     {
         freemarker.template.Template template;
         try
         {
-            template = TemplateConfig.getConfiguration().getTemplate(templateName);
-            template.process(data, writer);
+            template = TemplateConfig.getConfiguration().getTemplate("page.html");
+            template.process(page, writer);
         }
         catch (IOException | freemarker.template.TemplateException e)
         {

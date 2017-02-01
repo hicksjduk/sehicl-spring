@@ -32,4 +32,38 @@ public abstract class Page
     {
         return navigator;
     }
+
+    public String getContactsLink()
+    {
+        return new MailtoLink.Builder("contact")
+                .build()
+                .toString();
+    }
+
+    public String getFixtureSecretaryLink()
+    {
+        return new MailtoLink.Builder("fixturesec")
+                .setDescription("SEHICL Fixture Secretary")
+                .setLinkText("the Fixture Secretary")
+                .build()
+                .toString();
+    }
+
+    public String getSecretaryLink()
+    {
+        return new MailtoLink.Builder("secretary")
+                .setDescription("SEHICL Secretary")
+                .setLinkText("the Secretary")
+                .build()
+                .toString();
+    }
+
+    public String getWebmasterLink()
+    {
+        return new MailtoLink.Builder("website")
+                .setDescription("SEHICL Webmaster")
+                .setLinkText("the Webmaster")
+                .build()
+                .toString();
+    }
 }
