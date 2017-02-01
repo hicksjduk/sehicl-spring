@@ -34,7 +34,7 @@ public enum NavigatorSection
             new NavigatorItem("Colts Under-16 Bowling", "/averages/bowling/ColtsUnder16"),
             new NavigatorItem("Colts Under-13 Batting", "/averages/batting/ColtsUnder13"),
             new NavigatorItem("Colts Under-13 Bowling", "/averages/bowling/ColtsUnder13"),
-            new NavigatorItem("By team", "/averages/ByTeam")),
+            new NavigatorItem("By team", "/averages/byTeam")),
     RESOURCES(Section.RESOURCES, "Resources", "/resources"),
     RULES(Section.RULES, "Rules", "/rules"),
     RECORDS(Section.RECORDS, "Records", "/records",
