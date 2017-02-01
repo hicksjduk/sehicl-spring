@@ -11,7 +11,7 @@ public class TemplateConfig
     {
         if (CONFIG == null)
         {
-            Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
+            Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
             cfg
                     .setClassLoaderForTemplateLoading(TemplateConfig.class.getClassLoader(),
                             "templates");

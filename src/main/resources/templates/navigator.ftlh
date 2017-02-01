@@ -1,4 +1,5 @@
-<#assign lastIndent = -1/>
+<#assign lastIndent = 0/>
+<ul class="navigator">
 <#list navigator.rows as row>
 <#if (row.nestingLevel > lastIndent)>
 <ul>

@@ -1,6 +1,7 @@
 package uk.org.sehicl.website.template;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
 
 import uk.org.sehicl.website.page.Page;
@@ -13,13 +14,20 @@ public class Template
     {
         this.page = page;
     }
+    
+    public String process()
+    {
+        StringWriter sw = new StringWriter();
+        process(sw);
+        return sw.toString();
+    }
 
     public void process(Writer writer)
     {
         freemarker.template.Template template;
         try
         {
-            template = TemplateConfig.getConfiguration().getTemplate("page.html");
+            template = TemplateConfig.getConfiguration().getTemplate("page.ftlh");
             template.process(page, writer);
         }
         catch (IOException | freemarker.template.TemplateException e)

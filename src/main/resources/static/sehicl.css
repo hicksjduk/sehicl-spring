@@ -1,0 +1,584 @@
+#header
+{
+	padding-top: 10px;
+}
+
+#header #LeagueInfo
+{
+	font-size: 18pt;
+	font-weight: bold
+}	           	
+
+#header #SponsorInfo
+{
+	text-align: right;
+	font-style: italic;
+	color: green;
+	font-weight: bold;
+	font-size: 14pt
+}
+
+#leftNavigator {
+/*	display: none; */
+	position: fixed;
+	top: 1em;
+	left: .5em;
+	width: 12em;
+	float: left;
+	background-color: green;
+}
+
+#leftNavigator ul ul
+{
+	display: none
+}
+
+#leftNavigator #currentMenu
+{
+	display: block;
+}
+
+.navigator {
+	color: white;
+}
+
+.navigator a {
+	color: #eaffea; 
+}
+
+.navigator .current {
+	font-weight: bold
+}
+
+#main {
+/*	padding-left: 2.5em; */
+	padding-left: 13.5em;
+	padding-right: 2em;
+	min-height: 25em
+}
+
+#footer
+{
+/*	position: relative */
+/*	margin-left: 200px; */
+	padding-bottom: 2em
+}
+
+BODY {
+	font-family: sans-serif;
+	background-color: #bb0000
+}
+
+a {
+	color: green
+}
+
+#page {
+	background-color: #fafffb;
+}
+
+ul.navigator
+{
+	list-style-type: none;
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-left: 5px;
+	padding-left: 5px;
+}
+
+ul.navigator li
+{
+	margin-top: 3px;
+	padding-top: 3px;
+	margin-bottom: 0;
+	padding-bottom: 0
+}
+
+ul.navigator li ul
+{
+	list-style-type: none;
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-left: 10px;
+	padding-left: 10px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+	font-size: smaller
+}
+
+ul.navigator li ul li
+{
+	margin-top: 0px;
+	padding-top: 0px
+}
+
+#presentation dd {
+	font-weight: bold
+}
+
+#fixlist .time {
+	padding-left: 10px;
+	padding-right: 10px;
+	vertical-align: top
+}
+
+#fixlist .court {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#fixlist .teams {
+	padding-right: 30px;
+	white-space: nowrap;
+}
+
+#fixlist .division {
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+#fixlist .date {
+	font-weight: bold;
+	padding-top: 10px;
+	white-space: nowrap;
+}
+
+#teamfix .time {
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center
+}
+
+#teamfix .court {
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center
+}
+
+#teamfix .homeaway {
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center
+}
+
+#teamfix .opponent {
+	padding-left: 10px;
+	padding-right: 30px;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#teamfix .result {
+	padding-left: 25px;
+	text-align: left
+}
+
+#teamfix .date {
+	padding-right: 10px;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#teamfix .division {
+	vertical-align: top
+}
+
+#contacts td {
+	padding-top: 5px;
+	vertical-align: top;
+}
+
+H1 {
+	color: green;
+	font-size: 18pt
+}
+
+#batav .number {
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px
+}
+#batav .name {
+	padding-right: 20px;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#bowlav .number {
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px
+}
+
+#bowlav .name {
+	padding-right: 20px;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#users th {
+	padding-right: 20px;
+	text-align: left;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+#users td {
+	padding-right: 20px;
+	text-align: left;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+#table .number {
+	width: 3em;
+	text-align: center
+}
+
+#table .teamname {
+	padding-right: 1em;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#table .key {
+	width: 2em;
+	text-align: center;
+	color: red;
+	font-weight: bold
+}
+
+#table .linebelow {
+	border-bottom: 1px solid black;
+	line-height: 1px
+}
+
+#table .promoted {
+	font-weight: bold
+}
+
+#table .relegated {
+	font-weight: bold
+}
+
+#table .champions {
+	font-weight: bold;
+	font-style: italic
+}
+
+#recordPerformances .division {
+	padding-right: 2em;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#recordPerformances .team {
+	padding-right: 2em;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#recordPerformances .player {
+	padding-right: 2em;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#recordPerformances .performance {
+	text-align: center;
+	padding-right: 2em;
+	white-space: nowrap;
+}
+
+#divwinners .year {
+	padding-right: 2em;
+	text-align: left;
+	white-space: nowrap;
+}
+#divwinners .winner {
+	padding-right: 2em;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#indivAwards .year {
+	padding-right: 2em;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#indivAwards .winner {
+	padding-right: 2em;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#indivAwards .team {
+	padding-right: 2em;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#indivAwards .performance {
+	text-align: center;
+	white-space: nowrap;
+}
+
+#fairplay .year {
+	padding-right: 2em;
+	text-align: left;
+	vertical-align: top
+}
+
+#fairplay .winner {
+	padding-right: 2em;
+	text-align: left
+}
+
+#rules ul#index {
+	list-style: none;
+	padding-left: 2em;
+}
+
+#rules #index li {
+	white-space: nowrap;
+}
+
+#presentation .datecol {
+	padding-right: 25px;
+	text-align: left
+}
+
+#presentation .teamcol {
+	text-align: left
+}
+
+#presentation dt {
+	margin-top: 1em
+}
+
+ul.deductions {
+	list-style: none;
+}
+
+ul.tablenotes {
+	list-style: none;
+	font-weight: bold;
+}
+
+p.tablenotes {
+	font-weight: bold;
+}
+
+.dedkeys {
+	font-size: smaller;
+	font-style: italic;
+}
+
+.calctext {
+	font-size: smaller;
+}
+
+.statusMessage {
+	font-style: italic;
+}
+
+ul.deduct {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+ul.tablenote {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+	font-weight: bold
+}
+
+.boxed
+{
+	border-width: thin;
+	border-style: groove;
+	padding: 5px;
+	margin-top: 1em
+}
+
+#avgeindex td
+{
+	padding-right: 1em;
+	text-align: left;
+	vertical-align: top
+}
+
+#avgeindex .teamName
+{
+	width: 15em
+}
+
+H2 {
+	font-size: 14pt
+}
+
+H3 {
+	font-size: 12pt
+}
+
+#avgeindex .divheading {
+	vertical-align: top;
+	padding-top: 20px
+}
+
+#reslist .teamscore {
+	width: 50%;
+	padding-right: 30px;
+	padding-top: 5px
+}
+
+#reslist .highlights {
+	font-style: italic;
+	padding-left: 15px;
+	vertical-align: top;
+	padding-right: 30px;
+}
+
+#reslist .date {
+	padding-top: 20px;
+	font-weight: bold
+}
+
+#reslist .division {
+	padding-top: 10px;
+	font-weight: bold
+}
+
+#reslist .match {
+	padding-top: 5px
+}
+
+#reslist .result {
+	padding-left: 5em
+}
+
+#datenav {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+#datenav li {
+	display: inline;
+	white-space: nowrap;
+}
+
+#datenav li a {
+	margin-left: 5px;
+	padding-left: 5px
+}
+
+.printonly {
+	display: none
+}
+
+#contacts .role {
+	margin-right: 20px;
+	padding-right: 20px
+}
+
+#contacts .clubname {
+	margin-top: 5px;
+	padding-top: 5px;
+	font-weight: bold
+}
+
+.breakhere {
+	page-break-before: always
+}
+
+.nobreak {
+	page-break-inside: avoid
+}
+
+.nolinewrap {
+	white-space: nowrap;
+}
+
+#news {
+   font-style: italic;
+   background-color: #84ffc1;
+   border-color: #bb0000;
+   border-width: 3;
+   border-style: double;
+}
+
+#dutyrota .datecol {
+	padding-right: 25px;
+	text-align: left
+}
+
+#dutyrota .teamcol {
+	text-align: left
+}
+
+@media print
+{
+	#header
+	{
+		display: none;
+		margin-left: 0px
+	}
+
+	#leftNavigator {
+		display: none
+	}
+
+	#footer {
+		display: none
+	}
+
+	#main {
+		margin-left: 0px;
+		padding-left: 0;
+		float: none
+	}
+
+	#main div
+	{
+		position: relative
+	}
+
+	BODY {
+		background-color: white
+	}
+
+	.noprint
+	{
+		display: none
+	}
+
+	.printonly
+	{
+		display: inline
+	}
+
+	A {
+		text-decoration: none;
+		color: black;
+	}
+
+	H1
+	{
+		color: black;
+	}
+
+	h3
+	{
+		font-size: 12pt;
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: 0;
+		padding-bottom: 0
+	}
+}

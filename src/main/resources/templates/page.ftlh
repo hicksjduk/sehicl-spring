@@ -8,15 +8,15 @@
 <body id="${pageId}">
 	<div id="page">
 		<div id="leftNavigator">
-		<#include "navigator.html"/>
+		<#include "navigator.ftlh"/>
 		</div>
 		
 		<div id="main">
-  			<#include "header.html"/>
+  			<#include "header.ftlh"/>
 			<div id="content">
 				<#include contentTemplate/>
 			</div>
-			<#include "footer.html"/>
+			<#include "footer.ftlh"/>
 		</div>
 	</div>
 </body>

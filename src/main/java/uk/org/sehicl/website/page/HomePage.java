@@ -6,7 +6,7 @@ public class HomePage extends Page
 {
     public HomePage(String uri)
     {
-        super("home", "home.html", Section.HOME, uri);
+        super("home", "home.ftlh", Section.HOME, uri);
     }
 
     @Override
