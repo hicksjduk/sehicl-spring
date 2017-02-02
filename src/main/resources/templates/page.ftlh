@@ -1,10 +1,10 @@
 <#macro mailto address domain="" description="">
-<#assign linkText>
-	<#nested/>
-</#assign>
-<script language="javascript">
-	document.write(mailTo("${address}", "${domain}", "${description}", "${linkText?markup_string?trim?js_string}"));
-</script>
+	<#assign linkText>
+		<#nested/>
+	</#assign>
+	<script language="javascript">
+		document.write(mailTo("${address}", "${domain}", "${description}", "${linkText?markup_string?trim?js_string}"));
+	</script>
 </#macro>
 <html>
 <head>
