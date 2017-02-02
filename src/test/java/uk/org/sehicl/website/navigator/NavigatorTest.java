@@ -2,6 +2,7 @@ package uk.org.sehicl.website.navigator;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
@@ -89,13 +90,14 @@ public class NavigatorTest
         assertFalse(results.hasNext());
     }
 
-    private Consumer<NavigatorRow> validator(String title, String uri, int nestingLevel)
+    private Consumer<NavigatorRow> validator(String title, String uri, Consumer<NavigatorRow>... subItems)
     {
         return item ->
         {
             assertEquals(title, item.getTitle());
             assertEquals(uri, item.getUri());
-            assertEquals(nestingLevel, item.getNestingLevel());
+            if ()
+            Arrays.stream(subItems).forEach(action);
         };
     }
 }

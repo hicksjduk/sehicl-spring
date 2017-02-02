@@ -12,10 +12,8 @@ public class Navigator
 
     public Navigator(Section section, String uri)
     {
-        rows = Arrays
-                .stream(NavigatorSection.values())
-                .flatMap(s -> toRows(section, uri, s))
-                .collect(Collectors.toList());
+        rows = Arrays.stream(NavigatorSection.values()).map(s -> toRow(section, uri, s)).collect(
+                Collectors.toList());
     }
 
     public List<NavigatorRow> getRows()
@@ -23,24 +21,16 @@ public class Navigator
         return rows;
     }
 
-    private Stream<NavigatorRow> toRows(Section section, String uri,
-            NavigatorSection navigatorSection)
+    private NavigatorRow toRow(Section section, String uri, NavigatorSection navigatorSection)
     {
-        return toRows(Objects.equals(section, navigatorSection.getSection()), uri,
-                navigatorSection.getItem(), 0);
+        return toRow(Objects.equals(section, navigatorSection.getSection()), uri,
+                navigatorSection.getItem());
     }
 
-    private Stream<NavigatorRow> toRows(boolean current, String uri, NavigatorItem navigatorItem,
-            int nestingLevel)
+    private NavigatorRow toRow(boolean current, String uri, NavigatorItem item)
     {
-        Stream<NavigatorRow> answer = Stream.of(new NavigatorRow(navigatorItem.getTitle(),
-                Objects.equals(uri, navigatorItem.getUri()) ? null : navigatorItem.getUri(),
-                nestingLevel));
-        if (current)
-        {
-            answer = Stream.concat(answer, navigatorItem.getSubItems().stream().flatMap(
-                    i -> toRows(current, uri, i, nestingLevel + 1)));
-        }
+        NavigatorRow answer = new NavigatorRow(item.getTitle(), uri,
+                current ? item.getSubItems().stream().map(si -> toRow(current, uri, si)) : null);
         return answer;
 
     }
@@ -49,13 +39,13 @@ public class Navigator
     {
         private final String title;
         private final String uri;
-        private final int nestingLevel;
+        private final List<NavigatorRow> subRows;
 
-        public NavigatorRow(String title, String uri, int nestingLevel)
+        public NavigatorRow(String title, String uri, Stream<NavigatorRow> subRows)
         {
             this.title = title;
             this.uri = uri;
-            this.nestingLevel = nestingLevel;
+            this.subRows = subRows == null ? Arrays.asList() : subRows.collect(Collectors.toList());
         }
 
         public String getTitle()
@@ -68,16 +58,15 @@ public class Navigator
             return uri;
         }
 
-        public int getNestingLevel()
+        protected List<NavigatorRow> getSubRows()
         {
-            return nestingLevel;
+            return subRows;
         }
 
         @Override
         public String toString()
         {
-            return "NavigatorRow [title=" + title + ", uri=" + uri + ", nestingLevel="
-                    + nestingLevel + "]";
+            return "NavigatorRow [title=" + title + ", uri=" + uri + ", subRows=" + subRows + "]";
         }
 
     }
