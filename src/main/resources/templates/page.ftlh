@@ -1,6 +1,9 @@
 <#macro mailto address domain="" description="">
-<script language=\"javascript\">
-	document.write(mailTo("${address}", "${domain}", "${description}", "<#nested/>"));
+<#assign linkText>
+	<#nested/>
+</#assign>
+<script language="javascript">
+	document.write(mailTo("${address}", "${domain}", "${description}", "${linkText?markup_string?trim?js_string}"));
 </script>
 </#macro>
 <html>
@@ -11,9 +14,6 @@
 <title>${title}</title>
 </head>
 <body id="${pageId}">
-	<@mailto address="website" description="SEHICL Webmaster">
-	the Webmaster
-	</@mailto>
 	<div id="page">
 		<div id="leftNavigator">
 		<#include "navigator.ftlh"/>
