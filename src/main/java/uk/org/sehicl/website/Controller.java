@@ -49,4 +49,29 @@ public class Controller
         return new Template(new StaticPage("resources", "resources.ftlh", Section.RESOURCES, uri,
                 "SEHICL Resources")).process();
     }
+
+    @RequestMapping("/rules")
+    public String rules(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new Template(
+                new StaticPage("rules", "rules.ftlh", Section.RULES, uri, "SEHICL Rules"))
+                        .process();
+    }
+
+    @RequestMapping("/records")
+    public String recordsIndex(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new StaticPage("records", "records/index.ftlh", Section.RECORDS, uri,
+                "SEHICL Records")).process();
+    }
+
+    @RequestMapping("/records/performances")
+    public String recordPerformances(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new StaticPage("records", "records/performances.ftlh", Section.RECORDS,
+                uri, "SEHICL Record Performances")).process();
+    }
 }
