@@ -1,4 +1,5 @@
 <h1>Welcome!</h1>
+<#include "news.ftlh"/>
 <p>
 	<b>South East Hampshire (Fareham) Indoor Cricket League</b> is a <a
 		href="http://hampshirecb.play-cricket.com/">Hampshire Cricket
