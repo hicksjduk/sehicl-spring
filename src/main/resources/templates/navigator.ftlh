@@ -2,7 +2,7 @@
 <ul class="navigator">
 <#list navigator.rows as row>
 <#if (row.nestingLevel > lastIndent)>
-<ul>
+<ul id="currentMenu">
 <#elseif (row.nestingLevel < lastIndent)>
 </ul>
 </#if>

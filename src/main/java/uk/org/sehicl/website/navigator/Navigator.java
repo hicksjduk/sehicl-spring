@@ -73,5 +73,12 @@ public class Navigator
             return nestingLevel;
         }
 
+        @Override
+        public String toString()
+        {
+            return "NavigatorRow [title=" + title + ", uri=" + uri + ", nestingLevel="
+                    + nestingLevel + "]";
+        }
+
     }
 }
