@@ -43,7 +43,11 @@
         <tr>
             <td class="role">${contact.role.name}</td>
             <td>
-            ${contact.name}
+            <#if contact.role.email??>
+            	<@mailto address=contact.role.email>${contact.name}</@mailto>
+            <#else>
+            	${contact.name}
+            </#if>
             <#if !contacts.restricted>
             <#if contact.address??><br>${contact.address}</#if>
             <#if contact.phoneNumbers?size != 0><br>${contact.phoneNumbers?join(", ")}</#if>
@@ -53,11 +57,11 @@
     </#list>
 	</tbody>
 </table>
-<p>General contacts should be addressed to ${contactsLink}.</p>
+<p>General contacts should be addressed to <@mailto address="contacts"/>.</p>
 <p>Non-member clubs who wish to enter one or more teams in the
-	League are asked to contact ${secretaryLink} in the first instance.</p>
+	League are asked to contact <@mailto address="secretary">the Secretary</@mailto> in the first instance.</p>
 <p>
-	Result sheets may be sent electronically to ${fixtureSecretaryLink},
+	Result sheets may be sent electronically to <@mailto address="fixturesec">the Fixture Secretary</@mailto>,
 	using one of the template documents available on the <a
 		href="/resources">Resources</a> page.
 </p>
@@ -74,9 +78,18 @@
             <td>
 			<#if contact.role.name == "Secretary">
             	<#if contacts.restricted>
-            		${contact.name}
+		            <#if contact.role.email??>
+        		    	<@mailto address=contact.role.email>${contact.name}</@mailto>
+            		<#else>
+            			${contact.name}
+            		</#if>
             	<#else>
-            		${contact.role.name}: ${contact.name}
+            		${contact.role.name}:
+    				<#if contact.role.email??>
+        		    	<@mailto address=contact.role.email>${contact.name}</@mailto>
+            		<#else>
+            			${contact.name}
+            		</#if>
             		<#if contact.address??><br>${contact.address}</#if>
             		<#if contact.phoneNumbers?size != 0><br>${contact.phoneNumbers?join(", ")}</#if>
             	</#if>

@@ -11,7 +11,7 @@ public class ContactsPage extends Page
     public ContactsPage(String uri)
     {
         super("contacts", "contacts.ftlh", Section.CONTACTS, uri);
-        contacts = new ContactsReport(Contacts.getContacts(), false);
+        contacts = new ContactsReport(Contacts.getContacts(), true);
     }
 
     @Override
