@@ -24,4 +24,6 @@
 	on Sunday 20th March; click the link for details of the evening.
 </p>
 <p>Please report any broken links, mis-spelled names or other errors
-	to ${webmasterLink?no_esc}.</p>
+	to 	<@mailto address="website" description="SEHICL Webmaster">
+	the Webmaster
+	</@mailto>.</p>
