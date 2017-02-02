@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ContactsPage;
 import uk.org.sehicl.website.page.HomePage;
+import uk.org.sehicl.website.page.StaticPage;
 import uk.org.sehicl.website.template.Template;
 
 @RestController
@@ -40,11 +42,11 @@ public class Controller
         return new Template(new ContactsPage(uri)).process();
     }
 
-    @RequestMapping("/contacts/{hello}")
-    public String contactsHello(HttpServletRequest req)
+    @RequestMapping("/resources")
+    public String resources(HttpServletRequest req)
     {
         String uri = getRequestUri(req);
-        return new Template(new ContactsPage(uri)).process();
+        return new Template(new StaticPage("resources", "resources.ftlh", Section.RESOURCES, uri,
+                "SEHICL Resources")).process();
     }
-
 }
