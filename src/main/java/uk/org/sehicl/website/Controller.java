@@ -74,4 +74,12 @@ public class Controller
         return new Template(new StaticPage("records", "records/performances.ftlh", Section.RECORDS,
                 uri, "SEHICL Record Performances")).process();
     }
+
+    @RequestMapping("/records/winners")
+    public String divisionalWinners(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new StaticPage("divwinners", "records/divwinners.ftlh", Section.RECORDS,
+                uri, "SEHICL Divisional Winners")).process();
+    }
 }
