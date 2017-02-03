@@ -90,4 +90,12 @@ public class Controller
         return new Template(new StaticPage("awards", "records/individualawards.ftlh",
                 Section.RECORDS, uri, "SEHICL Individual Awards")).process();
     }
+
+    @RequestMapping("/records/fairplay")
+    public String fairplay(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new StaticPage("fairplay", "records/fairplay.ftlh", Section.RECORDS,
+                uri, "SEHICL Sporting & Efficiency")).process();
+    }
 }

@@ -1,304 +1,62 @@
+<#macro award year winner>
+	<tr>
+		<td class="year">${year}</td>
+		<td class="winner">${winner}</td>
+	</tr>
+</#macro>
+
 <div id="fairplay">
 <h1>Sporting and Efficiency</h1>
 <h2>Alastair MacDonald Award (Seniors)</h2>
 <table border="0">
-	
 <tbody>
-		
-<tr>
-			
-<td class="year">1994-95</td>
-			<td class="winner">Mr W.R. Jones</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1995-96</td>
-			<td class="winner">Enterprise A</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1996-97</td>
-			<td class="winner">Portsmouth B</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1997-98</td>
-			<td class="winner">Locks Heath A</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1998-99</td>
-			<td class="winner">Champagne</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1999-2000</td>
-			<td class="winner">Cowplain, DOE Gosport Cavaliers B (shared)</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2000-01</td>
-			<td class="winner">DOE Gosport Cavaliers B</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2001-02</td>
-			<td class="winner">DOE Gosport Cavaliers A</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2002-03</td>
-			<td class="winner">Portchester A</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2003-04</td>
-			<td class="winner">DOE Gosport Cavaliers</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2004-05</td>
-			<td class="winner">Portchester B</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2005-06</td>
-			<td class="winner">St James Casuals</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2006-07</td>
-			<td class="winner">Denmead</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2007-08</td>
-			<td class="winner">Havant A</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2008-09</td>
-			<td class="winner">Hambledon</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2009-10</td>
-			<td class="winner">Fareham &amp; Crofton B</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2010-11</td>
-			<td class="winner">Portsmouth Priory</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2011-12</td>
-			<td class="winner">Fareham &amp; Crofton C</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2012-13</td>
-			<td class="winner">Fareham &amp; Crofton A, Havant A, Sarisbury Athletic A (shared)</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2013-14</td>
-			<td class="winner">Havant A</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2014-15</td>
-			<td class="winner">Gosport Borough</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2015-16</td>
-			<td class="winner">Denmead</td>
-		
-</tr>
-	
+<@award "1994-95" "Mr W.R. Jones"/>
+<@award "1995-96" "Enterprise A"/>
+<@award "1996-97" "Portsmouth B"/>
+<@award "1997-98" "Locks Heath A"/>
+<@award "1998-99" "Champagne"/>
+<@award "1999-2000" "Cowplain, DOE Gosport Cavaliers B (shared)"/>
+<@award "2000-01" "DOE Gosport Cavaliers B"/>
+<@award "2001-02" "DOE Gosport Cavaliers A"/>
+<@award "2002-03" "Portchester A"/>
+<@award "2003-04" "DOE Gosport Cavaliers"/>
+<@award "2004-05" "Portchester B"/>
+<@award "2005-06" "St James Casuals"/>
+<@award "2006-07" "Denmead"/>
+<@award "2007-08" "Havant A"/>
+<@award "2008-09" "Hambledon"/>
+<@award "2009-10" "Fareham & Crofton B"/>
+<@award "2010-11" "Portsmouth Priory"/>
+<@award "2011-12" "Fareham & Crofton C"/>
+<@award "2012-13" "Fareham & Crofton A, Havant A, Sarisbury Athletic A (shared)"/>
+<@award "2013-14" "Havant A"/>
+<@award "2014-15" "Gosport Borough"/>
+<@award "2015-16" "Denmead"/>
 </tbody>
-
 </table>
+
 <h2>Roy Jones Award (Colts)</h2>
 <table border="0">
-	
 <tbody>
-		
-<tr>
-			
-<td class="year">1997-98</td>
-			<td class="winner">Gosport Borough</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1998-99</td>
-			<td class="winner">Portchester Under-16</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1999-2000</td>
-			<td class="winner">Portsmouth Under-13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2000-01</td>
-			<td class="winner">Havant Under-16</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2001-02</td>
-			<td class="winner">Havant Under-13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2002-03</td>
-			<td class="winner">Portsmouth Under-16</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2003-04</td>
-			<td class="winner">Fareham &amp; Crofton Under-16</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2004-05</td>
-			<td class="winner">Hambledon Under-16</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2005-06</td>
-			<td class="winner">Portsmouth Community Under-16</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2006-07</td>
-			<td class="winner">Locks Heath Under-13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2007-08</td>
-			<td class="winner">Portsmouth Under-13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2008-09</td>
-			<td class="winner">Locks Heath Under-13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2009-10</td>
-			<td class="winner">Fareham &amp; Crofton Under-13, Havant Under-16, Locks Heath Under-13, Portsmouth Under-16, Purbrook Under-13 (shared)</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2010-11</td>
-			<td class="winner">Havant Under-16</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2011-12</td>
-			<td class="winner">Waterlooville Under-16</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2012-13</td>
-			<td class="winner">Portsmouth Community Under-13</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2013-14</td>
-			<td class="winner">Petersfield Under-16, Portsmouth &amp; Southsea Under-13 (shared)</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2014-15</td>
-			<td class="winner">Sarisbury Athletic Under-16</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2015-16</td>
-			<td class="winner">Fareham &amp; Crofton Under-13</td>
-		
-</tr>
-	
+<@award "1997-98" "Gosport Borough"/>
+<@award "1998-99" "Portchester Under-16"/>
+<@award "1999-2000" "Portsmouth Under-13"/>
+<@award "2000-01" "Havant Under-16"/>
+<@award "2001-02" "Havant Under-13"/>
+<@award "2002-03" "Portsmouth Under-16"/>
+<@award "2003-04" "Fareham & Crofton Under-16"/>
+<@award "2004-05" "Hambledon Under-16"/>
+<@award "2005-06" "Portsmouth Community Under-16"/>
+<@award "2006-07" "Locks Heath Under-13"/>
+<@award "2007-08" "Portsmouth Under-13"/>
+<@award "2008-09" "Locks Heath Under-13"/>
+<@award "2009-10" "Fareham & Crofton Under-13, Havant Under-16, Locks Heath Under-13, Portsmouth Under-16, Purbrook Under-13 (shared)"/>
+<@award "2010-11" "Havant Under-16"/>
+<@award "2011-12" "Waterlooville Under-16"/>
+<@award "2012-13" "Portsmouth Community Under-13"/>
+<@award "2013-14" "Petersfield Under-16, Portsmouth & Southsea Under-13 (shared)"/>
+<@award "2014-15" "Sarisbury Athletic Under-16"/>
+<@award "2015-16" "Fareham & Crofton Under-13"/>
 </tbody>
-
 </table>
 </div>
