@@ -1,286 +1,64 @@
-
+<#macro performance division team performance year player="">
+	<tr>
+		<td class="division">${division}</td>
+		<#if player != "">
+			<td class="player">${player}</td>
+		</#if>
+		<td class="team">${team}</td>
+		<td class="performance">${performance}</td>
+		<td class="year">${year}</td>
+	</tr>
+</#macro>
 <div id="recordPerformances">
 <h1>Record performances</h1>
 <h2>
 <a id="hiteamtotal"></a>Highest team total</h2>
 <table border="0">
-	
 <tbody>
-		
-<tr>
-			
-<td class="division">Division 1</td>
-			<td class="team">Havant A</td>
-			<td class="performance">206 for 3</td>
-			<td class="year">2009-10</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 2</td>
-			<td class="team">United Services</td>
-			<td class="performance">192 for 3</td>
-			<td class="year">1991-92</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 3</td>
-			<td class="team">United Services</td>
-			<td class="performance">207 for 1</td>
-			<td class="year">1997-98</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 4</td>
-			<td class="team">ServiceMaster</td>
-			<td class="performance">207 for 0</td>
-			<td class="year">2014-15</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Colts Under-16</td>
-			<td class="team">Havant</td>
-			<td class="performance">269 for 1</td>
-			<td class="year">2003-04</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Colts Under-13</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">224 for 2</td>
-			<td class="year">2010-11</td>
-		
-</tr>
-	
+<@performance "Division 1" "Havant A" "206 for 3" "2009-10"/>
+<@performance "Division 2" "United Services" "192 for 3" "1991-92"/>
+<@performance "Division 3" "United Services" "207 for 1" "1997-98"/>
+<@performance "Division 4" "ServiceMaster" "207 for 0" "2014-15"/>
+<@performance "Colts Under-16" "Havant" "269 for 1" "2003-04"/>
+<@performance "Colts Under-13" "Portsmouth & Southsea" "224 for 2" "2010-11"/>
 </tbody>
-
 </table>
 <h2>
 <a id="loteamtotal"></a>Lowest team total</h2>
 <table border="0">
-	
 <tbody>
-		
-<tr>
-			
-<td class="division">Division 1</td>
-			<td class="team">Portsmouth A</td>
-			<td class="performance">11 all out</td>
-			<td class="year">2011-12</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 2</td>
-			<td class="team">IBM South Hants A</td>
-			<td class="performance">27 all out</td>
-			<td class="year">2008-09</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 3</td>
-			<td class="team">Cyanamid</td>
-			<td class="performance">12 all out</td>
-			<td class="year">1988-89</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 4</td>
-			<td class="team">IBM South Hants B</td>
-			<td class="performance">17 all out</td>
-			<td class="year">2003-04</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division"></td>
-			<td class="team">Flutters</td>
-			<td class="performance">17 all out</td>
-			<td class="year">2006-07</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Colts Under-16</td>
-			<td class="team">Portsmouth</td>
-			<td class="performance">14 all out</td>
-			<td class="year">2006-07</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Colts Under-13</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">15 all out</td>
-			<td class="year">2014-15</td>
-		
-</tr>
-	
+<@performance "Division 1" "Portsmouth A" "11 all out" "2011-12"/>
+<@performance "Division 2" "IBM South Hants A" "27 all out" "2008-09"/>
+<@performance "Division 3" "Cyanamid" "12 all out" "1988-89"/>
+<@performance "Division 4" "IBM South Hants B" "17 all out" "2003-04"/>
+<@performance "" "Flutters" "17 all out" "2006-07"/>
+<@performance "Colts Under-16" "Portsmouth" "14 all out" "2006-07"/>
+<@performance "Colts Under-13" "Portsmouth & Southsea" "15 all out" "2014-15"/>
 </tbody>
-
 </table>
 <h2>
 <a id="hiscore"></a>Highest individual score</h2>
 <table border="0">
-	
 <tbody>
-		
-<tr>
-			
-<td class="division">Division 1</td>
-			<td class="player">R Marston</td>
-			<td class="team">South Hants</td>
-			<td class="performance">81*</td>
-			<td class="year">1988-89</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 2</td>
-			<td class="player">P Barsby</td>
-			<td class="team">United Services</td>
-			<td class="performance">102*</td>
-			<td class="year">1988-89</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 3</td>
-			<td class="player">R Higgins</td>
-			<td class="team">Locks Heath B</td>
-			<td class="performance">84</td>
-			<td class="year">1999-2000</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 4</td>
-			<td class="player">M Berg</td>
-			<td class="team">Waterlooville B</td>
-			<td class="performance">91*</td>
-			<td class="year">2008-09</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division"></td>
-			<td class="player">B James</td>
-			<td class="team">Southern Electric</td>
-			<td class="performance">91*</td>
-			<td class="year">2015-16</td>
-		
-</tr>
-<tr>
-			
-<td class="division">Colts Under-16</td>
-			<td class="player">T Benfield</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">97</td>
-			<td class="year">2010-11</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Colts Under-13</td>
-			<td class="player">H Hovey</td>
-			<td class="team">Havant</td>
-			<td class="performance">122</td>
-			<td class="year">2010-11</td>
-		
-</tr>
-	
+<@performance "Division 1" "South Hants" "81*" "1988-89" "R Marston"/>
+<@performance "Division 2" "United Services" "102*" "1988-89" "P Barsby"/>
+<@performance "Division 3" "Locks Heath B" "84" "1999-2000" "R Higgins"/>
+<@performance "Division 4" "Waterlooville B" "91*" "2008-09" "M Berg"/>
+<@performance "" "Southern Electric" "91*" "2015-16" "B James"/>
+<@performance "Colts Under-16" "Portsmouth & Southsea" "97" "2010-11" "T Benfield"/>
+<@performance "Colts Under-13" "Havant" "122" "2010-11" "H Hovey"/>
 </tbody>
-
 </table>
 <h2>
 <a id="bestbowling"></a>Best bowling performance</h2>
 <table border="0">
-	
 <tbody>
-		
-<tr>
-			
-<td class="division">Division 1</td>
-			<td class="player">I Chaplen</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">5 for 9</td>
-			<td class="year">1987-88</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 2</td>
-			<td class="player">K Dunstan</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">5 for 12</td>
-			<td class="year">2013-14</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 3</td>
-			<td class="player">S Gale</td>
-			<td class="team">Portchester B</td>
-			<td class="performance">5 for 10</td>
-			<td class="year">2003-04</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Division 4</td>
-			<td class="player">S Kyte</td>
-			<td class="team">Harting</td>
-			<td class="performance">5 for 7</td>
-			<td class="year">1988-89</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Colts Under-16</td>
-			<td class="player">A Saunders</td>
-			<td class="team">Portsmouth</td>
-			<td class="performance">4 for 3</td>
-			<td class="year">1997-98</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="division">Colts Under-13</td>
-			<td class="player">S Le-Clercq</td>
-			<td class="team">Hambledon</td>
-			<td class="performance">4 for 0</td>
-			<td class="year">2008-09</td>
-		
-</tr>
-	
+<@performance "Division 1" "Portsmouth & Southsea" "5 for 9" "1987-88" "I Chaplen"/>
+<@performance "Division 2" "Portsmouth & Southsea" "5 for 12" "2013-14" "K Dunstan"/>
+<@performance "Division 3" "Portchester B" "5 for 10" "2003-04" "S Gale"/>
+<@performance "Division 4" ">Harting" "5 for 7" "1988-89" "S Kyte"/>
+<@performance "Colts Under-16" "Portsmouth" "4 for 3" "1997-98" "A Saunders"/>
+<@performance "Colts Under-13" "Hambledon" "4 for 0" "2008-09" "S Le-Clercq"/>
 </tbody>
-
 </table>
 </div>
