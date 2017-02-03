@@ -52,7 +52,8 @@ public class NavigatorTest
     @Test
     public void testMultipleItemSubSectionCurrent()
     {
-        final List<NavigatorRow> results = new Navigator(Section.CONTACTS, "/fullContacts").getRows();
+        final List<NavigatorRow> results = new Navigator(Section.CONTACTS, "/fullContacts")
+                .getRows();
         final Stream<Consumer<NavigatorRow>> expected = Stream.of(validator("Home", "/"),
                 validator("Contacts", "/contacts", validator("Full details", null)),
                 validator("Fixtures", "/fixtures"), validator("Results", "/results"),
@@ -65,7 +66,8 @@ public class NavigatorTest
     @Test
     public void testMultipleNoItemCurrent()
     {
-        final List<NavigatorRow> results = new Navigator(Section.AVERAGES, "/averages/team/OPCSTitchfield").getRows();
+        final List<NavigatorRow> results = new Navigator(Section.AVERAGES,
+                "/averages/team/OPCSTitchfield").getRows();
         final Stream<Consumer<NavigatorRow>> expected = Stream.of(validator("Home", "/"),
                 validator("Contacts", "/contacts"), validator("Fixtures", "/fixtures"),
                 validator("Results", "/results"), validator("Tables", "/tables"),
@@ -97,13 +99,19 @@ public class NavigatorTest
 
     private <T> void validate(Stream<Consumer<T>> validators, Collection<T> objects)
     {
-        Iterator<T> iterator = objects == null ? null : objects.iterator();
-        validators.forEach(v ->
+        if (objects == null)
         {
-            assertNotNull(iterator);
-            assertTrue(iterator.hasNext());
-            v.accept(iterator.next());
-        });
-        assertFalse(iterator != null && iterator.hasNext());
+            assertEquals(0L, validators.count());
+        }
+        else
+        {
+            Iterator<T> iterator = objects.iterator();
+            validators.forEach(v ->
+            {
+                assertTrue(iterator.hasNext());
+                v.accept(iterator.next());
+            });
+            assertFalse(iterator.hasNext());
+        }
     }
 }

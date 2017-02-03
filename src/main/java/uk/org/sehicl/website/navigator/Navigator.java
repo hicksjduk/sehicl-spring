@@ -36,6 +36,12 @@ public class Navigator
 
     }
 
+    @Override
+    public String toString()
+    {
+        return "Navigator [rows=" + rows + "]";
+    }
+
     public static class NavigatorRow
     {
         private final String title;
@@ -59,7 +65,7 @@ public class Navigator
             return uri;
         }
 
-        protected List<NavigatorRow> getSubRows()
+        public List<NavigatorRow> getSubRows()
         {
             return subRows;
         }
