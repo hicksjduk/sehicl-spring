@@ -29,7 +29,8 @@ public class Navigator
 
     private NavigatorRow toRow(boolean current, String uri, NavigatorItem item)
     {
-        NavigatorRow answer = new NavigatorRow(item.getTitle(), uri,
+        NavigatorRow answer = new NavigatorRow(item.getTitle(),
+                Objects.equals(uri, item.getUri()) ? null : item.getUri(),
                 current ? item.getSubItems().stream().map(si -> toRow(current, uri, si)) : null);
         return answer;
 
