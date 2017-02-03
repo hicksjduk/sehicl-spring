@@ -1,1216 +1,189 @@
+<#macro award year player team performance header=false>
+	<#assign tag=header?then("th", "td")/>
+	<tr>
+		<${tag} class="year">${year}</${tag}>
+		<${tag} class="winner">${player}</${tag}>
+		<${tag} class="team">${team}</${tag}>
+		<${tag} class="performance">${performance}</${tag}>
+	</tr>
+</#macro>
+
 <div id="indivAwards">
 <h1>Individual awards</h1>
+
 <h2>A.R. Pay Batting Trophy</h2>
 <table border="0">
-	
 <thead>
-		
-<tr>
-			
-<th class="year">Season</th>
-			<th class="winner">Player</th>
-			<th class="team">Team</th>
-			<th class="performance">Runs scored</th>
-		
-</tr>
-	
+	<@award "Season" "Player" "Team" "Runs scored" true/>
 </thead>
-	
 <tbody>
-		
-<tr>
-			
-<td class="year">1992-93</td>
-			<td class="winner">G Marchant</td>
-			<td class="team">Fareham &amp; Crofton A</td>
-			<td class="performance">299</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1993-94</td>
-			<td class="winner">G Marchant</td>
-			<td class="team">Fareham &amp; Crofton A</td>
-			<td class="performance">290</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1994-95</td>
-			<td class="winner">L Prittipaul</td>
-			<td class="team">Purbrook Colts</td>
-			<td class="performance">279</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1995-96</td>
-			<td class="winner">C Pay</td>
-			<td class="team">Harting</td>
-			<td class="performance">325</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1996-97</td>
-			<td class="winner">N Cunningham</td>
-			<td class="team">United Services</td>
-			<td class="performance">338</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1997-98</td>
-			<td class="winner">P Sparshott</td>
-			<td class="team">Locks Heath A</td>
-			<td class="performance">338</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1998-99</td>
-			<td class="winner">G McCoy</td>
-			<td class="team">Purbrook A</td>
-			<td class="performance">279</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1999-2000</td>
-			<td class="winner">R Higgins</td>
-			<td class="team">Locks Heath B</td>
-			<td class="performance">292</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2000-01</td>
-			<td class="winner">R Higgins</td>
-			<td class="team">Locks Heath B</td>
-			<td class="performance">273</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2001-02</td>
-			<td class="winner">C Pay</td>
-			<td class="team">Harting</td>
-			<td class="performance">273</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2002-03</td>
-			<td class="winner">M Hennessy</td>
-			<td class="team">Purbrook A</td>
-			<td class="performance">268</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2003-04</td>
-			<td class="winner">J Scutt</td>
-			<td class="team">Hambledon</td>
-			<td class="performance">330</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2004-05</td>
-			<td class="winner">C Grayston</td>
-			<td class="team">Bedhampton B</td>
-			<td class="performance">268</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2005-06</td>
-			<td class="winner">O Jones</td>
-			<td class="team">Havant B</td>
-			<td class="performance">313</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2006-07</td>
-			<td class="winner">J Scutt</td>
-			<td class="team">Hambledon</td>
-			<td class="performance">294</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2007-08</td>
-			<td class="winner">R Marshall</td>
-			<td class="team">Hambledon</td>
-			<td class="performance">263</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2008-09</td>
-			<td class="winner">S Wainwright</td>
-			<td class="team">Corinthians</td>
-			<td class="performance">258</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2009-10</td>
-			<td class="winner">S Figgins</td>
-			<td class="team">Purbrook B</td>
-			<td class="performance">239</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2010-11</td>
-			<td class="winner">M Le-Clercq</td>
-			<td class="team">Hambledon B</td>
-			<td class="performance">302</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2011-12</td>
-			<td class="winner">J Floyd</td>
-			<td class="team">Sarisbury Athletic</td>
-			<td class="performance">278</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2012-13</td>
-			<td class="winner">J Spiers</td>
-			<td class="team">Purbrook C</td>
-			<td class="performance">242</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2013-14</td>
-			<td class="winner">J Kent</td>
-			<td class="team">Portsmouth Priory</td>
-			<td class="performance">252</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2014-15</td>
-			<td class="winner">N Wyatt</td>
-			<td class="team">Portsmouth B</td>
-			<td class="performance">321</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2015-16</td>
-			<td class="winner">D Clark</td>
-			<td class="team">Bedhampton A</td>
-			<td class="performance">325</td>
-		
-</tr>
-	
+	<@award "1992-93" "G Marchant" "Fareham & Crofton A" "299"/>
+	<@award "1993-94" "G Marchant" "Fareham & Crofton A" "290"/>
+	<@award "1994-95" "L Prittipaul" "Purbrook Colts" "279"/>
+	<@award "1995-96" "C Pay" "Harting" "325"/>
+	<@award "1996-97" "N Cunningham" "United Services" "338"/>
+	<@award "1997-98" "P Sparshott" "Locks Heath A" "338"/>
+	<@award "1998-99" "G McCoy" "Purbrook A" "279"/>
+	<@award "1999-2000" "R Higgins" "Locks Heath B" "292"/>
+	<@award "2000-01" "R Higgins" "Locks Heath B" "273"/>
+	<@award "2001-02" "C Pay" "Harting" "273"/>
+	<@award "2002-03" "M Hennessy" "Purbrook A" "268"/>
+	<@award "2003-04" "J Scutt" "Hambledon" "330"/>
+	<@award "2004-05" "C Grayston" "Bedhampton B" "268"/>
+	<@award "2005-06" "O Jones" "Havant B" "313"/>
+	<@award "2006-07" "J Scutt" "Hambledon" "294"/>
+	<@award "2007-08" "R Marshall" "Hambledon" "263"/>
+	<@award "2008-09" "S Wainwright" "Corinthians" "258"/>
+	<@award "2009-10" "S Figgins" "Purbrook B" "239"/>
+	<@award "2010-11" "M Le-Clercq" "Hambledon B" "302"/>
+	<@award "2011-12" "J Floyd" "Sarisbury Athletic" "278"/>
+	<@award "2012-13" "J Spiers" "Purbrook C" "242"/>
+	<@award "2013-14" "J Kent" "Portsmouth Priory" "252"/>
+	<@award "2014-15" "N Wyatt" "Portsmouth B" "321"/>
+	<@award "2015-16" "D Clark" "Bedhampton A" "325"/>
 </tbody>
-
 </table>
+
 <h2>Tony Dunster Memorial Bowling Cup</h2>
 <table border="0">
-	
 <thead>
-		
-<tr>
-			
-<th class="year">Season</th>
-			<th class="winner">Player</th>
-			<th class="team">Team</th>
-			<th class="performance">Wickets taken</th>
-		
-</tr>
-	
+	<@award "Season" "Player" "Team" "Wickets taken" true/>
 </thead>
-	
 <tbody>
-		
-<tr>
-			
-<td class="year">1994-95</td>
-			<td class="winner">J Jordan</td>
-			<td class="team">Petersfield</td>
-			<td class="performance">14</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1995-96</td>
-			<td class="winner">P Loat</td>
-			<td class="team">Havant</td>
-			<td class="performance">14</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1996-97</td>
-			<td class="winner">S Kelly</td>
-			<td class="team">Portchester A</td>
-			<td class="performance">11</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1997-98</td>
-			<td class="winner">N Lane</td>
-			<td class="team">Denmead</td>
-			<td class="performance">10</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1998-99</td>
-			<td class="winner">N Hillier</td>
-			<td class="team">Curdridge A</td>
-			<td class="performance">11</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1999-2000</td>
-			<td class="winner">J Floyd</td>
-			<td class="team">Sarisbury Athletic A</td>
-			<td class="performance">12</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2000-01</td>
-			<td class="winner">S Kelly</td>
-			<td class="team">Portchester A</td>
-			<td class="performance">12</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2001-02</td>
-			<td class="winner">N Crocombe</td>
-			<td class="team">Bedhampton A</td>
-			<td class="performance">13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2002-03</td>
-			<td class="winner">M Woodgate</td>
-			<td class="team">Bedhampton A</td>
-			<td class="performance">14</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2003-04</td>
-			<td class="winner">N Webb</td>
-			<td class="team">Emsworth</td>
-			<td class="performance">13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2004-05</td>
-			<td class="winner">M Porton</td>
-			<td class="team">Cowplain</td>
-			<td class="performance">12</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2005-06</td>
-			<td class="winner">N Kenny</td>
-			<td class="team">Purbrook B</td>
-			<td class="performance">13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2006-07</td>
-			<td class="winner">P Stride</td>
-			<td class="team">IBM South Hants A</td>
-			<td class="performance">13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2007-08</td>
-			<td class="winner">N Halliday</td>
-			<td class="team">Denmead</td>
-			<td class="performance">14</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2008-09</td>
-			<td class="winner">F Hoolahan</td>
-			<td class="team">Havant A</td>
-			<td class="performance">16</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2009-10</td>
-			<td class="winner">T Larner</td>
-			<td class="team">DOE Cavaliers</td>
-			<td class="performance">13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2010-11</td>
-			<td class="winner">D Carson</td>
-			<td class="team">Havant B</td>
-			<td class="performance">12</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2011-12</td>
-			<td class="winner">R Marchant</td>
-			<td class="team">Fareham &amp; Crofton B</td>
-			<td class="performance">14</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2012-13</td>
-			<td class="winner">M Le-Clercq</td>
-			<td class="team">Hambledon B</td>
-			<td class="performance">14</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2013-14</td>
-			<td class="winner">S Taylor</td>
-			<td class="team">Gosport Borough</td>
-			<td class="performance">15</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2014-15</td>
-			<td class="winner">D Pitts</td>
-			<td class="team">Emsworth</td>
-			<td class="performance">17</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2015-16</td>
-			<td class="winner">D Pitts</td>
-			<td class="team">Emsworth</td>
-			<td class="performance">15</td>
-		
-</tr>
-	
+	<@award "1994-95" "J Jordan" "Petersfield" "14"/>
+	<@award "1995-96" "P Loat" "Havant" "14"/>
+	<@award "1996-97" "S Kelly" "Portchester A" "11"/>
+	<@award "1997-98" "N Lane" "Denmead" "10"/>
+	<@award "1998-99" "N Hillier" "Curdridge A" "11"/>
+	<@award "1999-2000" "J Floyd" "Sarisbury Athletic A" "12"/>
+	<@award "2000-01" "S Kelly" "Portchester A" "12"/>
+	<@award "2001-02" "N Crocombe" "Bedhampton A" "13"/>
+	<@award "2002-03" "M Woodgate" "Bedhampton A" "14"/>
+	<@award "2003-04" "N Webb" "Emsworth" "13"/>
+	<@award "2004-05" "M Porton" "Cowplain" "12"/>
+	<@award "2005-06" "N Kenny" "Purbrook B" "13"/>
+	<@award "2006-07" "P Stride" "IBM South Hants A" "13"/>
+	<@award "2007-08" "N Halliday" "Denmead" "14"/>
+	<@award "2008-09" "F Hoolahan" "Havant A" "16"/>
+	<@award "2009-10" "T Larner" "DOE Cavaliers" "13"/>
+	<@award "2010-11" "D Carson" "Havant B" "12"/>
+	<@award "2011-12" "R Marchant" "Fareham & Crofton B" "14"/>
+	<@award "2012-13" "M Le-Clercq" "Hambledon B" "14"/>
+	<@award "2013-14" "S Taylor" "Gosport Borough" "15"/>
+	<@award "2014-15" "D Pitts" "Emsworth" "17"/>
+	<@award "2015-16" "D Pitts" "Emsworth" "15"/>
 </tbody>
-
 </table>
+
 <h2>Michael Austin Harlick Under-16 Batting Award</h2>
 <table border="0">
-	
 <thead>
-		
-<tr>
-			
-<th class="year">Season</th>
-			<th class="winner">Player</th>
-			<th class="team">Team</th>
-			<th class="performance">Runs scored</th>
-		
-</tr>
-	
+	<@award "Season" "Player" "Team" "Runs scored" true/>
 </thead>
-	
 <tbody>
-		
-<tr>
-			
-<td class="year">1997-98</td>
-			<td class="winner">J Blake</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">194</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1998-99</td>
-			<td class="winner">J Watts</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">181</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1999-2000</td>
-			<td class="winner">D Wade</td>
-			<td class="team">Havant</td>
-			<td class="performance">262</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2000-01</td>
-			<td class="winner">M Boyd</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">254</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2001-02</td>
-			<td class="winner">G Ransley</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">280</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2002-03</td>
-			<td class="winner">L Russell</td>
-			<td class="team">Portsmouth</td>
-			<td class="performance">190</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2003-04</td>
-			<td class="winner">B Thomas</td>
-			<td class="team">Purbrook</td>
-			<td class="performance">176</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2004-05</td>
-			<td class="winner">J Hill</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">309</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2005-06</td>
-			<td class="winner">B Pay</td>
-			<td class="team">Purbrook</td>
-			<td class="performance">298</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2006-07</td>
-			<td class="winner">S Knott</td>
-			<td class="team">Havant</td>
-			<td class="performance">248</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2007-08</td>
-			<td class="winner">S Loat</td>
-			<td class="team">Havant</td>
-			<td class="performance">241</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2008-09</td>
-			<td class="winner">T Kent</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">213</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2009-10</td>
-			<td class="winner">T Kent</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">364</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2010-11</td>
-			<td class="winner">M Crouch</td>
-			<td class="team">Petersfield</td>
-			<td class="performance">309</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2011-12</td>
-			<td class="winner">D Sampson</td>
-			<td class="team">Sarisbury Athletic</td>
-			<td class="performance">340</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2012-13</td>
-			<td class="winner">H Hovey</td>
-			<td class="team">Havant</td>
-			<td class="performance">278</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2013-14</td>
-			<td class="winner">J McCoy</td>
-			<td class="team">Purbrook</td>
-			<td class="performance">324</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2014-15</td>
-			<td class="winner">H Gadd</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">277</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2015-16</td>
-			<td class="winner">B Anscombe</td>
-			<td class="team">Petersfield</td>
-			<td class="performance">277</td>
-		
-</tr>
-	
+	<@award "1997-98" "J Blake" "Fareham & Crofton" "194"/>
+	<@award "1998-99" "J Watts" "Fareham & Crofton" "181"/>
+	<@award "1999-2000" "D Wade" "Havant" "262"/>
+	<@award "2000-01" "M Boyd" "Locks Heath" "254"/>
+	<@award "2001-02" "G Ransley" "Locks Heath" "280"/>
+	<@award "2002-03" "L Russell" "Portsmouth" "190"/>
+	<@award "2003-04" "B Thomas" "Purbrook" "176"/>
+	<@award "2004-05" "J Hill" "Locks Heath" "309"/>
+	<@award "2005-06" "B Pay" "Purbrook" "298"/>
+	<@award "2006-07" "S Knott" "Havant" "248"/>
+	<@award "2007-08" "S Loat" "Havant" "241"/>
+	<@award "2008-09" "T Kent" "Fareham & Crofton" "213"/>
+	<@award "2009-10" "T Kent" "Fareham & Crofton" "364"/>
+	<@award "2010-11" "M Crouch" "Petersfield" "309"/>
+	<@award "2011-12" "D Sampson" "Sarisbury Athletic" "340"/>
+	<@award "2012-13" "H Hovey" "Havant" "278"/>
+	<@award "2013-14" "J McCoy" "Purbrook" "324"/>
+	<@award "2014-15" "H Gadd" "Portsmouth & Southsea" "277"/>
+	<@award "2015-16" "B Anscombe" "Petersfield" "277"/>
 </tbody>
-
 </table>
+
 <h2>Michael Austin Harlick Under-16 Bowling Award</h2>
 <table border="0">
-	
 <thead>
-		
-<tr>
-			
-<th class="year">Season</th>
-			<th class="winner">Player</th>
-			<th class="team">Team</th>
-			<th class="performance">Wickets taken</th>
-		
-</tr>
-	
+	<@award "Season" "Player" "Team" "Wickets taken" true/>
 </thead>
-	
 <tbody>
-		
-<tr>
-			
-<td class="year">1997-98</td>
-			<td class="winner">C Stares</td>
-			<td class="team">Gosport Borough</td>
-			<td class="performance">13</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1998-99</td>
-			<td class="winner">M Haynes</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">10</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1999-2000</td>
-			<td class="winner">L Sheppard</td>
-			<td class="team">Portsmouth</td>
-			<td class="performance">10</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2000-01</td>
-			<td class="winner">C Stares</td>
-			<td class="team">Gosport Borough</td>
-			<td class="performance">7</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2001-02</td>
-			<td class="winner">G Taylor</td>
-			<td class="team">United Services</td>
-			<td class="performance">11</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2002-03</td>
-			<td class="winner">A Adams</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">8</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2003-04</td>
-			<td class="winner">W Norman</td>
-			<td class="team">Hambledon</td>
-			<td class="performance">8</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2004-05</td>
-			<td class="winner">S Matthews</td>
-			<td class="team">Purbrook</td>
-			<td class="performance">9</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2005-06</td>
-			<td class="winner">S Matthews</td>
-			<td class="team">Purbrook</td>
-			<td class="performance">12</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2006-07</td>
-			<td class="winner">A Winfield</td>
-			<td class="team">Havant</td>
-			<td class="performance">9</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2007-08</td>
-			<td class="winner">G Chapman</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">11</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2008-09</td>
-			<td class="winner">G Greenwood</td>
-			<td class="team">Portsmouth Community</td>
-			<td class="performance">11</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2009-10</td>
-			<td class="winner">A Marston</td>
-			<td class="team">Portsmouth</td>
-			<td class="performance">12</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2010-11</td>
-			<td class="winner">S Shahid</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">12</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2011-12</td>
-			<td class="winner">A Marston</td>
-			<td class="team">Portsmouth</td>
-			<td class="performance">11</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2012-13</td>
-			<td class="winner">H Whitworth</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">9</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2013-14</td>
-			<td class="winner">J Bowler</td>
-			<td class="team">Sarisbury Athletic</td>
-			<td class="performance">9</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2014-15</td>
-			<td class="winner">B Marshall</td>
-			<td class="team">Sarisbury Athletic</td>
-			<td class="performance">11</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2015-16</td>
-			<td class="winner">C Creal</td>
-			<td class="team">Gosport Borough</td>
-			<td class="performance">10</td>
-		
-</tr>
-	
+	<@award "1997-98" "C Stares" "Gosport Borough" "13"/>
+	<@award "1998-99" "M Haynes" "Locks Heath" "10"/>
+	<@award "1999-2000" "L Sheppard" "Portsmouth" "10"/>
+	<@award "2000-01" "C Stares" "Gosport Borough" "7"/>
+	<@award "2001-02" "G Taylor" "United Services" "11"/>
+	<@award "2002-03" "A Adams" "Locks Heath" "8"/>
+	<@award "2003-04" "W Norman" "Hambledon" "8"/>
+	<@award "2004-05" "S Matthews" "Purbrook" "9"/>
+	<@award "2005-06" "S Matthews" "Purbrook" "12"/>
+	<@award "2006-07" "A Winfield" "Havant" "9"/>
+	<@award "2007-08" "G Chapman" "Portsmouth & Southsea" "11"/>
+	<@award "2008-09" "G Greenwood" "Portsmouth Community" "11"/>
+	<@award "2009-10" "A Marston" "Portsmouth" "12"/>
+	<@award "2010-11" "S Shahid" "Portsmouth & Southsea" "12"/>
+	<@award "2011-12" "A Marston" "Portsmouth" "11"/>
+	<@award "2012-13" "H Whitworth" "Portsmouth & Southsea" "9"/>
+	<@award "2013-14" "J Bowler" "Sarisbury Athletic" "9"/>
+	<@award "2014-15" "B Marshall" "Sarisbury Athletic" "11"/>
+	<@award "2015-16" "C Creal" "Gosport Borough" "10"/>
 </tbody>
-
 </table>
+
 <h2>Michael Austin Harlick Under-13 Batting Award</h2>
 <table border="0">
-	
 <thead>
-		
-<tr>
-			
-<th class="year">Season</th>
-			<th class="winner">Player</th>
-			<th class="team">Team</th>
-			<th class="performance">Runs scored</th>
-		
-</tr>
-	
+	<@award "Season" "Player" "Team" "Runs scored" true/>
 </thead>
-	
 <tbody>
-		
-<tr>
-			
-<td class="year">1997-98</td>
-			<td class="winner">M Boyd</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">128</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1998-99</td>
-			<td class="winner">M Journeaux</td>
-			<td class="team">Sarisbury Athletic</td>
-			<td class="performance">261</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1999-2000</td>
-			<td class="winner">E White</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">147</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2000-01</td>
-			<td class="winner">S Ransley</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">191</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2001-02</td>
-			<td class="winner">O Winter</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">274</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2002-03</td>
-			<td class="winner">C Morgan</td>
-			<td class="team">Havant</td>
-			<td class="performance">288</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2003-04</td>
-			<td class="winner">J Rolfe</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">205</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2004-05</td>
-			<td class="winner">S Loat</td>
-			<td class="team">Havant</td>
-			<td class="performance">171</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2005-06</td>
-			<td class="winner">S Loat</td>
-			<td class="team">Havant</td>
-			<td class="performance">230</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2006-07</td>
-			<td class="winner">T Kent</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">254</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2007-08</td>
-			<td class="winner">B Mengham</td>
-			<td class="team">Purbrook</td>
-			<td class="performance">293</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2008-09</td>
-			<td class="winner">D Sampson</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">253</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2009-10</td>
-			<td class="winner">E Lewis</td>
-			<td class="team">Hambledon</td>
-			<td class="performance">259</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2010-11</td>
-			<td class="winner">H Hovey</td>
-			<td class="team">Havant</td>
-			<td class="performance">356</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2011-12</td>
-			<td class="winner">A Reynolds</td>
-			<td class="team">Waterlooville</td>
-			<td class="performance">230</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2012-13</td>
-			<td class="winner">H Gadd</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">238</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2013-14</td>
-			<td class="winner">O Southon</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">278</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2014-15</td>
-			<td class="winner">T Wallis</td>
-			<td class="team">Portsmouth</td>
-			<td class="performance">189</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2015-16</td>
-			<td class="winner">F Gadd</td>
-			<td class="team">Portsmouth &amp; Southsea</td>
-			<td class="performance">244</td>
-		
-</tr>
-	
+	<@award "1997-98" "M Boyd" "Locks Heath" "128"/>
+	<@award "1998-99" "M Journeaux" "Sarisbury Athletic" "261"/>
+	<@award "1999-2000" "E White" "Fareham & Crofton" "147"/>
+	<@award "2000-01" "S Ransley" "Locks Heath" "191"/>
+	<@award "2001-02" "O Winter" "Locks Heath" "274"/>
+	<@award "2002-03" "C Morgan" "Havant" "288"/>
+	<@award "2003-04" "J Rolfe" "Locks Heath" "205"/>
+	<@award "2004-05" "S Loat" "Havant" "171"/>
+	<@award "2005-06" "S Loat" "Havant" "230"/>
+	<@award "2006-07" "T Kent" "Fareham & Crofton" "254"/>
+	<@award "2007-08" "B Mengham" "Purbrook" "293"/>
+	<@award "2008-09" "D Sampson" "Fareham & Crofton" "253"/>
+	<@award "2009-10" "E Lewis" "Hambledon" "259"/>
+	<@award "2010-11" "H Hovey" "Havant" "356"/>
+	<@award "2011-12" "A Reynolds" "Waterlooville" "230"/>
+	<@award "2012-13" "H Gadd" "Portsmouth & Southsea" "238"/>
+	<@award "2013-14" "O Southon" "Fareham & Crofton" "278"/>
+	<@award "2014-15" "T Wallis" "Portsmouth" "189"/>
+	<@award "2015-16" "F Gadd" "Portsmouth & Southsea" "244"/>
 </tbody>
-
 </table>
+
 <h2>Michael Austin Harlick Under-13 Bowling Award</h2>
 <table border="0">
-	
 <thead>
-		
-<tr>
-			
-<th class="year">Season</th>
-			<th class="winner">Player</th>
-			<th class="team">Team</th>
-			<th class="performance">Wickets taken</th>
-		
-</tr>
-	
+	<@award "Season" "Player" "Team" "Wickets taken" true/>
 </thead>
-	
 <tbody>
-		
-<tr>
-			
-<td class="year">1997-98</td>
-			<td class="winner">M Saunders</td>
-			<td class="team">Portsmouth</td>
-			<td class="performance">4</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1998-99</td>
-			<td class="winner">C Stares</td>
-			<td class="team">Gosport Borough</td>
-			<td class="performance">8</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">1999-2000</td>
-			<td class="winner">A Shepherd</td>
-			<td class="team">Waterlooville</td>
-			<td class="performance">9</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2000-01</td>
-			<td class="winner">H Haran</td>
-			<td class="team">Purbrook</td>
-			<td class="performance">9</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2001-02</td>
-			<td class="winner">C Morgan</td>
-			<td class="team">Havant</td>
-			<td class="performance">8</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2002-03</td>
-			<td class="winner">N Hodgson</td>
-			<td class="team">Havant</td>
-			<td class="performance">7</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2003-04</td>
-			<td class="winner">J Paskins</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">10</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2004-05</td>
-			<td class="winner">S Knott</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">7</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2005-06</td>
-			<td class="winner">B Kissane</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">9</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2006-07</td>
-			<td class="winner">L Le-Clercq</td>
-			<td class="team">Hambledon</td>
-			<td class="performance">11</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2007-08</td>
-			<td class="winner">J Christian</td>
-			<td class="team">Purbrook</td>
-			<td class="performance">8</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2008-09</td>
-			<td class="winner">M Hindry</td>
-			<td class="team">Locks Heath</td>
-			<td class="performance">11</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2009-10</td>
-			<td class="winner">R Prentice</td>
-			<td class="team">Hambledon</td>
-			<td class="performance">9</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2010-11</td>
-			<td class="winner">A Southon</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">8</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2011-12</td>
-			<td class="winner">O Milne</td>
-			<td class="team">Purbrook</td>
-			<td class="performance">9</td>
-		
-</tr>
-		
-<tr>
-			
-<td class="year">2012-13</td>
-			<td class="winner">O Southon</td>
-			<td class="team">Hambledon</td>
-			<td class="performance">8</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2013-14</td>
-			<td class="winner">O Pratt</td>
-			<td class="team">Fareham &amp; Crofton</td>
-			<td class="performance">11</td>
-		
-</tr>
-	
-<tr>
-			
-<td class="year">2014-15</td>
-			<td class="winner">T Wallis</td>
-			<td class="team">Portsmouth</td>
-			<td class="performance">12</td>
-		
-</tr>
-<tr>
-			
-<td class="year">2015-16</td>
-			<td class="winner">J Oliver</td>
-			<td class="team">Havant</td>
-			<td class="performance">10</td>
-		
-</tr>
-	
+	<@award "1997-98" "M Saunders" "Portsmouth" "4"/>
+	<@award "1998-99" "C Stares" "Gosport Borough" "8"/>
+	<@award "1999-2000" "A Shepherd" "Waterlooville" "9"/>
+	<@award "2000-01" "H Haran" "Purbrook" "9"/>
+	<@award "2001-02" "C Morgan" "Havant" "8"/>
+	<@award "2002-03" "N Hodgson" "Havant" "7"/>
+	<@award "2003-04" "J Paskins" "Locks Heath" "10"/>
+	<@award "2004-05" "S Knott" "Locks Heath" "7"/>
+	<@award "2005-06" "B Kissane" "Fareham & Crofton" "9"/>
+	<@award "2006-07" "L Le-Clercq" "Hambledon" "11"/>
+	<@award "2007-08" "J Christian" "Purbrook" "8"/>
+	<@award "2008-09" "M Hindry" "Locks Heath" "11"/>
+	<@award "2009-10" "R Prentice" "Hambledon" "9"/>
+	<@award "2010-11" "A Southon" "Fareham & Crofton" "8"/>
+	<@award "2011-12" "O Milne" "Purbrook" "9"/>
+	<@award "2012-13" "O Southon" "Hambledon" "8"/>
+	<@award "2013-14" "O Pratt" "Fareham & Crofton" "11"/>
+	<@award "2014-15" "T Wallis" "Portsmouth" "12"/>
+	<@award "2015-16" "J Oliver" "Havant" "10"/>
 </tbody>
-
 </table>
 </div>

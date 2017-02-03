@@ -46,11 +46,18 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testDivisionalWinnersPage()
     {
         new Template(new StaticPage("records", "records/divwinners.ftlh", Section.RECORDS,
                 "/records/winners", "SEHICL Divisional Winners"))
+                        .process(new OutputStreamWriter(System.out));
+    }
+
+    @Test
+    public void testIndividualAwardsPage()
+    {
+        new Template(new StaticPage("records", "records/individualawards.ftlh", Section.RECORDS,
+                "/records/awards", "SEHICL Individual Awards"))
                         .process(new OutputStreamWriter(System.out));
     }
 }
