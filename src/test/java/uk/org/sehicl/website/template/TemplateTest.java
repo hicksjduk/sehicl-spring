@@ -60,11 +60,18 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testFairplayPage()
     {
         new Template(new StaticPage("records", "records/fairplay.ftlh", Section.RECORDS,
                 "/records/fairplay", "SEHICL Sporting & Efficiency"))
+                        .process(new OutputStreamWriter(System.out));
+    }
+
+    @Test
+    public void testPresentationPage()
+    {
+        new Template(new StaticPage("presentation", "presentation.ftlh", Section.HOME,
+                "/records/fairplay", "SEHICL Presentation Evening"))
                         .process(new OutputStreamWriter(System.out));
     }
 }
