@@ -6,13 +6,15 @@
 	<#return {"team": team, "runs": runs, "overs": overs, "wickets": wickets, "highlights": highlights}/>
 </#function>
 
-<#function match title innings1 innings2>
-	<#return {"title": title, "innings", [innings1, innings2]}/>
-</#function>
-
-<#macro match title innings1 innings2>
+<#macro match title innings1 innings2 maxWickets=6>
 <tr>
 	<td colspan="2" class="division">${title}</td>
+</tr>
+<tr>
+<#list [innings1, innings2] as inns>
+<td class="teamscore">${inns.team} ${inns.runs} 
+${(inns.wickets == maxWickets)?then("all out", "for " + inns.wickets)} (10 ov)</td>
+<td class="teamscore">Waterlooville 74 for 1 (8.3 ov)</td>
 </tr>
 </#macro>
 
@@ -22,7 +24,7 @@
 		highlight("P Hopson" "27*"), highlight("B Walker", "25*"), highlight("S Ransley", "24"),
 		 highlight("S Matthews", "23"), highlight("B Mengham", "2/26"))
 	innings("The Mayor of Fareham's VIII", 112, 4, 12, 
-		highlight("J Spiers", "30*")) 
+		highlight("J Spiers", "30*") 8) 
 />
 </table>
 
