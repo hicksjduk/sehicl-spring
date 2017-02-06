@@ -70,7 +70,7 @@
 	}
 />
 
-<#macro award id winner picture text="">
+<#macro award id winner picture="" text="">
 	<#assign info = award_info[id]/>
 	<dt>${info.trophy}</dt>
 	<dd>
