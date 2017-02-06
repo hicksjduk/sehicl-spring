@@ -87,7 +87,7 @@
 
 <#macro result inns1 inns2 maxWkts>
 	<#if inns1.runs == inns2.runs>
-		"Match tied"
+		Match tied
 	<#elseif inns2.runs < inns1.runs>
 		<#assign margin = inns1.runs - inns2.runs/>
 		${inns1.team} won by ${margin} ${(margin > 1)?then("runs", "run")}
