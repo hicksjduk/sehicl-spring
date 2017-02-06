@@ -74,11 +74,18 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testPresentationPage2011()
     {
         new Template(new StaticPage("presentation", "presentation/2011.ftlh", Section.ARCHIVE,
                 "/archive/presentation/2011", "SEHICL Presentation Evening 2011"))
+                        .process(new OutputStreamWriter(System.out));
+    }
+
+    @Test
+    public void testPresentationPage2012()
+    {
+        new Template(new StaticPage("presentation", "presentation/2012.ftlh", Section.ARCHIVE,
+                "/archive/presentation/2012", "SEHICL Presentation Evening 2012"))
                         .process(new OutputStreamWriter(System.out));
     }
 

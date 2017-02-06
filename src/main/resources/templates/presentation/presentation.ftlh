@@ -79,7 +79,7 @@
 		<#else>
 			${winner}
 			<#if pic_or_text != "">
-				<i>(${pic_or_text})</i>
+				<br><i>(${pic_or_text})</i>
 			</#if>
 		</#if>
 	</dd>
