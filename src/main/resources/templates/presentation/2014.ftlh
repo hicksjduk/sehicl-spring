@@ -20,7 +20,7 @@ Fareham Leisure Centre on Sunday 6th April.</p>
 		<@award "u16" "Havant" "/graphics/presentation2014/P1010105.JPG"/>
 		<@award "u13" "Waterlooville" "/graphics/presentation2014/P1010104.JPG"/>
 		<@award "u16bat" "Josh McCoy (Purbrook)" "/graphics/presentation2014/P1010102.JPG"/>	
-		<@award "u16bowl" "Jamie Bowler (Sarisbury Athletic)"/>	
+		<@award "u16bowl" "Jamie Bowler (Sarisbury Athletic)" "/graphics/presentation2014/P1010103.JPG"/>	
 		<@award "u13bat" "Oliver Southon (Fareham & Crofton)" "/graphics/presentation2014/P1010100.JPG"/>	
 		<@award "u13bowl" "Oliver Pratt (Fareham & Crofton)" "/graphics/presentation2014/P1010101.JPG"/>	
 		<@award "cfair" "Petersfield Under-16, Portsmouth & Southsea Under-13" "/graphics/presentation2014/P1010099.JPG"/>	
@@ -30,7 +30,7 @@ Fareham Leisure Centre on Sunday 6th April.</p>
 <@section "Senior">
 	<@games>
 		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
-			innings("Havant A", 161, 3, 12, "P Hopson 27*", "B Walker 25*, S Ransley 24",
+			innings("Havant A", 161, 3, 12, "P Hopson 27*", "B Walker 25*", "S Ransley 24",
 		 		"S Matthews 23", "B Mengham 2/26")
 			innings("The Mayor of Fareham's VIII", 112, 4, 12, "J Spiers 30*") 8/>
 		<@match "Division 2 Champions v Division 3 Champions"
