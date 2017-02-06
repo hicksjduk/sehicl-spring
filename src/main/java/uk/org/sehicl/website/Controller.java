@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -97,5 +98,14 @@ public class Controller
         String uri = getRequestUri(req);
         return new Template(new StaticPage("fairplay", "records/fairplay.ftlh", Section.RECORDS,
                 uri, "SEHICL Sporting & Efficiency")).process();
+    }
+
+    @RequestMapping("/archive/presentation/{season}")
+    public String presentationEvening(HttpServletRequest req, @PathVariable String season)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new StaticPage("presentation",
+                String.format("presentation/%s.ftlh", season), Section.ARCHIVE, uri,
+                String.format("SEHICL Presentation Evening %s", season))).process();
     }
 }
