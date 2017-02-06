@@ -19,7 +19,7 @@ Fareham Leisure Centre on Sunday 1st April.</p>
 		<@award "u16" "Hambledon" "/graphics/presentation2012/DSC03323.JPG"/>
 		<@award "u13" "Havant" "/graphics/presentation2012/DSC03322.JPG"/>
 		<@award "u16bat" "Dominic Sampson (Sarisbury Athletic)" "/graphics/presentation2012/DSC03321.JPG"/>	
-		<@award "u16bowl" "Andrew Marston (Portsmouth)" "No picture as Andrew was not available to collect his award in person"/>	
+		<@award "u16bowl" "Andrew Marston (Portsmouth)" "" "No picture as Andrew was not available to collect his award in person"/>	
 		<@award "u13bat" "Archie Reynolds (Waterlooville)" "/graphics/presentation2012/DSC03320.JPG"/>	
 		<@award "u13bowl" "Owen Milne (Purbrook)" "/graphics/presentation2012/DSC03319.JPG"/>	
 		<@award "cfair" "Waterlooville Under-16", "/graphics/presentation2012/DSC03318.JPG"/>	
@@ -36,7 +36,7 @@ Fareham Leisure Centre on Sunday 1st April.</p>
 			innings("Sarisbury Athletic", 117, 5, 12, "J Floyd 39*")
 			innings("United Services", 81, 6, 10.4, "I Clark 2/16")/>
 		<@match "Division 4 Champions v Committee/Umpires VI"
-			innings("Committee/Umpires VI", 138, 5, 12, "A Smith 70,", "A Anthony 26*", "M Shinn 22", 
+			innings("Committee/Umpires VI", 138, 5, 12, "A Smith 70", "A Anthony 26*", "M Shinn 22", 
 				"R Matthews 2/23")
 			innings("Emsworth", 115, 3, 12, "J Mason 33*", "W Pitts 30*")/>
 	</@games>

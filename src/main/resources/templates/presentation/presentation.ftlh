@@ -70,17 +70,17 @@
 	}
 />
 
-<#macro award id winner pic_or_text="">
+<#macro award id winner picture text="">
 	<#assign info = award_info[id]/>
 	<dt>${info.trophy}</dt>
 	<dd>
-		<#if pic_or_text?starts_with("/") || pic_or_text?starts_with("http")>
-			<img border="0" src="${pic_or_text}" alt="${winner} - ${info.desc}"><br>${winner}
+		<#if picture != "">
+			<img border="0" src="${picture}" alt="${winner} - ${info.desc}"><br>${winner}
 		<#else>
 			${winner}
-			<#if pic_or_text != "">
-				<br><i>(${pic_or_text})</i>
-			</#if>
+		</#if>
+		<#if text != "">
+			<br><i>(${text})</i>
 		</#if>
 	</dd>
 </#macro>
