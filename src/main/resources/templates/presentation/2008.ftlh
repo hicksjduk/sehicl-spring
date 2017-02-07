@@ -46,7 +46,7 @@
 	</@games>
 	<@awards "The Senior awards were presented by Cllr Mrs Katrina Trott, Mayor of Fareham.">
 		<@award	"d1" "Havant A" "/graphics/presentation2008/P3290041.JPG"/>
-		<@award "d2", "Hambledon", "/graphics/presentation2008/P3290039.JPG"/>
+		<@award "d2" "Hambledon", "/graphics/presentation2008/P3290039.JPG"/>
 		<@award "d3" "Fareham & Crofton B" "/graphics/presentation2008/P3290038.JPG"/>
 		<@award "d4" "Hampshire Bowman" "/graphics/presentation2008/P3290037.JPG"/>
 		<@award "sbat" "Richard Marshall (Hambledon)" "/graphics/presentation2008/P3290036.JPG"/>
