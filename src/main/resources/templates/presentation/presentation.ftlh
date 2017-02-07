@@ -10,7 +10,7 @@
 <#list [innings1, innings2] as inns>
 	<td class="teamscore">${inns.team} ${inns.runs} 
 	${(inns.wickets == maxWickets)?then("all out", "for " + inns.wickets)} 
-	(${inns.overs} ov)</td>
+	<#if inns.overs != "">(${inns.overs} ov)</#if></td>
 </#list>
 </tr>
 <tr>
@@ -80,7 +80,7 @@
 			${winner}
 		</#if>
 		<#if text != "">
-			<br><i>(${text})</i>
+			<br><span style="font-weight: normal; font-style: italic">(${text})</span>
 		</#if>
 	</dd>
 </#macro>
