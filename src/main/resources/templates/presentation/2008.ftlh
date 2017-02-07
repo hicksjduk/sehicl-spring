@@ -6,8 +6,8 @@
 <@section "Colts">
 	<@games>
 		<@match "Under-13"
-			innings("Under-13 Select VI", 116, 3, "", "B Mengham 23")
-			innings("Fareham & Crofton", 113, 6, "", "T Kent 33", "B Mengham 2/14", "J Christian 2/21")
+			innings("Under-13 Select VI", 116, 3, -1, "B Mengham 23")
+			innings("Fareham & Crofton", 113, 6, -1, "T Kent 33", "B Mengham 2/14", "J Christian 2/21")
 		/>
 		<tr>
 			<td colspan="2" class="division">Under-16</td>
@@ -34,15 +34,15 @@
 <@section "Senior">
 	<@games>
 		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
-			innings("Havant A", 116, 6, "", "F Hoolahan 37*", "L Gould 2/25", "R Marston 2/31")
-			innings("The Mayor of Fareham's VIII", 92, 8, "", "R Marshall 22")
+			innings("Havant A", 116, 6, -1, "F Hoolahan 37*", "L Gould 2/25", "R Marston 2/31")
+			innings("The Mayor of Fareham's VIII", 92, 8, -1, "R Marshall 22")
 			 8/>
 		<@match "Division 2 Champions v Division 3 Champions"
-			innings("Hambledon", 88, 6, "", "D Reader 3/9")
-			innings("Fareham & Crofton B", 89, 3, "")/>
+			innings("Hambledon", 88, 6, -1, "D Reader 3/9")
+			innings("Fareham & Crofton B", 89, 3, -1)/>
 		<@match "Division 4 Champions v Committee/Umpires VI"
-			innings("Hampshire Bowman", 105, 5, "", "M Smith 26", "A Smith 23", "P Hicks 2/22")
-			innings("Committee/Umpires VI", 47, 6, "")/>
+			innings("Hampshire Bowman", 105, 5, -1, "M Smith 26", "A Smith 23", "P Hicks 2/22")
+			innings("Committee/Umpires VI", 47, 6, -1)/>
 	</@games>
 	<@awards "The Senior awards were presented by Cllr Mrs Katrina Trott, Mayor of Fareham.">
 		<@award	"d1" "Havant A" "/graphics/presentation2008/P3290041.JPG"/>
