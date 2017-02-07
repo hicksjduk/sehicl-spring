@@ -32,7 +32,7 @@
 	<@games>
 		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
 			innings("The Mayor of Fareham's VIII", 128, 3, 12, "M Goddard 26*")
-			innings("Havant A 124", 124, 8, 12, "P Hopson 55", "H Hovey 27", "S Hillman 2/26") 8/>
+			innings("Havant A", 124, 8, 12, "P Hopson 55", "H Hovey 27", "S Hillman 2/26") 8/>
 		<@match "Division 2 Champions v Division 3 Champions"
 			innings("Portsmouth B", 119, 6, 11.4, "J Palmer-Goddard 32", "N Wyatt 25",
 					"A Whitfield 3/22", "M Hovey 2/24")
