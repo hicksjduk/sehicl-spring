@@ -1,6 +1,5 @@
 package uk.org.sehicl.website.template;
 
-import freemarker.core.HTMLOutputFormat;
 import freemarker.template.Configuration;
 
 public class TemplateConfig
@@ -12,9 +11,8 @@ public class TemplateConfig
         if (CONFIG == null)
         {
             Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
-            cfg
-                    .setClassLoaderForTemplateLoading(TemplateConfig.class.getClassLoader(),
-                            "templates");
+            cfg.setClassLoaderForTemplateLoading(TemplateConfig.class.getClassLoader(),
+                    "templates");
             CONFIG = cfg;
         }
         return CONFIG;
