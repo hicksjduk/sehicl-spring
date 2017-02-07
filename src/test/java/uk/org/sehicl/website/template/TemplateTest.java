@@ -74,7 +74,6 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testPresentationPage2009()
     {
         new Template(new StaticPage("presentation", "presentation/2009.ftlh", Section.ARCHIVE,
@@ -114,6 +113,14 @@ public class TemplateTest
     {
         new Template(new StaticPage("presentation", "presentation/2014.ftlh", Section.ARCHIVE,
                 "/archive/presentation/2014", "SEHICL Presentation Evening 2014"))
+                        .process(new OutputStreamWriter(System.out));
+    }
+
+    @Test
+    public void testPresentationPage2015()
+    {
+        new Template(new StaticPage("presentation", "presentation/2015.ftlh", Section.ARCHIVE,
+                "/archive/presentation/2015", "SEHICL Presentation Evening 2015"))
                         .process(new OutputStreamWriter(System.out));
     }
 }
