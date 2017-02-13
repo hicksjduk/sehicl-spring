@@ -26,7 +26,7 @@ public class LeagueTablePage extends Page
         super("table", "leaguetable.ftlh", Section.ARCHIVE, uri);
         final League league = ModelLoader.getModel(season).getLeague(leagueId);
         table = new LeagueTable(league, new Rules.Builder(season).build());
-        title = String.format("%s Table - Season %d-%02d", league.getName(), season-1999, season);
+        title = String.format("%s Table - Season %d-%02d", league.getName(), season+1999, season);
         current = false;
     }
 

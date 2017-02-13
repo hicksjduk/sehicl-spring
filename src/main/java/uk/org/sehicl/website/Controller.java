@@ -116,4 +116,11 @@ public class Controller
         String uri = getRequestUri(req);
         return new Template(new LeagueTablePage(leagueId, uri)).process();
     }
+    
+    @RequestMapping("/archive/table/{leagueId}/{season}")
+    public String currentTable(HttpServletRequest req, @PathVariable String leagueId, @PathVariable int season)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new LeagueTablePage(leagueId, season, uri)).process();
+    }
 }

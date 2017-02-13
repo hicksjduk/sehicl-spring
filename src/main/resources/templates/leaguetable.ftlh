@@ -76,9 +76,9 @@ ${row.team.name}
 </td>
 <td class="points number">${row.points}</td>
 </tr>
-<#if row?counter == table.league.teamsPromoted ||
+<#if current && (row?counter == table.league.teamsPromoted ||
 (table.league.teamsRelegated != 0 && 
-row?counter == table.league.teams?size - table.league.teamsRelegated)>
+row?counter == table.league.teams?size - table.league.teamsRelegated))>
 <tr><td colspan="12" class="linebelow">&nbsp;</td></tr>
 </#if>
 </#list>
