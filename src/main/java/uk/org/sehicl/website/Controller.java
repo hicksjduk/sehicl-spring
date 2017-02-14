@@ -14,6 +14,7 @@ import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ContactsPage;
 import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueTablePage;
+import uk.org.sehicl.website.page.LeagueTablesPage;
 import uk.org.sehicl.website.page.StaticPage;
 import uk.org.sehicl.website.template.Template;
 
@@ -108,6 +109,13 @@ public class Controller
         return new Template(new StaticPage("presentation",
                 String.format("presentation/%s.ftlh", season), Section.ARCHIVE, uri,
                 String.format("SEHICL Presentation Evening %s", season))).process();
+    }
+    
+    @RequestMapping("/tables")
+    public String currentTables(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new LeagueTablesPage(uri)).process();
     }
     
     @RequestMapping("/tables/league/{leagueId}")

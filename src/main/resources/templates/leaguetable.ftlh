@@ -31,6 +31,8 @@
 	</#if>
 </#macro>
 
+<#list (tables??)?then(tables, [table]) as table>
+
 <div class="nobreak">
 <h1>${table.league.name}</h1>
 <#if current>
@@ -95,4 +97,6 @@ row?counter == table.league.teams?size - table.league.teamsRelegated))>
 </#list>
 </#if>
 </ul>
+
+</#list>
 <#include "pointscalc.ftlh"/>
