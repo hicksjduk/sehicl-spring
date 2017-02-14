@@ -56,7 +56,9 @@
 <tbody>
 <#list table.rows as row>
 <tr>
-<td class="position number">${row?counter}</td>
+<td class="position number">
+<#if (!lastRow??) || (row.compareSortFields(lastRow) != 0)>${row?counter}</#if>
+</td>
 <td class="teamname ">
 <#if current>
 <a href="../fixtures/team/${row.team.id}">${row.team.name}</a>
@@ -81,6 +83,7 @@ ${row.team.name}
 row?counter == table.league.teams?size - table.league.teamsRelegated))>
 <tr><td colspan="12" class="linebelow">&nbsp;</td></tr>
 </#if>
+<#assign lastRow = row/>
 </#list>
 </tbody>
 </table>

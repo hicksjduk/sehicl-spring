@@ -30,6 +30,7 @@ public class LeagueTable
     private final List<String> deductionStrings = new ArrayList<>();
     private final League league;
     private final Rules rules;
+    private final Collection<TableRow> rows;
 
     public LeagueTable(League league, Rules rules)
     {
@@ -38,7 +39,8 @@ public class LeagueTable
         league.getTeams().stream().filter(t -> !t.isExcludedFromTables()).forEach(
                 t -> rowsByTeamId.put(t.getId(), new TableRow(t, rules)));
         league.getMatches().stream().forEach(this::add);
-        getRows().stream().forEach(r -> r.processDeductions(deductionStrings));
+        rows = new TreeSet<>(rowsByTeamId.values());
+        rows.stream().forEach(r -> r.processDeductions(deductionStrings));
     }
 
     private void add(Match match)
@@ -71,7 +73,7 @@ public class LeagueTable
 
     public Collection<TableRow> getRows()
     {
-        return new TreeSet<>(rowsByTeamId.values());
+        return rows;
     }
 
     public League getLeague()
@@ -175,7 +177,7 @@ public class LeagueTable
             return answer == 0 ? team.getName().compareTo(o.team.getName()) : answer;
         }
 
-        private int compareSortFields(TableRow o)
+        public int compareSortFields(TableRow o)
         {
             int answer = o.getPoints() - getPoints();
             if (answer == 0)
