@@ -95,8 +95,11 @@ row?counter == table.league.teams?size - table.league.teamsRelegated))>
 <#list table.deductionStrings as deduction>
 <li><span class="dedkeys">(${deduction?counter})</span> ${deduction}</li>
 </#list>
-</#if>
 </ul>
+</#if>
+<#if table.league.tableNotes??>
+<p><b>${table.league.tableNotes}</b></p>
+</#if>
 
 </#list>
 <#include "pointscalc.ftlh"/>
