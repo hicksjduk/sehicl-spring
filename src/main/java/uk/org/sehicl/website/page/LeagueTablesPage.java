@@ -23,7 +23,7 @@ public class LeagueTablesPage extends Page
                 .getLeagues()
                 .stream()
                 .sorted()
-                .map(l -> new LeagueTable(l, rules))
+                .map(l -> new LeagueTable.Builder(l, rules).build())
                 .forEach(tables::add);
         title = "SEHICL Tables";
         current = true;

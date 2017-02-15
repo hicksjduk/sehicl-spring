@@ -25,35 +25,20 @@ import uk.org.sehicl.website.rules.Rules;
 
 public class LeagueTable
 {
-    private final ReportStatus status = new ReportStatus();
-    private final Map<String, TableRow> rowsByTeamId = new HashMap<>();
-    private final List<String> deductionStrings = new ArrayList<>();
     private final League league;
     private final Rules rules;
     private final Collection<TableRow> rows;
+    private final ReportStatus status;
+    private final List<String> deductionStrings;
 
-    public LeagueTable(League league, Rules rules)
+    private LeagueTable(League league, Rules rules, Collection<TableRow> rows, ReportStatus status,
+            List<String> deductionStrings)
     {
         this.league = league;
         this.rules = rules;
-        league.getTeams().stream().filter(t -> !t.isExcludedFromTables()).forEach(
-                t -> rowsByTeamId.put(t.getId(), new TableRow(t, rules)));
-        league.getMatches().stream().forEach(this::add);
-        rows = new TreeSet<>(rowsByTeamId.values());
-        rows.stream().forEach(r -> r.processDeductions(deductionStrings));
-    }
-
-    private void add(Match match)
-    {
-        if (match.isComplete(rules))
-        {
-            Stream
-                    .of(match.getHomeTeamId(), match.getAwayTeamId())
-                    .map(rowsByTeamId::get)
-                    .filter(Objects::nonNull)
-                    .forEach(r -> r.add(match));
-        }
-        status.add(match, rules);
+        this.rows = rows;
+        this.status = status;
+        this.deductionStrings = deductionStrings;
     }
 
     public Date getLastIncludedDate()
@@ -84,6 +69,11 @@ public class LeagueTable
     public List<String> getDeductionStrings()
     {
         return deductionStrings;
+    }
+
+    public Rules getRules()
+    {
+        return rules;
     }
 
     public static class TableRow implements Comparable<TableRow>
@@ -275,6 +265,45 @@ public class LeagueTable
         public List<Integer> getDeductionKeys()
         {
             return deductionKeys;
+        }
+    }
+
+    public static class Builder
+    {
+        private final ReportStatus status = new ReportStatus();
+        private final Map<String, TableRow> rowsByTeamId = new HashMap<>();
+        private final League league;
+        private final Rules rules;
+
+        public Builder(League league, Rules rules)
+        {
+            this.league = league;
+            this.rules = rules;
+        }
+
+        public LeagueTable build()
+        {
+            league.getTeams().stream().filter(t -> !t.isExcludedFromTables()).forEach(
+                    t -> rowsByTeamId.put(t.getId(), new TableRow(t, rules)));
+            league.getMatches().stream().forEach(this::add);
+            Collection<TableRow> rows = new TreeSet<>(rowsByTeamId.values());
+            List<String> deductionStrings = new ArrayList<>();
+            rows.stream().forEach(r -> r.processDeductions(deductionStrings));
+            return new LeagueTable(league, rules, rows, status, deductionStrings);
+        }
+
+        private void add(Match match)
+        {
+            final boolean complete = match.isComplete(rules);
+            if (complete)
+            {
+                Stream
+                        .of(match.getHomeTeamId(), match.getAwayTeamId())
+                        .map(rowsByTeamId::get)
+                        .filter(Objects::nonNull)
+                        .forEach(r -> r.add(match));
+            }
+            status.add(match, rules, complete);
         }
     }
 }

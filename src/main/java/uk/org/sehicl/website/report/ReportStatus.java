@@ -25,10 +25,15 @@ public class ReportStatus
 
     public void add(Match match, Rules rules)
     {
+        add(match, rules, match.isComplete(rules));
+    }
+
+    public void add(Match match, Rules rules, boolean complete)
+    {
         if (match.getDateTime() != null)
         {
             Date date = DateUtils.truncate(match.getDateTime(), Calendar.DATE);
-            if (match.isComplete(rules))
+            if (complete)
             {
                 if (lastIncludedDate == null || lastIncludedDate.before(date))
                 {
