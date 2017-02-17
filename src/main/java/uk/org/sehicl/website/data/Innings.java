@@ -101,4 +101,11 @@ public class Innings
         return wicketsLost == null || wicketsLost.intValue() == maxWickets || ballsBowled == null
                 || ballsBowled.intValue() == maxBalls;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Innings [runsScored=" + runsScored + ", wicketsLost=" + wicketsLost
+                + ", ballsBowled=" + ballsBowled + ", performances=" + performances + "]";
+    }
 }

@@ -90,4 +90,11 @@ public class PlayedMatch implements Outcome
         }
         return answer;
     }
+
+    @Override
+    public String toString()
+    {
+        return "PlayedMatch [submittedByEmail=" + submittedByEmail + ", teams=" + teams
+                + ", overLimit=" + overLimit + "]";
+    }
 }

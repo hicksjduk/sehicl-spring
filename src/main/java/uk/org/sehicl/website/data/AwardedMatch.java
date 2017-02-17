@@ -47,4 +47,10 @@ public class AwardedMatch implements Outcome
     {
         return winnerId != null;
     }
+
+    @Override
+    public String toString()
+    {
+        return "AwardedMatch [reason=" + reason + ", winnerId=" + winnerId + "]";
+    }
 }

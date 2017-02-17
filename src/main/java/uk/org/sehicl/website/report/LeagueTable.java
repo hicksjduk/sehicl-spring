@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import uk.org.sehicl.website.data.AwardedMatch;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
@@ -25,6 +28,8 @@ import uk.org.sehicl.website.rules.Rules;
 
 public class LeagueTable
 {
+    private static final Logger LOG = LoggerFactory.getLogger(LeagueTable.class);
+    
     private final League league;
     private final Rules rules;
     private final Collection<TableRow> rows;
@@ -302,6 +307,13 @@ public class LeagueTable
                         .map(rowsByTeamId::get)
                         .filter(Objects::nonNull)
                         .forEach(r -> r.add(match));
+            }
+            else
+            {
+                if (match.getOutcome() != null)
+                {
+                    LOG.warn(match.toString());
+                }
             }
             status.add(match, rules, complete);
         }

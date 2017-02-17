@@ -135,4 +135,11 @@ public class Match implements Comparable<Match>
 	{
 	    return dateTime != null && outcome != null && outcome.isComplete(rules);
 	}
+
+    @Override
+    public String toString()
+    {
+        return "Match [dateTime=" + dateTime + ", court=" + court + ", homeTeamId=" + homeTeamId
+                + ", awayTeamId=" + awayTeamId + ", outcome=" + outcome + "]";
+    }
 }

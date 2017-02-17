@@ -53,4 +53,11 @@ public class TeamInMatch
     {
         this.innings = innings;
     }
+
+    @Override
+    public String toString()
+    {
+        return "TeamInMatch [teamId=" + teamId + ", battingFirst=" + battingFirst + ", innings="
+                + innings + "]";
+    }
 }
