@@ -26,10 +26,10 @@ public class ReportStatus
 
     public void add(Match match, Rules rules, Completeness completenessThreshold)
     {
-        add(match, rules, completenessThreshold.compareTo(match.getCompleteness(rules)) >= 0);
+        add(match, completenessThreshold.compareTo(match.getCompleteness(rules)) >= 0);
     }
 
-    public void add(Match match, Rules rules, boolean complete)
+    public void add(Match match, boolean complete)
     {
         if (match.getDateTime() != null)
         {

@@ -319,7 +319,7 @@ public class LeagueTable
                     LOG.warn(match.toString());
                 }
             }
-            status.add(match, rules, complete);
+            status.add(match, complete);
         }
     }
 }
