@@ -120,21 +120,22 @@ public class Match implements Comparable<Match>
         outcome = awardedMatch;
     }
 
-	@Override
-	public int compareTo(Match m)
-	{
-		int answer = this.dateTime.compareTo(m.dateTime);
-		if (answer == 0)
-		{
-			answer = this.court.compareTo(m.getCourt());
-		}
-		return answer;
-	}
-	
-	public boolean isComplete(Rules rules)
-	{
-	    return dateTime != null && outcome != null && outcome.isComplete(rules);
-	}
+    @Override
+    public int compareTo(Match m)
+    {
+        int answer = this.dateTime.compareTo(m.dateTime);
+        if (answer == 0)
+        {
+            answer = this.court.compareTo(m.getCourt());
+        }
+        return answer;
+    }
+
+    public Completeness getCompleteness(Rules rules)
+    {
+        return dateTime == null || outcome == null ? Completeness.INCOMPLETE
+                : outcome.getCompleteness(rules);
+    }
 
     @Override
     public String toString()

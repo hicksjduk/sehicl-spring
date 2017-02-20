@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
+import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.data.Team;
@@ -27,8 +28,8 @@ public class LeagueTableTest
     public void testEmptyLeague()
     {
         League league = new League();
-        final LeagueTable result = new LeagueTable.Builder(league, new Rules.Builder(16).build())
-                .build();
+        final LeagueTable result = new LeagueTable.Builder(league, new Rules.Builder(16).build(),
+                Completeness.COMPLETE).build();
         checkTable(result, validate(league, null, Status.UNSTARTED, 0));
     }
 
@@ -43,8 +44,8 @@ public class LeagueTableTest
             t.setName("Team " + s);
             return t;
         }).forEach(league::addTeam);
-        final LeagueTable result = new LeagueTable.Builder(league, new Rules.Builder(16).build())
-                .build();
+        final LeagueTable result = new LeagueTable.Builder(league, new Rules.Builder(16).build(),
+                Completeness.COMPLETE).build();
         checkTable(result, validate(league, null, Status.UNSTARTED, 0),
                 validate("Team A", 0, 0, 0, 0, 0, 0, null, 0, 0),
                 validate("Team B", 0, 0, 0, 0, 0, 0, null, 0, 0),
@@ -58,8 +59,8 @@ public class LeagueTableTest
     {
         final Model model = ModelLoader.getModel(16);
         League league = model.getLeague("Division2");
-        final LeagueTable result = new LeagueTable.Builder(league, new Rules.Builder(16).build())
-                .build();
+        final LeagueTable result = new LeagueTable.Builder(league, new Rules.Builder(16).build(),
+                Completeness.COMPLETE).build();
         checkTable(result,
                 validate(league, getDate("2016-03-13"), Status.FINAL, 0,
                         "Failed to fulfil duty rota for 2 matches on 8th Nov - 2 points deducted",
@@ -81,8 +82,8 @@ public class LeagueTableTest
     {
         final Model model = ModelLoader.getModel(17);
         League league = model.getLeague("Division1");
-        final LeagueTable result = new LeagueTable.Builder(league, new Rules.Builder(16).build())
-                .build();
+        final LeagueTable result = new LeagueTable.Builder(league, new Rules.Builder(16).build(),
+                Completeness.COMPLETE).build();
         checkTable(result, validate(league, getDate("2017-02-12"), Status.IN_PROGRESS, 1),
                 validate("Portsmouth A", 7, 6, 0, 1, 33, 38, 10.72, 0, 143),
                 validate("Hambledon A", 7, 6, 0, 1, 34, 35, 10.43, 0, 141),

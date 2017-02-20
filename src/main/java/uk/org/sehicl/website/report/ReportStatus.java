@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.time.DateUtils;
 
+import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.Match;
 import uk.org.sehicl.website.rules.Rules;
 
@@ -23,9 +24,9 @@ public class ReportStatus
     private final SortedMap<Date, AtomicInteger> unplayedCountsByDate = new TreeMap<>(
             (d1, d2) -> d2.compareTo(d1));
 
-    public void add(Match match, Rules rules)
+    public void add(Match match, Rules rules, Completeness completenessThreshold)
     {
-        add(match, rules, match.isComplete(rules));
+        add(match, rules, completenessThreshold.compareTo(match.getCompleteness(rules)) >= 0);
     }
 
     public void add(Match match, Rules rules, boolean complete)

@@ -4,5 +4,5 @@ import uk.org.sehicl.website.rules.Rules;
 
 public interface Outcome
 {
-    boolean isComplete(Rules rules);
+    Completeness getCompleteness(Rules rules);
 }

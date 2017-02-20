@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import uk.org.sehicl.website.data.AwardedMatch;
+import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
 import uk.org.sehicl.website.data.PlayedMatch;
@@ -29,7 +30,7 @@ import uk.org.sehicl.website.rules.Rules;
 public class LeagueTable
 {
     private static final Logger LOG = LoggerFactory.getLogger(LeagueTable.class);
-    
+
     private final League league;
     private final Rules rules;
     private final Collection<TableRow> rows;
@@ -279,11 +280,13 @@ public class LeagueTable
         private final Map<String, TableRow> rowsByTeamId = new HashMap<>();
         private final League league;
         private final Rules rules;
+        private final Completeness completenessThreshold;
 
-        public Builder(League league, Rules rules)
+        public Builder(League league, Rules rules, Completeness completenessThreshold)
         {
             this.league = league;
             this.rules = rules;
+            this.completenessThreshold = completenessThreshold;
         }
 
         public LeagueTable build()
@@ -299,7 +302,8 @@ public class LeagueTable
 
         private void add(Match match)
         {
-            final boolean complete = match.isComplete(rules);
+            final boolean complete = completenessThreshold
+                    .compareTo(match.getCompleteness(rules)) <= 0;
             if (complete)
             {
                 Stream

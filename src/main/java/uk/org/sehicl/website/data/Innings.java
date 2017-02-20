@@ -35,6 +35,12 @@ public class Innings
         return wicketsLost;
     }
 
+    @JsonIgnore
+    public int getWicketsLost(int maxWickets)
+    {
+        return wicketsLost == null ? maxWickets : wicketsLost;
+    }
+
     public void setWicketsLost(Integer wicketsLost)
     {
         this.wicketsLost = wicketsLost;
@@ -44,6 +50,12 @@ public class Innings
     public Integer getBallsBowled()
     {
         return ballsBowled;
+    }
+
+    @JsonIgnore
+    public int getBallsBowled(int maxBalls)
+    {
+        return ballsBowled == null ? maxBalls : ballsBowled;
     }
 
     public void setBallsBowled(Integer ballsBowled)
@@ -96,16 +108,26 @@ public class Innings
         performances.add(bowler);
     }
 
-    public boolean isComplete(int maxWickets, int maxBalls)
-    {
-        return wicketsLost == null || wicketsLost.intValue() == maxWickets || ballsBowled == null
-                || ballsBowled.intValue() == maxBalls;
-    }
-
     @Override
     public String toString()
     {
         return "Innings [runsScored=" + runsScored + ", wicketsLost=" + wicketsLost
                 + ", ballsBowled=" + ballsBowled + ", performances=" + performances + "]";
+    }
+
+    public Completeness getCompleteness(Integer minBalls, Integer maxWickets)
+    {
+        Completeness answer = Completeness.CONSISTENT;
+        if ((minBalls != null && ballsBowled != null && ballsBowled < minBalls)
+                || (maxWickets != null && wicketsLost != null && wicketsLost > maxWickets))
+        {
+            answer = Completeness.COMPLETE;
+        }
+        return answer;
+    }
+    
+    public boolean isAllOut(int maxWickets)
+    {
+        return getWicketsLost(maxWickets) == maxWickets;
     }
 }

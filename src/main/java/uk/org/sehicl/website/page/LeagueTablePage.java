@@ -1,5 +1,6 @@
 package uk.org.sehicl.website.page;
 
+import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.dataload.ModelLoader;
 import uk.org.sehicl.website.navigator.Section;
@@ -16,7 +17,8 @@ public class LeagueTablePage extends Page
     {
         super("table", "leaguetable.ftlh", Section.TABLES, uri);
         final League league = ModelLoader.getModel().getLeague(leagueId);
-        table = new LeagueTable.Builder(league, new Rules.Builder().build()).build();
+        table = new LeagueTable.Builder(league, new Rules.Builder().build(),
+                Completeness.CONSISTENT).build();
         title = String.format("%s Table", league.getName());
         current = true;
     }
@@ -25,7 +27,8 @@ public class LeagueTablePage extends Page
     {
         super("table", "leaguetable.ftlh", Section.ARCHIVE, uri);
         final League league = ModelLoader.getModel(season).getLeague(leagueId);
-        table = new LeagueTable.Builder(league, new Rules.Builder(season).build()).build();
+        table = new LeagueTable.Builder(league, new Rules.Builder(season).build(),
+                Completeness.COMPLETE).build();
         title = String.format("%s Table - Season %d-%02d", league.getName(), season + 1999, season);
         current = false;
     }

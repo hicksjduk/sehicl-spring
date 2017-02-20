@@ -43,9 +43,9 @@ public class AwardedMatch implements Outcome
     }
 
     @Override
-    public boolean isComplete(Rules rules)
+    public Completeness getCompleteness(Rules rules)
     {
-        return winnerId != null;
+        return winnerId == null ? Completeness.INCOMPLETE : Completeness.CONSISTENT;
     }
 
     @Override
