@@ -1,6 +1,7 @@
 package uk.org.sehicl.website.report;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -15,20 +16,38 @@ import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.data.Player;
 import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.data.TeamInMatch;
+import uk.org.sehicl.website.report.ReportStatus.Status;
 import uk.org.sehicl.website.rules.Rules;
 
 public class BattingAverages
 {
     private final Collection<BattingRow> rows;
+    private final ReportStatus status;
 
     private BattingAverages(Builder builder)
     {
         rows = builder.getRows();
+        status = builder.status;
     }
 
     public Collection<BattingRow> getRows()
     {
         return rows;
+    }
+
+    public Date getLastIncludedDate()
+    {
+        return status.getLastIncludedDate();
+    }
+
+    public int getToCome()
+    {
+        return status.getToCome();
+    }
+
+    public Status getStatus()
+    {
+        return status.getStatus();
     }
 
     public static class BattingRow implements Comparable<BattingRow>
@@ -142,15 +161,15 @@ public class BattingAverages
             league
                     .getMatches()
                     .stream()
-                    .filter(m -> selector.isSelected(m)
-                            && completenessThreshold.compareTo(m.getCompleteness(rules)) <= 0)
+                    .filter(m -> selector.isSelected(m))
                     .forEach(m -> this.add(league, m));
         }
 
         private void add(League league, Match match)
         {
-            status.add(match, true);
-            if (match.getPlayedMatch() != null)
+            boolean complete = completenessThreshold.compareTo(match.getCompleteness(rules)) <= 0;
+            status.add(match, complete);
+            if (complete && match.getPlayedMatch() != null)
             {
                 match
                         .getPlayedMatch()

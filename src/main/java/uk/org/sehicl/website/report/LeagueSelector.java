@@ -8,7 +8,7 @@ import uk.org.sehicl.website.data.TeamInMatch;
 
 public enum LeagueSelector implements AveragesSelector
 {
-    SENIOR("Division \\d"), UNDER16("ColtsUnder16"), UNDER13("ColtsUnder13");
+    SENIOR("Division\\d"), UNDER16("ColtsUnder16"), UNDER13("ColtsUnder13");
     
     private final Pattern leagueIdPattern;
     
