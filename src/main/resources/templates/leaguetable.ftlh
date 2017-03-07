@@ -3,7 +3,7 @@
 <#list (tables??)?then(tables, [table]) as table>
 
 <div class="nobreak">
-<h1><#if title == "SEHICL Tables">${table.league.name}<#else>${title?replace("Table", "")}</#if></h1>
+<h1><#if tables??>${table.league.name}<#else>${title?replace("Table", "")}</#if></h1>
 <#if current>
 <p class="statusMessage">
 	<@statusMessage table.status table.lastIncludedDate table.toCome "table"/>
