@@ -53,9 +53,4 @@ public class LeagueBowlingAveragesPage extends Page
     {
         return current;
     }
-
-    public String getPageHeading()
-    {
-        return String.format("%s Bowling", selector.getName());
-    }
 }

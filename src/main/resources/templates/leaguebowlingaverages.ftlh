@@ -1,4 +1,4 @@
-<h1>${pageHeading}</h1>
+<h1>${title}</h1>
 <#if averages.status == "UNSTARTED">
 	<p>Averages will be available once the season has started.</p>
 <#else>

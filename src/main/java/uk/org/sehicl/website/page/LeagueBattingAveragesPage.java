@@ -52,9 +52,4 @@ public class LeagueBattingAveragesPage extends Page
     {
         return current;
     }
-
-    public String getPageHeading()
-    {
-        return String.format("%s Batting", selector.getName());
-    }
 }
