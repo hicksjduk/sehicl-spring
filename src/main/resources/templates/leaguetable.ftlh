@@ -71,4 +71,5 @@ row?counter == table.league.teams?size - table.league.teamsRelegated))>
 </#if>
 
 </#list>
-<#include "pointscalc.ftlh"/>
+<#if current><#include "pointscalc.ftlh"/></#if>
+	
