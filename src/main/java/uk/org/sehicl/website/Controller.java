@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ContactsPage;
 import uk.org.sehicl.website.page.HomePage;
+import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
 import uk.org.sehicl.website.page.LeagueTablePage;
 import uk.org.sehicl.website.page.LeagueTablesPage;
 import uk.org.sehicl.website.page.StaticPage;
+import uk.org.sehicl.website.report.LeagueSelector;
 import uk.org.sehicl.website.template.Template;
 
 @RestController
@@ -110,25 +112,43 @@ public class Controller
                 String.format("presentation/%s.ftlh", season), Section.ARCHIVE, uri,
                 String.format("SEHICL Presentation Evening %s", season))).process();
     }
-    
+
     @RequestMapping("/tables")
     public String currentTables(HttpServletRequest req)
     {
         String uri = getRequestUri(req);
         return new Template(new LeagueTablesPage(uri)).process();
     }
-    
+
     @RequestMapping("/tables/league/{leagueId}")
     public String currentTable(HttpServletRequest req, @PathVariable String leagueId)
     {
         String uri = getRequestUri(req);
         return new Template(new LeagueTablePage(leagueId, uri)).process();
     }
-    
+
     @RequestMapping("/archive/table/{leagueId}/{season}")
-    public String currentTable(HttpServletRequest req, @PathVariable String leagueId, @PathVariable int season)
+    public String archiveTable(HttpServletRequest req, @PathVariable String leagueId,
+            @PathVariable int season)
     {
         String uri = getRequestUri(req);
         return new Template(new LeagueTablePage(leagueId, season, uri)).process();
+    }
+
+    @RequestMapping("/averages/batting/{selector}")
+    public String currentBattingAverages(HttpServletRequest req, @PathVariable String selector)
+    {
+        String uri = getRequestUri(req);
+        return new Template(
+                new LeagueBattingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()), uri))
+                        .process();
+    }
+
+    @RequestMapping("/archive/batting/{selector}/{season}")
+    public String archiveBattingAverages(HttpServletRequest req,
+            @PathVariable LeagueSelector selector, @PathVariable int season)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new LeagueBattingAveragesPage(selector, season, uri)).process();
     }
 }

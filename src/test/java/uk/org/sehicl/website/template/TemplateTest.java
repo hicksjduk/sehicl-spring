@@ -7,7 +7,9 @@ import org.junit.Test;
 import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ContactsPage;
 import uk.org.sehicl.website.page.HomePage;
+import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
 import uk.org.sehicl.website.page.StaticPage;
+import uk.org.sehicl.website.report.LeagueSelector;
 
 public class TemplateTest
 {
@@ -123,11 +125,18 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testPresentationPage2016()
     {
         new Template(new StaticPage("presentation", "presentation/2016.ftlh", Section.ARCHIVE,
                 "/archive/presentation/2016", "SEHICL Presentation Evening 2016"))
+                        .process(new OutputStreamWriter(System.out));
+    }
+
+    @Test
+    public void testCurrentAveragesPage()
+    {
+        new Template(
+                new LeagueBattingAveragesPage(LeagueSelector.SENIOR, "/averages/batting/Senior"))
                         .process(new OutputStreamWriter(System.out));
     }
 }

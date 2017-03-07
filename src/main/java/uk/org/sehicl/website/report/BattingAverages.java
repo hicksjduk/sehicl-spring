@@ -16,10 +16,11 @@ import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.data.Player;
 import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.data.TeamInMatch;
+import uk.org.sehicl.website.report.BattingAverages.BattingRow;
 import uk.org.sehicl.website.report.ReportStatus.Status;
 import uk.org.sehicl.website.rules.Rules;
 
-public class BattingAverages
+public class BattingAverages implements Averages<BattingRow>
 {
     private final Collection<BattingRow> rows;
     private final ReportStatus status;
@@ -30,21 +31,25 @@ public class BattingAverages
         status = builder.status;
     }
 
+    @Override
     public Collection<BattingRow> getRows()
     {
         return rows;
     }
 
+    @Override
     public Date getLastIncludedDate()
     {
         return status.getLastIncludedDate();
     }
 
+    @Override
     public int getToCome()
     {
         return status.getToCome();
     }
 
+    @Override
     public Status getStatus()
     {
         return status.getStatus();

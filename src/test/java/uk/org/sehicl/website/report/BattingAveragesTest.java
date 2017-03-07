@@ -152,7 +152,7 @@ public class BattingAveragesTest
     public void testCompleteSeasonUnder16()
     {
         final BattingAverages averages = new BattingAverages.Builder(ModelLoader.getModel(16),
-                LeagueSelector.UNDER16, Completeness.COMPLETE, new Rules.Builder(16).build(), 25)
+                LeagueSelector.COLTSUNDER16, Completeness.COMPLETE, new Rules.Builder(16).build(), 25)
                         .build();
         checkAverages(averages, validate(getDate("2016-03-13"), Status.FINAL, 0),
                 validate("BAnscombe0", "B Anscombe", "Petersfield0", "Petersfield", 277, 68, false),
@@ -197,7 +197,7 @@ public class BattingAveragesTest
     public void testCompleteSeasonUnder13()
     {
         final BattingAverages averages = new BattingAverages.Builder(ModelLoader.getModel(16),
-                LeagueSelector.UNDER13, Completeness.COMPLETE, new Rules.Builder(16).build(), 25)
+                LeagueSelector.COLTSUNDER13, Completeness.COMPLETE, new Rules.Builder(16).build(), 25)
                         .build();
         checkAverages(averages, validate(getDate("2016-03-13"), Status.FINAL, 0),
                 validate("FGadd0", "F Gadd", "PortsmouthSouthsea1", "Portsmouth & Southsea", 244,

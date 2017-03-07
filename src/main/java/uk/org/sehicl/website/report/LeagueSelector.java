@@ -8,13 +8,15 @@ import uk.org.sehicl.website.data.TeamInMatch;
 
 public enum LeagueSelector implements AveragesSelector
 {
-    SENIOR("Division\\d"), UNDER16("ColtsUnder16"), UNDER13("ColtsUnder13");
+    SENIOR("Division\\d", "Senior"), COLTSUNDER16("ColtsUnder16", "Colts Under-16"), COLTSUNDER13("ColtsUnder13", "Colts Under-13");
     
     private final Pattern leagueIdPattern;
+    private final String name;
     
-    private LeagueSelector(String regex)
+    private LeagueSelector(String regex, String name)
     {
         leagueIdPattern = Pattern.compile(regex);
+        this.name = name;
     }
 
     @Override
@@ -34,5 +36,10 @@ public enum LeagueSelector implements AveragesSelector
     public boolean isSelected(TeamInMatch teamInMatch, boolean batting)
     {
         return true;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 }
