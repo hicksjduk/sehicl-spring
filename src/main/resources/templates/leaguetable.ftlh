@@ -6,7 +6,7 @@
 <h1>${table.league.name}</h1>
 <#if current>
 <p class="statusMessage">
-	<@statusMessage table.status table.lastIncludedDate table.toCome/>
+	<@statusMessage table.status table.lastIncludedDate table.toCome "table"/>
 </p>
 <p class="noprint">Click on a team to see all matches for that team.</p>
 </#if>

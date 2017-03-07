@@ -5,7 +5,7 @@
 	<#if current>
 		<#include "status.ftl"/>
 		<p class="statusMessage">
-			<@statusMessage batting.status batting.lastIncludedDate batting.toCome/>
+			<@statusMessage batting.status batting.lastIncludedDate batting.toCome "averages"/>
 		</p>
 	</#if>
 	<h2><a name="Batting">Batting</a></h2>

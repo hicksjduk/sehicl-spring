@@ -5,7 +5,7 @@
 	<#if current>
 		<#include "status.ftl"/>
 		<p class="statusMessage">
-			<@statusMessage averages.status averages.lastIncludedDate averages.toCome/>
+			<@statusMessage averages.status averages.lastIncludedDate averages.toCome "averages"/>
 		</p>
 		<p class="noprint">Click on a team to see the batting averages for that team.</p>
 	</#if>
