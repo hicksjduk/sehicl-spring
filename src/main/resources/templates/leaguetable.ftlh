@@ -1,35 +1,4 @@
-<#macro ordinalDate date monthTemplate yearTemplate>
-	${date?string("d")}${suffix(date?string("d"))} ${date?string(monthTemplate + " " + yearTemplate)}
-</#macro>
-
-<#function suffix numstr>
-	<#assign num = numstr?number/>
-	<#assign tens = (num / 10) % 10/>
-	<#assign units = num % 10/>
-	<#if tens != 1>
-		<#if units == 1>
-			<#return "st"/>
-		<#elseif units == 2>
-			<#return "nd"/>
-		<#elseif units == 3>
-			<#return "rd"/>
-		</#if>
-	</#if>
-	<#return "th"/>
-<</#function>
-
-<#macro statusMessage status lastIncludedDate toCome>
-	<#if status == "FINAL">
-		Final table
-	<#elseif status == "IN_PROGRESS">
-		<#if toCome == 0>
-			Includes all matches up to and including <@ordinalDate lastIncludedDate "MMMM" "yyyy"/>
-		<#else>
-			Date of last included result: <@ordinalDate lastIncludedDate "MMMM" "yyyy"/> 
-			(${toCome} ${(toCome == 1)?then("result", "results")} to come)
-		</#if>
-	</#if>
-</#macro>
+<#include "status.ftl"/>
 
 <#list (tables??)?then(tables, [table]) as table>
 
