@@ -1,3 +1,14 @@
-<#include "battingaverages.ftlh">
 <h1>${pageHeading}</h1>
-<@battingaverages averages current true/>
+<#if averages.status == "UNSTARTED">
+	<p>Averages will be available once the season has started.</p>
+<#else>
+	<#if current>
+		<#include "status.ftl"/>
+		<p class="statusMessage">
+			<@statusMessage averages.status averages.lastIncludedDate averages.toCome/>
+		</p>
+		<p class="noprint">Click on a team to see the batting averages for that team.</p>
+	</#if>
+	<#include "battingaverages.ftlh">
+	<@battingaverages averages current true/>
+</#if>

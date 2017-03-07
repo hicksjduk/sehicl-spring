@@ -18,6 +18,7 @@ import uk.org.sehicl.website.page.LeagueBowlingAveragesPage;
 import uk.org.sehicl.website.page.LeagueTablePage;
 import uk.org.sehicl.website.page.LeagueTablesPage;
 import uk.org.sehicl.website.page.StaticPage;
+import uk.org.sehicl.website.page.TeamAveragesPage;
 import uk.org.sehicl.website.report.LeagueSelector;
 import uk.org.sehicl.website.template.Template;
 
@@ -170,5 +171,20 @@ public class Controller
         String uri = getRequestUri(req);
         return new Template(new LeagueBowlingAveragesPage(
                 LeagueSelector.valueOf(selector.toUpperCase()), season, uri)).process();
+    }
+
+    @RequestMapping("/averages/team/{teamId}")
+    public String currentTeamAverages(HttpServletRequest req, @PathVariable String teamId)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new TeamAveragesPage(teamId, uri)).process();
+    }
+
+    @RequestMapping("/archive/teamAverages/{teamId}/{season}")
+    public String archiveTeamAverages(HttpServletRequest req, @PathVariable String teamId,
+            @PathVariable int season)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new TeamAveragesPage(teamId, season, uri)).process();
     }
 }

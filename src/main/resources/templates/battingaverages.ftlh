@@ -1,15 +1,5 @@
-<#include "status.ftl"/>
-
 <#macro battingaverages averages current showTeam>
-	<#if averages.status == "UNSTARTED">
-		<p>Averages will be available once the season has started.</p>
-	<#else>
-		<#if current>
-			<p class="statusMessage">
-				<@statusMessage averages.status averages.lastIncludedDate averages.toCome/>
-			</p>
-			<p class="noprint">Click on a team to see the batting averages for that team.</p>
-		</#if>
+	<#if averages.status != "UNSTARTED">
 		<p>Players are ranked by runs scored.</p>
 		<table id="batav">
 			<thead>
@@ -27,10 +17,11 @@
 				</tr>
 			</thead>
 			<tbody>
+				<#local lastRow="">
 				<#list averages.rows as row>
 					<tr>
 						<td class="position number">
-							<#if (!lastRow??) || (row.compareSortKeys(lastRow) != 0)>${row?counter}</#if>
+							<#if (lastRow == "") || (row.compareSortKeys(lastRow) != 0)>${row?counter}</#if>
 						</td>
 						<td class="name">${row.player.name}</td>
 						<#if showTeam>
