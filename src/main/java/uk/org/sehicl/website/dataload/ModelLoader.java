@@ -8,13 +8,14 @@ import java.util.TimeZone;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
+import uk.org.sehicl.website.Constants;
 import uk.org.sehicl.website.data.Model;
 
 public class ModelLoader
 {
 	private static FileLoader fileLoader = new ClasspathFileLoader();
 	private static final Map<Integer, Model> models = new HashMap<>();
-	public final static int DEFAULT_SEASON = 17;
+	public final static int DEFAULT_SEASON = Constants.CURRENT_SEASON;
 
 	public static void setFileLoader(FileLoader loader)
 	{

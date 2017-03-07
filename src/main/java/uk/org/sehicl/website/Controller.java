@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import uk.org.sehicl.website.navigator.Section;
+import uk.org.sehicl.website.page.ArchiveIndexPage;
 import uk.org.sehicl.website.page.ContactsPage;
 import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
 import uk.org.sehicl.website.page.LeagueBowlingAveragesPage;
 import uk.org.sehicl.website.page.LeagueTablePage;
 import uk.org.sehicl.website.page.LeagueTablesPage;
+import uk.org.sehicl.website.page.SeasonArchiveIndexPage;
 import uk.org.sehicl.website.page.StaticPage;
 import uk.org.sehicl.website.page.TeamAveragesIndexPage;
 import uk.org.sehicl.website.page.TeamAveragesPage;
@@ -26,7 +28,6 @@ import uk.org.sehicl.website.template.Template;
 @RestController
 public class Controller
 {
-
     private String getRequestUri(HttpServletRequest req)
     {
         String answer = Stream
@@ -202,5 +203,19 @@ public class Controller
         String uri = getRequestUri(req);
         return new Template(new StaticPage("averages", "averagesindex.ftlh",
                 Section.AVERAGES, uri, "SEHICL Averages")).process();
+    }
+
+    @RequestMapping("/archive")
+    public String archiveIndex(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new ArchiveIndexPage(uri)).process();
+    }
+
+    @RequestMapping("/archive/season/{season}")
+    public String seasonArchiveIndex(HttpServletRequest req, @PathVariable int season)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new SeasonArchiveIndexPage(uri, season)).process();
     }
 }
