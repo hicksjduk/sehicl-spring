@@ -11,7 +11,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 @JsonPropertyOrder(value =
 { "name", "excludedFromTables", "fixturePos", "pointsDeduction", "player" })
-public class Team
+public class Team implements Comparable<Team>
 {
     private String id;
     private String name;
@@ -107,5 +107,11 @@ public class Team
             }
         }
         return answer;
+    }
+
+    @Override
+    public int compareTo(Team o)
+    {
+        return name.compareTo(o.name);
     }
 }
