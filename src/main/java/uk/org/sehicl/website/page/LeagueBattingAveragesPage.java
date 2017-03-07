@@ -28,13 +28,13 @@ public class LeagueBattingAveragesPage extends Page
 
     public LeagueBattingAveragesPage(LeagueSelector selector, int season, String uri)
     {
-        super("averages", "leaguebattingaverages.ftlh", Section.AVERAGES, uri);
+        super("averages", "leaguebattingaverages.ftlh", Section.ARCHIVE, uri);
         this.selector = selector;
-        final Model model = ModelLoader.getModel();
+        final Model model = ModelLoader.getModel(season);
         averages = new BattingAverages.Builder(model, selector, 
-                Completeness.CONSISTENT, new Rules.Builder().build(), 50).build();
+                Completeness.COMPLETE, new Rules.Builder(season).build(), 50).build();
         title = String.format("%s Batting - Season %d-%02d", selector.getName(), season + 1999, season);
-        current = true;
+        current = false;
     }
 
     @Override

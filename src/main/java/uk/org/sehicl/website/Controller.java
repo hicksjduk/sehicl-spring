@@ -14,6 +14,7 @@ import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ContactsPage;
 import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
+import uk.org.sehicl.website.page.LeagueBowlingAveragesPage;
 import uk.org.sehicl.website.page.LeagueTablePage;
 import uk.org.sehicl.website.page.LeagueTablesPage;
 import uk.org.sehicl.website.page.StaticPage;
@@ -145,10 +146,29 @@ public class Controller
     }
 
     @RequestMapping("/archive/batting/{selector}/{season}")
-    public String archiveBattingAverages(HttpServletRequest req,
-            @PathVariable LeagueSelector selector, @PathVariable int season)
+    public String archiveBattingAverages(HttpServletRequest req, @PathVariable String selector,
+            @PathVariable int season)
     {
         String uri = getRequestUri(req);
-        return new Template(new LeagueBattingAveragesPage(selector, season, uri)).process();
+        return new Template(new LeagueBattingAveragesPage(
+                LeagueSelector.valueOf(selector.toUpperCase()), season, uri)).process();
+    }
+
+    @RequestMapping("/averages/bowling/{selector}")
+    public String currentBowlingAverages(HttpServletRequest req, @PathVariable String selector)
+    {
+        String uri = getRequestUri(req);
+        return new Template(
+                new LeagueBowlingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()), uri))
+                        .process();
+    }
+
+    @RequestMapping("/archive/bowling/{selector}/{season}")
+    public String archiveBowlingAverages(HttpServletRequest req, @PathVariable String selector,
+            @PathVariable int season)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new LeagueBowlingAveragesPage(
+                LeagueSelector.valueOf(selector.toUpperCase()), season, uri)).process();
     }
 }
