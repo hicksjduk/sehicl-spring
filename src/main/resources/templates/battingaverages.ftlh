@@ -1,6 +1,6 @@
 <#include "status.ftl"/>
 
-<#macro battingaverages averages current>
+<#macro battingaverages averages current showTeam>
 	<#if averages.status == "UNSTARTED">
 		<p>Averages will be available once the season has started.</p>
 	<#else>
@@ -16,7 +16,9 @@
 				<tr>
 					<th class="position number"></th>
 					<th class="name">Name</th>
-					<th class="teamName name">Team</th>
+					<#if showTeam>
+						<th class="teamName name">Team</th>
+					</#if>
 					<th class="innings number">Inns</th>
 					<th class="notout number">NO</th>
 					<th class="runs number">Runs</th>
@@ -31,13 +33,15 @@
 							<#if (!lastRow??) || (row.compareSortKeys(lastRow) != 0)>${row?counter}</#if>
 						</td>
 						<td class="name">${row.player.name}</td>
-						<td class="teamName name">
-							<#if current>
-								<a href="/averages/team/${row.team.id}#Batting">${row.team.name}</a>
-							<#else>
-								${row.team.name}
-							</#if>
-						</td>
+						<#if showTeam>
+							<td class="teamName name">
+								<#if current>
+									<a href="/averages/team/${row.team.id}#Batting">${row.team.name}</a>
+								<#else>
+									${row.team.name}
+								</#if>
+							</td>
+						</#if>
 						<td class="innings number">${row.innings}</td>
 						<td class="notout number">${row.notOut}</td>
 						<td class="runs number">${row.runs}</td>

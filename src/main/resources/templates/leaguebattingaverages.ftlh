@@ -1,3 +1,3 @@
 <#include "battingaverages.ftlh">
 <h1>${pageHeading}</h1>
-<@battingaverages averages current/>
+<@battingaverages averages current true/>
