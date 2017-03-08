@@ -4,12 +4,16 @@ import java.io.OutputStreamWriter;
 
 import org.junit.Test;
 
+import uk.org.sehicl.website.data.Completeness;
+import uk.org.sehicl.website.dataload.ModelLoader;
 import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ContactsPage;
 import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
 import uk.org.sehicl.website.page.StaticPage;
+import uk.org.sehicl.website.page.TeamFixturesPage;
 import uk.org.sehicl.website.report.LeagueSelector;
+import uk.org.sehicl.website.rules.Rules;
 
 public class TemplateTest
 {
@@ -132,11 +136,18 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testCurrentAveragesPage()
     {
         new Template(
                 new LeagueBattingAveragesPage(LeagueSelector.SENIOR, "/averages/batting/Senior"))
                         .process(new OutputStreamWriter(System.out));
+    }
+
+    @Test
+    public void testTeamFixturesPage()
+    {
+        new Template(new TeamFixturesPage(ModelLoader.getModel(), "IBMSouthHants",
+                Completeness.CONSISTENT, new Rules.Builder().build(),
+                "/fixtures/team/IBMSouthHants")).process(new OutputStreamWriter(System.out));
     }
 }
