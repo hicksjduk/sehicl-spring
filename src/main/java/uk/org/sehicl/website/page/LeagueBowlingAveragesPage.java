@@ -13,12 +13,10 @@ public class LeagueBowlingAveragesPage extends Page
     private final BowlingAverages averages;
     private final String title;
     private final boolean current;
-    private final LeagueSelector selector;
 
     public LeagueBowlingAveragesPage(LeagueSelector selector, String uri)
     {
         super("averages", "leaguebowlingaverages.ftlh", Section.AVERAGES, uri);
-        this.selector = selector;
         final Model model = ModelLoader.getModel();
         averages = new BowlingAverages.Builder(model, selector, Completeness.CONSISTENT,
                 new Rules.Builder().build(), 50).build();
@@ -29,7 +27,6 @@ public class LeagueBowlingAveragesPage extends Page
     public LeagueBowlingAveragesPage(LeagueSelector selector, int season, String uri)
     {
         super("averages", "leaguebowlingaverages.ftlh", Section.ARCHIVE, uri);
-        this.selector = selector;
         final Model model = ModelLoader.getModel(season);
         averages = new BowlingAverages.Builder(model, selector, Completeness.COMPLETE,
                 new Rules.Builder(season).build(), 50).build();
