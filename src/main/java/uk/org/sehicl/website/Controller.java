@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import uk.org.sehicl.website.data.Completeness;
-import uk.org.sehicl.website.dataload.ModelLoader;
 import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ArchiveIndexPage;
 import uk.org.sehicl.website.page.ContactsPage;
@@ -26,7 +24,6 @@ import uk.org.sehicl.website.page.TeamAveragesIndexPage;
 import uk.org.sehicl.website.page.TeamAveragesPage;
 import uk.org.sehicl.website.page.TeamFixturesPage;
 import uk.org.sehicl.website.report.LeagueSelector;
-import uk.org.sehicl.website.rules.Rules;
 import uk.org.sehicl.website.template.Template;
 
 @RestController
@@ -227,15 +224,13 @@ public class Controller
     public String teamFixtures(HttpServletRequest req, @PathVariable String teamId)
     {
         String uri = getRequestUri(req);
-        return new Template(new TeamFixturesPage(ModelLoader.getModel(), teamId,
-                Completeness.CONSISTENT, new Rules.Builder().build(), uri)).process();
+        return new Template(new TeamFixturesPage(teamId, uri)).process();
     }
 
     @RequestMapping("/fixtures/team/{teamId}/{season}")
     public String archiveTeamFixtures(HttpServletRequest req, @PathVariable String teamId, @PathVariable int season)
     {
         String uri = getRequestUri(req);
-        return new Template(new TeamFixturesPage(ModelLoader.getModel(season), teamId,
-                Completeness.COMPLETE, new Rules.Builder(season).build(), uri)).process();
+        return new Template(new TeamFixturesPage(teamId, season, uri)).process();
     }
 }
