@@ -1,4 +1,4 @@
-package uk.org.sehicl.website;
+package uk.org.sehicl.website.report;
 
 import java.util.Arrays;
 import java.util.Comparator;

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TreeSet;
 
-import uk.org.sehicl.website.ResultFormatter;
 import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
