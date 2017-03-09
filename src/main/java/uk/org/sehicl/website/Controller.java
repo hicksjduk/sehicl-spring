@@ -16,6 +16,7 @@ import uk.org.sehicl.website.page.ContactsPage;
 import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
 import uk.org.sehicl.website.page.LeagueBowlingAveragesPage;
+import uk.org.sehicl.website.page.LeagueFixturesPage;
 import uk.org.sehicl.website.page.LeagueTablePage;
 import uk.org.sehicl.website.page.LeagueTablesPage;
 import uk.org.sehicl.website.page.SeasonArchiveIndexPage;
@@ -228,9 +229,24 @@ public class Controller
     }
 
     @RequestMapping("/fixtures/team/{teamId}/{season}")
-    public String archiveTeamFixtures(HttpServletRequest req, @PathVariable String teamId, @PathVariable int season)
+    public String archiveTeamFixtures(HttpServletRequest req, @PathVariable String teamId,
+            @PathVariable int season)
     {
         String uri = getRequestUri(req);
         return new Template(new TeamFixturesPage(teamId, season, uri)).process();
+    }
+
+    @RequestMapping("/fixtures")
+    public String leagueFixtures(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new LeagueFixturesPage(uri)).process();
+    }
+
+    @RequestMapping("/fixtures/league/{leagueId}")
+    public String leagueFixtures(HttpServletRequest req, @PathVariable String leagueId)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new LeagueFixturesPage(leagueId, uri)).process();
     }
 }
