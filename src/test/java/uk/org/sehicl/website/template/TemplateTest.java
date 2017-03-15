@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ContactsPage;
+import uk.org.sehicl.website.page.DateResultsPage;
 import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
 import uk.org.sehicl.website.page.LeagueFixturesPage;
@@ -85,6 +86,7 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
+    @Test
     public void testPresentationPage2010()
     {
         new Template(new StaticPage("presentation", "presentation/2010.ftlh", Section.ARCHIVE,
@@ -149,8 +151,9 @@ public class TemplateTest
 
     public void testArchiveTeamFixturesPage()
     {
-        new Template(new TeamFixturesPage("IBMSouthHants", 15, "/archive/teamFixtures/IBMSouthHants/15"))
-                .process(new OutputStreamWriter(System.out));
+        new Template(
+                new TeamFixturesPage("IBMSouthHants", 15, "/archive/teamFixtures/IBMSouthHants/15"))
+                        .process(new OutputStreamWriter(System.out));
     }
 
     public void testLeagueFixturesPageAllLeagues()
@@ -159,10 +162,14 @@ public class TemplateTest
                 .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testLeagueFixturesPageOneLeague()
     {
         new Template(new LeagueFixturesPage("Division4", "/fixtures/league/Division4"))
                 .process(new OutputStreamWriter(System.out));
+    }
+
+    public void testDateResultsNoDate()
+    {
+        new Template(new DateResultsPage("/results")).process(new OutputStreamWriter(System.out));
     }
 }

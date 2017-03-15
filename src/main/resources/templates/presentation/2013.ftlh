@@ -6,11 +6,11 @@ Fareham Leisure Centre on Sunday 24th March.</p>
 
 <@section "Colts">
 	<@games>
-		<@match "Under-13"
+		<@exhibitionMatch "Under-13"
 			innings("Portsmouth & Southsea", 130, 3, 12, "H Gadd 49*", "D Cox 23*", "O Kanavan 22*", "O Southon 3/29")
 			innings("Under-13 Select VI", 134, 1, 11.2, "J Acaster 22*", "M Frost 20*", "O Southon 20*")
 		/>
-		<@match "Under-16"
+		<@exhibitionMatch "Under-16"
 			innings("Sarisbury Athletic", 121, 2, 12, "J Bowler 27*", "T Larcombe 25*")
 			innings("Under-16 Select VI", 125, 3, 11.4, "J Palmer-Goddard 26*", "A Southon 24*", 
 				"B White 20*", "T Larcombe 2/22")
@@ -29,14 +29,14 @@ Fareham Leisure Centre on Sunday 24th March.</p>
 
 <@section "Senior">
 	<@games>
-		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
+		<@exhibitionMatch "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
 			innings("The Mayor of Fareham's VIII", 111, 5, 12, "S Ransley 29*", "M Cook 2/23", "J Burnett 2/25")
 			innings("Waterlooville A", 113, 4, 12, "M Goddard 26*", "J Hudson 25*")
 			 8/>
-		<@match "Division 2 Champions v Division 3 Champions"
+		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
 			innings("Corinthians", 105, 6, 12, "R Wainwright 34")
 			innings("Bedhampton A", 97, 5, 12, "M Hovey 35*", "H Hovey 29", "P McIntyre 3/23 (inc. a hat-trick)")/>
-		<@match "Division 4 Champions v Committee/Umpires VI"
+		<@exhibitionMatch "Division 4 Champions v Committee/Umpires VI"
 			innings("Hambledon B", 138, 5, 12, "W Bond 22", "K Shinn 21", "A Anthony 2/20")
 			innings("Committee/Umpires VI", 108, 5, 12, "A Anthony 56*", "L Le-Clercq 3/23")/>
 	</@games>

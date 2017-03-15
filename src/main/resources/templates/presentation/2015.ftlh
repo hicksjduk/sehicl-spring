@@ -6,11 +6,11 @@
 
 <@section "Colts">
 	<@games>
-		<@match "Under-13"
+		<@exhibitionMatch "Under-13"
 			innings("Waterlooville", 122, 5, 12, "J Pearce 23", "S Reynolds 22*", "T Wallis 2/17")
 			innings("Under-13 Select VI", 123, 2, 11.4, "T Wallis 29*", "C Dean 23*", "C Pratt 23*")
 		/>
-		<@match "Under-16"
+		<@exhibitionMatch "Under-16"
 			innings("Portsmouth & Southsea", 93, 6, 9.1, "H Gadd 49*", "M McGlinchey 2/19")
 			innings("Under-16 Select VI", 94, 1, 9.5, "G Broadhurst 26*", "M McGlinchey 25*")
 		/>
@@ -30,14 +30,14 @@
 
 <@section "Senior">
 	<@games>
-		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
+		<@exhibitionMatch "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
 			innings("The Mayor of Fareham's VIII", 128, 3, 12, "M Goddard 26*")
 			innings("Havant A", 124, 8, 12, "P Hopson 55", "H Hovey 27", "S Hillman 2/26") 8/>
-		<@match "Division 2 Champions v Division 3 Champions"
+		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
 			innings("Portsmouth B", 119, 6, 11.4, "J Palmer-Goddard 32", "N Wyatt 25",
 					"A Whitfield 3/22", "M Hovey 2/24")
 			innings("Bedhampton B", 94, 3, 12, "C Hovey 26*", "M Hovey 25*")/>
-		<@match "Division 4 Champions v Committee/Umpires VI"
+		<@exhibitionMatch "Division 4 Champions v Committee/Umpires VI"
 			innings("St James Casuals", 132, 5, 12, "J Hawley 24", "R Webb 22")
 			innings("Committee/Umpires VI", 113, 6, 11.4, "T Newman 42", "M Shinn 29")/>
 	</@games>

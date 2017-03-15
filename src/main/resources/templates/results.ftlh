@@ -1,10 +1,33 @@
-<#include "../results.ftlh"/>
+<#function innings team runs wickets overs highlights...>
+	<#return {"team": {"name": team}, "runs": runs, "overs": overs, "wickets": wickets, "highlights": highlights}/>
+</#function>
 
-<#macro exhibitionMatch title innings1 innings2 maxWickets=6>
+<#macro match innings1 innings2 maxWickets=6>
 <tr>
-	<td colspan="2" class="division">${title}</td>
+<#list [innings1, innings2] as inns>
+	<td class="teamscore">
+		<#if (inns.team.id)??>
+			<a href="/fixtures/team/${inns.team.id}">${inns.team.name}</a>
+		<#else>
+			${inns.team.name}
+		</#if> 
+		${inns.runs} 
+		${(inns.wickets == maxWickets)?then("all out", "for " + inns.wickets)} 
+		<#if (inns.overs >= 0)>(${inns.overs} ov)</#if></td>
+</#list>
 </tr>
-<@match innings1 innings2 maxWickets/>
+<tr>
+<#list [innings1, innings2] as inns>
+	<td class="highlights">
+		<#list inns.highlights as h>
+			<span class="nolinewrap">${h}${h?is_last?then("", ",")}</span>
+		</#list>
+	</td>
+</#list>
+</tr>
+<tr>
+	<td class="result" colspan="2"><@result innings1 innings2 maxWickets/></td>
+</tr>
 </#macro>
 
 <#macro section title>

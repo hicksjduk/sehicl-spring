@@ -6,11 +6,11 @@ Fareham Leisure Centre on Sunday 27th March.</p>
 
 <@section "Colts">
 	<@games>
-		<@match "Under-13"
+		<@exhibitionMatch "Under-13"
 			innings("Hambledon", 135, 1, 12, "R Morris 22*", "F Rockett 22*", "C Boyd 21*")
 			innings("Under-13 Select VI", 127, 3, 12, "J McCoy 20*")
 		/>
-		<@match "Under-16"
+		<@exhibitionMatch "Under-16"
 			innings("Fareham & Crofton", 137, 6, 12, "T Kent 37", "L Cornish 25", "K Shinn 3/26")
 			innings("Under-16 Select VI", 139, 1, 11.4, "J Marston 25*", "K Shinn 25*")
 		/>
@@ -28,14 +28,14 @@ Fareham Leisure Centre on Sunday 27th March.</p>
 
 <@section "Senior">
 	<@games>
-		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
+		<@exhibitionMatch "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
 			innings("Havant B", 128, 6, 12, "M Reed 26*", "S Loat 24")
 			innings("The Mayor of Fareham's VIII", 71, 7, 12, "R Marston 26*")
 			 8/>
-		<@match "Division 2 Champions v Division 3 Champions"
+		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
 			innings("Fareham & Crofton A", 106, 6, 11.5, "D Emery 32", "M MacDowell 2/19")
 			innings("Hayling Island", 107, 3, 11.1, "M Hallett 28*")/>
-		<@match "Division 4 Champions v Committee/Umpires VI"
+		<@exhibitionMatch "Division 4 Champions v Committee/Umpires VI"
 			innings("Hambledon B", 115, 4, 12, "K Shinn 36*", "M Le Clercq 22", "A Smith 2/9", 
 				"R Matthews 2/23")
 			innings("Committee/Umpires VI", 115, 5, 12, "K Shinn 2/11", "W Mann 2/35")/>

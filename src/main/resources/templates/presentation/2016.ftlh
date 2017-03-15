@@ -6,7 +6,7 @@
 
 <@section "Colts">
 	<@games>
-		<@match "Under-13"
+		<@exhibitionMatch "Under-13"
 			innings("Under-13 Select VI", 162, 1, 12, "O Creal 36*", "O Pratt 21*", "C Walker 20*",
 				"N Kajendran 20*")
 			innings("Havant", 89, 6, 9.5, "C Dean 30", "N Kajendran 2/25")
@@ -16,7 +16,7 @@
 				alt="Colts Under-13 Select VI"><br>The Colts Under-13 Select side
 
 		</tr>
-		<@match "Under-16"
+		<@exhibitionMatch "Under-16"
 			innings("Petersfield", 138, 3, 12, "G Broadhurst 29*", "B Turk 27*")
 			innings("Under-16 Select VI", 127, 3, 12, "J Dunn 27*", "J Harris 27*", "B Turk 2/28")
 		/>
@@ -42,7 +42,7 @@
 
 <@section "Senior">
 	<@games>
-		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
+		<@exhibitionMatch "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
 			innings("Waterlooville A", 114, 8, 12, "J Scutt 34", "D Emery 2/25")
 			innings("The Mayor of Fareham's VIII", 114, 5, 12, "G Marshall 30*", "J Palmer-Goddard 25*", 
 				"A Reynolds 2/16", "H Knight 2/33") 8/>
@@ -57,10 +57,10 @@
 				by the captains of Waterlooville A and the Mayor's team 
 
 		</tr>
-		<@match "Division 2 Champions v Division 3 Champions"
+		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
 			innings("Gosport Borough A", 104, 5, 12, "G King 34*", "S Taylor 24")
 			innings("Purbrook", 106, 2, 8.3, "J Spiers 36*", "A Dean 20")/>
-		<@match "Division 4 Champions v Committee/Umpires VI"
+		<@exhibitionMatch "Division 4 Champions v Committee/Umpires VI"
 			innings("Gosport Borough B", 124, 2, 12, "C Pennicott 41*", "J Harris 30*", "J Richards 25*")
 			innings("Committee/Umpires VI", 70, 6, 11.5, "J Richards 2/16")/>
 	</@games>

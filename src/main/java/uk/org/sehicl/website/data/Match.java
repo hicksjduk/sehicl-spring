@@ -14,7 +14,7 @@ import uk.org.sehicl.website.rules.Rules;
 
 @JsonPropertyOrder(value =
 { "date", "pitch", "homeTeam", "awayTeam", "playedMatch", "awardedMatch" })
-public class Match implements Comparable<Match>
+public class Match
 {
     private Date dateTime;
     private String court;
@@ -118,27 +118,6 @@ public class Match implements Comparable<Match>
     public void setAwardedMatch(AwardedMatch awardedMatch)
     {
         outcome = awardedMatch;
-    }
-
-    @Override
-    public int compareTo(Match m)
-    {
-        int answer = compareDates(dateTime, m.dateTime);
-        if (answer == 0)
-        {
-            answer = this.court.compareTo(m.getCourt());
-        }
-        return answer;
-    }
-    
-    private int compareDates(Date d1, Date d2)
-    {
-        int answer = 0;
-        if (d1 != d2)
-        {
-            answer = d1 == null ? 1 : d2 == null ? -1 : d1.compareTo(d2);
-        }
-        return answer;
     }
 
     public Completeness getCompleteness(Rules rules)

@@ -6,11 +6,11 @@ Fareham Leisure Centre on Sunday 28th March.</p>
 
 <@section "Colts">
 	<@games>
-		<@match "Under-13"
+		<@exhibitionMatch "Under-13"
 			innings("Hambledon", 146, 4, 12, "J Brown 28", "C Boyd 21*")
 			innings("Under-13 Select VI", 100, 6, 10.1, "R Fitsell 27", "J McCoy 27", "C Boyd 2/24")
 		/>
-		<@match "Under-16"
+		<@exhibitionMatch "Under-16"
 			innings("Under-16 Select VI", 155, 4, 12, "M Windsor 35*", "N Verma 29*", "T Kent 28")
 			innings("Portsmouth & Southsea", 139, 5, 12, "S Collings-Wells 61*", "S Corbett 25", "M Windsor 2/33")
 		/>
@@ -29,16 +29,16 @@ Fareham Leisure Centre on Sunday 28th March.</p>
 
 <@section "Senior">
 	<@games>
-		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
+		<@exhibitionMatch "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
 			innings("The Mayor of Fareham's VIII", 120, 3, 12, "S Figgins 30*", "E Jordan 26*", "M Reeves 25*")
 			innings("Waterlooville A", 123, 7, 11.5, "S Hillman 26*", "M Goddard 26", "A Reynolds 20",
 				"P Hicks 2/24")
 			 8/>
-		<@match "Division 2 Champions v Division 3 Champions"
+		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
 			innings("Havant B", 158, 5, 12, "P Hopson 39*", "D Carson 39",
 				"E Reed 24")
 			innings("DOE Cavaliers", 74, 5, 12, "D Carson 3/6", "M Stanley 2/10")/>
-		<@match "Division 4 Champions v Committee/Umpires VI"
+		<@exhibitionMatch "Division 4 Champions v Committee/Umpires VI"
 			innings("Rowner", 102, 4, 12, "D Patmore 20*", "S Dean 3/25")
 			innings("Committee/Umpires VI", 104, 1, 8.5, "A Tucker 26*", "A Smith 24")/>
 	</@games>

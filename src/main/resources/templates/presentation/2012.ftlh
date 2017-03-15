@@ -6,11 +6,11 @@ Fareham Leisure Centre on Sunday 1st April.</p>
 
 <@section "Colts">
 	<@games>
-		<@match "Under-13"
+		<@exhibitionMatch "Under-13"
 			innings("Havant", 71, 6, 11.5, "J Davies 20", "J Brook 2/10")
 			innings("Under-13 Select VI", 72, 2, 9.4, "A Reynolds 23*", "E Hind 23*")
 		/>
-		<@match "Under-16"
+		<@exhibitionMatch "Under-16"
 			innings("Under-16 Select VI", 127, 4, 12, "J McCoy 42*", "R Fitsell 23")
 			innings("Hambledon", 130, 1, 11.3, "J Brown 28*", "S Jackson 26*", "S Le-Clercq 25*")
 		/>
@@ -28,14 +28,14 @@ Fareham Leisure Centre on Sunday 1st April.</p>
 
 <@section "Senior">
 	<@games>
-		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
+		<@exhibitionMatch "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
 			innings("The Mayor of Fareham's VIII", 126, 7, 12, "J Paskins 33", "L Mitchard 28", "S Hillman 2/32")
 			innings("Waterlooville A", 123, 8, 12, "S Hillman 31", "A Reynolds 29", "C Marsh 3/20", "L Mitchard 2/27")
 			 8/>
-		<@match "Division 2 Champions v Division 3 Champions"
+		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
 			innings("Sarisbury Athletic", 117, 5, 12, "J Floyd 39*")
 			innings("United Services", 81, 6, 10.4, "I Clark 2/16")/>
-		<@match "Division 4 Champions v Committee/Umpires VI"
+		<@exhibitionMatch "Division 4 Champions v Committee/Umpires VI"
 			innings("Committee/Umpires VI", 138, 5, 12, "A Smith 70", "A Anthony 26*", "M Shinn 22", 
 				"R Matthews 2/23")
 			innings("Emsworth", 115, 3, 12, "J Mason 33*", "W Pitts 30*")/>

@@ -1,11 +1,13 @@
 package uk.org.sehicl.website;
 
+import java.text.ParseException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ArchiveIndexPage;
 import uk.org.sehicl.website.page.ContactsPage;
+import uk.org.sehicl.website.page.DateResultsPage;
 import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
 import uk.org.sehicl.website.page.LeagueBowlingAveragesPage;
@@ -248,5 +251,19 @@ public class Controller
     {
         String uri = getRequestUri(req);
         return new Template(new LeagueFixturesPage(leagueId, uri)).process();
+    }
+
+    @RequestMapping("/results")
+    public String dateResultsLatest(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new DateResultsPage(uri)).process();
+    }
+
+    @RequestMapping("/results/date/{date}")
+    public String dateResultsLatest(HttpServletRequest req, @PathVariable String date) throws ParseException
+    {
+        String uri = getRequestUri(req);
+        return new Template(new DateResultsPage(DateUtils.parseDate(date, "yyyyMMdd"),uri)).process();
     }
 }

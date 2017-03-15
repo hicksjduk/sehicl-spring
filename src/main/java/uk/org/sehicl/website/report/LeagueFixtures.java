@@ -1,6 +1,7 @@
 package uk.org.sehicl.website.report;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.TreeSet;
 
 import uk.org.sehicl.website.data.Completeness;
@@ -69,7 +70,18 @@ public class LeagueFixtures
         @Override
         public int compareTo(UnplayedMatch o)
         {
-            return match.compareTo(o.match);
+            int answer = compareDates(match.getDateTime(), o.match.getDateTime());
+            return answer;
+        }
+        
+        private int compareDates(Date d1, Date d2)
+        {
+            int answer = 0;
+            if (d1 != d2)
+            {
+                answer = d1 == null ? 1 : d2 == null ? -1 : d1.compareTo(d2);
+            }
+            return answer;
         }
     }
 

@@ -6,11 +6,11 @@ Fareham Leisure Centre on Sunday 6th April.</p>
 
 <@section "Colts">
 	<@games>
-		<@match "Under-13"
+		<@exhibitionMatch "Under-13"
 			innings("Under-13 Select VI", 72, 6, 10, "O Pratt 24", "O Kanavan 23")
 			innings("Waterlooville", 74, 1, 8.3)
 		/>
-		<@match "Under-16"
+		<@exhibitionMatch "Under-16"
 			innings("Under-16 Select VI", 122, 4, 12, "J McCoy 34", "A Reynolds 25*")
 			innings("Havant", 51, 6, 11, "J Bowler 3/10", "R Fitsell 2/12")
 		/>
@@ -29,15 +29,15 @@ Fareham Leisure Centre on Sunday 6th April.</p>
 
 <@section "Senior">
 	<@games>
-		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
+		<@exhibitionMatch "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
 			innings("Havant A", 161, 3, 12, "P Hopson 27*", "B Walker 25*", "S Ransley 24",
 		 		"S Matthews 23", "B Mengham 2/26")
 			innings("The Mayor of Fareham's VIII", 112, 4, 12, "J Spiers 30*") 8/>
-		<@match "Division 2 Champions v Division 3 Champions"
+		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
 			innings("Portsmouth B", 118, 6, 11.5, "J Palmer-Goddard 31", "N Wyatt 22",
 				"M Benfield 2/28")
 			innings("Portsmouth & Southsea", 119, 5, 11.5, "M Smith 21", "R Jones 3/19")/>
-		<@match "Division 4 Champions v Committee/Umpires VI"
+		<@exhibitionMatch "Division 4 Champions v Committee/Umpires VI"
 			innings("Gosport Borough", 134, 5, 12, "G Kitchin 23", "A Smith 3/22")
 			innings("Committee/Umpires VI", 84, 6, 10.2, "P Stride 20", "T Larner 3/18")/>
 	</@games>

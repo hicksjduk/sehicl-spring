@@ -6,12 +6,12 @@ Fareham Leisure Centre on Saturday 4th April.</p>
 
 <@section "Colts">
 	<@games>
-		<@match "Under-13"
+		<@exhibitionMatch "Under-13"
 			innings("Portsmouth", 111, 5, 12, "J Marston 31", "A Marston 22*", "W Smitherman 21", 
 				"M Hindry 3/21")
 			innings("Under-13 Select VI", 98, 2, 12, "S Jackson 23*", "L Cornish 21*", "D Sampson 21*")
 		/>
-		<@match "Under-16"
+		<@exhibitionMatch "Under-16"
 			innings("Under-16 Select VI", 113, 4, 12, "J Marshall 23")
 			innings("Portsmouth & Southsea", 114, 0, 10.5, "J Peach 28*", "O Zee 25*")
 		/>
@@ -29,14 +29,14 @@ Fareham Leisure Centre on Saturday 4th April.</p>
 
 <@section "Senior">
 	<@games>
-		<@match "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
+		<@exhibitionMatch "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
 			innings("The Mayor of Fareham's VIII", 135, 7, -1, "D Hewitt 38*", "Mt Lee 3/24", "R Marston 2/31")
 			innings("Purbrook B", 117, 8, -1, "S Figgins 21", "R Jones 2/17", "G Wylde 2/36")
 			 8/>
-		<@match "Division 2 Champions v Division 3 Champions"
+		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
 			innings("Fareham & Crofton B", 122, 5, 12, "D Reader 34", "P Hicks 22*", "T Bullen 2/29")
 			innings("Portsmouth & Southsea B", 91, 6, 11.4, "E Hind 30", "P Hicks 3/18")/>
-		<@match "Division 4 Champions v Committee/Umpires VI"
+		<@exhibitionMatch "Division 4 Champions v Committee/Umpires VI"
 			innings("Wickham", 158, 2, 12, "C Martin 27*", "B Kirby 26*", "S Ryan 23", "J Paskins 2/17")
 			innings("Committee/Umpires VI", 99, 6, 8.2, "J Paskins 38", "N Lane 26", "J Gwynn 2/15")/>
 	</@games>
