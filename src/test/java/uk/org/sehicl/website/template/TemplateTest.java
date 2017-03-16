@@ -86,7 +86,6 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testPresentationPage2010()
     {
         new Template(new StaticPage("presentation", "presentation/2010.ftlh", Section.ARCHIVE,
@@ -167,7 +166,8 @@ public class TemplateTest
         new Template(new LeagueFixturesPage("Division4", "/fixtures/league/Division4"))
                 .process(new OutputStreamWriter(System.out));
     }
-
+    
+    @Test
     public void testDateResultsNoDate()
     {
         new Template(new DateResultsPage("/results")).process(new OutputStreamWriter(System.out));

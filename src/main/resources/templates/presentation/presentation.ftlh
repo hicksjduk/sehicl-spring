@@ -64,15 +64,3 @@
 		</#if>
 	</dd>
 </#macro>
-
-<#macro result inns1 inns2 maxWkts>
-	<#if inns1.runs == inns2.runs>
-		Match tied
-	<#elseif inns2.runs < inns1.runs>
-		<#assign margin = inns1.runs - inns2.runs/>
-		${inns1.team} won by ${margin} ${(margin > 1)?then("runs", "run")}
-	<#else>
-		<#assign margin = maxWkts - inns2.wickets/>
-		${inns2.team} won by ${margin} ${(margin > 1)?then("wickets", "wicket")}
-	</#if>
-</#macro>
