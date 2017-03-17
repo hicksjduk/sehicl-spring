@@ -1,43 +1,70 @@
-<#function innings team runs wickets overs highlights...>
-	<#return {"team": {"name": team}, "runs": runs, "overs": overs, "wickets": wickets, "highlights": highlights}/>
-</#function>
+<#include "ordinaldate.ftl"/>
+<#include "resultutils.ftlh"/>
 
-<#macro match innings1 innings2 maxWickets=6>
-<tr>
-<#list [innings1, innings2] as inns>
-	<td class="teamscore">
-		<#if (inns.team.id)??>
-			<a href="/fixtures/team/${inns.team.id}">${inns.team.name}</a>
-		<#else>
-			${inns.team.name}
-		</#if> 
-		${inns.runs} 
-		${(inns.wickets == maxWickets)?then("all out", "for " + inns.wickets)} 
-		<#if (inns.overs >= 0)>(${inns.overs} ov)</#if></td>
-</#list>
-</tr>
-<tr>
-<#list [innings1, innings2] as inns>
-	<td class="highlights">
-		<#list inns.highlights as h>
-			<span class="nolinewrap">${h}${h?is_last?then("", ",")}</span>
-		</#list>
-	</td>
-</#list>
-</tr>
-<tr>
-	<td class="result" colspan="2"><@result innings1 innings2 maxWickets/></td>
-</tr>
-</#macro>
-
-<#macro result inns1 inns2 maxWkts>
-	<#if inns1.runs == inns2.runs>
-		Match tied
-	<#elseif inns2.runs < inns1.runs>
-		<#assign margin = inns1.runs - inns2.runs/>
-		${inns1.team.name} won by ${margin} ${(margin > 1)?then("runs", "run")}
+<h1>
+	<#if results.date??>
+		Results: <@ordinalDate results.date "MMMM" "yyyy"/>
+	<#elseif results.league??>
+		${results.league.name}
 	<#else>
-		<#assign margin = maxWkts - inns2.wickets/>
-		${inns2.team.name} won by ${margin} ${(margin > 1)?then("wickets", "wicket")}
+		Results
 	</#if>
-</#macro>
+</h1>
+<#if results.results?size == 0>
+	<p>Results will be available once the season has started.</p>
+<#else>
+
+	<#if (results.allDates![])?size != 0>
+		<ul id="datenav" class="noprint">
+			<li>Results on other dates:</li>
+			<#list results.allDates as date>
+				<#if date?string("yyyyMMdd") != results.date?string("yyyyMMdd")>
+					<li>
+						<#if date?counter == 1>
+							<a href="/results">
+						<#else>
+							<a href="/results/date/${date?string("yyyyMMdd")}">
+						</#if>
+						<@ordinalDate date "MMM" ""/>
+						</a>
+					</li>
+				</#if>
+			</#list>
+		</ul>
+	</#if>
+
+	<p class="noprint">Click on a team to see all matches for that team.</p>
+	
+	<table id="reslist">
+	
+	<#list results.results as res>
+		<#if (results.date??) && (res.league.id != (lastRes.league.id)!"")>
+			<tr>
+				<td class="division" colspan="2">${res.league.name}</td>
+			</tr>
+		</#if>
+		<#if results.league??>
+			<#assign dateStr = (res.match.dateTime?string("yyyyMMdd"))!"TBA"/>
+			<#assign lastDateStr = (lastRes??)?then((lastRes.match.dateTime?string("yyyyMMdd"))!"TBA", "")/>
+			<#if dateStr != lastDateStr>
+				<tr>
+					<td class="date" colspan="2">
+						<#if dateStr == "TBA">
+							${dateStr}
+						<#else>
+							<@ordinalDate res.match.dateTime "MMMM" "yyyy"/>
+						</#if>
+					</td>
+				</tr>
+			</#if>
+		</#if>
+		<#assign lastRes = res/>
+		<#if res.match.playedMatch??>
+			<@match res.firstInnings res.secondInnings res.maxWickets/>
+		<#else>
+			<@walkover res/>
+		</#if>
+	</#list>
+
+	</table>
+</#if>

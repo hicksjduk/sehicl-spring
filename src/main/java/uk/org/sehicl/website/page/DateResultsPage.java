@@ -22,7 +22,7 @@ public class DateResultsPage extends Page
 
     public DateResultsPage(Date date, String uri)
     {
-        super("results", "dateresults.ftlh", Section.RESULTS, uri);
+        super("results", "results.ftlh", Section.RESULTS, uri);
         results = new DateResults.Builder(ModelLoader.getModel(), date, Completeness.CONSISTENT,
                 new Rules.Builder().build()).build();
         title = results.getDate() == null ? "Results"

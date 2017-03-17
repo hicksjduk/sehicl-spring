@@ -8,9 +8,12 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import uk.org.sehicl.website.data.AwardedMatch;
+import uk.org.sehicl.website.data.Batsman;
+import uk.org.sehicl.website.data.Bowler;
 import uk.org.sehicl.website.data.Innings;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
@@ -91,8 +94,7 @@ public abstract class Results
         public PlayedResultDetails(League league, Match match, Rules rules)
         {
             super(league, match);
-            final PlayedMatch playedMatch = match
-                    .getPlayedMatch();
+            final PlayedMatch playedMatch = match.getPlayedMatch();
             final List<TeamInMatch> teams = playedMatch
                     .getTeams()
                     .stream()
@@ -100,8 +102,10 @@ public abstract class Results
                     .collect(Collectors.toList());
             Team teamBattingFirst = league.getTeam(teams.get(0).getTeamId());
             Team teamBattingSecond = league.getTeam(teams.get(1).getTeamId());
-            firstInnings = new InningsDetails(true, teams.get(0).getInnings(), teamBattingFirst, teamBattingSecond, rules, playedMatch);
-            secondInnings = new InningsDetails(false, teams.get(1).getInnings(), teamBattingSecond, teamBattingFirst, rules, playedMatch);
+            firstInnings = new InningsDetails(true, teams.get(0).getInnings(), teamBattingFirst,
+                    teamBattingSecond, rules, playedMatch);
+            secondInnings = new InningsDetails(false, teams.get(1).getInnings(), teamBattingSecond,
+                    teamBattingFirst, rules, playedMatch);
             maxOvers = playedMatch.getOverLimit() == null ? rules.getOversPerInnings()
                     : playedMatch.getOverLimit();
             maxWickets = rules.getMaxWickets();
@@ -181,20 +185,39 @@ public abstract class Results
                     .stream()
                     .filter(b -> b.getRunsScored() >= rules.getMinRunsForBattingHighlight())
                     .sorted((a, b) -> compare(a, b, battingTeam))
-                    .map(b -> String.format("%s %d%s",
-                            battingTeam.getPlayer(b.getPlayerId()).getName(), b.getRunsScored(),
-                            b.isOut() ? "" : "*"))
+                    .map(this::format)
                     .forEach(answer::add);
             innings
                     .getBowlers()
                     .stream()
                     .filter(b -> b.getWicketsTaken() >= rules.getMinWicketsForBowlingHighlight())
                     .sorted((a, b) -> compare(a, b, bowlingTeam))
-                    .map(b -> String.format("%s %d/%d",
-                            bowlingTeam.getPlayer(b.getPlayerId()).getName(), b.getWicketsTaken(),
-                            b.getRunsConceded()))
+                    .map(this::format)
                     .forEach(answer::add);
             return answer;
+        }
+
+        private String format(Batsman b)
+        {
+            String answer = addNotes(
+                    String.format("%s %d%s", battingTeam.getPlayer(b.getPlayerId()).getName(),
+                            b.getRunsScored(), b.isOut() ? "" : "*"),
+                    b.getNotes());
+            return answer;
+        }
+
+        private String format(Bowler b)
+        {
+            String answer = addNotes(
+                    String.format("%s %d/%d", bowlingTeam.getPlayer(b.getPlayerId()).getName(),
+                            b.getWicketsTaken(), b.getRunsConceded()),
+                    b.getNotes());
+            return answer;
+        }
+
+        private String addNotes(String data, String notes)
+        {
+            return StringUtils.isEmpty(notes) ? data : String.format("%s (%s)", data, notes);
         }
 
         @Override
@@ -202,7 +225,7 @@ public abstract class Results
         {
             return Boolean.compare(o.first, first);
         }
-        
+
         private <T extends Performance & Comparable<T>> int compare(T a, T b, Team t)
         {
             int answer = a.compareTo(b);
@@ -212,7 +235,7 @@ public abstract class Results
             }
             return answer;
         }
-}
+    }
 
     public static class AwardedMatchDetails extends ResultDetails
     {

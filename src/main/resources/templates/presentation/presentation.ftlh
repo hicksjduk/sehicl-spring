@@ -1,4 +1,4 @@
-<#include "../results.ftlh"/>
+<#include "../resultutils.ftlh"/>
 
 <#macro exhibitionMatch title innings1 innings2 maxWickets=6>
 <tr>

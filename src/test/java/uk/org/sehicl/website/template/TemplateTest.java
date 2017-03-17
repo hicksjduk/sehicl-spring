@@ -12,6 +12,7 @@ import uk.org.sehicl.website.page.DateResultsPage;
 import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
 import uk.org.sehicl.website.page.LeagueFixturesPage;
+import uk.org.sehicl.website.page.LeagueResultsPage;
 import uk.org.sehicl.website.page.StaticPage;
 import uk.org.sehicl.website.page.TeamFixturesPage;
 import uk.org.sehicl.website.report.LeagueSelector;
@@ -116,6 +117,7 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
+    @Test
     public void testPresentationPage2014()
     {
         new Template(new StaticPage("presentation", "presentation/2014.ftlh", Section.ARCHIVE,
@@ -169,6 +171,7 @@ public class TemplateTest
                 .process(new OutputStreamWriter(System.out));
     }
 
+    @Test
     public void testDateResultsNoDate()
     {
         new Template(new DateResultsPage("/results")).process(new OutputStreamWriter(System.out));
@@ -179,5 +182,12 @@ public class TemplateTest
     {
         new Template(new DateResultsPage(DateUtils.parseDate("2016/11/06", "yyyy/MM/dd"),
                 "/results/date/20161106")).process(new OutputStreamWriter(System.out));
+    }
+
+    @Test
+    public void testLeagueResults() throws ParseException
+    {
+        new Template(new LeagueResultsPage("Division3",
+                "/results/league/Division3")).process(new OutputStreamWriter(System.out));
     }
 }

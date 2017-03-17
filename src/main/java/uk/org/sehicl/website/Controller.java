@@ -20,6 +20,7 @@ import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
 import uk.org.sehicl.website.page.LeagueBowlingAveragesPage;
 import uk.org.sehicl.website.page.LeagueFixturesPage;
+import uk.org.sehicl.website.page.LeagueResultsPage;
 import uk.org.sehicl.website.page.LeagueTablePage;
 import uk.org.sehicl.website.page.LeagueTablesPage;
 import uk.org.sehicl.website.page.SeasonArchiveIndexPage;
@@ -261,9 +262,19 @@ public class Controller
     }
 
     @RequestMapping("/results/date/{date}")
-    public String dateResultsLatest(HttpServletRequest req, @PathVariable String date) throws ParseException
+    public String dateResults(HttpServletRequest req, @PathVariable String date)
+            throws ParseException
     {
         String uri = getRequestUri(req);
-        return new Template(new DateResultsPage(DateUtils.parseDate(date, "yyyyMMdd"),uri)).process();
+        return new Template(new DateResultsPage(DateUtils.parseDate(date, "yyyyMMdd"), uri))
+                .process();
+    }
+
+    @RequestMapping("/results/league/{leagueId}")
+    public String leagueResults(HttpServletRequest req, @PathVariable String leagueId)
+            throws ParseException
+    {
+        String uri = getRequestUri(req);
+        return new Template(new LeagueResultsPage(leagueId, uri)).process();
     }
 }
