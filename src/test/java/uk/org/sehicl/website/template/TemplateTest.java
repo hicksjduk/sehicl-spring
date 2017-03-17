@@ -1,7 +1,9 @@
 package uk.org.sehicl.website.template;
 
 import java.io.OutputStreamWriter;
+import java.text.ParseException;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
 import uk.org.sehicl.website.navigator.Section;
@@ -166,10 +168,16 @@ public class TemplateTest
         new Template(new LeagueFixturesPage("Division4", "/fixtures/league/Division4"))
                 .process(new OutputStreamWriter(System.out));
     }
-    
-    @Test
+
     public void testDateResultsNoDate()
     {
         new Template(new DateResultsPage("/results")).process(new OutputStreamWriter(System.out));
+    }
+
+    @Test
+    public void testDateResultsWithDate() throws ParseException
+    {
+        new Template(new DateResultsPage(DateUtils.parseDate("2016/11/06", "yyyy/MM/dd"),
+                "/results/date/20161106")).process(new OutputStreamWriter(System.out));
     }
 }
