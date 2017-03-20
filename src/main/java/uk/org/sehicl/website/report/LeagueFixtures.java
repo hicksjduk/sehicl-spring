@@ -70,11 +70,19 @@ public class LeagueFixtures
         @Override
         public int compareTo(UnplayedMatch o)
         {
-            int answer = compareDates(match.getDateTime(), o.match.getDateTime());
+            int answer = compareNullSortsLast(match.getDateTime(), o.match.getDateTime());
+            if (answer == 0)
+            {
+                answer = compareNullSortsLast(match.getCourt(), o.match.getCourt());
+                if (answer == 0)
+                {
+                    answer = homeTeam.compareTo(awayTeam);
+                }
+            }
             return answer;
         }
-        
-        private int compareDates(Date d1, Date d2)
+
+        private <T extends Comparable<T>> int compareNullSortsLast(T d1, T d2)
         {
             int answer = 0;
             if (d1 != d2)
