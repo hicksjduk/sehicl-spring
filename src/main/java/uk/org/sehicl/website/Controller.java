@@ -277,4 +277,12 @@ public class Controller
         String uri = getRequestUri(req);
         return new Template(new LeagueResultsPage(leagueId, uri)).process();
     }
+
+    @RequestMapping("/dutyRota")
+    public String dutyRota(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new Template(new StaticPage("dutyRota", "dutyRota.ftlh", Section.FIXTURES,
+                uri, "SEHICL Duty Rota")).process();
+    }
 }
