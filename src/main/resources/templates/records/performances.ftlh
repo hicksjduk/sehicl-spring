@@ -43,8 +43,7 @@
 <@performance "Division 1" "South Hants" "81*" "1988-89" "R Marston"/>
 <@performance "Division 2" "United Services" "102*" "1988-89" "P Barsby"/>
 <@performance "Division 3" "Locks Heath B" "84" "1999-2000" "R Higgins"/>
-<@performance "Division 4" "Waterlooville B" "91*" "2008-09" "M Berg"/>
-<@performance "" "Southern Electric" "91*" "2015-16" "B James"/>
+<@performance "Division 4" "OPCS Titchfield" "95*" "2016-17" "A Jagadeesh"/>
 <@performance "Colts Under-16" "Portsmouth & Southsea" "97" "2010-11" "T Benfield"/>
 <@performance "Colts Under-13" "Havant" "122" "2010-11" "H Hovey"/>
 </tbody>
