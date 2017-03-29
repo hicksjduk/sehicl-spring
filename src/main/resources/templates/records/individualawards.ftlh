@@ -41,6 +41,7 @@
 	<@award "2013-14" "J Kent" "Portsmouth Priory" "252"/>
 	<@award "2014-15" "N Wyatt" "Portsmouth B" "321"/>
 	<@award "2015-16" "D Clark" "Bedhampton A" "325"/>
+	<@award "2016-17" "D Wallis" "Portsmouth B" "271"/>
 </tbody>
 </table>
 
@@ -72,6 +73,7 @@
 	<@award "2013-14" "S Taylor" "Gosport Borough" "15"/>
 	<@award "2014-15" "D Pitts" "Emsworth" "17"/>
 	<@award "2015-16" "D Pitts" "Emsworth" "15"/>
+	<@award "2016-17" "J Lewis" "Hambledon B" "13"/>
 </tbody>
 </table>
 
@@ -100,6 +102,7 @@
 	<@award "2013-14" "J McCoy" "Purbrook" "324"/>
 	<@award "2014-15" "H Gadd" "Portsmouth & Southsea" "277"/>
 	<@award "2015-16" "B Anscombe" "Petersfield" "277"/>
+	<@award "2016-17" "J Kooner-Evans" "Portsmouth A" "276"/>
 </tbody>
 </table>
 
@@ -128,6 +131,7 @@
 	<@award "2013-14" "J Bowler" "Sarisbury Athletic" "9"/>
 	<@award "2014-15" "B Marshall" "Sarisbury Athletic" "11"/>
 	<@award "2015-16" "C Creal" "Gosport Borough" "10"/>
+	<@award "2016-17" "F Gadd" "Portsmouth & Southsea" "9"/>
 </tbody>
 </table>
 
@@ -156,6 +160,7 @@
 	<@award "2013-14" "O Southon" "Fareham & Crofton" "278"/>
 	<@award "2014-15" "T Wallis" "Portsmouth" "189"/>
 	<@award "2015-16" "F Gadd" "Portsmouth & Southsea" "244"/>
+	<@award "2016-17" "J Oliver" "Havant" "247"/>
 </tbody>
 </table>
 
@@ -184,6 +189,7 @@
 	<@award "2013-14" "O Pratt" "Fareham & Crofton" "11"/>
 	<@award "2014-15" "T Wallis" "Portsmouth" "12"/>
 	<@award "2015-16" "J Oliver" "Havant" "10"/>
+	<@award "2016-17" "J Oliver" "Havant" "14"/>
 </tbody>
 </table>
 </div>

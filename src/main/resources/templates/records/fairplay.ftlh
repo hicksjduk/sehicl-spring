@@ -32,6 +32,7 @@
 <@award "2013-14" "Havant A"/>
 <@award "2014-15" "Gosport Borough"/>
 <@award "2015-16" "Denmead"/>
+<@award "2016-17" "Havant B"/>
 </tbody>
 </table>
 
@@ -57,6 +58,7 @@
 <@award "2013-14" "Petersfield Under-16, Portsmouth & Southsea Under-13 (shared)"/>
 <@award "2014-15" "Sarisbury Athletic Under-16"/>
 <@award "2015-16" "Fareham & Crofton Under-13"/>
+<@award "2016-17" "Havant Under-13, Waterlooville Under-16 (shared)"/>
 </tbody>
 </table>
 </div>
