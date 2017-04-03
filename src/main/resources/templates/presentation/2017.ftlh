@@ -56,8 +56,8 @@
 
 		</tr>
 		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
-			innings("Petersfield", 155, 6, -1, "B Turk 41", "K Dunstan 2/43")
-			innings("Portsmouth & Southsea A", 95, 6, -1, "J Davies 38", "D Marshall 4/27",
+			innings("Petersfield", 155, 6, 12, "B Turk 41", "K Dunstan 2/43")
+			innings("Portsmouth & Southsea A", 95, 6, 9.3, "J Davies 38", "D Marshall 4/27",
 				"B Turk 2/17")/>
 		<@exhibitionMatch "Division 4 Champions v Committee/Umpires VI"
 			innings("Hambledon B", 104, 6, 12, "J Lewis 43*", "N Lane 2/15", 
