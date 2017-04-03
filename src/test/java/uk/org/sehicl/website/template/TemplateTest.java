@@ -117,7 +117,6 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testPresentationPage2014()
     {
         new Template(new StaticPage("presentation", "presentation/2014.ftlh", Section.ARCHIVE,
@@ -136,6 +135,14 @@ public class TemplateTest
     {
         new Template(new StaticPage("presentation", "presentation/2016.ftlh", Section.ARCHIVE,
                 "/archive/presentation/2016", "SEHICL Presentation Evening 2016"))
+                        .process(new OutputStreamWriter(System.out));
+    }
+
+    @Test
+    public void testPresentationPage2017()
+    {
+        new Template(new StaticPage("presentation", "presentation/2017.ftlh", Section.ARCHIVE,
+                "/archive/presentation/2017", "SEHICL Presentation Evening 2017"))
                         .process(new OutputStreamWriter(System.out));
     }
 
@@ -171,20 +178,17 @@ public class TemplateTest
                 .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testDateResultsNoDate()
     {
         new Template(new DateResultsPage("/results")).process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testDateResultsWithDate() throws ParseException
     {
         new Template(new DateResultsPage(DateUtils.parseDate("2016/11/06", "yyyy/MM/dd"),
                 "/results/date/20161106")).process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testLeagueResults() throws ParseException
     {
         new Template(new LeagueResultsPage("Division3",
