@@ -6,7 +6,7 @@
 <h1><#if tables??>${table.league.name}<#else>${title?replace("Table", "")}</#if></h1>
 <#if current>
 <p class="statusMessage">
-	<@statusMessage table.status table.lastIncludedDate table.toCome "table"/>
+	<@statusMessage table.status table.lastIncludedDate!"" table.toCome "table"/>
 </p>
 <p class="noprint">Click on a team to see all matches for that team.</p>
 </#if>
@@ -43,7 +43,7 @@ ${row.team.name}
 <td class="lost number">${row.lost}</td>
 <td class="batpoints number">${row.battingPoints}</td>
 <td class="bowlpoints number">${row.bowlingPoints}</td>
-<td class="runrate number">${row.runRate?string("0.00")}</td>
+<td class="runrate number">${(row.runRate?string("0.00"))!""}</td>
 <td class="dedpoints"><#if row.pointsDeducted != 0>${row.pointsDeducted}</#if></td>
 <td class="dedkeys"><#if row.deductionKeys?size != 0>(${row.deductionKeys?join(", ")})</#if>
 </td>
