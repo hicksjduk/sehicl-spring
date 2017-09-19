@@ -174,13 +174,12 @@
 	actual fixture. The Sports Hall clock shall be used in respect of
 	timings. In the event of the Sports Hall clock being unavailable, the
 	time piece used shall be at the discretion of the attending umpire. <br>
-	If neither team is ready to start, the first THREE MINUTES after the
-	allocated start time are to be disregarded. After this for every part
-	of and up to and including the next six minutes one over shall be
-	deducted from each innings of the match. If only one team is not ready
-	to start, no deduction of overs shall be made from either innings.
-	(Four points are to be deducted from the team(s) causing the game to be
-	delayed beyond the first three minutes). <br> NOTE: Teams failing
+	If neither team is ready to start at the designated time, for every part 
+	of and up to and including the next six minutes one over shall be deducted 
+	from each innings of the match. If only one team is not ready to start, 
+	no deduction of overs shall be made from either innings. 
+	(Four points are to be deducted from the team(s) causing the game to be delayed). 
+	 <br> NOTE: Teams failing
 	to fulfil a fixture or arriving with less than FOUR players plus a
 	Scorer will be required to pay the Hall Hire charges for the lost hour
 	of play, within 21 days of the date of the unfulfilled fixture. Failure
@@ -268,19 +267,15 @@ through their withdrawal.
 <a name="sectionM"></a>
 <h2>M. Promotion and Relegation</h2>
 <p>
-	Due to the restructuring approved at the 2016 Annual General Meeting, under which
-	the League will consist of five divisions from 2017 onward,
-	there is no promotion, and the following arrangements for relegation apply, <b>in season
-	2016/17 only</b>:
 	<ul compact>
-	<li>The top <u>six</u> teams in Division 1, and the top <u>three</u> teams in each of 
-	Divisions 2, 3 and 4, will stay in the same division.
-	<li>The <u>bottom</u> team in each of Divisions 1, 2 and 3 will be relegated by <u>two</u>
-	divisions (that is, Division 1 to Division 3, Division 2 to Division 4, Division 3 to Division 5).
-	<li><u>All other teams</u> will be relegated by <u>one</u>
-	division (that is, Division 1 to Division 2, Division 2 to Division 3, Division 3 to Division 4
-	and Division 4 to Division 5). This applies to the teams that finish 7th to 9th in Division 1,
-	4th to 9th in Divisions 2 and 3, and 4th to 10th in Division 4.
+	<li>The team finishing bottom of Division 1 shall be relegated to Division 2, 
+	and the team finishing top of Division 2 shall be promoted to Division 1.
+	<li>The bottom two teams in Division 2 shall be relegated to Division 3,
+	and the top two teams in Division 3 shall be promoted to Division 2.
+	<li>The bottom two teams in Division 3 shall be relegated to Division 4,
+	and the top two teams in Division 4 shall be promoted to Division 3.
+	<li>The bottom two teams in Division 4 shall be relegated to Division 5,
+	and the top two teams in Division 5 shall be promoted to Division 4.
 	</ul>
 	 <br>
 	Any club not wishing to carry on playing next season should notify the
