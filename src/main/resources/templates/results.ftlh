@@ -14,7 +14,7 @@
 	<p>Results will be available once the season has started.</p>
 <#else>
 
-	<#if (results.allDates![])?size != 0>
+	<#if ((results.allDates![])?size > 1)>
 		<ul id="datenav" class="noprint">
 			<li>Results on other dates:</li>
 			<#list results.allDates as date>
