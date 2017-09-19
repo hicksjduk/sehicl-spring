@@ -1,7 +1,6 @@
 package uk.org.sehicl.website.report;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.TreeSet;
 
 import uk.org.sehicl.website.data.Completeness;
