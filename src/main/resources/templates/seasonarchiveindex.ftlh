@@ -16,7 +16,7 @@
 					<li><a href="/archive/table/Division3/${season}">Division 3</a></li>
 					<li><a href="/archive/table/Division4/${season}">Division 4</a></li>
 					<li><a href="/archive/table/ColtsUnder16/${season}">Colts Under-16</a></li>
-					<li><a href="/archive/table/ColtsUnder13">Colts Under-13</a></li>
+					<li><a href="/archive/table/ColtsUnder13/${season}">Colts Under-13</a></li>
 				</ul>
 			</td>
 			<td width="30"></td>
