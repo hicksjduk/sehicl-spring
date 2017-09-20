@@ -23,6 +23,7 @@ import uk.org.sehicl.website.page.LeagueFixturesPage;
 import uk.org.sehicl.website.page.LeagueResultsPage;
 import uk.org.sehicl.website.page.LeagueTablePage;
 import uk.org.sehicl.website.page.LeagueTablesPage;
+import uk.org.sehicl.website.page.Page;
 import uk.org.sehicl.website.page.SeasonArchiveIndexPage;
 import uk.org.sehicl.website.page.StaticPage;
 import uk.org.sehicl.website.page.TeamAveragesIndexPage;
@@ -142,7 +143,11 @@ public class Controller
             @PathVariable int season)
     {
         String uri = getRequestUri(req);
-        return new Template(new LeagueTablePage(leagueId, season, uri)).process();
+        final Page page = season <= 5
+                ? new StaticPage("archive", String.format("archive%d/%s.html", season, leagueId),
+                        Section.ARCHIVE, uri, "SEHICL Archive")
+                : new LeagueTablePage(leagueId, season, uri);
+        return new Template(page).process();
     }
 
     @RequestMapping("/averages/batting/{selector}")
@@ -159,8 +164,13 @@ public class Controller
             @PathVariable int season)
     {
         String uri = getRequestUri(req);
-        return new Template(new LeagueBattingAveragesPage(
-                LeagueSelector.valueOf(selector.toUpperCase()), season, uri)).process();
+        final Page page = season <= 5
+                ? new StaticPage("archive",
+                        String.format("archive%d/%sBatting.html", season, selector),
+                        Section.ARCHIVE, uri, "SEHICL Archive")
+                : new LeagueBattingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()),
+                        season, uri);
+        return new Template(page).process();
     }
 
     @RequestMapping("/averages/bowling/{selector}")
@@ -177,8 +187,13 @@ public class Controller
             @PathVariable int season)
     {
         String uri = getRequestUri(req);
-        return new Template(new LeagueBowlingAveragesPage(
-                LeagueSelector.valueOf(selector.toUpperCase()), season, uri)).process();
+        final Page page = season <= 5
+                ? new StaticPage("archive",
+                        String.format("archive%d/%sBowling.html", season, selector),
+                        Section.ARCHIVE, uri, "SEHICL Archive")
+                : new LeagueBowlingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()),
+                        season, uri);
+        return new Template(page).process();
     }
 
     @RequestMapping("/averages/team/{teamId}")
@@ -282,7 +297,7 @@ public class Controller
     public String dutyRota(HttpServletRequest req)
     {
         String uri = getRequestUri(req);
-        return new Template(new StaticPage("dutyRota", "dutyRota.ftlh", Section.FIXTURES,
-                uri, "SEHICL Duty Rota")).process();
+        return new Template(new StaticPage("dutyRota", "dutyRota.ftlh", Section.FIXTURES, uri,
+                "SEHICL Duty Rota")).process();
     }
 }
