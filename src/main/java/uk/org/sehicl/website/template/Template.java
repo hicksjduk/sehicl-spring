@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import uk.org.sehicl.website.page.Page;
-
-public class Template
+public abstract class Template<T>
 {
-    private final Page page;
+    private final String templateFile;
+    private final T dataObj;
     
-    public Template(Page page)
+    public Template(String templateFile, T dataObj)
     {
-        this.page = page;
+        this.templateFile = templateFile;
+        this.dataObj = dataObj;
     }
-    
+
     public String process()
     {
         StringWriter sw = new StringWriter();
@@ -27,8 +27,8 @@ public class Template
         freemarker.template.Template template;
         try
         {
-            template = TemplateConfig.getConfiguration().getTemplate("page.ftlh");
-            template.process(page, writer);
+            template = TemplateConfig.getConfiguration().getTemplate(templateFile);
+            template.process(dataObj, writer);
         }
         catch (IOException | freemarker.template.TemplateException e)
         {
