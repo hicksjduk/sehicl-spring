@@ -47,7 +47,7 @@ public class UserManager
 
     private long generateToken(User user)
     {
-        UserSession session = datastore.getSessionByUserId(user.getId());
+        SessionData session = datastore.getSessionByUserId(user.getId());
         if (session == null)
         {
             session = datastore.createSession(user);
@@ -60,7 +60,7 @@ public class UserManager
     public User registerUser(String email, String name, String club, String password)
             throws UserException, EmailException
     {
-        User answer = new User(name, email, club, Status.INACTIVE, 0, password);
+        User answer = new User(name, email, club, Status.INACTIVE, 0, password, true);
         if (!isBlocked(email))
         {
             final User user = datastore.getUserByEmail(email);
@@ -186,7 +186,7 @@ public class UserManager
         boolean answer = false;
         if (token != null)
         {
-            final UserSession session = datastore.getSessionBySessionId(token);
+            final SessionData session = datastore.getSessionBySessionId(token);
             if (session != null)
             {
                 if (role == null)

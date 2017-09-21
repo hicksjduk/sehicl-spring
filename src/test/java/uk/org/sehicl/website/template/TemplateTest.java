@@ -13,9 +13,11 @@ import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
 import uk.org.sehicl.website.page.LeagueFixturesPage;
 import uk.org.sehicl.website.page.LeagueResultsPage;
+import uk.org.sehicl.website.page.LoginPage;
 import uk.org.sehicl.website.page.StaticPage;
 import uk.org.sehicl.website.page.TeamFixturesPage;
 import uk.org.sehicl.website.report.LeagueSelector;
+import uk.org.sehicl.website.users.UserManager;
 
 public class TemplateTest
 {
@@ -138,7 +140,6 @@ public class TemplateTest
                         .process(new OutputStreamWriter(System.out));
     }
 
-    @Test
     public void testPresentationPage2017()
     {
         new PageTemplate(new StaticPage("presentation", "presentation/2017.ftlh", Section.ARCHIVE,
@@ -193,5 +194,11 @@ public class TemplateTest
     {
         new PageTemplate(new LeagueResultsPage("Division3",
                 "/results/league/Division3")).process(new OutputStreamWriter(System.out));
+    }
+
+    @Test
+    public void testLoginPage()
+    {
+        new PageTemplate(new LoginPage("/login", (UserManager) null)).process(new OutputStreamWriter(System.out));
     }
 }

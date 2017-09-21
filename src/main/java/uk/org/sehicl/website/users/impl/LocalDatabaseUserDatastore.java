@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.User.Status;
 import uk.org.sehicl.website.users.UserDatastore;
-import uk.org.sehicl.website.users.UserSession;
+import uk.org.sehicl.website.users.SessionData;
 
 public class LocalDatabaseUserDatastore implements UserDatastore
 {
@@ -58,7 +58,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
                     rs.getString(index++), Status.valueOf(rs
                             .getString(index++)
                             .toUpperCase()),
-                    rs.getInt(index++), rs.getString(index++));
+                    rs.getInt(index++), rs.getString(index++), false);
             do
             {
                 final String role = rs.getString(index);
@@ -93,21 +93,21 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         return answer;
     }
 
-    private UserSession getSession(ResultSet rs) throws SQLException
+    private SessionData getSession(ResultSet rs) throws SQLException
     {
-        UserSession answer = null;
+        SessionData answer = null;
         if (rs.next())
         {
             int index = 1;
-            answer = new UserSession(rs.getLong(index++), rs.getLong(index++), rs.getLong(index++));
+            answer = new SessionData(rs.getLong(index++), rs.getLong(index++), rs.getLong(index++));
         }
         return answer;
     }
 
     @Override
-    public UserSession getSessionByUserId(long id)
+    public SessionData getSessionByUserId(long id)
     {
-        UserSession answer = null;
+        SessionData answer = null;
         try (Connection conn = connect())
         {
             final PreparedStatement stmt = conn.prepareStatement(
@@ -126,9 +126,9 @@ public class LocalDatabaseUserDatastore implements UserDatastore
     }
 
     @Override
-    public UserSession getSessionBySessionId(long id)
+    public SessionData getSessionBySessionId(long id)
     {
-        UserSession answer = null;
+        SessionData answer = null;
         try (Connection conn = connect())
         {
             final PreparedStatement stmt = conn.prepareStatement(
@@ -147,7 +147,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
     }
 
     @Override
-    public UserSession createSession(User user)
+    public SessionData createSession(User user)
     {
         try (Connection conn = connect())
         {
@@ -159,7 +159,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
             final ResultSet rs = conn.createStatement().executeQuery("select last_insert_rowid()");
             rs.next();
             final long sessionId = rs.getLong(1);
-            return new UserSession(sessionId, user.getId(), expiry);
+            return new SessionData(sessionId, user.getId(), expiry);
         }
         catch (SQLException ex)
         {
@@ -199,7 +199,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
             final ResultSet rs = conn.createStatement().executeQuery("select last_insert_rowid()");
             rs.next();
             final long id = rs.getLong(1);
-            return new User(id, name, email, club, status, 0, password); 
+            return new User(id, name, email, club, status, 0, password, true); 
         }
         catch (SQLException ex)
         {

@@ -56,16 +56,16 @@ public class Login
     public final Validation validation = new Validation();
     public String message;
     
-    @Autowired
-    private UserManager userManager;
+    private final UserManager userManager;
 
-    public Login()
+    public Login(UserManager userManager)
     {
-        this(null, null);
+        this(userManager, null, null);
     }
 
-    public Login(String email, String password)
+    public Login(UserManager userManager, String email, String password)
     {
+        this.userManager = userManager;
         validation.email = email;
         validation.password = password;
     }

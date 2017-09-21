@@ -8,11 +8,11 @@ public interface UserDatastore
 
     User getUserById(long id);
 
-    UserSession getSessionByUserId(long id);
+    SessionData getSessionByUserId(long id);
 
-    UserSession getSessionBySessionId(long id);
+    SessionData getSessionBySessionId(long id);
 
-    UserSession createSession(User user);
+    SessionData createSession(User user);
 
     void clearExpiredSessions();
 

@@ -21,13 +21,13 @@ public class User
     private final String password;
 
     public User(String name, String email, String club, Status status, int failureCount,
-            String password)
+            String password, boolean encodePassword)
     {
-        this(null, name, email, club, status, failureCount, password);
+        this(null, name, email, club, status, failureCount, password, encodePassword);
     }
 
     public User(Long id, String name, String email, String club, Status status, int failureCount,
-            String password)
+            String password, boolean encodePassword)
     {
         this.id = id;
         this.name = name;
@@ -35,7 +35,7 @@ public class User
         this.club = club;
         this.status = status;
         this.failureCount = failureCount;
-        this.password = base64Encode(password);
+        this.password = encodePassword ? base64Encode(password) : password;
     }
 
     public Long getId()

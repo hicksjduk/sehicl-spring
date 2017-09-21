@@ -1,16 +1,16 @@
 package uk.org.sehicl.website.users;
 
-public class UserSession
+public class SessionData
 {
     public long id;
     public long userId;
     public long expiry;
 
-    public UserSession()
+    public SessionData()
     {
     }
 
-    public UserSession(long id, long userId, long expiry)
+    public SessionData(long id, long userId, long expiry)
     {
         this.id = id;
         this.userId = userId;

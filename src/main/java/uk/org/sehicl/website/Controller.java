@@ -1,15 +1,19 @@
 package uk.org.sehicl.website;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import uk.org.sehicl.website.navigator.Section;
@@ -24,6 +28,7 @@ import uk.org.sehicl.website.page.LeagueFixturesPage;
 import uk.org.sehicl.website.page.LeagueResultsPage;
 import uk.org.sehicl.website.page.LeagueTablePage;
 import uk.org.sehicl.website.page.LeagueTablesPage;
+import uk.org.sehicl.website.page.LoginPage;
 import uk.org.sehicl.website.page.Page;
 import uk.org.sehicl.website.page.SeasonArchiveIndexPage;
 import uk.org.sehicl.website.page.StaticPage;
@@ -32,10 +37,16 @@ import uk.org.sehicl.website.page.TeamAveragesPage;
 import uk.org.sehicl.website.page.TeamFixturesPage;
 import uk.org.sehicl.website.report.LeagueSelector;
 import uk.org.sehicl.website.template.PageTemplate;
+import uk.org.sehicl.website.users.EmailException;
+import uk.org.sehicl.website.users.Login;
+import uk.org.sehicl.website.users.UserManager;
 
 @RestController
 public class Controller
 {
+    @Autowired
+    private UserManager userManager;
+    
     private String getRequestUri(HttpServletRequest req)
     {
         String answer = Stream
@@ -60,10 +71,21 @@ public class Controller
     }
 
     @RequestMapping("/fullContacts")
-    public String fullContacts(HttpServletRequest req)
+    public String fullContacts(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
-        String uri = getRequestUri(req);
-        return new PageTemplate(new FullContactsPage(uri)).process();
+        String answer = "";
+        final UserSession userSession = new UserSession(req);
+        if (userManager.sessionHasRole(userSession.getToken(), null))
+        {
+            String uri = getRequestUri(req);
+            answer = new PageTemplate(new FullContactsPage(uri)).process();
+        }
+        else
+        {
+            userSession.setRedirectTarget(req.getRequestURI());
+            resp.sendRedirect("/login");
+        }
+        return answer;
     }
 
     @RequestMapping("/resources")
@@ -307,5 +329,51 @@ public class Controller
         String uri = getRequestUri(req);
         return new PageTemplate(new StaticPage("dutyRota", "dutyRota.ftlh", Section.FIXTURES, uri,
                 "SEHICL Duty Rota")).process();
+    }
+
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    public String login(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new PageTemplate(new LoginPage(uri, userManager)).process();
+    }
+
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public String login(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    {
+        String answer = "";
+        String uri = getRequestUri(req);
+        final String email = req.getParameter("email");
+        final String password = req.getParameter("password");
+        final Login login = new Login(userManager, email, password);
+        boolean redisplay = true;
+        if (req.getParameter("Login") != null)
+        {
+            final Long token = login.validateAndLogin();
+            if (token != null)
+            {
+                redisplay = false;
+                final UserSession userSession = new UserSession(req);
+                userSession.setToken(token);
+                resp.sendRedirect(userSession.getRedirectTarget());
+            }
+        }
+        else
+        {
+            try
+            {
+                login.validateAndRemind();
+            }
+            catch (EmailException e)
+            {
+                redisplay = false;
+                resp.sendRedirect(String.format("/emailError?message=%s", e.getMessage()));
+            }
+        }
+        if (redisplay)
+        {
+            answer = new PageTemplate(new LoginPage(uri, login)).process();
+        }
+        return answer;
     }
 }
