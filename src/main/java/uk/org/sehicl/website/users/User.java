@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
+
+@RedisHash("users")
 public class User
 {
     public static enum Status
@@ -11,8 +16,10 @@ public class User
         INACTIVE, ACTIVE
     }
 
+    @Id
     private Long id;
     private final String name;
+    @Indexed
     private final String email;
     private final String club;
     private final List<String> roles = new ArrayList<>();

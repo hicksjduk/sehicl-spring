@@ -13,7 +13,6 @@ import javax.mail.internet.MimeMessage;
 
 import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.EmailSender;
-import uk.org.sehicl.website.users.EmailSender.Addressee;
 
 public class JavamailSender implements EmailSender
 {
