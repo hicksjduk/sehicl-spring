@@ -2,9 +2,7 @@ package uk.org.sehicl.website.users;
 
 import java.io.StringWriter;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -47,12 +45,7 @@ public class UserManager
 
     private long generateToken(User user)
     {
-        SessionData session = datastore.getSessionByUserId(user.getId());
-        if (session == null)
-        {
-            session = datastore.createSession(user);
-        }
-        session.setExpiry(new Date().getTime() + TimeUnit.DAYS.toMillis(1));
+        SessionData session = datastore.setSession(user);
         final long answer = session.getId();
         return answer;
     }

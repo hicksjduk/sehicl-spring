@@ -147,7 +147,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
     }
 
     @Override
-    public SessionData createSession(User user)
+    public SessionData setSession(User user)
     {
         try (Connection conn = connect())
         {

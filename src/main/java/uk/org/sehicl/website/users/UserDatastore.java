@@ -12,7 +12,7 @@ public interface UserDatastore
 
     SessionData getSessionBySessionId(long id);
 
-    SessionData createSession(User user);
+    SessionData setSession(User user);
 
     void clearExpiredSessions();
 
