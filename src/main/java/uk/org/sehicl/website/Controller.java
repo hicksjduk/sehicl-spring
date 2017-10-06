@@ -38,8 +38,10 @@ import uk.org.sehicl.website.page.TeamFixturesPage;
 import uk.org.sehicl.website.report.LeagueSelector;
 import uk.org.sehicl.website.template.PageTemplate;
 import uk.org.sehicl.website.users.EmailException;
+import uk.org.sehicl.website.users.EmailSender.Addressee;
 import uk.org.sehicl.website.users.Login;
 import uk.org.sehicl.website.users.UserManager;
+import uk.org.sehicl.website.users.impl.SendgridSender;
 
 @RestController
 public class Controller
@@ -57,9 +59,10 @@ public class Controller
     }
 
     @RequestMapping("/")
-    public String home(HttpServletRequest req)
+    public String home(HttpServletRequest req) throws EmailException
     {
         String uri = getRequestUri(req);
+        new SendgridSender().sendEmail("Started", "Started the application!", new Addressee("jeremy@thehickses.org.uk"));
         return new PageTemplate(new HomePage(uri)).process();
     }
 
