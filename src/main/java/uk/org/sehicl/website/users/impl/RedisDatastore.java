@@ -17,6 +17,7 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 
+import redis.clients.jedis.JedisPoolConfig;
 import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.User.Status;
@@ -59,7 +60,14 @@ public class RedisDatastore implements UserDatastore
 
     private static JedisConnectionFactory createConnectionFactory()
     {
-        final JedisConnectionFactory answer = new JedisConnectionFactory();
+        JedisPoolConfig poolConfig = new JedisPoolConfig();
+        poolConfig.setMaxTotal(10);
+        poolConfig.setMaxIdle(5);
+        poolConfig.setMinIdle(1);
+        poolConfig.setTestOnBorrow(true);
+        poolConfig.setTestOnReturn(true);
+        poolConfig.setTestWhileIdle(true);
+        final JedisConnectionFactory answer = new JedisConnectionFactory(poolConfig);
         answer.setUsePool(true);
         return answer;
     }
