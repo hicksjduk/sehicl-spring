@@ -1,6 +1,7 @@
 package uk.org.sehicl.website.users.impl;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,6 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 
-import redis.clients.jedis.JedisPoolConfig;
 import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.User.Status;
@@ -35,9 +35,9 @@ public class RedisDatastore implements UserDatastore
         this(createConnectionFactory());
     }
 
-    public RedisDatastore(String host)
+    public RedisDatastore(String uri)
     {
-        this(createConnectionFactory(host, null, null));
+        this(createConnectionFactory(uri));
     }
 
     public RedisDatastore(String host, int port)
@@ -60,15 +60,22 @@ public class RedisDatastore implements UserDatastore
 
     private static JedisConnectionFactory createConnectionFactory()
     {
-        JedisPoolConfig poolConfig = new JedisPoolConfig();
-        poolConfig.setMaxTotal(10);
-        poolConfig.setMaxIdle(5);
-        poolConfig.setMinIdle(1);
-        poolConfig.setTestOnBorrow(true);
-        poolConfig.setTestOnReturn(true);
-        poolConfig.setTestWhileIdle(true);
-        final JedisConnectionFactory answer = new JedisConnectionFactory(poolConfig);
+        final JedisConnectionFactory answer = new JedisConnectionFactory();
         answer.setUsePool(true);
+        return answer;
+    }
+    
+    private static JedisConnectionFactory createConnectionFactory(String uriString)
+    {
+        final JedisConnectionFactory answer = createConnectionFactory();
+        if (uriString != null)
+        {
+            URI uri = URI.create(uriString);
+            answer.setHostName(uri.getHost());
+            answer.setPort(uri.getPort());
+            final String password = uri.getUserInfo().split(":")[1];
+            answer.setPassword(password);
+        }
         return answer;
     }
 
