@@ -1,5 +1,7 @@
 package uk.org.sehicl.website;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -13,9 +15,18 @@ import uk.org.sehicl.website.users.impl.RedisDatastore;
 @SpringBootApplication
 public class Application
 {
+    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
+
     public static void main(String[] args)
     {
-        SpringApplication.run(Application.class, args);
+        try
+        {
+            SpringApplication.run(Application.class, args);
+        }
+        catch (Throwable ex)
+        {
+            LOG.error("Application crash!", ex);
+        }
     }
 
     @Bean
