@@ -1,16 +1,13 @@
 package uk.org.sehicl.website.users;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class User implements Serializable
+public class User
 {
-    private static final long serialVersionUID = -1060316851734731086L;
-
     public static enum Status
     {
         INACTIVE, ACTIVE

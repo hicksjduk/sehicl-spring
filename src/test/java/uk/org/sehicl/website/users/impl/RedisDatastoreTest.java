@@ -74,4 +74,10 @@ public class RedisDatastoreTest
         assertThat(session.getExpiry()).isCloseTo(new Date().getTime() + TimeUnit.DAYS.toMillis(1),
                 within(50L));
     }
+    
+    @Test
+    public void testClearExpiredSessions()
+    {
+        datastore.clearExpiredSessions();
+    }
 }

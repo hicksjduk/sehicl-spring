@@ -1,13 +1,19 @@
 package uk.org.sehicl.website.users.impl;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions.ScanOptionsBuilder;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 
@@ -20,17 +26,25 @@ public class RedisDatastore implements UserDatastore
 {
     private final JedisConnectionFactory connectionFactory;
     private final RedisAtomicLong keyGenerator;
+    private final RedisTemplate<String, String> template;
+    private final HashOperations<String, Object, Object> ops;
 
     public RedisDatastore()
     {
-        (connectionFactory = createConnectionFactory()).afterPropertiesSet();;
-        keyGenerator = new RedisAtomicLong("counter", connectionFactory, 0L);
+        this(createConnectionFactory());
     }
 
     public RedisDatastore(String host, int port)
     {
-        (connectionFactory = createConnectionFactory(host, port)).afterPropertiesSet();;
+        this(createConnectionFactory(host, port));
+    }
+
+    private RedisDatastore(JedisConnectionFactory connectionFactory)
+    {
+        (this.connectionFactory = connectionFactory).afterPropertiesSet();
         keyGenerator = new RedisAtomicLong("counter", connectionFactory);
+        template = createTemplate();
+        ops = template.opsForHash();
     }
 
     private static JedisConnectionFactory createConnectionFactory()
@@ -61,7 +75,7 @@ public class RedisDatastore implements UserDatastore
         answer.setKeySerializer(new StringRedisSerializer());
         answer.setValueSerializer(new GenericToStringSerializer<>(Long.class));
         answer.setHashKeySerializer(new GenericToStringSerializer<>(Long.class));
-        answer.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(User.class));
+        answer.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         answer.afterPropertiesSet();
         return answer;
     }
@@ -69,35 +83,36 @@ public class RedisDatastore implements UserDatastore
     @Override
     public User getUserByEmail(String email)
     {
-        final User answer = (User) createTemplate().opsForHash().get("email", email);
+        final User answer = (User) ops.get("email", email);
         return answer;
     }
 
     @Override
     public User getUserById(long id)
     {
-        final User answer = (User) createTemplate().opsForHash().get("user", id);
+        final User answer = (User) ops.get("user", id);
         return answer;
     }
 
     @Override
     public SessionData getSessionByUserId(long id)
     {
-        // TODO Auto-generated method stub
-        return null;
+        SessionData answer = null;
+        answer = (SessionData) ops.get("usersession", id);
+        return answer;
     }
 
     @Override
     public SessionData getSessionBySessionId(long id)
     {
-        // TODO Auto-generated method stub
-        return null;
+        SessionData answer = null;
+        answer = (SessionData) ops.get("session", id);
+        return answer;
     }
 
     @Override
     public SessionData setSession(User user)
     {
-        final HashOperations<String, Object, Object> ops = createTemplate().opsForHash();
         final long expiry = new Date().getTime() + TimeUnit.DAYS.toMillis(1);
         SessionData answer = getSessionByUserId(user.getId());
         if (answer == null)
@@ -116,8 +131,30 @@ public class RedisDatastore implements UserDatastore
     @Override
     public void clearExpiredSessions()
     {
-        // TODO Auto-generated method stub
-
+        long now = new Date().getTime();
+        List<SessionData> expiredSessions = new ArrayList<>();
+        try (Cursor<Entry<Object, Object>> c = ops.scan("session",
+                new ScanOptionsBuilder().build()))
+        {
+            c.forEachRemaining(e ->
+            {
+                final SessionData s = (SessionData) e.getValue();
+                if (s.getExpiry() < now)
+                {
+                    expiredSessions.add(s);
+                }
+            });
+        }
+        catch (IOException ex)
+        {
+            throw new RuntimeException("Error closing cursor", ex);
+        }
+        if (!expiredSessions.isEmpty())
+        {
+            ops.delete("session", expiredSessions.stream().mapToLong(SessionData::getId).toArray());
+            ops.delete("usersession",
+                    expiredSessions.stream().mapToLong(SessionData::getUserId).toArray());
+        }
     }
 
     @Override
@@ -132,7 +169,6 @@ public class RedisDatastore implements UserDatastore
     @Override
     public void updateUser(User user)
     {
-        final HashOperations<String, Object, Object> ops = createTemplate().opsForHash();
         ops.put("user", user.getId(), user);
         ops.put("email", user.getEmail(), user);
     }
