@@ -1,7 +1,6 @@
 package uk.org.sehicl.website.users;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class Login
 {
