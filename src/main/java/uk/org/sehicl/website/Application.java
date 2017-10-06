@@ -15,7 +15,7 @@ import uk.org.sehicl.website.users.impl.RedisDatastore;
 @SpringBootApplication
 public class Application
 {
-    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
+//    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args)
     {
@@ -25,7 +25,7 @@ public class Application
         }
         catch (Throwable ex)
         {
-            LOG.error("Application crash!", ex);
+            ex.printStackTrace(System.out);
         }
     }
 
