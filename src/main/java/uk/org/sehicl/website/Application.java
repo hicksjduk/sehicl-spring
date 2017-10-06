@@ -38,7 +38,7 @@ public class Application
     {
         final String redisUrl = System.getenv("REDIS_URL");
         System.out.println("Redis URL: " + redisUrl);
-        return new RedisDatastore(redisUrl);
+        return new RedisDatastore();
     }
 
     @Bean
