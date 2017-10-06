@@ -34,9 +34,19 @@ public class RedisDatastore implements UserDatastore
         this(createConnectionFactory());
     }
 
+    public RedisDatastore(String host)
+    {
+        this(createConnectionFactory(host, null, null));
+    }
+
     public RedisDatastore(String host, int port)
     {
-        this(createConnectionFactory(host, port));
+        this(createConnectionFactory(host, port, null));
+    }
+
+    public RedisDatastore(String host, Integer port, String password)
+    {
+        this(createConnectionFactory(host, port, password));
     }
 
     private RedisDatastore(JedisConnectionFactory connectionFactory)
@@ -54,11 +64,22 @@ public class RedisDatastore implements UserDatastore
         return answer;
     }
 
-    private static JedisConnectionFactory createConnectionFactory(String host, int port)
+    private static JedisConnectionFactory createConnectionFactory(String host, Integer port,
+            String password)
     {
         final JedisConnectionFactory answer = createConnectionFactory();
-        answer.setHostName(host);
-        answer.setPort(port);
+        if (host != null)
+        {
+            answer.setHostName(host);
+        }
+        if (port != null)
+        {
+            answer.setPort(port);
+        }
+        if (password != null)
+        {
+            answer.setPassword(password);
+        }
         return answer;
     }
 
@@ -164,6 +185,12 @@ public class RedisDatastore implements UserDatastore
         answer.setId(keyGenerator.getAndIncrement());
         updateUser(answer);
         return answer;
+    }
+
+    public void createUser(User user)
+    {
+        user.setId(keyGenerator.getAndIncrement());
+        updateUser(user);
     }
 
     @Override

@@ -8,7 +8,7 @@ import uk.org.sehicl.website.users.EmailSender;
 import uk.org.sehicl.website.users.UserDatastore;
 import uk.org.sehicl.website.users.UserManager;
 import uk.org.sehicl.website.users.impl.JavamailSender;
-import uk.org.sehicl.website.users.impl.LocalDatabaseUserDatastore;
+import uk.org.sehicl.website.users.impl.RedisDatastore;
 
 @SpringBootApplication
 public class Application
@@ -27,7 +27,7 @@ public class Application
     @Bean
     public UserDatastore userDatastore()
     {
-        return new LocalDatabaseUserDatastore("/Users/jerhicks/Documents/personal/sehicl/users.db");
+        return new RedisDatastore(System.getenv("REDIS_URL"));
     }
 
     @Bean

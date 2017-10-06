@@ -6,12 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.User.Status;
 import uk.org.sehicl.website.users.UserDatastore;
-import uk.org.sehicl.website.users.SessionData;
 
 public class LocalDatabaseUserDatastore implements UserDatastore
 {
@@ -93,6 +95,25 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         return answer;
     }
 
+    public List<Long> getUserKeys()
+    {
+        List<Long> answer = new LinkedList<>();
+        try (Connection conn = connect())
+        {
+            final ResultSet rs = conn.createStatement().executeQuery(
+                    "select id from user");
+            while (rs.next())
+            {
+                answer.add(rs.getLong(1));
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new RuntimeException("Error retrieving userKeys", ex);
+        }
+        return answer;
+    }
+
     private SessionData getSession(ResultSet rs) throws SQLException
     {
         SessionData answer = null;
@@ -111,9 +132,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         try (Connection conn = connect())
         {
             final PreparedStatement stmt = conn.prepareStatement(
-                    "select id, user_id, expiry "
-                            + "from session "
-                            + "where user_id = ?");
+                    "select id, user_id, expiry " + "from session " + "where user_id = ?");
             stmt.setLong(1, id);
             final ResultSet rs = stmt.executeQuery();
             answer = getSession(rs);
@@ -132,9 +151,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         try (Connection conn = connect())
         {
             final PreparedStatement stmt = conn.prepareStatement(
-                    "select id, user_id, expiry "
-                            + "from session "
-                            + "where id = ?");
+                    "select id, user_id, expiry " + "from session " + "where id = ?");
             stmt.setLong(1, id);
             final ResultSet rs = stmt.executeQuery();
             answer = getSession(rs);
@@ -151,7 +168,8 @@ public class LocalDatabaseUserDatastore implements UserDatastore
     {
         try (Connection conn = connect())
         {
-            final PreparedStatement stmt = conn.prepareStatement("insert into session (expiry, user_id) values (?, ?)");
+            final PreparedStatement stmt = conn
+                    .prepareStatement("insert into session (expiry, user_id) values (?, ?)");
             final long expiry = new Date().getTime() + TimeUnit.DAYS.toMillis(1);
             stmt.setLong(1, expiry);
             stmt.setLong(2, user.getId());
@@ -172,7 +190,8 @@ public class LocalDatabaseUserDatastore implements UserDatastore
     {
         try (Connection conn = connect())
         {
-            final PreparedStatement stmt = conn.prepareStatement("delete from session where expiry < ?");
+            final PreparedStatement stmt = conn
+                    .prepareStatement("delete from session where expiry < ?");
             stmt.setLong(1, new Date().getTime());
             stmt.execute();
         }
@@ -199,7 +218,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
             final ResultSet rs = conn.createStatement().executeQuery("select last_insert_rowid()");
             rs.next();
             final long id = rs.getLong(1);
-            return new User(id, name, email, club, status, 0, password, true); 
+            return new User(id, name, email, club, status, 0, password, true);
         }
         catch (SQLException ex)
         {
