@@ -50,7 +50,10 @@
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.sendgrid</groupId>
+			<artifactId>sendgrid-java</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -60,7 +63,6 @@
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<version>3.8.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
