@@ -20,7 +20,7 @@ public class SendgridSender implements EmailSender
     public void sendEmail(String subject, String messageText, Addressee... addressees)
             throws EmailException
     {
-        Email from = new Email("sehantsicl@gmail.com", "SEHICL Admin");
+        Email from = new Email("admin@sehicl.org.uk", "SEHICL Admin");
         Content content = new Content("text/plain", messageText);
         Mail mail = new Mail();
         mail.setFrom(from);
