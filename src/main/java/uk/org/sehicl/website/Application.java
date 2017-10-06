@@ -1,7 +1,5 @@
 package uk.org.sehicl.website;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +23,7 @@ public class Application
         }
         catch (Throwable ex)
         {
-            ex.printStackTrace(System.out);
+            ex.printStackTrace();
         }
     }
 
