@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Bean;
 import uk.org.sehicl.website.users.EmailSender;
 import uk.org.sehicl.website.users.UserDatastore;
 import uk.org.sehicl.website.users.UserManager;
-import uk.org.sehicl.website.users.impl.JavamailSender;
 import uk.org.sehicl.website.users.impl.RedisDatastore;
+import uk.org.sehicl.website.users.impl.SendgridSender;
 
 @SpringBootApplication
 public class Application
@@ -42,6 +42,6 @@ public class Application
     @Bean
     EmailSender emailSender()
     {
-        return new JavamailSender();
+        return new SendgridSender();
     }
 }
