@@ -1,7 +1,6 @@
 package uk.org.sehicl.website.users;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class Register
 {
@@ -122,16 +121,16 @@ public class Register
     private final Validation validation = new Validation();
     private String message;
 
-    @Autowired
-    private UserManager userManager;
+    private final UserManager userManager;
     
-    public Register()
+    public Register(UserManager userManager)
     {
-        this(null, null, null, null, null);
+        this(userManager, null, null, null, null, null);
     }
 
-    public Register(String email, String name, String club, String password, String passwordConf)
+    public Register(UserManager userManager, String email, String name, String club, String password, String passwordConf)
     {
+        this.userManager = userManager;
         validation.email = email;
         validation.name = name;
         validation.club = StringUtils.isEmpty(club) ? null : club;

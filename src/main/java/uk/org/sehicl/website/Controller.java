@@ -30,6 +30,8 @@ import uk.org.sehicl.website.page.LeagueTablePage;
 import uk.org.sehicl.website.page.LeagueTablesPage;
 import uk.org.sehicl.website.page.LoginPage;
 import uk.org.sehicl.website.page.Page;
+import uk.org.sehicl.website.page.RegisterConfPage;
+import uk.org.sehicl.website.page.RegisterPage;
 import uk.org.sehicl.website.page.SeasonArchiveIndexPage;
 import uk.org.sehicl.website.page.StaticPage;
 import uk.org.sehicl.website.page.TeamAveragesIndexPage;
@@ -39,6 +41,8 @@ import uk.org.sehicl.website.report.LeagueSelector;
 import uk.org.sehicl.website.template.PageTemplate;
 import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.Login;
+import uk.org.sehicl.website.users.Register;
+import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.UserManager;
 
 @RestController
@@ -46,7 +50,7 @@ public class Controller
 {
     @Autowired
     private UserManager userManager;
-    
+
     private String getRequestUri(HttpServletRequest req)
     {
         String answer = Stream
@@ -92,8 +96,8 @@ public class Controller
     public String resources(HttpServletRequest req)
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new StaticPage("resources", "resources.ftlh", Section.RESOURCES, uri,
-                "SEHICL Resources")).process();
+        return new PageTemplate(new StaticPage("resources", "resources.ftlh", Section.RESOURCES,
+                uri, "SEHICL Resources")).process();
     }
 
     @RequestMapping("/rules")
@@ -109,24 +113,24 @@ public class Controller
     public String recordsIndex(HttpServletRequest req)
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new StaticPage("records", "records/index.ftlh", Section.RECORDS, uri,
-                "SEHICL Records")).process();
+        return new PageTemplate(new StaticPage("records", "records/index.ftlh", Section.RECORDS,
+                uri, "SEHICL Records")).process();
     }
 
     @RequestMapping("/records/performances")
     public String recordPerformances(HttpServletRequest req)
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new StaticPage("records", "records/performances.ftlh", Section.RECORDS,
-                uri, "SEHICL Record Performances")).process();
+        return new PageTemplate(new StaticPage("records", "records/performances.ftlh",
+                Section.RECORDS, uri, "SEHICL Record Performances")).process();
     }
 
     @RequestMapping("/records/winners")
     public String divisionalWinners(HttpServletRequest req)
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new StaticPage("divwinners", "records/divwinners.ftlh", Section.RECORDS,
-                uri, "SEHICL Divisional Winners")).process();
+        return new PageTemplate(new StaticPage("divwinners", "records/divwinners.ftlh",
+                Section.RECORDS, uri, "SEHICL Divisional Winners")).process();
     }
 
     @RequestMapping("/records/awards")
@@ -252,8 +256,8 @@ public class Controller
     public String averagesIndex(HttpServletRequest req)
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new StaticPage("averages", "averagesindex.ftlh", Section.AVERAGES, uri,
-                "SEHICL Averages")).process();
+        return new PageTemplate(new StaticPage("averages", "averagesindex.ftlh", Section.AVERAGES,
+                uri, "SEHICL Averages")).process();
     }
 
     @RequestMapping("/archive")
@@ -373,6 +377,39 @@ public class Controller
         if (redisplay)
         {
             answer = new PageTemplate(new LoginPage(uri, login)).process();
+        }
+        return answer;
+    }
+
+    @RequestMapping(path = "/register", method = RequestMethod.GET)
+    public String register(HttpServletRequest req) throws IOException
+    {
+        String uri = getRequestUri(req);
+        return new PageTemplate(new RegisterPage(uri, userManager)).process();
+    }
+
+    @RequestMapping(path = "/register", method = RequestMethod.POST)
+    public String register(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    {
+        String answer = "";
+        String uri = getRequestUri(req);
+        final String email = req.getParameter("email");
+        final String name = req.getParameter("name");
+        final String club = req.getParameter("club");
+        final String password = req.getParameter("password");
+        final String passwordConf = req.getParameter("passwordConf");
+        final Register register = new Register(userManager, email, name, club, password,
+                passwordConf);
+        try
+        {
+            User user = register.validateAndRegister();
+            final Page page = user == null ? new RegisterPage(uri, register)
+                    : new RegisterConfPage(uri, register);
+            answer = new PageTemplate(page).process();
+        }
+        catch (EmailException e)
+        {
+            resp.sendRedirect(String.format("/emailError?message=%s", e.getMessage()));
         }
         return answer;
     }
