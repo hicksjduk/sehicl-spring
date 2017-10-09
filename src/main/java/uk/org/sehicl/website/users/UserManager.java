@@ -16,11 +16,11 @@ import uk.org.sehicl.website.users.UserException.Message;
 public class UserManager
 {
     @Autowired
-    UserDatastore datastore;
+    private UserDatastore datastore;
 
     @Autowired
-    EmailSender emailer;
-
+    private EmailSender emailer;
+    
     private final static List<String> blockList = Arrays.asList("u03.gmailmirror.com");
 
     public long login(String email, String password) throws UserException
