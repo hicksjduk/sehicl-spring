@@ -5,6 +5,8 @@ Before you can use your account, you must activate it, which you can do by click
 ${activationPageAddress}/${user.id?string.computer}
                 
 If you experience any problems with the activation process, please reply to this e-mail stating what problem you saw.
+
+If you did not register this user ID, please reply to this e-mail so that the administrator may investigate.
                 
 Many thanks,
 The Webmaster
