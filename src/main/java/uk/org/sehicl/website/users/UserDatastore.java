@@ -20,4 +20,6 @@ public interface UserDatastore
             String password);
 
     void updateUser(User user);
+    
+    PasswordReset generatePasswordReset(String email);
 }

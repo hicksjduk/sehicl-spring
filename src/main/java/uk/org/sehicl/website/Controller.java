@@ -369,7 +369,8 @@ public class Controller
         {
             try
             {
-                login.validateAndRemind();
+                login.validateAndRemind(
+                        URI.create(req.getRequestURL().toString()).resolve("/pwdReset").toString());
             }
             catch (EmailException e)
             {

@@ -7,8 +7,8 @@ ${message!""}
 </p>
 <p>If you have already registered, please fill in the fields below
 	and press "Login". If you cannot remember your password, fill in the
-	e-mail address and press "Remind"; if the e-mail address you specify is
-	that of a registered user, a password reminder will be sent to that
+	e-mail address and press "Reset password"; if the e-mail address you specify is
+	that of a registered user, a password reset link will be sent to that
 	address.</p>
 <form action="/login" method="post">
 	<table>
@@ -25,7 +25,7 @@ ${message!""}
 		</tr>
 	</table>
 	<p>
-		<input name="Login" type="Submit" value="Login"> <input
-			name="Remind" type="Submit" value="Remind">
+		<input name="Login" type="Submit" value="Login"/> <input
+			name="Remind" type="Submit" value="Reset password"/>
 	</p>
 </form>

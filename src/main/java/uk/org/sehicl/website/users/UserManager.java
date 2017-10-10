@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import uk.org.sehicl.website.template.ActivationMailTemplate;
 import uk.org.sehicl.website.template.AdminNotifyMailTemplate;
-import uk.org.sehicl.website.template.PasswordReminderMailTemplate;
+import uk.org.sehicl.website.template.PasswordResetMailTemplate;
 import uk.org.sehicl.website.users.EmailSender.Addressee;
 import uk.org.sehicl.website.users.User.Status;
 import uk.org.sehicl.website.users.UserException.Message;
@@ -89,18 +89,18 @@ public class UserManager
         }
     }
 
-    private void sendPasswordReminderEmail(User user) throws UserException, EmailException
+    private void sendPasswordResetEmail(PasswordReset reset, String resetAddress) throws UserException, EmailException
     {
         StringWriter sw = new StringWriter();
-        new PasswordReminderMailTemplate(user).process(sw);
+        new PasswordResetMailTemplate(reset, resetAddress).process(sw);
         try
         {
-            emailer.sendEmail("SEHICL password reminder", sw.toString(),
-                    new Addressee(user.getEmail(), user.getName()));
+            emailer.sendEmail("SEHICL password reset", sw.toString(),
+                    new Addressee(reset.getUserEmail()));
         }
         catch (EmailException e)
         {
-            throw new RuntimeException("Error sending password reminder e-mail", e);
+            throw new RuntimeException("Error sending password reset e-mail", e);
         }
     }
 
@@ -119,16 +119,16 @@ public class UserManager
         }
     }
 
-    public void remindOfPassword(String email) throws UserException, EmailException
+    public void generatePasswordReset(String email, String resetAddress) throws UserException, EmailException
     {
         if (!isBlocked(email))
         {
-            final User user = datastore.getUserByEmail(email);
-            if (user == null)
+            final PasswordReset reset = datastore.generatePasswordReset(email);
+            if (reset == null)
             {
                 throw new UserException(Message.emailNotFound);
             }
-            sendPasswordReminderEmail(user);
+            sendPasswordResetEmail(reset, resetAddress);
         }
     }
 

@@ -6,7 +6,7 @@ ${activationPageAddress}/${user.id?string.computer}
                 
 If you experience any problems with the activation process, please reply to this e-mail stating what problem you saw.
 
-If you did not register this user ID, please reply to this e-mail so that the administrator may investigate.
+If you did not register this user ID, please inform the Webmaster by replying to this e-mail.
                 
 Many thanks,
 The Webmaster

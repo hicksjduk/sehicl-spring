@@ -18,6 +18,7 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 
+import uk.org.sehicl.website.users.PasswordReset;
 import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.User.Status;
@@ -64,7 +65,7 @@ public class RedisDatastore implements UserDatastore
         answer.setUsePool(true);
         return answer;
     }
-    
+
     private static JedisConnectionFactory createConnectionFactory(String uriString)
     {
         final JedisConnectionFactory answer = createConnectionFactory();
@@ -163,7 +164,7 @@ public class RedisDatastore implements UserDatastore
         ops.put("usersession", answer.getUserId(), answer);
         return answer;
     }
-    
+
     long getSessionId(User user)
     {
         long factor = 10000000000L;
@@ -222,4 +223,18 @@ public class RedisDatastore implements UserDatastore
         ops.put("user", user.getId(), user);
         ops.put("email", user.getEmail(), user);
     }
+
+    @Override
+    public PasswordReset generatePasswordReset(String email)
+    {
+        PasswordReset answer = null;
+        final User user = getUserByEmail(email);
+        if (user != null)
+        {
+            answer = new PasswordReset(user.getId(), email);
+            ops.put("reset", answer.getId(), answer);
+        }
+        return answer;
+    }
+
 }

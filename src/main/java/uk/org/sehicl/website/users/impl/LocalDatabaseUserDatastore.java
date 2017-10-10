@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import uk.org.sehicl.website.users.PasswordReset;
 import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.User.Status;
@@ -248,6 +249,18 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         {
             throw new RuntimeException("Error updating user", ex);
         }
+    }
+
+    @Override
+    public PasswordReset generatePasswordReset(String email)
+    {
+        PasswordReset answer = null;
+        final User user = getUserByEmail(email);
+        if (user != null)
+        {
+            answer = new PasswordReset(user.getId(), email);
+        }
+        return answer;
     }
 
 }
