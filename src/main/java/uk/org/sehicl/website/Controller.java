@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import uk.org.sehicl.website.navigator.Section;
+import uk.org.sehicl.website.page.ActivatePage;
 import uk.org.sehicl.website.page.ArchiveIndexPage;
 import uk.org.sehicl.website.page.ContactsPage;
 import uk.org.sehicl.website.page.DateResultsPage;
@@ -44,6 +45,7 @@ import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.Login;
 import uk.org.sehicl.website.users.Register;
 import uk.org.sehicl.website.users.User;
+import uk.org.sehicl.website.users.UserException;
 import uk.org.sehicl.website.users.UserManager;
 
 @RestController
@@ -416,5 +418,20 @@ public class Controller
             resp.sendRedirect(String.format("/emailError?message=%s", e.getMessage()));
         }
         return answer;
+    }
+
+    @RequestMapping(path = "/activate/{userId}")
+    public String activate(HttpServletRequest req, @PathVariable long userId) throws IOException
+    {
+        String uri = getRequestUri(req);
+        User user = null;
+        try
+        {
+            user = userManager.activateUser(userId);
+        }
+        catch (UserException ex)
+        {
+        }
+        return new PageTemplate(new ActivatePage(uri, user)).process();
     }
 }
