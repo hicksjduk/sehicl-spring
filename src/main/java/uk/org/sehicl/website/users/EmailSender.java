@@ -31,5 +31,10 @@ public interface EmailSender
             return name;
         }
 
+        @Override
+        public String toString()
+        {
+            return "Addressee [address=" + address + ", name=" + name + "]";
+        }
     }
 }

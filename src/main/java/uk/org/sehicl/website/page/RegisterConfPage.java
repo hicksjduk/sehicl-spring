@@ -1,21 +1,15 @@
 package uk.org.sehicl.website.page;
 
-import uk.org.sehicl.website.users.Register;
-import uk.org.sehicl.website.users.UserManager;
+import uk.org.sehicl.website.users.User;
 
 public class RegisterConfPage extends Page
 {
-    private final Register register;
+    private final User user;
 
-    public RegisterConfPage(String uri, UserManager userManager)
-    {
-        this(uri, new Register(userManager));
-    }
-
-    public RegisterConfPage(String uri, Register register)
+    public RegisterConfPage(String uri, User user)
     {
         super("register", "registerConf.ftlh", null, uri);
-        this.register = register;
+        this.user = user;
     }
 
     @Override
@@ -24,8 +18,8 @@ public class RegisterConfPage extends Page
         return "SEHICL User Registration";
     }
 
-    public Register getRegister()
+    public User getUser()
     {
-        return register;
+        return user;
     }
 }

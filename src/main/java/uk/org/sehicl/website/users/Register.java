@@ -153,7 +153,7 @@ public class Register
         return validation;
     }
 
-    public User validateAndRegister() throws EmailException
+    public User validateAndRegister(String activationPageAddress) throws EmailException
     {
         User answer = null;
         boolean valid = true;
@@ -191,7 +191,7 @@ public class Register
             try
             {
                 answer = userManager.registerUser(validation.email, validation.name,
-                        validation.club, validation.password);
+                        validation.club, validation.password, activationPageAddress);
             }
             catch (UserException e)
             {

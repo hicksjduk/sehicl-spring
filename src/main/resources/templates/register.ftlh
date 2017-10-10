@@ -6,32 +6,32 @@
 		<tr>
 			<td>Name</td>
 			<td>*</td>
-			<td><input type="text" name="name" value="${(validation.name)!""}"></td>
-			<td>${(validation.nameMessage)!""}</td>
+			<td><input type="text" name="name" value="${(register.validation.name)!""}"></td>
+			<td>${(register.validation.nameMessage)!""}</td>
 		</tr>
 		<tr>
 			<td>Club</td>
 			<td></td>
-			<td><input type="text" name="club" value="${(validation.club)!""}"></td>
-			<td>${(validation.clubMessage)!""}</td>
+			<td><input type="text" name="club" value="${(register.validation.club)!""}"></td>
+			<td>${(register.validation.clubMessage)!""}</td>
 		</tr>
 		<tr>
 			<td>E-mail address</td>
 			<td>*</td>
-			<td><input type="text" name="email" value="${(validation.email)!""}"></td>
-			<td>${(validation.emailMessage)!""}</td>
+			<td><input type="text" name="email" value="${(register.validation.email)!""}"></td>
+			<td>${(register.validation.emailMessage)!""}</td>
 		</tr>
 		<tr>
 			<td>Password</td>
 			<td>*</td>
 			<td><input type="password" name="password""></td>
-			<td>${(validation.passwordMessage)!""}</td>
+			<td>${(register.validation.passwordMessage)!""}</td>
 		</tr>
 		<tr>
 			<td>Confirm password</td>
 			<td>*</td>
 			<td><input type="password" name="passwordConf""></td>
-			<td>${(validation.passwordConfMessage)!""}</td>
+			<td>${(register.validation.passwordConfMessage)!""}</td>
 		</tr>
 	</table>
 	<p>By clicking the "Submit" button below, you agree that:

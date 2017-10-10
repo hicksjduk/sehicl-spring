@@ -1,6 +1,7 @@
 package uk.org.sehicl.website;
 
 import java.io.IOException;
+import java.net.URI;
 import java.text.ParseException;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -402,9 +403,12 @@ public class Controller
                 passwordConf);
         try
         {
-            User user = register.validateAndRegister();
+            User user = register.validateAndRegister(URI
+                    .create(req.getRequestURL().toString())
+                    .resolve("/activate")
+                    .toString());
             final Page page = user == null ? new RegisterPage(uri, register)
-                    : new RegisterConfPage(uri, register);
+                    : new RegisterConfPage(uri, user);
             answer = new PageTemplate(page).process();
         }
         catch (EmailException e)

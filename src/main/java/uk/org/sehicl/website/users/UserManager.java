@@ -50,7 +50,7 @@ public class UserManager
         return answer;
     }
 
-    public User registerUser(String email, String name, String club, String password)
+    public User registerUser(String email, String name, String club, String password, String activationPageAddress)
             throws UserException, EmailException
     {
         User answer = new User(name, email, club, Status.INACTIVE, 0, password, true);
@@ -61,8 +61,8 @@ public class UserManager
             {
                 throw new UserException(Message.emailAlreadyExists);
             }
-            answer = datastore.createUser(name, email, club, Status.INACTIVE, password);
-            sendActivationEmail(answer);
+            answer = datastore.createUser(email, name, club, Status.INACTIVE, password);
+            sendActivationEmail(answer, activationPageAddress);
             notifyAdmin("register", answer);
         }
         return answer;
@@ -74,10 +74,10 @@ public class UserManager
         return answer;
     }
 
-    private void sendActivationEmail(User user) throws UserException
+    private void sendActivationEmail(User user, String activationPageAddress) throws UserException
     {
         StringWriter sw = new StringWriter();
-        new ActivationMailTemplate(user).process(sw);
+        new ActivationMailTemplate(user, activationPageAddress).process(sw);
         try
         {
             emailer.sendEmail("Activate your SEHICL account", sw.toString(),
