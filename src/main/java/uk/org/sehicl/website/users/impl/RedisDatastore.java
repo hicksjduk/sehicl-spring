@@ -153,7 +153,7 @@ public class RedisDatastore implements UserDatastore
         SessionData answer = getSessionByUserId(user.getId());
         if (answer == null)
         {
-            answer = new SessionData(keyGenerator.incrementAndGet(), user.getId(), expiry);
+            answer = new SessionData(getSessionId(user), user.getId(), expiry);
         }
         else
         {
@@ -161,6 +161,14 @@ public class RedisDatastore implements UserDatastore
         }
         ops.put("session", answer.getId(), answer);
         ops.put("usersession", answer.getUserId(), answer);
+        return answer;
+    }
+    
+    long getSessionId(User user)
+    {
+        long factor = 10000000000L;
+        final long time = new Date().getTime();
+        long answer = user.getId() * factor + time % factor;
         return answer;
     }
 

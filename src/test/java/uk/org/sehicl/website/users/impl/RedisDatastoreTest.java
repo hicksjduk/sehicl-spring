@@ -1,10 +1,11 @@
 package uk.org.sehicl.website.users.impl;
 
-import org.junit.Test;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import org.junit.Test;
 
 import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
@@ -79,5 +80,13 @@ public class RedisDatastoreTest
     public void testClearExpiredSessions()
     {
         datastore.clearExpiredSessions();
+    }
+    
+    @Test
+    public void testGetSessionId()
+    {
+        User user = new User();
+        user.setId(14141L);
+        final long result = datastore.getSessionId(user);
     }
 }
