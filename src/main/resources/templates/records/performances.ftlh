@@ -19,6 +19,7 @@
 <@performance "Division 2" "United Services" "192 for 3" "1991-92"/>
 <@performance "Division 3" "United Services" "207 for 1" "1997-98"/>
 <@performance "Division 4" "ServiceMaster" "207 for 0" "2014-15"/>
+<@performance "Division 5" "Portsmouth C" "214 for 2" "2017-18"/>
 <@performance "Colts Under-16" "Havant" "269 for 1" "2003-04"/>
 <@performance "Colts Under-13" "Portsmouth & Southsea" "224 for 2" "2010-11"/>
 </tbody>
@@ -32,6 +33,7 @@
 <@performance "Division 3" "Cyanamid" "12 all out" "1988-89"/>
 <@performance "Division 4" "IBM South Hants B" "17 all out" "2003-04"/>
 <@performance "" "Flutters" "17 all out" "2006-07"/>
+<@performance "Division 5" "Bedhampton C" "48 all out" "2017-18"/>
 <@performance "Colts Under-16" "Portsmouth" "14 all out" "2006-07"/>
 <@performance "Colts Under-13" "Portsmouth & Southsea" "15 all out" "2014-15"/>
 </tbody>
@@ -44,6 +46,7 @@
 <@performance "Division 2" "United Services" "102*" "1988-89" "P Barsby"/>
 <@performance "Division 3" "Locks Heath B" "84" "1999-2000" "R Higgins"/>
 <@performance "Division 4" "OPCS Titchfield" "95*" "2016-17" "A Jagadeesh"/>
+<@performance "Division 5" "Emsworth B" "53*" "2017-18" "M Matthews"/>
 <@performance "Colts Under-16" "Portsmouth & Southsea" "97" "2010-11" "T Benfield"/>
 <@performance "Colts Under-13" "Havant" "122" "2010-11" "H Hovey"/>
 </tbody>
@@ -56,6 +59,7 @@
 <@performance "Division 2" "Portsmouth & Southsea" "5 for 12" "2013-14" "K Dunstan"/>
 <@performance "Division 3" "Portchester B" "5 for 10" "2003-04" "S Gale"/>
 <@performance "Division 4" "Harting" "5 for 7" "1988-89" "S Kyte"/>
+<@performance "Division 5" "Hambledon C" "3 for 16" "2017-18" "J Restell"/>
 <@performance "Colts Under-16" "Portsmouth" "4 for 3" "1997-98" "A Saunders"/>
 <@performance "Colts Under-13" "Hambledon" "4 for 0" "2008-09" "S Le-Clercq"/>
 </tbody>
