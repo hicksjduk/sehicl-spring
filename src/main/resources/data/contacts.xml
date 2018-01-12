@@ -41,6 +41,13 @@
 		<name>Mike Collins</name>
 		<address>17 Buckland Close, Waterlooville PO7 6ED</address>
 		<phone>07905 373054</phone>
+	</person>
+
+	<person>
+		<name>Phillip Williams</name>
+		<address>30 Andover Road, Southsea PO4 9QG</address>
+		<phone>023 92 790 658</phone>
+		<phone>0788 232 1103</phone>
 		<role name="Secretary" club="Bedhampton">
 			<email id="bedhampton.secretary" />
 		</role>
@@ -316,9 +323,15 @@
 	</person>
 
 	<person>
-		<name>Dave Modig</name>
+		<name>Dave Moody</name>
 		<address>2 Magdala Road, Hayling Island PO11 0BH</address>
 		<phone>02392 464401</phone>
+	</person>
+
+	<person>
+		<name>Alex Johnson</name>
+		<address>8 Park View, Northern Parade, Portsmouth PO2 8SR</address>
+		<phone>07760348447</phone>
 		<role name="Secretary" club="Hayling Island">
 			<email id="hayling.secretary" />
 		</role>
