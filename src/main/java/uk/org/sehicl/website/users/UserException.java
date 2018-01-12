@@ -7,7 +7,7 @@ public class UserException extends Exception
     {
         super(message.message);
     }
-    
+
     public UserException(String message, Throwable cause)
     {
         super(message, cause);
@@ -17,9 +17,11 @@ public class UserException extends Exception
     {
         emailNotFound("Email address not found"), emailOrPasswordNotFound(
                 "Email address and/or password not found"), userNotActive(
-                "User is not active - you must activate your ID before you can login"), sessionExpired(
-                "Session expired"), emailAlreadyExists(
-                "A user with this e-mail address already exists"), userNotFound("User not found");
+                        "User is not active - you must activate your ID before you can login"), sessionExpired(
+                                "Session expired"), emailAlreadyExists(
+                                        "A user with this e-mail address already exists"), userNotFound(
+                                                "User not found"), resetTokenNotFound(
+                                                        "Specified reset token does not exist, or has expired");
 
         private final String message;
 

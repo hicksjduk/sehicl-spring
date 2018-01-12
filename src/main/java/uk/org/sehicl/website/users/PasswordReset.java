@@ -5,19 +5,44 @@ import java.util.concurrent.TimeUnit;
 
 public class PasswordReset
 {
-    private final long userId;
-    private final String userEmail;
-    private final long id;
-    private final long expiryTime;
-
+    private long userId;
+    private String userEmail;
+    private long id;
+    private long expiryTime;
+    
+    @SuppressWarnings("unused")
+    private PasswordReset()
+    {
+    }
+    
     public PasswordReset(long userId, String userEmail)
     {
         long factor = 100000000000L;
-        this.userId = userId;
-        this.userEmail = userEmail;
+        setUserId(userId);
+        setUserEmail(userEmail);
         final long time = new Date().getTime();
-        this.id = userId * factor + time % factor;
-        this.expiryTime = time + TimeUnit.HOURS.toMillis(3);
+        setId(userId * factor + time % factor);
+        setExpiryTime(time + TimeUnit.HOURS.toMillis(3));
+    }
+
+    public void setUserId(long userId)
+    {
+        this.userId = userId;
+    }
+
+    public void setUserEmail(String userEmail)
+    {
+        this.userEmail = userEmail;
+    }
+
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
+    public void setExpiryTime(long expiryTime)
+    {
+        this.expiryTime = expiryTime;
     }
 
     public long getUserId()

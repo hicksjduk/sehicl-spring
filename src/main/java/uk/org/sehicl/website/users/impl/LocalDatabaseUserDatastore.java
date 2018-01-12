@@ -263,4 +263,18 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         return answer;
     }
 
+    @Override
+    public PasswordReset getPasswordReset(long id)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void clearExpiredResets()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

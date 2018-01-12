@@ -22,4 +22,8 @@ public interface UserDatastore
     void updateUser(User user);
     
     PasswordReset generatePasswordReset(String email);
+    
+    PasswordReset getPasswordReset(long id);
+
+    void clearExpiredResets();
 }

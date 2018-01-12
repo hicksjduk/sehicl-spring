@@ -237,4 +237,37 @@ public class RedisDatastore implements UserDatastore
         return answer;
     }
 
+    @Override
+    public PasswordReset getPasswordReset(long id)
+    {
+        PasswordReset answer = (PasswordReset) ops.get("reset", id);
+        return answer;
+    }
+
+    @Override
+    public void clearExpiredResets()
+    {
+        long now = new Date().getTime();
+        List<PasswordReset> expiredResets = new ArrayList<>();
+        try (Cursor<Entry<Object, Object>> c = ops.scan("reset",
+                new ScanOptionsBuilder().build()))
+        {
+            c.forEachRemaining(e ->
+            {
+                final PasswordReset r = (PasswordReset) e.getValue();
+                if (r.getExpiryTime() < now)
+                {
+                    expiredResets.add(r);
+                }
+            });
+        }
+        catch (IOException ex)
+        {
+            throw new RuntimeException("Error closing cursor", ex);
+        }
+        if (!expiredResets.isEmpty())
+        {
+            ops.delete("reset", expiredResets.stream().mapToLong(PasswordReset::getId).toArray());
+        }
+    }
 }

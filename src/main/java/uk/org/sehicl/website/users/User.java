@@ -116,6 +116,16 @@ public class User
         this.status = status;
     }
 
+    private void setPassword(String password)
+    {
+        this.password = password;
+    }
+    
+    public void encodeAndSetPassword(String password)
+    {
+        setPassword(base64Encode(password));
+    }
+
     @Override
     public int hashCode()
     {

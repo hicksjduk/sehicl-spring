@@ -34,6 +34,7 @@ import uk.org.sehicl.website.page.LoginPage;
 import uk.org.sehicl.website.page.Page;
 import uk.org.sehicl.website.page.RegisterConfPage;
 import uk.org.sehicl.website.page.RegisterPage;
+import uk.org.sehicl.website.page.ResetPage;
 import uk.org.sehicl.website.page.SeasonArchiveIndexPage;
 import uk.org.sehicl.website.page.StaticPage;
 import uk.org.sehicl.website.page.TeamAveragesIndexPage;
@@ -44,6 +45,7 @@ import uk.org.sehicl.website.template.PageTemplate;
 import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.Login;
 import uk.org.sehicl.website.users.Register;
+import uk.org.sehicl.website.users.Reset;
 import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.UserException;
 import uk.org.sehicl.website.users.UserManager;
@@ -435,4 +437,30 @@ public class Controller
         }
         return new PageTemplate(new ActivatePage(uri, user)).process();
     }
+
+    @RequestMapping(path = "/pwdReset/{resetId}", method = RequestMethod.GET)
+    public String passwordReset(HttpServletRequest req, @PathVariable long resetId)
+            throws IOException
+    {
+        String uri = getRequestUri(req);
+        return new PageTemplate(new ResetPage(uri, new Reset(resetId, userManager))).process();
+    }
+
+    @RequestMapping(path = "/pwdReset/{resetId}", method = RequestMethod.POST)
+    public String passwordReset(HttpServletRequest req, HttpServletResponse resp,
+            @PathVariable long resetId) throws IOException
+    {
+        String uri = getRequestUri(req);
+        final String password = req.getParameter("password");
+        final String passwordConf = req.getParameter("passwordConf");
+        final Reset reset = new Reset(resetId, userManager);
+        if (reset.validateAndReset(password, passwordConf))
+        {
+            resp.sendRedirect("/login");
+            return "";
+        }
+        else
+            return new PageTemplate(new ResetPage(uri, reset)).process();
+    }
+
 }

@@ -42,7 +42,7 @@ public class UserManager
         long token = generateToken(user);
         return token;
     }
-
+    
     private long generateToken(User user)
     {
         SessionData session = datastore.setSession(user);
@@ -121,6 +121,7 @@ public class UserManager
 
     public void generatePasswordReset(String email, String resetAddress) throws UserException, EmailException
     {
+        datastore.clearExpiredResets();
         if (!isBlocked(email))
         {
             final PasswordReset reset = datastore.generatePasswordReset(email);
@@ -130,6 +131,17 @@ public class UserManager
             }
             sendPasswordResetEmail(reset, resetAddress);
         }
+    }
+    
+    public PasswordReset getPasswordReset(long id) throws UserException
+    {
+        datastore.clearExpiredResets();
+        final PasswordReset answer = datastore.getPasswordReset(id);
+        if (answer == null)
+        {
+            throw new UserException(Message.resetTokenNotFound);
+        }
+        return answer;
     }
 
     public User activateUser(long id) throws UserException
@@ -194,5 +206,22 @@ public class UserManager
             }
         }
         return answer;
+    }
+    
+    public void changePassword(long userId, String newPassword) throws UserException
+    {
+        final User user = datastore.getUserById(userId);
+        if (user == null)
+        {
+            throw new UserException(Message.userNotFound);
+        }
+        user.encodeAndSetPassword(newPassword);
+        datastore.updateUser(user);
+    }
+    
+    public User getUserByResetId(long resetId)
+    {
+        final PasswordReset passwordReset = datastore.getPasswordReset(resetId);
+        return passwordReset == null ? null : datastore.getUserById(passwordReset.getUserId());
     }
 }
