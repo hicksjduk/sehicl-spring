@@ -7,6 +7,7 @@
 	</script>
 </#macro>
 <html>
+<!-- This is the Heroku version -->
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/sehicl.css" rel="stylesheet" type="text/css">
