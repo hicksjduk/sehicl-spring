@@ -21,7 +21,7 @@
 <@performance "Division 4" "ServiceMaster" "207 for 0" "2014-15"/>
 <@performance "Division 5" "Portsmouth C" "214 for 2" "2017-18"/>
 <@performance "Colts Under-16" "Havant" "269 for 1" "2003-04"/>
-<@performance "Colts Under-13" "Portsmouth & Southsea" "224 for 2" "2010-11"/>
+<@performance "Colts Under-13" "Portsmouth" "227 for 1" "2017-18"/>
 </tbody>
 </table>
 <h2>
@@ -33,7 +33,7 @@
 <@performance "Division 3" "Cyanamid" "12 all out" "1988-89"/>
 <@performance "Division 4" "IBM South Hants B" "17 all out" "2003-04"/>
 <@performance "" "Flutters" "17 all out" "2006-07"/>
-<@performance "Division 5" "Bedhampton C" "48 all out" "2017-18"/>
+<@performance "Division 5" "OPCS Titchfield" "46 all out" "2017-18"/>
 <@performance "Colts Under-16" "Portsmouth" "14 all out" "2006-07"/>
 <@performance "Colts Under-13" "Portsmouth & Southsea" "15 all out" "2014-15"/>
 </tbody>
@@ -47,6 +47,7 @@
 <@performance "Division 3" "Locks Heath B" "84" "1999-2000" "R Higgins"/>
 <@performance "Division 4" "OPCS Titchfield" "95*" "2016-17" "A Jagadeesh"/>
 <@performance "Division 5" "Emsworth B" "53*" "2017-18" "M Matthews"/>
+<@performance "" "United Services" "53*" "2017-18" "G Toms"/>
 <@performance "Colts Under-16" "Portsmouth & Southsea" "97" "2010-11" "T Benfield"/>
 <@performance "Colts Under-13" "Havant" "122" "2010-11" "H Hovey"/>
 </tbody>

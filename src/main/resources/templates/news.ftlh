@@ -12,13 +12,11 @@
 	</#if>
 </#macro>
 
-<@news>
+<@news end="2018-01-31">
 We are sad to have heard of the death of <b>Brian Ravenhall</b>. Brian was a stalwart member
 of Waterlooville Cricket Club, and scored for their senior teams until relatively
 recently; he also umpired in the League for several years.
 We send our condolences and best wishes to Brian's family, friends and clubmates.
-<br><b>A minute's silence</b> will be observed in Brian's memory before the first senior games
-on Sunday 14th January; those wishing to take part are asked to be present no later than 6pm.
 </@news>
 
 <@news end="2018-01-31">
