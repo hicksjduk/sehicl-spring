@@ -46,8 +46,7 @@
 <@performance "Division 2" "United Services" "102*" "1988-89" "P Barsby"/>
 <@performance "Division 3" "Locks Heath B" "84" "1999-2000" "R Higgins"/>
 <@performance "Division 4" "OPCS Titchfield" "95*" "2016-17" "A Jagadeesh"/>
-<@performance "Division 5" "Emsworth B" "53*" "2017-18" "M Matthews"/>
-<@performance "" "United Services" "53*" "2017-18" "G Toms"/>
+<@performance "Division 5" "Afghan Society Portsmouth" "71*" "2017-18" "H Peruzi"/>
 <@performance "Colts Under-16" "Portsmouth & Southsea" "97" "2010-11" "T Benfield"/>
 <@performance "Colts Under-13" "Havant" "122" "2010-11" "H Hovey"/>
 </tbody>

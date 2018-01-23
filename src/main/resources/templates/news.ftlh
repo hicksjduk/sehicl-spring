@@ -12,27 +12,22 @@
 	</#if>
 </#macro>
 
-<@news end="2018-01-27">
-<b>The normal means of submitting results by e-mail is currently not working.</b>
-This is due to a configuration change which has been corrected, but the correction may take some time
-to become effective. Therefore, if you have submitted a result which has not yet been acknowledged,
-please re-submit to <@mailto address="sehicl" domain="thehickses.org.uk"></@mailto>.
-<br>Because of this problem, the deadline for submitting results by e-mail is extended (for this week only)
-to Wednesday. Apologies for any inconvenience this may have caused.
-</@news>
-
 <@news end="2018-01-31">
 We are sad to have heard of the death of <b>Brian Ravenhall</b>. Brian was a stalwart member
 of Waterlooville Cricket Club, and scored for their senior teams until relatively
 recently; he also umpired in the League for several years.
 We send our condolences and best wishes to Brian's family, friends and clubmates.
+<br>Brian's funeral will take place at The Oaks Havant Crematorium, Bartons Road, Havant PO9 5NA,
+on Monday 12th February at 11.30am. Family flowers only, but donations can be made to Naomi House
+Hospice via the funeral directors - Searsons, 18 Park Parade, Leigh Park, Havant PO9 5AD. Afterwards
+there will be a wake at Waterlooville Cricket Club, Rowlands Avenue PO7 7RT.
 </@news>
 
 <@news end="2018-01-31">
 Some <b>equipment has gone missing</b> from the kit of Portsmouth senior players:
 a blue Masuri helmet and a set of wicketkeeping kit - helmet, gloves and pads.
 All players are asked to check their kit bags and contact 
-<@mailto address="neil.palmer" domain="live.co.uk" description="Neil Palmer">Neil Palmer</@mailto>
+<@mailto address="neil.palmer" domain="live.co.uk" description="Neil Palmer"/>
 if they find the missing equipment.
 </@news>
 
