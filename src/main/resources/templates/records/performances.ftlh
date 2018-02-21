@@ -59,7 +59,7 @@
 <@performance "Division 2" "Portsmouth & Southsea" "5 for 12" "2013-14" "K Dunstan"/>
 <@performance "Division 3" "Portchester B" "5 for 10" "2003-04" "S Gale"/>
 <@performance "Division 4" "Harting" "5 for 7" "1988-89" "S Kyte"/>
-<@performance "Division 5" "Hambledon C" "3 for 16" "2017-18" "J Restell"/>
+<@performance "Division 5" "Hambledon C" "3 for 15" "2017-18" "W Norman"/>
 <@performance "Colts Under-16" "Portsmouth" "4 for 3" "1997-98" "A Saunders"/>
 <@performance "Colts Under-13" "Hambledon" "4 for 0" "2008-09" "S Le-Clercq"/>
 </tbody>
