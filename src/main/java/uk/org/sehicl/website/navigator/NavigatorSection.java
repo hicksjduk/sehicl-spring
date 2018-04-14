@@ -46,6 +46,7 @@ public enum NavigatorSection
             new NavigatorItem("Individual Awards", "/records/awards"),
             new NavigatorItem("Sporting and Efficiency", "/records/fairplay")),
     ARCHIVE(Section.ARCHIVE, "Archive", "/archive",
+            new NavigatorItem("2017-18", "/archive/season/18"),
             new NavigatorItem("2016-17", "/archive/season/17"),
             new NavigatorItem("2015-16", "/archive/season/16"),
             new NavigatorItem("2014-15", "/archive/season/15"),
