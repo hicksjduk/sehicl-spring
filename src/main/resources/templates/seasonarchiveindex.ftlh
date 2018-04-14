@@ -1,4 +1,5 @@
 <h1>Archive: Season ${(season + 1999)?string.computer}-${season?string("00")}</h1>
+<#assign divs = (season < 18)?then(4, 5)/>
 <table>
 	<thead>
 		<tr>
@@ -11,10 +12,9 @@
 		<tr>
 			<td>
 				<ul>
-					<li><a href="/archive/table/Division1/${season}">Division 1</a></li>
-					<li><a href="/archive/table/Division2/${season}">Division 2</a></li>
-					<li><a href="/archive/table/Division3/${season}">Division 3</a></li>
-					<li><a href="/archive/table/Division4/${season}">Division 4</a></li>
+					<#list 1..divs as div>
+						<li><a href="/archive/table/Division${div}/${season}">Division ${div}</a></li>
+					</#list>
 					<li><a href="/archive/table/ColtsUnder16/${season}">Colts Under-16</a></li>
 					<li><a href="/archive/table/ColtsUnder13/${season}">Colts Under-13</a></li>
 				</ul>
