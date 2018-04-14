@@ -462,5 +462,13 @@ public class Controller
         else
             return new PageTemplate(new ResetPage(uri, reset)).process();
     }
+    
+    @RequestMapping(path = "/dp")
+    public String dataProtection(HttpServletRequest req) throws IOException
+    {
+        String uri = getRequestUri(req);
+        return new PageTemplate(new StaticPage("dp", "dataProtection.ftlh", Section.DP,
+                uri, "SEHICL Data Protection Policy")).process();
+    }
 
 }
