@@ -72,6 +72,7 @@
 	<@winner 2015 "Havant A"/>
 	<@winner 2016 "Waterlooville A"/>
 	<@winner 2017 "Waterlooville A"/>
+	<@winner 2018 "Waterlooville A"/>
 </@div>
 
 <@div "Division 2" "from 1986-87 for the Barretts Shield">
@@ -111,6 +112,7 @@
 	<@winner 2015 "Portsmouth B"/>
 	<@winner 2016 "Purbrook"/>
 	<@winner 2017 "Portsmouth & Southsea A"/>
+	<@winner 2018 "Portsmouth & Southsea A"/>
 </@div>
 
 <@div "Division 3" "for the Ferguson Shield">
@@ -145,6 +147,7 @@
 	<@winner 2015 "Bedhampton B"/>
 	<@winner 2016 "Gosport Borough A"/>
 	<@winner 2017 "Petersfield"/>
+	<@winner 2018 "St James Casuals"/>
 </@div>
 
 <@div "Division 4", "for the Joan Vause Shield">
@@ -178,6 +181,11 @@
 	<@winner 2015 "St James Casuals"/>
 	<@winner 2016 "Gosport Borough B"/>
 	<@winner 2017 "Hambledon B"/>
+	<@winner 2018 "Sarisbury Athletic"/>
+</@div>
+
+<@div "Division 5", "for the Brian Ravenhall Memorial Shield">
+	<@winner 2018 "Hambledon C"/>
 </@div>
 
 <@div "Colts" "from 1986-87 for the Peter Faulkner Shield">
@@ -220,6 +228,7 @@
 	<@winner 2015 "Portsmouth & Southsea"/>
 	<@winner 2016 "Petersfield"/>
 	<@winner 2017 "Portsmouth & Southsea"/>
+	<@winner 2018 "Hambledon"/>
 </@div>
 
 <@div "Colts Under-13" "for the Ron Cross MBE Trophy">
@@ -243,6 +252,7 @@
 	<@winner 2015 "Waterlooville"/>
 	<@winner 2016 "Havant"/>
 	<@winner 2017 "Havant"/>
+	<@winner 2018 "Hambledon"/>
 </@div>
 
 </div>
