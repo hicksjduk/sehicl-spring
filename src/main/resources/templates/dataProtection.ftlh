@@ -27,8 +27,8 @@ in any of the information available on the website. However, we will retain a co
 your details included,
 so that it can be reinstated should you change your mind.
 <li>If you have been fined or suspended due to a disciplinary infraction, the information regarding the 
-offence for which you
-were suspended will be retained until the suspension has been served or the fine has been paid, after which 
+offence, and the sanction imposed, will be retained until the suspension has been served 
+or the fine has been paid, after which 
 normal procedures will be
 followed for disposing of it.  
 </ol>
