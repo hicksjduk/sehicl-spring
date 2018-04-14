@@ -18,7 +18,7 @@
 	the Mayor of Fareham, presents the senior teams' awards, and the
 	evening culminates with an eight-a-side challenge match between the
 	Mayor of Fareham's VIII and the Division 1 champions' VIII.
-	<a href="/archive/presentation/2017">
+	<a href="/archive/presentation/2018">
 	The 2018 presentation evening</a> was on Sunday 25th March;
 	click the link for information and pictures from the evening.
 </p>
