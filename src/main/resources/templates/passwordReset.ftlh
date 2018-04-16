@@ -1,6 +1,7 @@
 <h1>Password reset</h1>
 <#if !(reset.user??)>
 <p>The specified password reset token does not exist, or has expired.</p>
+<p>To generate a new token, <a href="/login">go to the Login page.</a></p>
 <#else>
 
 <p>

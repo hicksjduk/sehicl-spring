@@ -221,6 +221,7 @@ public class UserManager
     
     public User getUserByResetId(long resetId)
     {
+        datastore.clearExpiredResets();
         final PasswordReset passwordReset = datastore.getPasswordReset(resetId);
         return passwordReset == null ? null : datastore.getUserById(passwordReset.getUserId());
     }
