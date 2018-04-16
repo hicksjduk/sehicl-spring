@@ -11,11 +11,13 @@ public class Register
         private String club;
         private String password;
         private String passwordConf;
+        private boolean agreement;
         private String emailMessage;
         private String nameMessage;
         private String clubMessage;
         private String passwordMessage;
         private String passwordConfMessage;
+        private String agreementMessage;
 
         public String getEmail()
         {
@@ -116,6 +118,26 @@ public class Register
         {
             this.passwordConfMessage = passwordConfMessage;
         }
+
+        public String getAgreementMessage()
+        {
+            return agreementMessage;
+        }
+
+        public void setAgreementMessage(String agreementMessage)
+        {
+            this.agreementMessage = agreementMessage;
+        }
+
+        public boolean getAgreement()
+        {
+            return agreement;
+        }
+
+        public void setAgreement(boolean agreement)
+        {
+            this.agreement = agreement;
+        }
     }
 
     private final Validation validation = new Validation();
@@ -125,10 +147,10 @@ public class Register
     
     public Register(UserManager userManager)
     {
-        this(userManager, null, null, null, null, null);
+        this(userManager, null, null, null, null, null, false);
     }
 
-    public Register(UserManager userManager, String email, String name, String club, String password, String passwordConf)
+    public Register(UserManager userManager, String email, String name, String club, String password, String passwordConf, boolean agreement)
     {
         this.userManager = userManager;
         validation.email = email;
@@ -136,6 +158,7 @@ public class Register
         validation.club = StringUtils.isEmpty(club) ? null : club;
         validation.password = password;
         validation.passwordConf = passwordConf;
+        validation.agreement = agreement;
     }
 
     public String getMessage()
@@ -175,6 +198,11 @@ public class Register
         if (StringUtils.isEmpty(validation.passwordConf))
         {
             validation.setPasswordConfMessage("Please confirm your password.");
+            valid = false;
+        }
+        if (!validation.agreement)
+        {
+            validation.setAgreementMessage("You must tick the box to register.");
             valid = false;
         }
         if (valid)

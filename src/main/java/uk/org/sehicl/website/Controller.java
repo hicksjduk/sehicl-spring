@@ -404,8 +404,9 @@ public class Controller
         final String club = req.getParameter("club");
         final String password = req.getParameter("password");
         final String passwordConf = req.getParameter("passwordConf");
+        final String agreement = req.getParameter("agreement");
         final Register register = new Register(userManager, email, name, club, password,
-                passwordConf);
+                passwordConf, agreement != null);
         try
         {
             User user = register.validateAndRegister(URI

@@ -33,20 +33,27 @@
 			<td><input type="password" name="passwordConf""></td>
 			<td>${(register.validation.passwordConfMessage)!""}</td>
 		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+			<td colspan="3">
+				* 
+				<input type="checkbox" name="agreement" ${register.validation.agreement?then("checked", "")}>
+				I confirm that:</input>
+			</td>
+			<td>${(register.validation.agreementMessage)!""}</td>
+		</tr>
 	</table>
-	<p>By clicking the "Submit" button below, you agree that:
-	<ul>
-		<li>We may store the information you have supplied on a computer
-			system, and we may use it only for the purpose of administering your
-			rights as a registered user of this site. We will never give your
-			details to any other party.</li>
-		<li>You will treat all information to which your login gives you
-			access with appropriate care and respect. In particular, where that
-			information comprises other people's personal details, you may use it
-			only for legitimate purposes connected with the League, unless you
-			first gain the explicit consent of the person or persons concerned.</li>
-	</ul>
-	</p>
+				<ul>
+					<li>I have read and understood <a href="/dp">the League's data protection policy</a>.
+					<li>I consent to the information I have supplied being stored on a computer
+					system, and used exclusively for the purpose of administering my
+					rights as a registered user of this site.</li>
+					<li>I will treat all information to which my login gives me
+					access with appropriate care and respect. In particular, where that
+					information comprises other people's personal details, I will use it
+					only for legitimate purposes connected with the League, unless I
+					first gain the explicit consent of the person or persons concerned.</li>
+				</ul>
 	<p>
 		<input type="Submit" value="Submit">
 	</p>
