@@ -1,9 +1,7 @@
 <h1>Login</h1>
 ${message!""}
 <p>
-	If you do not have a login, <a href="/register">register here</a>.<br>
-	Please note that if you registered for a login prior to the start of the 2016-17
-	season, that login no longer works and you must re-register.
+	If you do not have a login, <a href="/register">register here</a>.
 </p>
 <p>If you have already registered, please fill in the fields below
 	and press "Login". If you cannot remember your password, fill in the
