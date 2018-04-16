@@ -27,10 +27,7 @@ in any of the information available on the website. However, we will retain a co
 your details included,
 so that it can be reinstated should you change your mind.
 <li>If you have been fined or suspended due to a disciplinary infraction, the information regarding the 
-offence, and the sanction imposed, will be retained until the suspension has been served 
-or the fine has been paid, after which 
-normal procedures will be
-followed for disposing of it.  
+offence, and the sanction imposed, will be retained for as long as is necessary.  
 </ol>
 <h2>The personal data held by the League</h2>
 <h3>Names, addresses, email addresses and phone numbers of committee members</h3>
@@ -67,9 +64,9 @@ or the contact information is tested and found not to work.
 <h3>Disciplinary records</h3>
 <p>Records of players who have been sanctioned for disciplinary infractions.
 <p>Held by the Chairman of the Disciplinary Committee.
-<p>Used to ensure that sanctions are correctly enforced.
-<p>Retained until the sanction no longer applies (the fine has been paid, or the suspension has been served),
-then destroyed.
+<p>Used to ensure that sanctions are correctly enforced, and also to identify repeat offending
+and appropriate precedents for future decisions.
+<p>Retained indefinitely.
 <h3>Names of players in each team (including ages of players under 18)</h3>
 <p>Supplied on a team sheet, completed by the captain of each senior team before each game.
 <p>Held in the league cupboard at the Leisure Centre until collected by the Fixture Secretary.
