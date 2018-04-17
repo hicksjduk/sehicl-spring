@@ -6,6 +6,6 @@ public class ActivationMailTemplate extends Template<ActivationMail>
 {
     public ActivationMailTemplate(User user, String activationPageAddress)
     {
-        super("activationMail.ftl", new ActivationMail(user, activationPageAddress));
+        super("activationMail.ftlh", new ActivationMail(user, activationPageAddress));
     }
 }

@@ -6,6 +6,6 @@ public class PasswordResetMailTemplate extends Template<PasswordResetMail>
 {
     public PasswordResetMailTemplate(PasswordReset reset, String resetPageAddress)
     {
-        super("passwordResetMail.ftl", new PasswordResetMail(reset.getId(), resetPageAddress));
+        super("passwordResetMail.ftlh", new PasswordResetMail(reset.getId(), resetPageAddress));
     }
 }
