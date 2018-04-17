@@ -1,8 +1,7 @@
 <ul>
 	<li>I have read and understood
 	<#if (pageId!"") != ""><a href="/dp"></#if>
-	the League's data protection policy
-	<#if (pageId!"") != ""></a></#if>.
+	the League's data protection policy<#if (pageId!"") != ""></a></#if>.
     <li>I consent to the information I have supplied being stored on a computer
 		system, and used exclusively for the purpose of administering my
 		rights as a registered user of this site.</li>
