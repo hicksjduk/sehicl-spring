@@ -32,6 +32,7 @@ import uk.org.sehicl.website.page.LeagueTablePage;
 import uk.org.sehicl.website.page.LeagueTablesPage;
 import uk.org.sehicl.website.page.LoginPage;
 import uk.org.sehicl.website.page.Page;
+import uk.org.sehicl.website.page.ReconfirmPage;
 import uk.org.sehicl.website.page.RegisterConfPage;
 import uk.org.sehicl.website.page.RegisterPage;
 import uk.org.sehicl.website.page.ResetPage;
@@ -44,6 +45,7 @@ import uk.org.sehicl.website.report.LeagueSelector;
 import uk.org.sehicl.website.template.PageTemplate;
 import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.Login;
+import uk.org.sehicl.website.users.Reconfirm;
 import uk.org.sehicl.website.users.Register;
 import uk.org.sehicl.website.users.Reset;
 import uk.org.sehicl.website.users.User;
@@ -462,6 +464,31 @@ public class Controller
         }
         else
             return new PageTemplate(new ResetPage(uri, reset)).process();
+    }
+    
+    @RequestMapping(path = "/reconfirm/{userId}", method = RequestMethod.GET)
+    public String reconfirmUser(HttpServletRequest req, @PathVariable long userId)
+            throws IOException
+    {
+        String uri = getRequestUri(req);
+        return new PageTemplate(new ReconfirmPage(uri, new Reconfirm(userId, userManager))).process();
+    }
+
+    @RequestMapping(path = "/reconfirm/{userId}", method = RequestMethod.POST)
+    public String reconfirm(HttpServletRequest req, HttpServletResponse resp,
+            @PathVariable long userId) throws IOException
+    {
+        String uri = getRequestUri(req);
+        final String agreement = req.getParameter("agreement");
+        final boolean agreed = agreement != null;
+        final Reconfirm reconfirm = new Reconfirm(userId, userManager);
+        if (reconfirm.validateAndReconfirm(agreed))
+        {
+            resp.sendRedirect("/login");
+            return "";
+        }
+        else
+            return new PageTemplate(new ReconfirmPage(uri, reconfirm)).process();
     }
     
     @RequestMapping(path = "/dp")

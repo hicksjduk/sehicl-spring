@@ -225,4 +225,16 @@ public class UserManager
         final PasswordReset passwordReset = datastore.getPasswordReset(resetId);
         return passwordReset == null ? null : datastore.getUserById(passwordReset.getUserId());
     }
+
+    public User getUserById(long userId)
+    {
+        return datastore.getUserById(userId);
+    }
+
+    public User reconfirmUser(long id) throws UserException
+    {
+        final User answer = setUserStatusNoNotify(id, Status.ACTIVE);
+        notifyAdmin("reconfirm", answer);
+        return answer;
+    }
 }
