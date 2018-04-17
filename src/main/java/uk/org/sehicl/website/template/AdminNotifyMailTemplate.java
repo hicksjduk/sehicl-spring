@@ -6,6 +6,6 @@ public class AdminNotifyMailTemplate extends Template<User>
 {
     public AdminNotifyMailTemplate(User user)
     {
-        super("adminNotifyMail.ftl", user);
+        super("adminNotifyMail.ftlh", user);
     }
 }

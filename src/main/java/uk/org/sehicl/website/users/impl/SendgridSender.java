@@ -21,7 +21,7 @@ public class SendgridSender implements EmailSender
             throws EmailException
     {
         Email from = new Email("admin@sehicl.org.uk", "SEHICL Admin");
-        Content content = new Content("text/plain", messageText);
+        Content content = new Content("text/html", messageText);
         Mail mail = new Mail();
         mail.setFrom(from);
         mail.setSubject(subject);

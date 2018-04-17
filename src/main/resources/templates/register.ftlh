@@ -43,17 +43,7 @@
 			<td>${(register.validation.agreementMessage)!""}</td>
 		</tr>
 	</table>
-				<ul>
-					<li>I have read and understood <a href="/dp">the League's data protection policy</a>.
-					<li>I consent to the information I have supplied being stored on a computer
-					system, and used exclusively for the purpose of administering my
-					rights as a registered user of this site.</li>
-					<li>I will treat all information to which my login gives me
-					access with appropriate care and respect. In particular, where that
-					information comprises other people's personal details, I will use it
-					only for legitimate purposes connected with the League, unless I
-					first gain the explicit consent of the person or persons concerned.</li>
-				</ul>
+<#include "dataprotectionagreement.ftlh"/>
 	<p>
 		<input type="Submit" value="Submit">
 	</p>
