@@ -484,11 +484,19 @@ public class Controller
         final Reconfirm reconfirm = new Reconfirm(userId, userManager);
         if (reconfirm.validateAndReconfirm(agreed))
         {
-            resp.sendRedirect("/login");
+            resp.sendRedirect("/reconfConf");
             return "";
         }
         else
             return new PageTemplate(new ReconfirmPage(uri, reconfirm)).process();
+    }
+    
+    @RequestMapping(path = "/reconfConf")
+    public String confirmReconfirmation(HttpServletRequest req) throws IOException
+    {
+        String uri = getRequestUri(req);
+        return new PageTemplate(new StaticPage("reconfirm", "reconfConf.ftlh", null,
+                uri, "Thank you")).process();
     }
     
     @RequestMapping(path = "/dp")
@@ -498,5 +506,4 @@ public class Controller
         return new PageTemplate(new StaticPage("dp", "dataProtection.ftlh", Section.DP,
                 uri, "SEHICL Data Protection Policy")).process();
     }
-
 }
