@@ -6,7 +6,11 @@
 	<li>E-mail: ${reconfirm.user.email}</li>
 	<li>Club: ${reconfirm.user.club!"(Not specified)"}</li>
 </ul>
-<p>To reconfirm this account, please tick the box below and press "Reconfirm".</p>
+<p>To reconfirm this account, please read the statements below, tick the box 
+to confirm that you agree with them, and press "Reconfirm".
+<u>Do not continue unless you understand what you are agreeing to and are
+willing to be bound by it.</u>
+</p>
 <form action="/reconfirm/${reconfirm.user.id?string.computer}" method="post">
 	<p><input type="checkbox" name="agreement" $({(reconfirm.validation.agreement)??)?then("checked", "")}>
 		I confirm that:</input>
