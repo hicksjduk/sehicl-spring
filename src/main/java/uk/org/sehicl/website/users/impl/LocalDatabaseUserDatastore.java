@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -275,6 +276,13 @@ public class LocalDatabaseUserDatastore implements UserDatastore
     {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public Collection<Long> getAllUserIds()
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

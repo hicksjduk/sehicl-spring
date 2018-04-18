@@ -1,5 +1,7 @@
 package uk.org.sehicl.website.users;
 
+import java.util.Collection;
+
 import uk.org.sehicl.website.users.User.Status;
 
 public interface UserDatastore
@@ -7,6 +9,8 @@ public interface UserDatastore
     User getUserByEmail(String email);
 
     User getUserById(long id);
+    
+    Collection<Long> getAllUserIds();
 
     SessionData getSessionByUserId(long id);
 

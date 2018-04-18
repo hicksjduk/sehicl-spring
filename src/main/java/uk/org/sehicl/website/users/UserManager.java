@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import uk.org.sehicl.website.template.ActivationMailTemplate;
 import uk.org.sehicl.website.template.AdminNotifyMailTemplate;
 import uk.org.sehicl.website.template.PasswordResetMailTemplate;
+import uk.org.sehicl.website.template.ReconfirmationMailTemplate;
 import uk.org.sehicl.website.users.EmailSender.Addressee;
 import uk.org.sehicl.website.users.User.Status;
 import uk.org.sehicl.website.users.UserException.Message;
@@ -20,7 +21,7 @@ public class UserManager
 
     @Autowired
     private EmailSender emailer;
-    
+
     private final static List<String> blockList = Arrays.asList("u03.gmailmirror.com");
 
     public long login(String email, String password) throws UserException
@@ -42,7 +43,7 @@ public class UserManager
         long token = generateToken(user);
         return token;
     }
-    
+
     private long generateToken(User user)
     {
         SessionData session = datastore.setSession(user);
@@ -50,8 +51,8 @@ public class UserManager
         return answer;
     }
 
-    public User registerUser(String email, String name, String club, String password, String activationPageAddress)
-            throws UserException, EmailException
+    public User registerUser(String email, String name, String club, String password,
+            String activationPageAddress) throws UserException, EmailException
     {
         User answer = new User(name, email, club, Status.INACTIVE, 0, password, true);
         if (!isBlocked(email))
@@ -89,7 +90,8 @@ public class UserManager
         }
     }
 
-    private void sendPasswordResetEmail(PasswordReset reset, String resetAddress) throws UserException, EmailException
+    private void sendPasswordResetEmail(PasswordReset reset, String resetAddress)
+            throws UserException, EmailException
     {
         StringWriter sw = new StringWriter();
         new PasswordResetMailTemplate(reset, resetAddress).process(sw);
@@ -119,7 +121,8 @@ public class UserManager
         }
     }
 
-    public void generatePasswordReset(String email, String resetAddress) throws UserException, EmailException
+    public void generatePasswordReset(String email, String resetAddress)
+            throws UserException, EmailException
     {
         datastore.clearExpiredResets();
         if (!isBlocked(email))
@@ -132,7 +135,7 @@ public class UserManager
             sendPasswordResetEmail(reset, resetAddress);
         }
     }
-    
+
     public PasswordReset getPasswordReset(long id) throws UserException
     {
         datastore.clearExpiredResets();
@@ -207,7 +210,7 @@ public class UserManager
         }
         return answer;
     }
-    
+
     public void changePassword(long userId, String newPassword) throws UserException
     {
         final User user = datastore.getUserById(userId);
@@ -218,7 +221,7 @@ public class UserManager
         user.encodeAndSetPassword(newPassword);
         datastore.updateUser(user);
     }
-    
+
     public User getUserByResetId(long resetId)
     {
         datastore.clearExpiredResets();
@@ -236,5 +239,24 @@ public class UserManager
         final User answer = setUserStatusNoNotify(id, Status.ACTIVE);
         notifyAdmin("reconfirm", answer);
         return answer;
+    }
+
+    public void sendReconfirmationEmails(String reconfirmationPageAddress)
+    {
+        datastore.getAllUserIds().forEach(id ->
+        {
+            try
+            {
+                User user = setUserStatusNoNotify(id, Status.AWAITING_RECONFIRMATION);
+                StringWriter sw = new StringWriter();
+                new ReconfirmationMailTemplate(user, reconfirmationPageAddress).process(sw);
+                emailer.sendEmail("ACTION REQUIRED - Reconfirm your SEHICL account", sw.toString(),
+                        new Addressee(user.getEmail(), user.getName()));
+            }
+            catch (Exception e)
+            {
+                throw new RuntimeException("Error sending activation e-mail", e);
+            }
+        });
     }
 }

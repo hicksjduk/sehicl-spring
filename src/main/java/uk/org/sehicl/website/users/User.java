@@ -10,7 +10,7 @@ public class User
 {
     public static enum Status
     {
-        INACTIVE, ACTIVE
+        INACTIVE, ACTIVE, AWAITING_RECONFIRMATION
     }
 
     private Long id;
@@ -108,7 +108,7 @@ public class User
     @JsonIgnore
     public boolean isInactive()
     {
-        return status == Status.INACTIVE;
+        return status != Status.ACTIVE;
     }
 
     public void setStatus(Status status)

@@ -3,10 +3,12 @@ package uk.org.sehicl.website.users.impl;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.Cursor;
@@ -249,8 +251,7 @@ public class RedisDatastore implements UserDatastore
     {
         long now = new Date().getTime();
         List<PasswordReset> expiredResets = new ArrayList<>();
-        try (Cursor<Entry<Object, Object>> c = ops.scan("reset",
-                new ScanOptionsBuilder().build()))
+        try (Cursor<Entry<Object, Object>> c = ops.scan("reset", new ScanOptionsBuilder().build()))
         {
             c.forEachRemaining(e ->
             {
@@ -269,5 +270,13 @@ public class RedisDatastore implements UserDatastore
         {
             ops.delete("reset", expiredResets.stream().mapToLong(PasswordReset::getId).toArray());
         }
+    }
+
+    @Override
+    public Collection<Long> getAllUserIds()
+    {
+        String bucket = "user";
+        Collection<Long> answer = ops.keys(bucket).stream().map(Long.class::cast).collect(Collectors.toSet());
+        return answer;
     }
 }

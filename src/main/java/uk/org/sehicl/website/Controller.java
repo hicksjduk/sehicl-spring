@@ -465,13 +465,14 @@ public class Controller
         else
             return new PageTemplate(new ResetPage(uri, reset)).process();
     }
-    
+
     @RequestMapping(path = "/reconfirm/{userId}", method = RequestMethod.GET)
     public String reconfirmUser(HttpServletRequest req, @PathVariable long userId)
             throws IOException
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new ReconfirmPage(uri, new Reconfirm(userId, userManager))).process();
+        return new PageTemplate(new ReconfirmPage(uri, new Reconfirm(userId, userManager)))
+                .process();
     }
 
     @RequestMapping(path = "/reconfirm/{userId}", method = RequestMethod.POST)
@@ -490,20 +491,34 @@ public class Controller
         else
             return new PageTemplate(new ReconfirmPage(uri, reconfirm)).process();
     }
-    
+
     @RequestMapping(path = "/reconfConf")
     public String confirmReconfirmation(HttpServletRequest req) throws IOException
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new StaticPage("reconfirm", "reconfConf.ftlh", null,
-                uri, "Thank you")).process();
+        return new PageTemplate(
+                new StaticPage("reconfirm", "reconfConf.ftlh", null, uri, "Thank you")).process();
     }
-    
+
     @RequestMapping(path = "/dp")
     public String dataProtection(HttpServletRequest req) throws IOException
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new StaticPage("dp", "dataProtection.ftlh", Section.DP,
-                uri, "SEHICL Data Protection Policy")).process();
+        return new PageTemplate(new StaticPage("dp", "dataProtection.ftlh", Section.DP, uri,
+                "SEHICL Data Protection Policy")).process();
+    }
+
+    @RequestMapping(path = "/admin/reconf")
+    public String sendUserReconfirmRequests(HttpServletRequest req) throws IOException
+    {
+        final UserSession userSession = new UserSession(req);
+        if (!userManager.sessionHasRole(userSession.getToken(), "admin"))
+            return "Not authorised";
+        String reconfirmationPageAddress = URI
+                .create(req.getRequestURL().toString())
+                .resolve("/reconfirm")
+                .toString();
+        userManager.sendReconfirmationEmails(reconfirmationPageAddress);
+        return "Emails sent";
     }
 }
