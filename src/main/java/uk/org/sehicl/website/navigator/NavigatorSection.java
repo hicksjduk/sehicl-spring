@@ -60,8 +60,8 @@ public enum NavigatorSection
             new NavigatorItem("2006-07", "/archive/season/7"),
             new NavigatorItem("2005-06", "/archive/season/6"),
             new NavigatorItem("2004-05", "/archive/season/5"),
-            new NavigatorItem("2003-04", "/archive/season/4"))//,
-    //DP(Section.DP, "Data Protection", "/dp")
+            new NavigatorItem("2003-04", "/archive/season/4")),
+    DP(Section.DP, "Data Protection", "/dp")
     ;
     
     private final Section section;
