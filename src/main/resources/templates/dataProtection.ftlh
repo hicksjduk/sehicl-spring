@@ -56,10 +56,11 @@ or submits a new records update form.
 <p>Used to invite teams to join when they reach the top of the waiting list.
 <p>Retained by the Secretary until either the club joins, an invitation to join is declined, 
 or the contact information is tested and found not to work.
-<h3>Names, email addresses and phone numbers of umpires</h3>
+<h3>Names, email addresses, phone numbers and bank account details of umpires</h3>
 <p>Supplied by the umpire when they join the list.
 <p>Held by the Umpires' Co-ordinator, and shared with the umpires.
-<p>Used to organise umpiring cover for matches, and to share issues of concern to umpires.
+<p>Used to organise umpiring cover for matches, to share issues of concern to umpires, and to
+pay umpires' expenses.
 <p>Retained until the person ceases to be an umpire.
 <h3>Disciplinary records</h3>
 <p>Records of players who have been sanctioned for disciplinary infractions.
