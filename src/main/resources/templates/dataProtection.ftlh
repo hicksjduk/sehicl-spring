@@ -42,7 +42,8 @@ offence, and the sanction imposed, will be retained for as long as is necessary.
 <p>Email addresses are held on our web domain supplier's database, in order to map them to 
 job-specific aliases and distribution lists.
 <p>Used to contact members of the committee.
-<p>Names and email aliases are freely available on the website. Addresses and phone numbers are held 
+<p>Names and email aliases of committee members who hold specific roles 
+are freely available on the website. Their addresses and phone numbers are held 
 on our website server, but are only available to people who register as users of the site and log in. 
 <p>Retained until the person ceases to be a committee member.
 
