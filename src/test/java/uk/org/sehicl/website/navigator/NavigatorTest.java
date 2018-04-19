@@ -25,7 +25,7 @@ public class NavigatorTest
                 validator("Results", "/results"), validator("Tables", "/tables"),
                 validator("Averages", "/averages"), validator("Resources", "/resources"),
                 validator("Rules", null), validator("Records", "/records"),
-                validator("Archive", "/archive"));
+                validator("Archive", "/archive"), validator("Data Protection", "/dp"));
         validate(expected, results);
     }
 
@@ -39,13 +39,14 @@ public class NavigatorTest
                         validator("Division 2", "/fixtures/league/Division2"),
                         validator("Division 3", "/fixtures/league/Division3"),
                         validator("Division 4", "/fixtures/league/Division4"),
+                        validator("Division 5", "/fixtures/league/Division5"),
                         validator("Colts Under-16", "/fixtures/league/ColtsUnder16"),
                         validator("Colts Under-13", "/fixtures/league/ColtsUnder13"),
                         validator("Duty team rota", "/dutyRota")),
                 validator("Results", "/results"), validator("Tables", "/tables"),
                 validator("Averages", "/averages"), validator("Resources", "/resources"),
                 validator("Rules", "/rules"), validator("Records", "/records"),
-                validator("Archive", "/archive"));
+                validator("Archive", "/archive"), validator("Data Protection", "/dp"));
         validate(expected, results);
     }
 
@@ -59,7 +60,8 @@ public class NavigatorTest
                 validator("Fixtures", "/fixtures"), validator("Results", "/results"),
                 validator("Tables", "/tables"), validator("Averages", "/averages"),
                 validator("Resources", "/resources"), validator("Rules", "/rules"),
-                validator("Records", "/records"), validator("Archive", "/archive"));
+                validator("Records", "/records"), validator("Archive", "/archive"),
+                validator("Data Protection", "/dp"));
         validate(expected, results);
     }
 
@@ -80,7 +82,8 @@ public class NavigatorTest
                         validator("Colts Under-13 Bowling", "/averages/bowling/ColtsUnder13"),
                         validator("By team", "/averages/byTeam")),
                 validator("Resources", "/resources"), validator("Rules", "/rules"),
-                validator("Records", "/records"), validator("Archive", "/archive"));
+                validator("Records", "/records"), validator("Archive", "/archive"),
+                validator("Data Protection", "/dp"));
         validate(expected, results);
     }
 
