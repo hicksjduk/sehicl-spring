@@ -38,12 +38,6 @@
 	</person>
 
 	<person>
-		<name>Mike Collins</name>
-		<address>17 Buckland Close, Waterlooville PO7 6ED</address>
-		<phone>07905 373054</phone>
-	</person>
-
-	<person>
 		<name>Phillip Williams</name>
 		<address>30 Andover Road, Southsea PO4 9QG</address>
 		<phone>023 92 790 658</phone>
@@ -200,11 +194,6 @@
 	</person>
 
 	<person>
-		<name>Scott Taylor</name>
-		<phone>07734 029699</phone>
-	</person>
-
-	<person>
 		<name>Shaun Harris</name>
 		<phone>07771 897264</phone>
 		<role name="Under-16" club="Gosport Borough"/>
@@ -217,24 +206,12 @@
 	</person>
 
 	<person>
-		<name>Jane Shinn</name>
-		<address>58 The Yews, Horndean PO8 0BH</address>
-		<phone>02392596136</phone>
-		<phone>07504098778</phone>
-	</person>
-
-	<person>
 		<name>Seb Duggan</name>
 		<address>263 Lovedean Lane, Waterlooville PO8 9RX</address>
 		<phone>07786 333184</phone>
 		<role name="Secretary" club="Hambledon">
 			<email id="hambledon.secretary" />
 		</role>
-	</person>
-
-	<person>
-		<name>Rhidian Chapman</name>
-		<phone>07894234033</phone>
 	</person>
 
 	<person>
@@ -290,19 +267,9 @@
 	</person>
 
 	<person>
-		<name>Peter Hopson</name>
-		<phone>07882057913</phone>
-	</person>
-
-	<person>
 		<name>Simon Loat</name>
 		<phone>07742 106827</phone>
 		<role name="A team" club="Havant" />
-	</person>
-
-	<person>
-		<name>Jeremy Bulled</name>
-		<phone>07717760252</phone>
 	</person>
 
 	<person>
@@ -318,28 +285,12 @@
 	</person>
 
 	<person>
-		<name>Daniel Oliver</name>
-		<phone>07920 887093</phone>
-	</person>
-
-	<person>
-		<name>Dave Moody</name>
-		<address>2 Magdala Road, Hayling Island PO11 0BH</address>
-		<phone>02392 464401</phone>
-	</person>
-
-	<person>
 		<name>Alex Johnson</name>
 		<address>8 Park View, Northern Parade, Portsmouth PO2 8SR</address>
 		<phone>07760348447</phone>
 		<role name="Secretary" club="Hayling Island">
 			<email id="hayling.secretary" />
 		</role>
-	</person>
-
-	<person>
-		<name>Yvette Conquest</name>
-		<phone>07771 282325</phone>
 	</person>
 
 	<person>
@@ -373,11 +324,6 @@
 	</person>
 
 	<person>
-		<name>Simon Izzard</name>
-		<phone>07791 675618</phone>
-	</person>
-
-	<person>
 		<name>Sam Ryan</name>
 		<phone>07730 913830</phone>
 		<role name="Captain" club="Knowle Village"/>
@@ -394,6 +340,9 @@
 		<role name="Webmaster">
 			<email id="website" />
 		</role>
+		<role name="Data Protection Officer">
+			<email id="dpo" />
+		</role>
 		<role name="Secretary" club="OPCS Titchfield">
 			<email id="opcs.secretary" />
 		</role>
@@ -408,11 +357,6 @@
 		<role name="Secretary" club="Petersfield">
 			<email id="petersfield.secretary" />
 		</role>
-	</person>
-
-	<person>
-		<name>Damien Carson</name>
-		<role name="Senior" club="Petersfield" />
 	</person>
 
 	<person>
@@ -450,11 +394,6 @@
 	</person>
 
 	<person>
-		<name>Geoff Stares</name>
-		<phone>07724 899547</phone>
-	</person>
-
-	<person>
 		<name>Rick Marston</name>
 		<address>113 Festing Grove, Portsmouth PO4 9QE</address>
 		<phone>02392735987</phone>
@@ -485,11 +424,6 @@
 	</person>
 
 	<person>
-		<name>Pete Howells</name>
-		<phone>07786 984337</phone>
-	</person>
-
-	<person>
 		<name>Jason Manning</name>
 		<address>Flat 16, Park Court, Castle Road, Southsea PO5 3DF</address>
 		<phone>07902 711254</phone>
@@ -497,13 +431,6 @@
 			<email id="academics.secretary" />
 		</role>
 		<role name="Captain" club="Portsmouth Academics" />
-	</person>
-
-	<person>
-		<name>Daniel Frostick</name>
-		<address>54 West Street, Portchester PO16 7XB</address>
-		<phone>023 9265 3563</phone>
-		<phone>07884 194505</phone>
 	</person>
 
 	<person>
@@ -535,18 +462,6 @@
 	</person>
 
 	<person>
-		<name>Alex Cornborough</name>
-		<address>3 Church Way, Portsmouth PO3 6GL</address>
-		<phone>02392 043057</phone>
-		<phone>07745 497291</phone>
-	</person>
-
-	<person>
-		<name>Josh Spiers</name>
-		<phone>07741 294958</phone>
-	</person>
-
-	<person>
 		<name>Jim Ireson</name>
 		<address>11 Broad Oak Lane, Bexhill-on-Sea TN39 4HE</address>
 		<phone>01424 576054</phone>
@@ -557,21 +472,9 @@
 	</person>
 
 	<person>
-		<name>Simon Smith</name>
-		<phone>07599 001896</phone>
-	</person>
-
-	<person>
 		<name>Stuart White</name>
 		<phone>07879 414943</phone>
 		<role name="Captain" club="Railway Triangle" />
-	</person>
-
-	<person>
-		<name>Sally Anderson</name>
-		<address>28 Highfield Avenue, Fareham PO14 1HZ</address>
-		<phone>01329 550500</phone>
-		<phone>07710 189157</phone>
 	</person>
 
 	<person>
@@ -586,11 +489,6 @@
 		<name>Paul Friedrich</name>
 		<phone>07968 933569</phone>
 		<role name="Captain" club="Sarisbury Athletic" />
-	</person>
-
-	<person>
-		<name>Phil Dunn</name>
-		<phone>07885 735064</phone>
 	</person>
 
 	<person>
@@ -613,18 +511,6 @@
 		<name>George Wilson</name>
 		<phone>07542 246539</phone>
 		<role name="Captain" club="Servicemaster"/>
-	</person>
-
-	<person>
-		<name>Karthik Muthuraman</name>
-		<phone>07983 608353</phone>
-	</person>
-
-	<person>
-		<name>Ian Campbell</name>
-		<address>29 Selborne Close, Petersfield GU32 2JB</address>
-		<phone>01730 269331</phone>
-		<phone>07544 663320</phone>
 	</person>
 
 	<person>
@@ -662,12 +548,6 @@
 		<role name="Secretary" club="United Services">
 			<email id="us.secretary" />
 		</role>
-	</person>
-
-	<person>
-		<name>Tom Harris</name>
-		<phone>07446 127883</phone>
-		<role name="Captain" club="United Services" />
 	</person>
 
 	<person>
@@ -728,253 +608,6 @@
 		<name>Andrew Kirby</name>
 		<phone>07736296929</phone>
 		<role name="B team" club="XIIth Men" />
-	</person>
-
-	<person>
-		<name>John Adams</name>
-		<phone>07789 681178</phone>
-		<phone>01329 516450</phone>
-	</person>
-
-	<person>
-		<name>Andy Anthony</name>
-		<address>24 Victory Road, Fareham PO14 2SE</address>
-		<phone>01329665945</phone>
-		<phone>07815191990</phone>
-	</person>
-
-	<person>
-		<name>Shaun Blanks</name>
-		<phone>07880 797177</phone>
-	</person>
-
-	<person>
-		<name>Gary Callaghan</name>
-		<phone>07828 934401</phone>
-	</person>
-
-	<person>
-		<name>Mark Carter</name>
-		<phone>07710 288857</phone>
-	</person>
-
-	<person>
-		<name>Saleem Chaudhry</name>
-		<phone>07446057165</phone>
-	</person>
-
-	<person>
-		<name>Chris Clode</name>
-		<phone>07980679394</phone>
-	</person>
-
-	<person>
-		<name>Simon Creal</name>
-		<phone>07854 439898</phone>
-	</person>
-
-	<person>
-		<name>Aaron Dean</name>
-		<phone>02392 250863</phone>
-		<phone>07881 497291</phone>
-	</person>
-
-	<person>
-		<name>Steve Dean</name>
-		<phone>07775865925</phone>
-	</person>
-
-	<person>
-		<name>Jon Floyd</name>
-		<phone>07802 268853</phone>
-	</person>
-
-	<person>
-		<name>Mike Freeston</name>
-		<address>23 Buckmore Avenue, Petersfield GU32 2EG</address>
-		<phone>01730269906</phone>
-		<phone>07976441475</phone>
-	</person>
-
-	<person>
-		<name>Max Goddard</name>
-		<phone>07590033598</phone>
-	</person>
-
-	<person>
-		<name>Chris Hovey</name>
-		<phone>07702409697</phone>
-	</person>
-
-	<person>
-		<name>John Howard</name>
-		<phone>07795083692</phone>
-	</person>
-
-	<person>
-		<name>Andy King</name>
-		<phone>07919 107090</phone>
-	</person>
-
-	<person>
-		<name>Jo Larcombe</name>
-		<phone>07934 698267</phone>
-	</person>
-
-	<person>
-		<name>Shane Lawrence</name>
-		<address>29 Benham Drive, Hilsea, Portsmouth PO3 5QW</address>
-		<phone>07900634745</phone>
-	</person>
-
-	<person>
-		<name>Pete Levy</name>
-		<phone>07717 003998</phone>
-	</person>
-
-	<person>
-		<name>Gary Martin</name>
-		<phone>07707834375</phone>
-	</person>
-
-	<person>
-		<name>Graeme McDowell</name>
-		<phone>07879 632919</phone>
-	</person>
-
-	<person>
-		<name>Paul McVeigh</name>
-		<address>4 Boulton Road, Southsea PO5 1NT</address>
-		<phone>02392 178732</phone>
-		<phone>07913 871505</phone>
-	</person>
-
-	<person>
-		<name>Dave Mitchard</name>
-		<phone>07791 858116</phone>
-	</person>
-
-	<person>
-		<name>Neil Palmer</name>
-		<phone>07736 794865</phone>
-	</person>
-
-	<person>
-		<name>Andy Paskins</name>
-		<phone>07549705129</phone>
-	</person>
-
-	<person>
-		<name>Jack Paskins</name>
-		<phone>07535 355289</phone>
-	</person>
-
-	<person>
-		<name>Mark Perrin</name>
-		<phone>07818 453786</phone>
-	</person>
-
-	<person>
-		<name>Dave Pitts</name>
-		<phone>07872 139068</phone>
-	</person>
-
-	<person>
-		<name>Matt Reeves</name>
-		<phone>07807045580</phone>
-	</person>
-
-	<person>
-		<name>Kevin Riley</name>
-		<address>34 Fearon Road, North End, Portsmouth PO2 0NJ</address>
-		<phone>02392 838383</phone>
-		<phone>07710 553778</phone>
-	</person>
-
-	<person>
-		<name>Steve Roberts</name>
-		<address>192a Locks Road, Locks Heath SO31 6LE</address>
-		<phone>01489581477</phone>
-		<phone>07918671878</phone>
-	</person>
-
-	<person>
-		<name>Shaun Russell</name>
-		<phone>07590 555274</phone>
-	</person>
-
-	<person>
-		<name>James Scott</name>
-		<phone>07912022536</phone>
-	</person>
-
-	<person>
-		<name>Darren Shergill</name>
-		<phone>07748 323733</phone>
-	</person>
-
-	<person>
-		<name>John Smith</name>
-		<phone>07738 933234</phone>
-	</person>
-
-	<person>
-		<name>Matthew Smith</name>
-		<phone>07784 492318</phone>
-	</person>
-
-	<person>
-		<name>Dave Squires</name>
-		<phone>07841011216</phone>
-	</person>
-
-	<person>
-		<name>James Stratford-Tuke</name>
-		<phone>07976 441475</phone>
-	</person>
-
-	<person>
-		<name>Andy Stretton</name>
-		<phone>07917 341864</phone>
-	</person>
-
-	<person>
-		<name>Richard Thomas</name>
-		<phone>01730894974</phone>
-	</person>
-
-	<person>
-		<name>Steve Toogood</name>
-		<phone>07919887582</phone>
-	</person>
-
-	<person>
-		<name>John Udy</name>
-		<phone>07917 597155</phone>
-	</person>
-
-	<person>
-		<name>Richard Webb</name>
-		<phone>01329 280228</phone>
-	</person>
-
-	<person>
-		<name>Dan Williamson</name>
-		<address>Unit 34, Portsmouth Enterprise Centre, Quartremaine Road, Portsmouth PO3 5QT</address>
-		<phone>01489278747</phone>
-		<phone>07776 300422</phone>
-	</person>
-
-	<person>
-		<name>Dean Wilson</name>
-		<phone>07837 303295</phone>
-	</person>
-
-	<person>
-		<name>Rosalind Woodnutt</name>
-		<address>24 Old Manor Way, Drayton, Portsmouth PO6 2NN</address>
-		<phone>02392363467</phone>
-		<phone>07557683286</phone>
 	</person>
 
 </contacts>

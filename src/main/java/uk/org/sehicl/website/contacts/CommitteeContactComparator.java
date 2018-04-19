@@ -8,7 +8,7 @@ public class CommitteeContactComparator implements Comparator<ContactDetails>
 {
     public static final List<String> ROLES = Arrays.asList("President", "Chairman",
             "Vice-Chairman", "Secretary", "Treasurer", "Umpires' Co-ordinator",
-            "Fixture Secretary", "Webmaster");
+            "Fixture Secretary", "Webmaster", "Data Protection Officer");
 
     @Override
     public int compare(ContactDetails o1, ContactDetails o2)
