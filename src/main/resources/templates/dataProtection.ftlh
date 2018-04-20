@@ -23,17 +23,20 @@ of the request being received.</p>
 To make such a request, you should contact ${dpo} by email; subject to the following provisos, your
 data will be deleted as soon as possible, and within 4 weeks
 of the request being received.
-<ol>
+<ul>
 <li>If you are
 the only contact we have for a club or team that is currently active in the League, we reserve the right
 to request the details of an alternative contact before removing yours.
-<li>In the case of historical performance data, your details will no longer be included
-in any of the information available on the website. However, we will retain a copy of the data with 
-your details included,
-so that it can be reinstated should you change your mind.
-<li>If you have been fined or suspended due to a disciplinary infraction, the information regarding the 
-offence, and the sanction imposed, will be retained for as long as is necessary.  
-</ol>
+<li>In the case of historical performance data, the details of your performances will continue 
+to be recorded, and where appropriate will be included
+in the information available on the website. However, your name will be changed to 
+"Redacted #<i>n</i>", where <i>n</i> is a number; we will keep a list showing which name corresponds
+to which number, and this list will only be used to reinstate your name
+should you subsequently change your mind.
+<li>If you have been fined or suspended due to a disciplinary infraction, we reserve the right to retain
+the information regarding the 
+offence, and the sanction imposed, for as long as we deem necessary.  
+</ul>
 
 <h2>The personal data held by the League</h2>
 
