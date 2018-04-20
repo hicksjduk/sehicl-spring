@@ -15,12 +15,14 @@ is stored securely, and
 is used only for the purposes stated.</p>
 
 <p>You have the right to obtain a full listing of the personal data we hold about you. To request such a
-listing, you should contact ${dpo} by email; the listing will be emailed to you as soon as possible, 
+listing, you should contact ${dpo} by email, or by post at the address shown on 
+<a href="/fullContacts">the Full Contacts page</a>; the listing will be sent to you as soon as possible, 
 and within 4 weeks
 of the request being received.</p>
 
 <p>You have the right to request that all the personal data we hold about you should be deleted.
-To make such a request, you should contact ${dpo} by email; subject to the following provisos, your
+To make such a request, you should contact ${dpo} by email, or by post at the address shown on 
+<a href="/fullContacts">the Full Contacts page</a>; subject to the following provisos, your
 data will be deleted as soon as possible, and within 4 weeks
 of the request being received.
 <ul>
