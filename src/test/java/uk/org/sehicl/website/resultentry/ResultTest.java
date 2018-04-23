@@ -2,9 +2,13 @@ package uk.org.sehicl.website.resultentry;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.text.SimpleDateFormat;
+import java.io.StringWriter;
+import java.io.Writer;
 
 import org.junit.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import uk.org.sehicl.website.dataload.ModelLoader;
 import uk.org.sehicl.website.resultentry.Result.ResultException;
@@ -82,10 +86,23 @@ public class ResultTest
     {
         final Result result = new Result(ModelLoader.getModel(18), "Division5",
                 "PortsmouthSouthseaB", "OPCSTitchfield");
-        assertThat(result.getHomeTeam().getName()).isEqualTo("Portsmouth & Southsea B");
-        assertThat(result.getAwayTeam().getName()).isEqualTo("OPCS Titchfield");
-        assertThat(result.getMatch().getCourt()).isEqualTo("B");
-        assertThat(new SimpleDateFormat("yyyy-MM-dd.HH:mm").format(result.getMatch().getDateTime()))
-                .isEqualTo("2018-03-04.21:15");
+        assertThat(result.homeTeam.name).isEqualTo("Portsmouth & Southsea B");
+        assertThat(result.awayTeam.name).isEqualTo("OPCS Titchfield");
+        assertThat(result.court).isEqualTo("B");
+        assertThat(result.date).isEqualTo("4th March 2018");
+        assertThat(result.time).isEqualTo("9:15");
+        assertThat(result.leagueId).isEqualTo("Division5");
+        assertThat(result.leagueName).isEqualTo("Division 5");
+    }
+
+    @Test
+    public void testJsonUnmarshal() throws Exception
+    {
+        final Result result = new Result(ModelLoader.getModel(18), "Division5", "PortsmouthSouthseaB", "OPCSTitchfield");
+        final Writer sw = new StringWriter();
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        mapper.writeValue(sw, result);
+        System.out.println(sw.toString());
     }
 }
