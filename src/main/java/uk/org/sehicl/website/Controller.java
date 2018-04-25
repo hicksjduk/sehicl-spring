@@ -36,12 +36,14 @@ import uk.org.sehicl.website.page.ReconfirmPage;
 import uk.org.sehicl.website.page.RegisterConfPage;
 import uk.org.sehicl.website.page.RegisterPage;
 import uk.org.sehicl.website.page.ResetPage;
+import uk.org.sehicl.website.page.ResultEntryPage;
 import uk.org.sehicl.website.page.SeasonArchiveIndexPage;
 import uk.org.sehicl.website.page.StaticPage;
 import uk.org.sehicl.website.page.TeamAveragesIndexPage;
 import uk.org.sehicl.website.page.TeamAveragesPage;
 import uk.org.sehicl.website.page.TeamFixturesPage;
 import uk.org.sehicl.website.report.LeagueSelector;
+import uk.org.sehicl.website.resultentry.Result.ResultException;
 import uk.org.sehicl.website.template.PageTemplate;
 import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.Login;
@@ -521,4 +523,23 @@ public class Controller
         userManager.sendReconfirmationEmails(reconfirmationPageAddress);
         return "Emails sent";
     }
+    
+    @RequestMapping(path = "/result/{leagueId}/{homeTeamId}/{awayTeamId}")
+    public String resultEntry(HttpServletRequest req, @PathVariable String leagueId,
+            @PathVariable String homeTeamId,
+            @PathVariable String awayTeamId)
+            throws IOException
+    {
+        String uri = getRequestUri(req);
+        try
+        {
+            return new PageTemplate(new ResultEntryPage(uri, leagueId, homeTeamId, awayTeamId))
+                    .process();
+        }
+        catch (ResultException e)
+        {
+            return e.getMessage();
+        }
+    }
+   
 }
