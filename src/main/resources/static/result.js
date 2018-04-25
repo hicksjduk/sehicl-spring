@@ -2,33 +2,70 @@ function batFirstChanged(selection)
 {
 	if (selection == null)
 	{
-		selection = document.getElementById("battingfirst").selectedIndex;
+		selection = battingFirstField().selectedIndex;
 	}
-	var bat1Name = [match.homeTeam, match.awayTeam][selection].name;
-	document.getElementById("bat1TeamName").innerHTML = "Innings of " + bat1Name;
-	var bat2Name = [match.awayTeam, match.homeTeam][selection].name;
-	document.getElementById("bat2TeamName").innerHTML = "Innings of " + bat2Name;
+	setTeamName(1, [match.homeTeam, match.awayTeam][selection].name)
+	setTeamName(2, [match.awayTeam, match.homeTeam][selection].name)
 	for (let inns = 0; inns < 2; inns++)
 	{
 		var batsmen = inns == selection ? 'homeplayers' : 'awayplayers' 
 		var bowlers = inns == selection ? 'awayplayers' : 'homeplayers'
 		for (let p = 1; p <= 6; p++)
 		{
-			document.getElementsByName("batsman" + (inns + 1) + p)[0].setAttribute('list', batsmen)
-			document.getElementsByName("bowlerwicket" + (inns + 1) + p)[0].setAttribute('list', bowlers)
-			document.getElementsByName("bowler" + (inns + 1) + p)[0].setAttribute('list', bowlers)
+			batsmanNameField(inns + 1, p).setAttribute('list', batsmen)
+			bowlerTakingWicketField(inns + 1, p).setAttribute('list', bowlers)
+			bowlerNameField(inns + 1, p).setAttribute('list', bowlers)
 		}
 	}
 }
 
+function battingFirstField()
+{
+	return document.getElementById("battingfirst")
+}
+
+function setTeamName(batSequence, name)
+{
+	document.getElementById("bat" + batSequence + "TeamName").innerHTML = "Innings of " + name;
+}
+
+function batsmanNameField(inns, sequence)
+{
+	return document.getElementsByName("batsman" + inns + sequence)[0]
+}
+
+function bowlerTakingWicketField(inns, sequence)
+{
+	return document.getElementsByName("bowlerwicket" + inns + sequence)[0]
+}
+
+function howOutField(inns, sequence)
+{
+	return document.getElementById("howout" + inns + sequence)
+}
+
+function runsScoredField(inns, sequence)
+{
+	return document.getElementsByName("runsScored" + inns + sequence)[0]
+}
+
+function bowlerNameField(inns, sequence)
+{
+	return document.getElementsByName("bowler" + inns + sequence)[0]
+}
+
+function bowlerWicketsField(inns, sequence)
+{
+	return document.getElementsByName("wickets" + inns + sequence)[0]
+}
 
 function howOutChanged(innings, batsman)
 {
-	var value = document.getElementById("howout" + innings + batsman).value;
+	var value = howOutField(innings, batsman).value;
 	var score = value.indexOf("score") != -1;
-	document.getElementsByName("runsScored" + innings + batsman)[0].disabled = !score;
+	runsScoredField(innings, batsman).disabled = !score;
 	var bowler = value.indexOf("bowler") != -1;
-	document.getElementsByName("bowlerwicket" + innings + batsman)[0].disabled = !bowler;
+	bowlerTakingWicketField(innings, batsman).disabled = !bowler;
 	refreshWicketCount(innings);
 	refreshBowlerWickets(innings);
 }
@@ -38,7 +75,7 @@ function refreshWicketCount(innings)
 	var wickets = 0;
 	for (let bat = 1; bat < 7; bat++)
 	{
-		if (document.getElementById("howout" + innings + bat).value.indexOf(";out") != -1)
+		if (howOutField(innings, bat).value.indexOf(";out") != -1)
 		{
 			wickets++;
 		}
@@ -49,9 +86,9 @@ function refreshWicketCount(innings)
 function refreshTotal(innings)
 {
 	var total = Number(document.getElementsByName("extras" + innings)[0].value) || 0;
-	for (let bat = 1; bat < 7; bat++)
+	for (let bat = 1; bat <= 6; bat++)
 	{
-		total = total + Number(document.getElementsByName("runsScored" + innings + bat)[0].value) || 0;
+		total = total + Number(runsScoredField(innings, bat).value) || 0;
 	}
 	document.getElementById("total" + innings).value = total;
 }
@@ -61,7 +98,7 @@ function refreshOvers(innings)
 	var balls = 0;
 	for (let bowler = 1; bowler < 7; bowler++)
 	{
-		balls += parseInt(document.getElementsByName("overs" + innings + bowler)[0].value);
+		balls += Number(document.getElementsByName("overs" + innings + bowler)[0].value);
 	}
 	document.getElementById("overs" + innings).value = toOvers(balls);
 }
@@ -71,10 +108,10 @@ function refreshBowlerWickets(innings)
 	var wkByBowler = new Object();
 	for (let batsman = 1; batsman <= 6; batsman++)
 	{
-		var howout = document.getElementById("howout" + innings + batsman).value;
+		var howout = howOutField(innings, batsman).value;
 		if (howout.indexOf("bowler") != -1)
 		{
-			var bowler = document.getElementsByName("bowlerwicket" + innings + batsman)[0].value;
+			var bowler = bowlerTakingWicketField(innings, batsman).value;
 			if (bowler != "")
 			{
 				wkByBowler[bowler] = ((bowler in wkByBowler) ? wkByBowler[bowler] : 0) + 1;
@@ -83,13 +120,13 @@ function refreshBowlerWickets(innings)
 	}
 	for (let bowler = 1; bowler <= 6; bowler++)
 	{
-		var name = document.getElementsByName("bowler" + innings + bowler)[0].value;
+		var name = bowlerNameField(innings, bowler).value;
 		var wickets = "";
 		if (name != "")
 		{
 			wickets = (name in wkByBowler) ? wkByBowler[name] : 0;
 		}
-		document.getElementsByName("wickets" + innings + bowler)[0].value = wickets;
+		bowlerWicketsField(innings, bowler).value = wickets;
 	}
 }
 
