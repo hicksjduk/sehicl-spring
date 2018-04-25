@@ -66,6 +66,21 @@ public class Result
                     .map(PlayerData::new)
                     .collect(Collectors.toList());
         }
+
+        public String getName()
+        {
+            return name;
+        }
+
+        public String getId()
+        {
+            return id;
+        }
+
+        public List<PlayerData> getPlayers()
+        {
+            return players;
+        }
     }
 
     public static class PlayerData
@@ -77,6 +92,16 @@ public class Result
         {
             this.id = p.getId();
             this.name = p.getName();
+        }
+
+        public String getId()
+        {
+            return id;
+        }
+
+        public String getName()
+        {
+            return name;
         }
     }
 
@@ -126,5 +151,40 @@ public class Result
         if (t == null)
             throw ResultException.create("Team %s not found in league %s", teamId, leagueId);
         return new TeamData(t);
+    }
+
+    public TeamData getHomeTeam()
+    {
+        return homeTeam;
+    }
+
+    public String getDate()
+    {
+        return date;
+    }
+
+    public String getTime()
+    {
+        return time;
+    }
+
+    public String getCourt()
+    {
+        return court;
+    }
+
+    public String getLeagueId()
+    {
+        return leagueId;
+    }
+
+    public String getLeagueName()
+    {
+        return leagueName;
+    }
+
+    public TeamData getAwayTeam()
+    {
+        return awayTeam;
     }
 }

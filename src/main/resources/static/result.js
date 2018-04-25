@@ -1,262 +1,24 @@
-/**
- * 
- */
-
-Player = function() {}
-
-Player.prototype.setName = function(name) {
-	this.name = name;
-	return this;
-}
-
-Player.prototype.setId = function(id) {
-	this.id = id;
-	return this;
-}
-
-Team = function() {}
-
-Team.prototype.setName = function(name) {
-	this.name = name;
-	return this;
-}
-
-Team.prototype.setId = function(id) {
-	this.id = id;
-	return this;
-}
-
-Team.prototype.addPlayer = function(player) {
-	(this.players = this.players || []).push(player);
-	return this;
-}
-
-Team.prototype.getPlayerByName = function(name)
+function batFirstChanged(selection)
 {
-	var answer;
-	for (let player of this.players)
+	if (selection == null)
 	{
-		if (name == player.name)
-		{
-			answer = player;
-			break;
-		}
+		selection = document.getElementById("battingfirst").selectedIndex;
 	}
-	if (!answer)
-	{
-		answer = new Player().setName(name);
-		this.addPlayer(answer);
-	}
-	return answer;
-}
-
-Match = function() {}
-
-Match.prototype.setDate = function(date) {
-	this.date = date;
-	return this;
-}
-
-Match.prototype.setTime = function(time) {
-	this.time = time;
-	return this;
-}
-
-Match.prototype.setCourt = function(court) {
-	this.court = court;
-	return this;
-}
-
-Match.prototype.setLeague = function(league) {
-	this.league = league;
-	return this;
-}
-
-Match.prototype.setHomeTeam = function(team) {
-	this.homeTeam = team;
-	return this;
-}
-
-Match.prototype.setAwayTeam = function(team) {
-	this.awayTeam = team;
-	return this;
-}
-
-Match.prototype.setFirstInnings = function(innings) {
-	this.firstInnings = innings;
-	return this;
-}
-
-Match.prototype.setSecondInnings = function(innings) {
-	this.secondInnings = innings;
-	return this;
-}
-
-Match.prototype.swapInnings = function() {
-	var inns = this.firstInnings;
-	this.firstInnings = this.secondInnings;
-	this.secondInnings = inns;
-	return this;
-}
-
-Innings = function() {}
-
-Innings.prototype.setBattingTeam = function(team) 
-{
-	this.battingTeam = team;
-	return this;
-}
-
-Innings.prototype.setBowlingTeam = function(team) 
-{
-	this.bowlingTeam = team;
-	return this;
-}
-
-Innings.prototype.setExtras = function(extras) 
-{
-	this.extras = extras;
-	return this;
-}
-
-Innings.prototype.getTotal = function()
-{
-	var answer = this.extras || 0;
-	for (let batsman of (this.batsmen || []))
-	{
-		answer += (batsman.runsScored || 0);
-	}
-	return answer;
-}
-
-Innings.prototype.getWickets = function()
-{
-	var answer = 0;
-	for (let batsman of (this.batsmen || []))
-	{
-		howOut = batsman.howOut || HowOuts.didNotBat;
-		answer += howOut.isOut ? 1 : 0;
-	}
-	return answer;
-}
-
-Innings.prototype.setBattingDetails = function(batsmanName, runsScored, howOut, bowlerName)
-{
-	this.batsmen = this.batsmen || [];
-	var player = this.battingTeam.getPlayerByName(batsmanName);
-	var batsman;
-	for (let bat of this.batsmen)
-	{
-		if (bat.player == player)
-		{
-			batsman = bat;
-			break;
-		}
-	}
-	if (!batsman)
-	{
-		this.batsmen.push(batsman = new Batsman(player));
-	}
-	batsman.setRunsScored(runsScored);
-	var bowler = bowlerName ? this.bowlingTeam.getPlayerByName(bowlerName) : null;
-	batsman.setHowOut(howOut, bowler);
-	return this;
-}
-
-Innings.prototype.setBowlingDetails = function(bowlerName, oversBowled, runsConceded)
-{
-	this.bowlers = this.bowlers || [];
-	var player = this.bowlingTeam.getPlayerByName(bowlerName);
-	var bowler;
-	for (let b of this.bowlers)
-	{
-		if (b.player == player)
-		{
-			bowler = b;
-			break;
-		}
-	}
-	if (!bowler)
-	{
-		this.bowlers.push(bowler = new Bowler(player));
-	}
-	bowler.setOversBowled(oversBowled)
-	bowler.setRunsConceded(runsConceded);
-	return this;
-}
-
-HowOut = function(title, isOut, creditedToBowler)
-{
-	this.title = title;
-	this.isOut = isOut;
-	this.creditedToBowler = creditedToBowler || false;
-}
-
-HowOuts = 
-{
-	"didNotBat": new HowOut("Did not bat", false),
-	"notOut": new HowOut("Not out", false),
-	"retired": new HowOut("Retired", false),
-	"runOut": new HowOut("Run out", true, false),
-	"bowled": new HowOut("Bowled", true, true),
-	"caught": new HowOut("Caught", true, true),
-	"stumped": new HowOut("Stumped", true, true),
-	"lbw": new HowOut("LBW", true, true),
-	"retiredHurt": new HowOut("Retired hurt", false),
-	"hitWicket": new HowOut("Hit wicket", true, true),
-	"handledBall": new HowOut("Handled ball", true, false),
-	"obstructingField": new HowOut("Obstructing the field", true, false),
-	"hitBallTwice": new HowOut("Hit ball twice", true, false),
-	"timedOut": new HowOut("Timed out", true, false)
-};
-
-Batsman = function(player)
-{
-	this.player = player;
-}
-
-Batsman.prototype.setRunsScored = function(runsScored)
-{
-	this.runsScored = runsScored;
-	return this;
-}
-
-Batsman.prototype.setHowOut = function(howOut, bowler)
-{
-	this.howOut = howOut;
-	if (howOut.creditedToBowler)
-	{
-		this.bowler = bowler;
-	}
-}
-
-Bowler = function(player)
-{
-	this.player = player;
-}
-
-Bowler.prototype.setOversBowled = function(oversBowled)
-{
-	this.ballsBowled = Math.floor(oversBowled) * 6 + (oversBowled * 10 % 10);
-	return this;
-}
-
-Bowler.prototype.setRunsConceded = function(runsConceded)
-{
-	this.runsConceded = runsConceded;
-	return this;
-}
-
-if (module) module.exports = [Match, Player, Team, Batsman, Bowler, Innings, HowOut];
-
-
-function batFirstChanged()
-{
-	var selection = document.getElementById("battingfirst").selectedIndex;
 	var bat1Name = [match.homeTeam, match.awayTeam][selection].name;
 	document.getElementById("bat1TeamName").innerHTML = "Innings of " + bat1Name;
 	var bat2Name = [match.awayTeam, match.homeTeam][selection].name;
 	document.getElementById("bat2TeamName").innerHTML = "Innings of " + bat2Name;
+	for (let inns = 0; inns < 2; inns++)
+	{
+		var batsmen = inns == selection ? 'homeplayers' : 'awayplayers' 
+		var bowlers = inns == selection ? 'awayplayers' : 'homeplayers'
+		for (let p = 1; p <= 6; p++)
+		{
+			document.getElementsByName("batsman" + (inns + 1) + p)[0].setAttribute('list', batsmen)
+			document.getElementsByName("bowlerwicket" + (inns + 1) + p)[0].setAttribute('list', bowlers)
+			document.getElementsByName("bowler" + (inns + 1) + p)[0].setAttribute('list', bowlers)
+		}
+	}
 }
 
 
@@ -267,7 +29,8 @@ function howOutChanged(innings, batsman)
 	document.getElementsByName("runsScored" + innings + batsman)[0].disabled = !score;
 	var bowler = value.indexOf("bowler") != -1;
 	document.getElementsByName("bowlerwicket" + innings + batsman)[0].disabled = !bowler;
-	refreshWicketCount(innings); 
+	refreshWicketCount(innings);
+	refreshBowlerWickets(innings);
 }
 
 function refreshWicketCount(innings)
@@ -298,9 +61,36 @@ function refreshOvers(innings)
 	var balls = 0;
 	for (let bowler = 1; bowler < 7; bowler++)
 	{
-		balls += toBalls(document.getElementsByName("overs" + innings + bowler)[0].value);
+		balls += parseInt(document.getElementsByName("overs" + innings + bowler)[0].value);
 	}
 	document.getElementById("overs" + innings).value = toOvers(balls);
+}
+
+function refreshBowlerWickets(innings)
+{
+	var wkByBowler = new Object();
+	for (let batsman = 1; batsman <= 6; batsman++)
+	{
+		var howout = document.getElementById("howout" + innings + batsman).value;
+		if (howout.indexOf("bowler") != -1)
+		{
+			var bowler = document.getElementsByName("bowlerwicket" + innings + batsman)[0].value;
+			if (bowler != "")
+			{
+				wkByBowler[bowler] = ((bowler in wkByBowler) ? wkByBowler[bowler] : 0) + 1;
+			}
+		}
+	}
+	for (let bowler = 1; bowler <= 6; bowler++)
+	{
+		var name = document.getElementsByName("bowler" + innings + bowler)[0].value;
+		var wickets = "";
+		if (name != "")
+		{
+			wickets = (name in wkByBowler) ? wkByBowler[name] : 0;
+		}
+		document.getElementsByName("wickets" + innings + bowler)[0].value = wickets;
+	}
 }
 
 function toBalls(overs)
