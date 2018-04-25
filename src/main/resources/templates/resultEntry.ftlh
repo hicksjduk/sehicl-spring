@@ -17,7 +17,11 @@ var match = ${jsonResult?no_esc};
 		</#list>
 	</datalist>
 	<fieldset style="width: 20%;">
+<<<<<<< HEAD
 		Which team batted first? <select id="battingfirst" name="battingfirst" onchange="batFirstChanged()">
+=======
+		Which team batted first? <select id="battingfirst" onchange="batFirstChanged()">
+>>>>>>> a1081b3e81ed6b249ceb920cc9cf4528a35d89d4
 			<option value="hometeam">${result.homeTeam.name}</option>
 			<option value="awayteam">${result.awayTeam.name}</option>
 		</select>
@@ -40,7 +44,11 @@ var match = ${jsonResult?no_esc};
 				<td><input type="text" 
 						list="${(inns == 1)?then('homeplayers', 'awayplayers')}" 
 						name="batsman${inns}${bat}" ${(bat <= 4)?then('required', '')}></td>
+<<<<<<< HEAD
 				<td><select id="howout${inns}${bat}" name="howout${inns}${bat}" onchange="howOutChanged(${inns}, ${bat})">
+=======
+				<td><select id="howout${inns}${bat}" onchange="howOutChanged(${inns}, ${bat})">
+>>>>>>> a1081b3e81ed6b249ceb920cc9cf4528a35d89d4
 						<option value="dnb" selected>Did not bat</option>
 						<option value="notout;score">Not out</option>
 						<option value="retired;score">Retired</option>
@@ -98,7 +106,11 @@ var match = ${jsonResult?no_esc};
 						onchange="refreshBowlerWickets(${inns})" 
 						list="${(inns == 2)?then('homeplayers', 'awayplayers')}" 
 						name="bowler${inns}${bowl}" ${(bowl <= 4)?then('required', '')}></td>
+<<<<<<< HEAD
 				<td><select name="overs${inns}${bowl}" onchange="refreshOvers(${inns})">
+=======
+				<td><select name="overs${inns}${bowl}"onchange="refreshOvers(${inns})">
+>>>>>>> a1081b3e81ed6b249ceb920cc9cf4528a35d89d4
 					<#list 0..3 as overs>
 						<option value="${overs * 6}">${overs}</option>
 					</#list>
