@@ -533,7 +533,27 @@ public class Controller
         String uri = getRequestUri(req);
         try
         {
-            return new PageTemplate(new ResultEntryPage(uri, leagueId, homeTeamId, awayTeamId))
+            return new PageTemplate(new ResultEntryPage(uri, null, leagueId, homeTeamId, awayTeamId))
+                    .process();
+        }
+        catch (ResultException e)
+        {
+            return e.getMessage();
+        }
+    }
+   
+    @RequestMapping(path = "/result/{season}/{leagueId}/{homeTeamId}/{awayTeamId}")
+    public String resultEntry(HttpServletRequest req,
+            @PathVariable int season,
+            @PathVariable String leagueId,
+            @PathVariable String homeTeamId,
+            @PathVariable String awayTeamId)
+            throws IOException
+    {
+        String uri = getRequestUri(req);
+        try
+        {
+            return new PageTemplate(new ResultEntryPage(uri, season, leagueId, homeTeamId, awayTeamId))
                     .process();
         }
         catch (ResultException e)

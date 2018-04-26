@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.dataload.ModelLoader;
 import uk.org.sehicl.website.resultentry.Result;
 import uk.org.sehicl.website.resultentry.Result.ResultException;
@@ -12,11 +13,12 @@ public class ResultEntryPage extends Page
 {
     private final Result result;
 
-    public ResultEntryPage(String uri, String leagueId, String homeTeamId, String awayTeamId)
-            throws ResultException
+    public ResultEntryPage(String uri, Integer season, String leagueId, String homeTeamId,
+            String awayTeamId) throws ResultException
     {
         super("result", "resultEntry.ftlh", null, uri);
-        this.result = new Result(ModelLoader.getModel(18), leagueId, homeTeamId, awayTeamId);
+        final Model model = season == null ? ModelLoader.getModel() : ModelLoader.getModel(season);
+        this.result = new Result(model, leagueId, homeTeamId, awayTeamId);
     }
 
     @Override
