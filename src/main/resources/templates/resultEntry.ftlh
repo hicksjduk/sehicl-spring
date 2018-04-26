@@ -109,7 +109,8 @@ var match = ${jsonResult?no_esc};
 					</#list>
 				</select></td>
 				<td><input type="number" name="runsConceded${inns}${bowl}" min="0"></td>
-				<td><input type="number" name="wickets${inns}${bowl}" readonly min="0"></td>
+				<td><input type="number" name="wickets${inns}${bowl}" 
+					id="wickets${inns}${bowl}" readonly min="0"></td>
 			</tr>
 			</#list>
 		</table>
