@@ -174,6 +174,7 @@
 	actual fixture. The Sports Hall clock shall be used in respect of
 	timings. In the event of the Sports Hall clock being unavailable, the
 	time piece used shall be at the discretion of the attending umpire. <br>
+	In the event of the court being available earlier than anticipated, the umpires may decide that the match should start up to fifteen minutes before the scheduled start time.
 	If neither team is ready to start at the designated time, for every part 
 	of and up to and including the next six minutes one over shall be deducted 
 	from each innings of the match. If only one team is not ready to start, 
@@ -249,21 +250,17 @@ through their withdrawal.
 </p>
 <a name="sectionL"></a>
 <h2>L. Awards</h2>
-<p>The team with the highest number of points in Division I, II,
-	III, IV and the Colts League on completion of the League programme will
-	be awarded trophies and seven individual medals for members of their
-	respective teams. Clubs shall hold their respective trophies until 1st
-	March of the following year and failure to return them in good order to
-	a nominated Committee member by 1st March will invoke a fine of
-	&pound;20.00. If the trophy is returned damaged or is lost, the club
-	will be liable for the repair or replacement cost of the trophy. Clubs
-	will be responsible for the return of individual trophies won by their
-	team members. In the event of teams having equal number of points and
-	promotion and relegation issues being involved, the higher position
-	shall be attained by the team with the highest number of runs/over
-	throughout the competition. For the purpose of Runs/Over only, any team
-	being dismissed before the end of its scheduled innings, shall be
-	deemed to have received their full entitlement.</p>
+<ol>
+<li>The teams in each division shall be placed according to the following criteria, in the order specified (i.e. for any two teams, the first criterion by which one is placed above the other determines their relative ordering).
+<ol style="list-style-type: lower-alpha">
+<li>Highest average number of points gained, per completed match. For the avoidance of doubt, matches won or lost by default count as completed matches; matches cancelled by the League due to unavoidable cause, and not rescheduled, do not.
+<li>Highest average number of runs per over. For this purpose only, any team which is dismissed before its full entitlement of overs has been bowled shall be regarded as having received the full entitlement.
+</ol> 
+If two or more teams are equal according to the above criteria, they shall share the relevant place in the league table.
+<li>The team placed first in each division on completion of the League programme shall be awarded a trophy and seven individual medals for the members of its team. If two or more teams are placed equal first, the trophy shall not be awarded but each of the tied teams shall receive seven medals.
+<li>Individual awards for batting and bowling, and other team awards, shall be awarded as the Committee shall direct.
+<li>Team and individual trophies shall be held by the winners until 1st March of the following year. Each club is responsible for returning all trophies won by teams and individuals representing that club, in good order and in accordance with the arrangements established by the Committee, by 1st March; failure to do so will incur a fine of £20.00 per trophy. If a trophy is returned dirty or damaged, or is lost, the Committee may direct that the trophy be cleaned, repaired or replaced, and the responsible club shall be liable for the cost of this in addition to the fine.
+</ol>
 <a name="sectionM"></a>
 <h2>M. Promotion and Relegation</h2>
 <p>
@@ -485,27 +482,11 @@ through their withdrawal.
 				height of the batsman standing in his normal stance, irrespective of
 				where the ball had pitched.</li>
 
-			<li><a name="fastfulltoss"></a>
-			Any high full pitched ball (regardless of its pace) which
-				passes or would have passed above waist height of the striker
-				standing in his normal stance shall be called and signalled "No ball""
-				by either umpire. In addition, if the high full pitched ball is
-				fast, it shall be deemed dangerous and unfair and the umpire at the
-				bowler's end, further to the call and signal of No Ball, shall issue
-				a first and Final warning. Should the bowler bowl a further high
-				full pitched delivery, then the captain of the fielding side shall
-				be instructed to suspend the bowler who shall not bowl again in that
-				match. A report shall be issued to the governing body in charge of
-				the league.
-				NOTE: This provision for the bowler to receive only one warning applies
-				only to senior games. In Colts games, two warnings are to be given as
-				laid down in Law 42.7.</li>
-
 			<li>The laws relating to wides shall be strictly interpreted by
-				the Umpires. <br> LAW 25.1 - WIDE BALL - judging a "wide". <br>
+				the Umpires. <br> LAW 22.1 - WIDE BALL - judging a "wide". <br>
 				Umpires are instructed to apply a very strict and consistent
 				interpretation in regard to this law in order to prevent negative
-				bowling wide of the wicket or over the batsmen's head. The following
+				bowling wide of the wicket. The following
 				criterion should be adopted as a guide:- <br> "If a ball passes
 				either side of the wicket sufficiently wide to make it virtually
 				impossible for the striker to play a normal cricket stroke from
@@ -530,6 +511,8 @@ through their withdrawal.
 				or any physical abuse they may abandon the game should they deem it
 				necessary, and will write a full report to the Disciplinary
 				Committee.</li>
+			
+			<li>Law 42 “Players’ Conduct” shall not apply to the League.</li>
 
 		</ol></li>
 
