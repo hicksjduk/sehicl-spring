@@ -175,17 +175,19 @@ public class LeagueTable
 
         public int compareSortFields(TableRow o)
         {
-            int answer = o.getPoints() - getPoints();
+            int answer = rules.isOrderByAveragePoints()
+                    ? compareAscendingNullSortsLast(o.getAveragePoints(), getAveragePoints())
+                    : o.getPoints() - getPoints();
             if (answer == 0)
             {
-                answer = compareRunRates(o.getRunRate(), getRunRate());
+                answer = compareAscendingNullSortsLast(o.getRunRate(), getRunRate());
             }
             return answer;
         }
 
-        private int compareRunRates(Double rr1, Double rr2)
+        private int compareAscendingNullSortsLast(Double d1, Double d2)
         {
-            return rr1 == rr2 ? 0 : rr1 == null ? 1 : rr2 == null ? -1 : rr1.compareTo(rr2);
+            return d1 == d2 ? 0 : d1 == null ? 1 : d2 == null ? -1 : d1.compareTo(d2);
         }
 
         public void add(Match match)
@@ -271,6 +273,12 @@ public class LeagueTable
         public List<Integer> getDeductionKeys()
         {
             return deductionKeys;
+        }
+
+        public Double getAveragePoints()
+        {
+            final int played = getPlayed();
+            return played == 0 ? null : getPoints() * 1.0 / played;
         }
     }
 

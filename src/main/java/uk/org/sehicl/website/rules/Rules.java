@@ -19,6 +19,7 @@ public class Rules
     private final int maxBattingPoints;
     private final int minRunsForBattingHighlight;
     private final int minWicketsForBowlingHighlight;
+    private final boolean orderByAveragePoints;
 
     public Rules(Builder builder)
     {
@@ -39,6 +40,7 @@ public class Rules
         this.maxBattingPoints = builder.maxBattingPoints;
         this.minRunsForBattingHighlight = builder.minRunsForBattingHighlight;
         this.minWicketsForBowlingHighlight = builder.minWicketsForBowlingHighlight;
+        this.orderByAveragePoints = builder.orderByAveragePoints;
     }
 
     public int getPointsPerWin()
@@ -126,6 +128,11 @@ public class Rules
         return minWicketsForBowlingHighlight;
     }
 
+    public boolean isOrderByAveragePoints()
+    {
+        return orderByAveragePoints;
+    }
+
     public int getBattingPoints(int runsScored, Integer wicketsLostifWonBattingSecond)
     {
         int runsPoints = Math.max(0, runsScored - battingPointsThreshold) / battingPointsIncrement;
@@ -182,6 +189,7 @@ public class Rules
         private int maxBattingPoints = 6;
         private int minRunsForBattingHighlight = 20;
         private int minWicketsForBowlingHighlight = 2;
+        private boolean orderByAveragePoints = true;
         
         public Builder()
         {
@@ -195,6 +203,8 @@ public class Rules
                 setBattingPointsForAwardedMatch(3);
                 setBowlingPointsForAwardedMatch(6);
             }
+            if (season != null && season < 19)
+                setOrderByAveragePoints(false);
         }
 
         public Rules build()
@@ -301,6 +311,12 @@ public class Rules
         public Builder setMinWicketsForBowlingHighlight(int minWicketsForBowlingHighlight)
         {
             this.minWicketsForBowlingHighlight = minWicketsForBowlingHighlight;
+            return this;
+        }
+
+        public Builder setOrderByAveragePoints(boolean orderByAveragePoints)
+        {
+            this.orderByAveragePoints = orderByAveragePoints;
             return this;
         }
     }
