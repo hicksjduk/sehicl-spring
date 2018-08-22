@@ -1,7 +1,8 @@
 package uk.org.sehicl.website.navigator;
 
-import java.util.Collections;
 import java.util.stream.IntStream;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import uk.org.sehicl.website.Constants;
 
@@ -51,18 +52,22 @@ public enum NavigatorSection
             new NavigatorItem("Individual Awards", "/records/awards"),
             new NavigatorItem("Sporting and Efficiency", "/records/fairplay")),
     ARCHIVE(Section.ARCHIVE, "Archive", "/archive",
-            IntStream
+            reverse(IntStream
                     .range(4, Constants.CURRENT_SEASON)
-                    .boxed()
-                    .sorted(Collections.reverseOrder())
-                    .map(s -> new NavigatorItem(String.format("%d-%02d", s + 1999, s),
+                    .mapToObj(s -> new NavigatorItem(String.format("%d-%02d", s + 1999, s),
                             String.format("/archive/season/%d", s)))
-                    .toArray(NavigatorItem[]::new)),
+                    .toArray(NavigatorItem[]::new))),
     DP(Section.DP, "Data Protection", "/dp")
     ;
     
+    private static <T> T[] reverse(T[] array)
+    {
+        ArrayUtils.reverse(array);
+        return array;
+    }
+    
     private final Section section;
-    private final NavigatorItem item;
+    private final NavigatorItem item; 
 
     private NavigatorSection(Section section, String title)
     {
