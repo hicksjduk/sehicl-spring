@@ -534,6 +534,21 @@
 	</person>
 
 	<person>
+		<name>Dave Knight</name>
+		<address>39 Huntingdon Gardens, Horton Heath SO50 7FH</address>
+		<phone>07950 097760</phone>
+		<role name="Secretary" club="Swanmore">
+			<email id="swanmore.secretary" />
+		</role>
+	</person>
+
+	<person>
+		<name>Alex Ball</name>
+		<phone>07867 122816</phone>
+		<role name="Captain" club="Swanmore"/>
+	</person>
+
+	<person>
 		<name>Alan Atkinson</name>
 		<address>31 Harbour Tower, Trinity Green, Gosport PO12 1HD</address>
 		<phone>02392 529660</phone>
