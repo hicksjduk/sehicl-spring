@@ -34,6 +34,11 @@
 		<role name="Secretary" club="Afghan Society Portsmouth">
 			<email id="afghan.secretary" />
 		</role>
+	</person>
+
+	<person>
+		<name>Sameen Mahboob</name>
+		<phone>07428 784754</phone>
 		<role name="Captain" club="Afghan Society Portsmouth" />
 	</person>
 
