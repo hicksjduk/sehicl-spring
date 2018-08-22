@@ -1,5 +1,10 @@
 package uk.org.sehicl.website.navigator;
 
+import java.util.Collections;
+import java.util.stream.IntStream;
+
+import uk.org.sehicl.website.Constants;
+
 public enum NavigatorSection
 {
     HOME(Section.HOME, "Home", "/"),
@@ -46,21 +51,13 @@ public enum NavigatorSection
             new NavigatorItem("Individual Awards", "/records/awards"),
             new NavigatorItem("Sporting and Efficiency", "/records/fairplay")),
     ARCHIVE(Section.ARCHIVE, "Archive", "/archive",
-            new NavigatorItem("2017-18", "/archive/season/18"),
-            new NavigatorItem("2016-17", "/archive/season/17"),
-            new NavigatorItem("2015-16", "/archive/season/16"),
-            new NavigatorItem("2014-15", "/archive/season/15"),
-            new NavigatorItem("2013-14", "/archive/season/14"),
-            new NavigatorItem("2012-13", "/archive/season/13"),
-            new NavigatorItem("2011-12", "/archive/season/12"),
-            new NavigatorItem("2010-11", "/archive/season/11"),
-            new NavigatorItem("2009-10", "/archive/season/10"),
-            new NavigatorItem("2008-09", "/archive/season/9"),
-            new NavigatorItem("2007-08", "/archive/season/8"),
-            new NavigatorItem("2006-07", "/archive/season/7"),
-            new NavigatorItem("2005-06", "/archive/season/6"),
-            new NavigatorItem("2004-05", "/archive/season/5"),
-            new NavigatorItem("2003-04", "/archive/season/4")),
+            IntStream
+                    .range(4, Constants.CURRENT_SEASON)
+                    .boxed()
+                    .sorted(Collections.reverseOrder())
+                    .map(s -> new NavigatorItem(String.format("%d-%02d", s + 1999, s),
+                            String.format("/archive/season/%d", s)))
+                    .toArray(NavigatorItem[]::new)),
     DP(Section.DP, "Data Protection", "/dp")
     ;
     
