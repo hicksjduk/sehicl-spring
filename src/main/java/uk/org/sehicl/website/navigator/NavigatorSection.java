@@ -1,5 +1,6 @@
 package uk.org.sehicl.website.navigator;
 
+import java.util.function.BiFunction;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -18,10 +19,10 @@ public enum NavigatorSection
     AVERAGES(Section.AVERAGES, "Averages", "/averages", averagesSubItems()),
     RESOURCES(Section.RESOURCES, "Resources", "/resources"),
     RULES(Section.RULES, "Rules", "/rules"),
-    RECORDS(Section.RECORDS, "Records", "/records", recordsSubItems()), 
+    RECORDS(Section.RECORDS, "Records", "/records", recordsSubItems()),
     ARCHIVE(Section.ARCHIVE, "Archive", "/archive", archiveSubItems()),
     DP(Section.DP, "Data Protection", "/dp");
-    
+
     private static NavigatorItem[] fixturesSubItems()
     {
         Stream.Builder<NavigatorItem> builder = Stream.builder();
@@ -29,17 +30,17 @@ public enum NavigatorSection
         builder.accept(new NavigatorItem("Duty team rota", "/dutyRota"));
         return builder.build().toArray(NavigatorItem[]::new);
     }
-    
+
     private static NavigatorItem[] resultsSubItems()
     {
         return divisionSubItems("/results/league/%s").toArray(NavigatorItem[]::new);
     }
-    
+
     private static NavigatorItem[] tablesSubItems()
     {
         return divisionSubItems("/tables/league/%s").toArray(NavigatorItem[]::new);
     }
-    
+
     private static Stream<NavigatorItem> divisionSubItems(String uriTemplate)
     {
         return IntStream
@@ -48,20 +49,26 @@ public enum NavigatorSection
                 .map(divName -> new NavigatorItem(divName,
                         String.format(uriTemplate, divName.replaceAll("\\W+", ""))));
     }
-    
+
     private static NavigatorItem[] averagesSubItems()
     {
         Stream.Builder<NavigatorItem> builder = Stream.builder();
-        Stream.of("Senior", "Colts Under-16", "Colts Under-13").forEach(section -> Stream
-                .of("Batting", "Bowling")
-                .forEach(discipline -> builder
-                        .accept(new NavigatorItem(String.format("%s %s", section, discipline),
-                                String.format("/averages/%s/%s", discipline.toLowerCase(),
-                                        section.replaceAll("\\W+", ""))))));
+        BiFunction<String, String, NavigatorItem> itemMaker = (section, discipline) ->
+        {
+            final String title = String.format("%s %s", section, discipline);
+            final String url = String.format("/averages/%s/%s", discipline.toLowerCase(),
+                    section.replaceAll("\\W+", ""));
+            return new NavigatorItem(title, url);
+        };
+        Stream
+                .of("Senior", "Colts Under-16", "Colts Under-13")
+                .flatMap(section -> Stream.of("Batting", "Bowling").map(
+                        discipline -> itemMaker.apply(section, discipline)))
+                .forEach(builder);
         builder.accept(new NavigatorItem("By team", "/averages/byTeam"));
         return builder.build().toArray(NavigatorItem[]::new);
     }
-    
+
     private static NavigatorItem[] recordsSubItems()
     {
         return Stream
