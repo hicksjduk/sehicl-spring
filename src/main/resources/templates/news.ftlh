@@ -13,8 +13,14 @@
 </#macro>
 
 <@news>
-<b>The 2018-19 season</b> will commence on Sunday 30th September. The fixtures will be
-published on or before the first weekend in September.
+<b><a href="/fixtures">The fixtures are now available</a> for the 2018-19 season</b> which will commence on Sunday 30th September.
+All clubs are asked to review their fixtures carefully, and communicate any concerns as soon as possible
+to <@mailto "fixturesec">the Fixture Secretary</@mailto>. In accordance with <a href="/rules#sectionJ">the rules</a>, 
+requests for changes
+of court (so that players and/or scorers are not involved in consecutive matches on different courts) must be
+received by the Fixture Secretary not later than two weeks after publication - that is, by <u>Tuesday 11th September</u>.
+After that date, changes will be made only in exceptional circumstances.
+<br>The duty rota will be published as soon as possible.
 </@news>
 
 <@news end="2018-10-01">
