@@ -34,6 +34,11 @@
 		<role name="Secretary" club="Afghan Society Portsmouth">
 			<email id="afghan.secretary" />
 		</role>
+	</person>
+
+	<person>
+		<name>Sameen Mahboob</name>
+		<phone>07428 784754</phone>
 		<role name="Captain" club="Afghan Society Portsmouth" />
 	</person>
 
@@ -526,6 +531,21 @@
 		<name>James Hawley</name>
 		<phone>07891 624314</phone>
 		<role name="Captain" club="St James Casuals"/>
+	</person>
+
+	<person>
+		<name>Dave Knight</name>
+		<address>39 Huntingdon Gardens, Horton Heath SO50 7FH</address>
+		<phone>07950 097760</phone>
+		<role name="Secretary" club="Swanmore">
+			<email id="swanmore.secretary" />
+		</role>
+	</person>
+
+	<person>
+		<name>Alex Ball</name>
+		<phone>07867 122816</phone>
+		<role name="Captain" club="Swanmore"/>
 	</person>
 
 	<person>
