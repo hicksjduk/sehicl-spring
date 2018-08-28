@@ -45,6 +45,11 @@ public class League implements Comparable<League>
     {
         this.name = name;
     }
+    
+    private boolean isSenior()
+    {
+        return !name.startsWith("Colts");
+    }
 
     @JacksonXmlProperty(isAttribute = true)
     public String getId()
@@ -104,7 +109,8 @@ public class League implements Comparable<League>
     public int compareTo(League o)
     {
         return Comparator
-                .comparing(League::getName, name.startsWith("D") ? Comparator.naturalOrder()
+                .comparing(League::isSenior, Comparator.reverseOrder())
+                .thenComparing(League::getName, isSenior() ? Comparator.naturalOrder()
                         : Comparator.reverseOrder())
                 .compare(this, o);
     }
