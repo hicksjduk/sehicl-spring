@@ -1,9 +1,12 @@
 package uk.org.sehicl.website.data;
 
+import java.util.Comparator;
+
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@JsonPropertyOrder(value={"runs", "out", "notes"})
+@JsonPropertyOrder(value =
+{ "runs", "out", "notes" })
 public class Batsman extends Performance implements Comparable<Batsman>
 {
     private int runsScored;
@@ -34,11 +37,10 @@ public class Batsman extends Performance implements Comparable<Batsman>
     @Override
     public int compareTo(Batsman o)
     {
-        int answer = o.runsScored - runsScored;
-        if (answer == 0)
-        {
-            answer = (out ? 1 : 0) - (o.out ? 1 : 0);
-        }
-        return answer;
+        return Comparator
+                .comparingInt(Batsman::getRunsScored)
+                .reversed()
+                .thenComparing(Batsman::isOut)
+                .compare(this, o);
     }
 }

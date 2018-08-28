@@ -2,6 +2,7 @@ package uk.org.sehicl.website.report;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -84,6 +85,19 @@ public class LeagueTable
 
     public static class TableRow implements Comparable<TableRow>
     {
+        public static Comparator<TableRow> sortFieldComparator(Rules rules)
+        {
+            final Comparator<TableRow> averagePointsComparator = Comparator.comparing(
+                    TableRow::getAveragePoints, Comparator.nullsLast(Comparator.reverseOrder()));
+            final Comparator<TableRow> pointsComparator = Comparator
+                    .comparingInt(TableRow::getPoints)
+                    .reversed();
+            final Comparator<TableRow> runRateComparator = Comparator.comparing(TableRow::getRunRate,
+                    Comparator.nullsLast(Comparator.reverseOrder()));
+            return (rules.isOrderByAveragePoints() ? averagePointsComparator : pointsComparator)
+                    .thenComparing(runRateComparator);
+        }
+
         private final Team team;
         private final Rules rules;
         private int won = 0;
@@ -94,11 +108,13 @@ public class LeagueTable
         private int runsScored = 0;
         private int runRateBalls = 0;
         private final List<Integer> deductionKeys = new ArrayList<>();
+        private final Comparator<TableRow> fieldComparator;
 
         public TableRow(Team team, Rules rules)
         {
             this.team = team;
             this.rules = rules;
+            this.fieldComparator = sortFieldComparator(rules);
         }
 
         public int getPlayed()
@@ -169,25 +185,12 @@ public class LeagueTable
         @Override
         public int compareTo(TableRow o)
         {
-            int answer = compareSortFields(o);
-            return answer == 0 ? team.getName().compareTo(o.team.getName()) : answer;
+            return fieldComparator.thenComparing(r -> r.team.getName()).compare(this, o);
         }
 
         public int compareSortFields(TableRow o)
         {
-            int answer = rules.isOrderByAveragePoints()
-                    ? compareAscendingNullSortsLast(o.getAveragePoints(), getAveragePoints())
-                    : o.getPoints() - getPoints();
-            if (answer == 0)
-            {
-                answer = compareAscendingNullSortsLast(o.getRunRate(), getRunRate());
-            }
-            return answer;
-        }
-
-        private int compareAscendingNullSortsLast(Double d1, Double d2)
-        {
-            return d1 == d2 ? 0 : d1 == null ? 1 : d2 == null ? -1 : d1.compareTo(d2);
+            return fieldComparator.compare(this, o);
         }
 
         public void add(Match match)

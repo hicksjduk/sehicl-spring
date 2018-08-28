@@ -3,6 +3,7 @@ package uk.org.sehicl.website.data;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -102,14 +103,12 @@ public class League implements Comparable<League>
     @Override
     public int compareTo(League o)
     {
-        int answer = o.name.charAt(0) - name.charAt(0);
-        if (answer == 0)
-        {
-            answer = name.startsWith("C") ? o.name.compareTo(name) : name.compareTo(o.name);
-        }
-        return answer;
+        return Comparator
+                .comparing(League::getName, name.startsWith("D") ? Comparator.naturalOrder()
+                        : Comparator.reverseOrder())
+                .compare(this, o);
     }
-    
+
     public Team getTeam(String teamId)
     {
         Team answer = null;
@@ -123,7 +122,7 @@ public class League implements Comparable<League>
         }
         return answer;
     }
-    
+
     public Match getMatch(String teamId1, String teamId2)
     {
         Match answer = null;
@@ -132,7 +131,8 @@ public class League implements Comparable<League>
             final Collection<String> teamIds = new TreeSet<>(Arrays.asList(teamId1, teamId2));
             for (Match match : matches)
             {
-                if (teamIds.equals(new TreeSet<>(Arrays.asList(match.getHomeTeamId(), match.getAwayTeamId()))))
+                if (teamIds.equals(
+                        new TreeSet<>(Arrays.asList(match.getHomeTeamId(), match.getAwayTeamId()))))
                 {
                     answer = match;
                     break;

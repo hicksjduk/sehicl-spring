@@ -6,9 +6,9 @@ import java.util.TreeSet;
 public class ContactsReport
 {
     private final Collection<ContactDetails> committeeContacts = new TreeSet<>(
-            new CommitteeContactComparator());
+            CommitteeContacts.COMPARATOR);
     private final Collection<ContactDetails> clubContacts = new TreeSet<>(
-            new ClubContactComparator());
+            ClubContacts.COMPARATOR);
     private final boolean restricted;
 
     public ContactsReport(Contacts contacts, boolean restricted)
@@ -20,14 +20,14 @@ public class ContactsReport
             {
                 if (role.getClub() == null)
                 {
-                    if (CommitteeContactComparator.ROLES.contains(role.getName()))
+                    if (CommitteeContacts.ROLES.contains(role.getName()))
                     {
                         committeeContacts.add(new ContactDetails(person, role));
                     }
                 }
                 else
                 {
-                    int roleIndex = ClubContactComparator.ROLES.indexOf(role.getName());
+                    int roleIndex = ClubContacts.ROLES.indexOf(role.getName());
                     if (roleIndex == 0 || (!restricted && roleIndex > 0))
                     {
                         clubContacts.add(new ContactDetails(person, role));
