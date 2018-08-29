@@ -1,6 +1,7 @@
 package uk.org.sehicl.website.report;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -57,6 +58,12 @@ public class BattingAverages implements Averages<BattingRow>
 
     public static class BattingRow implements Comparable<BattingRow>
     {
+        private static final Comparator<BattingRow> SK_COMPARATOR = Comparator
+                .comparingInt(BattingRow::getRuns)
+                .reversed();
+        private static final Comparator<BattingRow> COMPARATOR = SK_COMPARATOR
+                .thenComparing(BattingRow::getPlayer);
+
         private final Player player;
         private final Team team;
         private int innings;
@@ -109,18 +116,12 @@ public class BattingAverages implements Averages<BattingRow>
         @Override
         public int compareTo(BattingRow o)
         {
-            int answer = compareSortKeys(o);
-            if (answer == 0)
-            {
-                answer = player.compareTo(o.player);
-            }
-            return answer;
+            return COMPARATOR.compare(this, o);
         }
 
         public int compareSortKeys(BattingRow o)
         {
-            int answer = Integer.compare(o.runs, runs);
-            return answer;
+            return SK_COMPARATOR.compare(this, o);
         }
 
         public void add(Batsman batsman)
@@ -163,11 +164,8 @@ public class BattingAverages implements Averages<BattingRow>
 
         private void add(League league)
         {
-            league
-                    .getMatches()
-                    .stream()
-                    .filter(m -> selector.isSelected(m))
-                    .forEach(m -> this.add(league, m));
+            league.getMatches().stream().filter(m -> selector.isSelected(m)).forEach(
+                    m -> this.add(league, m));
         }
 
         private void add(League league, Match match)

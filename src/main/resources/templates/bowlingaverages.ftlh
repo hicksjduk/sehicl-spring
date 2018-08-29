@@ -19,11 +19,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<#local lastRow="">
 				<#list averages.rows as row>
 					<tr>
 						<td class="position number">
-							<#if (lastRow == "") || (row.compareSortKeys(lastRow) != 0)>${row?counter}</#if>
+							<#if (row?counter == 1) || (row.compareSortKeys(lastRow) != 0)>${row?counter}</#if>
 						</td>
 						<td class="name">${row.player.name}</td>
 						<#if showTeam>

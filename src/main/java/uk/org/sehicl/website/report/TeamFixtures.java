@@ -3,6 +3,7 @@ package uk.org.sehicl.website.report;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -45,6 +46,10 @@ public class TeamFixtures
 
     public static class Fixture implements Comparable<Fixture>
     {
+        private static final Comparator<Fixture> COMPARATOR = Comparator
+                .comparing(Fixture::getDateTime, Comparator.nullsLast(Comparator.naturalOrder()))
+                .thenComparing(Fixture::getOpponent);
+
         private final Team opponent;
         private final Date dateTime;
         private final String court;
@@ -91,17 +96,7 @@ public class TeamFixtures
         @Override
         public int compareTo(Fixture o)
         {
-            int answer = 0;
-            if (dateTime != o.dateTime)
-            {
-                answer = dateTime == null ? 1
-                        : o.dateTime == null ? -1 : dateTime.compareTo(o.dateTime);
-            }
-            if (answer == 0)
-            {
-                answer = opponent.compareTo(o.opponent);
-            }
-            return answer;
+            return COMPARATOR.compare(this, o);
         }
     }
 

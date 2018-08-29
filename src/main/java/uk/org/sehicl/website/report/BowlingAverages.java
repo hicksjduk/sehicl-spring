@@ -1,6 +1,7 @@
 package uk.org.sehicl.website.report;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -58,6 +59,14 @@ public class BowlingAverages implements Averages<BowlingRow>
 
     public static class BowlingRow implements Comparable<BowlingRow>
     {
+        private final static Comparator<BowlingRow> SK_COMPARATOR = Comparator
+                .comparingInt(BowlingRow::getWickets)
+                .reversed()
+                .thenComparing(BowlingRow::getEconomyRate,
+                        Comparator.nullsLast(Comparator.naturalOrder()));
+        private final static Comparator<BowlingRow> COMPARATOR = SK_COMPARATOR
+                .thenComparing(BowlingRow::getPlayer);
+
         private final Player player;
         private final Team team;
         private final Rules rules;
@@ -116,28 +125,12 @@ public class BowlingAverages implements Averages<BowlingRow>
         @Override
         public int compareTo(BowlingRow o)
         {
-            int answer = compareSortKeys(o);
-            if (answer == 0)
-            {
-                answer = player.compareTo(o.player);
-            }
-            return answer;
+            return COMPARATOR.compare(this, o);
         }
 
         public int compareSortKeys(BowlingRow o)
         {
-            int answer = Integer.compare(o.wickets, wickets);
-            if (answer == 0)
-            {
-                answer = compareEconomyRates(getEconomyRate(), o.getEconomyRate());
-            }
-            return answer;
-        }
-
-        private int compareEconomyRates(Double a, Double b)
-        {
-            return Double.compare(a == null ? Double.MAX_VALUE : a,
-                    b == null ? Double.MAX_VALUE : b);
+            return SK_COMPARATOR.compare(this, o);
         }
 
         public void add(Bowler bowler)

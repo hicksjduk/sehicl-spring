@@ -15,6 +15,15 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 { "name", "teamsPromoted", "teamsRelegated", "team", "match", "tableNotes" })
 public class League implements Comparable<League>
 {
+    private static Comparator<League> comparator(String name)
+    {
+        boolean senior = name.charAt(0) != 'C';
+        return Comparator.comparing(League::getName,
+                Comparator.comparingInt((String n) -> n.charAt(0)).reversed().thenComparing(
+                        (String n) -> n.charAt(n.length() - 1), senior ? Comparator.naturalOrder()
+                                : Comparator.reverseOrder()));
+    }
+
     private String id;
     private String name;
     private final List<Team> teams = new ArrayList<>();
@@ -22,6 +31,7 @@ public class League implements Comparable<League>
     private int teamsRelegated;
     private final List<Match> matches = new ArrayList<>();
     private String tableNotes;
+    private Comparator<League> comparator;
 
     @JacksonXmlProperty(localName = "team")
     @JacksonXmlElementWrapper(useWrapping = false)
@@ -44,11 +54,7 @@ public class League implements Comparable<League>
     public void setName(String name)
     {
         this.name = name;
-    }
-    
-    private boolean isSenior()
-    {
-        return !name.startsWith("Colts");
+        this.comparator = comparator(name);
     }
 
     @JacksonXmlProperty(isAttribute = true)
@@ -108,11 +114,7 @@ public class League implements Comparable<League>
     @Override
     public int compareTo(League o)
     {
-        return Comparator
-                .comparing(League::isSenior, Comparator.reverseOrder())
-                .thenComparing(League::getName, isSenior() ? Comparator.naturalOrder()
-                        : Comparator.reverseOrder())
-                .compare(this, o);
+        return comparator.compare(this, o);
     }
 
     public Team getTeam(String teamId)

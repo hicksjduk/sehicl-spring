@@ -1,15 +1,13 @@
 package uk.org.sehicl.website.report;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 import uk.org.sehicl.website.data.AwardedMatch;
 import uk.org.sehicl.website.data.Batsman;
@@ -17,7 +15,6 @@ import uk.org.sehicl.website.data.Bowler;
 import uk.org.sehicl.website.data.Innings;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
-import uk.org.sehicl.website.data.Performance;
 import uk.org.sehicl.website.data.PlayedMatch;
 import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.data.TeamInMatch;
@@ -39,6 +36,11 @@ public abstract class Results
 
     public static abstract class ResultDetails implements Comparable<ResultDetails>
     {
+        private static final Comparator<ResultDetails> COMPARATOR = Comparator
+                .comparing(ResultDetails::getLeague)
+                .thenComparing(ResultDetails::getMatch,
+                        Comparator.comparing(Match::getDateTime).thenComparing(Match::getCourt));
+
         private final League league;
         private final Match match;
 
@@ -51,26 +53,7 @@ public abstract class Results
         @Override
         public int compareTo(ResultDetails o)
         {
-            int answer = league.compareTo(o.league);
-            if (answer == 0)
-            {
-                answer = compareDates(match.getDateTime(), o.match.getDateTime());
-                if (answer == 0)
-                {
-                    answer = match.getCourt().compareTo(o.match.getCourt());
-                }
-            }
-            return answer;
-        }
-
-        private int compareDates(Date d1, Date d2)
-        {
-            int answer = DateUtils.truncatedCompareTo(d2, d1, Calendar.DATE);
-            if (answer == 0)
-            {
-                answer = d1.compareTo(d2);
-            }
-            return answer;
+            return COMPARATOR.compare(this, o);
         }
 
         public League getLeague()
@@ -141,6 +124,18 @@ public abstract class Results
         private final Rules rules;
         private final Integer overLimit;
 
+        private static Comparator<Batsman> battingComparator(Team battingTeam)
+        {
+            return Comparator.comparing((Batsman b) -> b).thenComparing(
+                    b -> battingTeam.getPlayer(b.getPlayerId()));
+        }
+
+        private static Comparator<Bowler> bowlingComparator(Team bowlingTeam)
+        {
+            return Comparator.comparing((Bowler b) -> b).thenComparing(
+                    b -> bowlingTeam.getPlayer(b.getPlayerId()));
+        }
+
         public InningsDetails(boolean first, Innings innings, Team battingTeam, Team bowlingTeam,
                 Rules rules, PlayedMatch playedMatch)
         {
@@ -184,14 +179,14 @@ public abstract class Results
                     .getBatsmen()
                     .stream()
                     .filter(b -> b.getRunsScored() >= rules.getMinRunsForBattingHighlight())
-                    .sorted((a, b) -> compare(a, b, battingTeam))
+                    .sorted(battingComparator(battingTeam))
                     .map(this::format)
                     .forEach(answer::add);
             innings
                     .getBowlers()
                     .stream()
                     .filter(b -> b.getWicketsTaken() >= rules.getMinWicketsForBowlingHighlight())
-                    .sorted((a, b) -> compare(a, b, bowlingTeam))
+                    .sorted(bowlingComparator(bowlingTeam))
                     .map(this::format)
                     .forEach(answer::add);
             return answer;
@@ -224,16 +219,6 @@ public abstract class Results
         public int compareTo(InningsDetails o)
         {
             return Boolean.compare(o.first, first);
-        }
-
-        private <T extends Performance & Comparable<T>> int compare(T a, T b, Team t)
-        {
-            int answer = a.compareTo(b);
-            if (answer == 0)
-            {
-                answer = t.getPlayer(a.getPlayerId()).compareTo(t.getPlayer(b.getPlayerId()));
-            }
-            return answer;
         }
     }
 

@@ -10,6 +10,11 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 { "ballsBowled", "runs", "wickets", "notes" })
 public class Bowler extends Performance implements Comparable<Bowler>
 {
+    private static final Comparator<Bowler> COMPARATOR = Comparator
+            .comparing(Bowler::getWicketsTaken)
+            .reversed()
+            .thenComparingDouble(Bowler::getEconomyRate);
+    
     private int ballsBowled;
     private int runsConceded;
     private int wicketsTaken;
@@ -62,10 +67,6 @@ public class Bowler extends Performance implements Comparable<Bowler>
     @Override
     public int compareTo(Bowler o)
     {
-        return Comparator
-                .comparing(Bowler::getWicketsTaken)
-                .reversed()
-                .thenComparingDouble(Bowler::getEconomyRate)
-                .compare(this, o);
+        return COMPARATOR.compare(this, o);
     }
 }

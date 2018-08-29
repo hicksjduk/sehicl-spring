@@ -9,6 +9,11 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 { "runs", "out", "notes" })
 public class Batsman extends Performance implements Comparable<Batsman>
 {
+    private static final Comparator<Batsman> COMPARATOR = Comparator
+            .comparingInt(Batsman::getRunsScored)
+            .reversed()
+            .thenComparing(Batsman::isOut);
+
     private int runsScored;
     private boolean out;
 
@@ -37,10 +42,6 @@ public class Batsman extends Performance implements Comparable<Batsman>
     @Override
     public int compareTo(Batsman o)
     {
-        return Comparator
-                .comparingInt(Batsman::getRunsScored)
-                .reversed()
-                .thenComparing(Batsman::isOut)
-                .compare(this, o);
+        return COMPARATOR.compare(this, o);
     }
 }

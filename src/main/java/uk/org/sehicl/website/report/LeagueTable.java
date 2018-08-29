@@ -85,15 +85,15 @@ public class LeagueTable
 
     public static class TableRow implements Comparable<TableRow>
     {
-        public static Comparator<TableRow> sortFieldComparator(Rules rules)
+        public static Comparator<TableRow> sortKeyComparator(Rules rules)
         {
             final Comparator<TableRow> averagePointsComparator = Comparator.comparing(
                     TableRow::getAveragePoints, Comparator.nullsLast(Comparator.reverseOrder()));
             final Comparator<TableRow> pointsComparator = Comparator
                     .comparingInt(TableRow::getPoints)
                     .reversed();
-            final Comparator<TableRow> runRateComparator = Comparator.comparing(TableRow::getRunRate,
-                    Comparator.nullsLast(Comparator.reverseOrder()));
+            final Comparator<TableRow> runRateComparator = Comparator.comparing(
+                    TableRow::getRunRate, Comparator.nullsLast(Comparator.reverseOrder()));
             return (rules.isOrderByAveragePoints() ? averagePointsComparator : pointsComparator)
                     .thenComparing(runRateComparator);
         }
@@ -108,13 +108,15 @@ public class LeagueTable
         private int runsScored = 0;
         private int runRateBalls = 0;
         private final List<Integer> deductionKeys = new ArrayList<>();
-        private final Comparator<TableRow> fieldComparator;
+        private final Comparator<TableRow> skComparator;
+        private final Comparator<TableRow> comparator;
 
         public TableRow(Team team, Rules rules)
         {
             this.team = team;
             this.rules = rules;
-            this.fieldComparator = sortFieldComparator(rules);
+            this.skComparator = sortKeyComparator(rules);
+            this.comparator = skComparator.thenComparing(TableRow::getTeam);
         }
 
         public int getPlayed()
@@ -185,12 +187,12 @@ public class LeagueTable
         @Override
         public int compareTo(TableRow o)
         {
-            return fieldComparator.thenComparing(r -> r.team.getName()).compare(this, o);
+            return comparator.compare(this, o);
         }
 
         public int compareSortFields(TableRow o)
         {
-            return fieldComparator.compare(this, o);
+            return skComparator.compare(this, o);
         }
 
         public void add(Match match)
