@@ -31,13 +31,21 @@ public class DateResultsPage extends Page
     public DateResultsPage(Date date, String uri)
     {
         super("results", "results.ftlh", Section.RESULTS, uri);
-        final int season = getSeason(date);
-        results = new DateResults.Builder(ModelLoader.getModel(season), date,
-                Completeness.CONSISTENT, new Rules.Builder(season).build()).build();
-        title = results.getDate() == null ? "Results"
-                : String.format("Results: %s",
-                        new OrdinalDateFormatter(new SimpleDateFormat("d MMMM yyyy"))
-                                .format(results.getDate()));
+        if (date == null)
+        {
+            results = new DateResults.Builder(ModelLoader.getModel(), date, Completeness.CONSISTENT,
+                    new Rules.Builder().build()).build();
+            title = "Results";
+        }
+        else
+        {
+            final int season = getSeason(date);
+            results = new DateResults.Builder(ModelLoader.getModel(season), date,
+                    Completeness.CONSISTENT, new Rules.Builder(season).build()).build();
+            title = String.format("Results: %s",
+                    new OrdinalDateFormatter(new SimpleDateFormat("d MMMM yyyy"))
+                            .format(results.getDate()));
+        }
     }
 
     @Override
