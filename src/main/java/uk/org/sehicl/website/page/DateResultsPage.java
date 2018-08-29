@@ -1,6 +1,7 @@
 package uk.org.sehicl.website.page;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import uk.org.sehicl.website.OrdinalDateFormatter;
@@ -12,6 +13,13 @@ import uk.org.sehicl.website.rules.Rules;
 
 public class DateResultsPage extends Page
 {
+    private int getSeason(Date date)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal.get(Calendar.YEAR) % 100 + (cal.get(Calendar.MONTH) > Calendar.JUNE ? 1 : 0);
+    }
+
     private final DateResults results;
     private final String title;
 
@@ -23,8 +31,9 @@ public class DateResultsPage extends Page
     public DateResultsPage(Date date, String uri)
     {
         super("results", "results.ftlh", Section.RESULTS, uri);
-        results = new DateResults.Builder(ModelLoader.getModel(), date, Completeness.CONSISTENT,
-                new Rules.Builder().build()).build();
+        final int season = getSeason(date);
+        results = new DateResults.Builder(ModelLoader.getModel(season), date,
+                Completeness.CONSISTENT, new Rules.Builder(season).build()).build();
         title = results.getDate() == null ? "Results"
                 : String.format("Results: %s",
                         new OrdinalDateFormatter(new SimpleDateFormat("d MMMM yyyy"))
