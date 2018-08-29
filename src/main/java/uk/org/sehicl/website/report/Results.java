@@ -126,13 +126,13 @@ public abstract class Results
 
         private static Comparator<Batsman> battingComparator(Team battingTeam)
         {
-            return Comparator.comparing((Batsman b) -> b).thenComparing(
+            return Comparator.<Batsman>naturalOrder().thenComparing(
                     b -> battingTeam.getPlayer(b.getPlayerId()));
         }
 
         private static Comparator<Bowler> bowlingComparator(Team bowlingTeam)
         {
-            return Comparator.comparing((Bowler b) -> b).thenComparing(
+            return Comparator.<Bowler>naturalOrder().thenComparing(
                     b -> bowlingTeam.getPlayer(b.getPlayerId()));
         }
 
