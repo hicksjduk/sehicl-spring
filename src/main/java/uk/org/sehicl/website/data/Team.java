@@ -15,6 +15,7 @@ public class Team implements Comparable<Team>
 {
     private String id;
     private String name;
+    private String sortKey;
     private final List<Player> players = new ArrayList<>();
     private Integer fixturePos;
     private final List<PointsDeduction> pointsDeductions = new ArrayList<>();
@@ -28,6 +29,7 @@ public class Team implements Comparable<Team>
     public void setName(String name)
     {
         this.name = name;
+        this.sortKey = name.replaceAll("\\W+", "");
     }
 
     @JacksonXmlProperty(isAttribute = true)
@@ -112,6 +114,6 @@ public class Team implements Comparable<Team>
     @Override
     public int compareTo(Team o)
     {
-        return name.compareTo(o.name);
+        return sortKey.compareToIgnoreCase(o.sortKey);
     }
 }
