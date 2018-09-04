@@ -20,7 +20,7 @@ requests for changes
 of court (so that players and/or scorers are not involved in consecutive matches on different courts) must be
 received by the Fixture Secretary not later than two weeks after publication - that is, by <u>Tuesday 11th September</u>.
 After that date, changes will be made only in exceptional circumstances.
-<br>The duty rota will be published as soon as possible.
+<br><a href="/dutyRota">The duty rota</a> is also now available.
 </@news>
 
 <@news end="2018-10-01">
