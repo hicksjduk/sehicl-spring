@@ -35,7 +35,7 @@
 </td>
 <td class="teamname ">
 <#if current>
-<a href="../fixtures/team/${row.team.id}">${row.team.name}</a>
+<a href="/fixtures/team/${row.team.id}">${row.team.name}</a>
 <#else>
 ${row.team.name}
 </#if>
