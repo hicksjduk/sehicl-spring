@@ -12,21 +12,20 @@
 	</#if>
 </#macro>
 
-<@news>
-<b><a href="/fixtures">The fixtures are now available</a> for the 2018-19 season</b> which will commence on Sunday 30th September.
-All clubs are asked to review their fixtures carefully, and communicate any concerns as soon as possible
-to <@mailto "fixturesec">the Fixture Secretary</@mailto>. In accordance with <a href="/rules#sectionJ">the rules</a>, 
-requests for changes
-of court (so that players and/or scorers are not involved in consecutive matches on different courts) must be
-received by the Fixture Secretary not later than two weeks after publication - that is, by <u>Tuesday 11th September</u>.
-After that date, changes will be made only in exceptional circumstances.
-<br><a href="/dutyRota">The duty rota</a> is also now available.
+<@news end="2018-09-30">
+<b>The <a href="/fixtures">fixtures</a> and <a href="/dutyRota">duty rota</a> are now available for the 2018-19 season</b> which will commence on Sunday 30th September.
 </@news>
 
 <@news end="2018-10-01">
 <b>The League's <a href="/dp">Data Protection Policy</a> is now available.</b>
 Please contact <@mailto "dpo">the Data Protection Officer</@mailto> 
 if you have any concerns or questions regarding the League's processing of personal data. 
+</@news>
+
+<@news start="2018-10-08" end="2018-10-26">
+Please note that <b>the website will not be updated</b> between 12th and 26th October</b>. Results submitted
+between those dates will be acknowledged automatically (if submitted by email), but will not appear on the
+website until 27th October at the earliest. 
 </@news>
 
 <#if started??>
