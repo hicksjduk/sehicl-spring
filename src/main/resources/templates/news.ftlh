@@ -12,14 +12,11 @@
 	</#if>
 </#macro>
 
-<@news end="2018-09-30">
-<b>The <a href="/fixtures">fixtures</a> and <a href="/dutyRota">duty rota</a> are now available for the 2018-19 season</b> which will commence on Sunday 30th September.
-</@news>
-
-<@news end="2018-10-01">
-<b>The League's <a href="/dp">Data Protection Policy</a> is now available.</b>
-Please contact <@mailto "dpo">the Data Protection Officer</@mailto> 
-if you have any concerns or questions regarding the League's processing of personal data. 
+<@news end="2018-10-31">
+<b>Players are reminded that kit bags should <u>not</u> be left in the corridors or changing
+rooms while matches are in progress.</b> Teams playing on court A should leave their bags in
+the disabled toilets next to the entrance to court A; those playing on court B should use the 
+studio opposite the entrance to court B. Thank you.
 </@news>
 
 <@news start="2018-10-08" end="2018-10-26">
