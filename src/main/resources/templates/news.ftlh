@@ -9,6 +9,10 @@
 		<p>
 			<#nested/>
 		</p>
+	<#else>
+		<!-- 
+			<#nested/>
+		-->
 	</#if>
 </#macro>
 
@@ -19,7 +23,7 @@ the disabled toilets next to the entrance to court A; those playing on court B s
 studio opposite the entrance to court B. Thank you.
 </@news>
 
-<@news start="2018-10-08" end="2018-10-26">
+<@news start="2018-10-08" end="2018-10-27">
 Please note that <b>the website will not be updated</b> between 12th and 26th October</b>. Results submitted
 between those dates will be acknowledged automatically (if submitted by email), but will not appear on the
 website until 27th October at the earliest. 
