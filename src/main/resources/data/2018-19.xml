@@ -5159,6 +5159,8 @@
                     </innings>
                 </teamInMatch>
             </playedMatch>
+=======
+>>>>>>> with-hambledon-b-u16
         </match>
         <match>
             <date>2018-11-04.20:15</date>
@@ -5523,8 +5525,8 @@
                 <name>J Lee</name>
             </player>
         </team>
-        <team id="Hambledon">
-            <name>Hambledon</name>
+        <team id="HambledonA0">
+            <name>Hambledon A</name>
             <player id="WParvin0">
                 <name>W Parvin</name>
             </player>
@@ -5613,6 +5615,57 @@
                 <name>M Redpath</name>
             </player>
         </team>
+        <team id="HambledonB0">
+            <name>Hambledon B</name>
+        </team>
+        <match>
+            <date>2018-11-04.17:15</date>
+            <pitch>B</pitch>
+            <homeTeam id="HambledonB0"/>
+            <awayTeam id="HambledonA0"/>
+        </match>
+        <match>
+            <date>2018-12-02.17:15</date>
+            <pitch>B</pitch>
+            <homeTeam id="Petersfield0"/>
+            <awayTeam id="HambledonB0"/>
+        </match>
+        <match>
+            <date>2018-12-16.17:15</date>
+            <pitch>B</pitch>
+            <homeTeam id="HambledonB0"/>
+            <awayTeam id="PortsmouthSouthsea"/>
+        </match>
+        <match>
+            <date>2019-01-13.17:15</date>
+            <pitch>A</pitch>
+            <homeTeam id="GosportBorough"/>
+            <awayTeam id="HambledonB0"/>
+        </match>
+        <match>
+            <date>2019-02-03.17:15</date>
+            <pitch>B</pitch>
+            <homeTeam id="HambledonB0"/>
+            <awayTeam id="Emsworth"/>
+        </match>
+        <match>
+            <date>2019-02-17.17:15</date>
+            <pitch>A</pitch>
+            <homeTeam id="Havant"/>
+            <awayTeam id="HambledonB0"/>
+        </match>
+        <match>
+            <date>2019-03-03.17:15</date>
+            <pitch>B</pitch>
+            <homeTeam id="HambledonB0"/>
+            <awayTeam id="PortsmouthB0"/>
+        </match>
+        <match>
+            <date>2019-03-24.17:15</date>
+            <pitch>A</pitch>
+            <homeTeam id="HambledonB0"/>
+            <awayTeam id="Waterlooville"/>
+        </match>
         <match>
             <date>2018-09-30.17:15</date>
             <pitch>A</pitch>
@@ -6209,12 +6262,12 @@
         <match>
             <date>2018-10-28.17:15</date>
             <pitch>A</pitch>
-            <homeTeam id="Hambledon"/>
+            <homeTeam id="HambledonA0"/>
             <awayTeam id="Havant"/>
             <playedMatch>
                 <submittedByEmail/>
                 <teamInMatch>
-                    <teamRef id="Hambledon"/>
+                    <teamRef id="HambledonA0"/>
                     <battingFirst>false</battingFirst>
                     <innings>
                         <runsScored>91</runsScored>
@@ -6458,7 +6511,7 @@
         <match>
             <date>2018-11-18.16:15</date>
             <pitch>B</pitch>
-            <homeTeam id="Hambledon"/>
+            <homeTeam id="HambledonA0"/>
             <awayTeam id="Waterlooville"/>
         </match>
         <match>
@@ -6477,7 +6530,7 @@
             <date>2018-12-09.17:15</date>
             <pitch>A</pitch>
             <homeTeam id="PortsmouthA0"/>
-            <awayTeam id="Hambledon"/>
+            <awayTeam id="HambledonA0"/>
         </match>
         <match>
             <date>2018-12-09.17:15</date>
@@ -6501,7 +6554,7 @@
             <date>2019-01-06.17:15</date>
             <pitch>B</pitch>
             <homeTeam id="PortsmouthB0"/>
-            <awayTeam id="Hambledon"/>
+            <awayTeam id="HambledonA0"/>
         </match>
         <match>
             <date>2019-01-13.17:15</date>
@@ -6518,7 +6571,7 @@
         <match>
             <date>2019-01-20.17:15</date>
             <pitch>A</pitch>
-            <homeTeam id="Hambledon"/>
+            <homeTeam id="HambledonA0"/>
             <awayTeam id="Petersfield0"/>
         </match>
         <match>
@@ -6549,7 +6602,7 @@
             <date>2019-02-17.17:15</date>
             <pitch>B</pitch>
             <homeTeam id="PortsmouthSouthsea"/>
-            <awayTeam id="Hambledon"/>
+            <awayTeam id="HambledonA0"/>
         </match>
         <match>
             <date>2019-02-24.17:15</date>
@@ -6572,7 +6625,7 @@
         <match>
             <date>2019-03-10.17:15</date>
             <pitch>A</pitch>
-            <homeTeam id="Hambledon"/>
+            <homeTeam id="HambledonA0"/>
             <awayTeam id="GosportBorough"/>
         </match>
         <match>
@@ -6609,7 +6662,7 @@
             <date>2019-03-31.17:15</date>
             <pitch>B</pitch>
             <homeTeam id="Emsworth"/>
-            <awayTeam id="Hambledon"/>
+            <awayTeam id="HambledonA0"/>
         </match>
         <tableNotes/>
     </league>
