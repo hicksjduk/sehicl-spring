@@ -36,7 +36,7 @@
 						<td class="notout number">${row.notOut}</td>
 						<td class="runs number">${row.runs}</td>
 						<td class="highscore number">${row.best.runsScored}${row.best.out?then("","*")}</td>
-						<td class="average number"><#if row.average??>${row.average?string(".00")}</#if></td>
+						<td class="average number"><#if row.average??>${row.average?string("0.00")}</#if></td>
 					</tr>
 					<#assign lastRow = row/>
 				</#list>

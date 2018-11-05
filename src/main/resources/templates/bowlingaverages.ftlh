@@ -38,8 +38,8 @@
 						<td class="runs number">${row.runs}</td>
 						<td class="wickets number">${row.wickets}</td>
 						<td class="bestBowling number">${row.best.wicketsTaken}/${row.best.runsConceded}</td>
-						<td class="averagePerWicket number"><#if row.averagePerWicket??>${row.averagePerWicket?string(".00")}</#if></td>
-						<td class="averagePerOver number"><#if row.economyRate??>${row.economyRate?string(".00")}</#if></td>					
+						<td class="averagePerWicket number"><#if row.averagePerWicket??>${row.averagePerWicket?string("0.00")}</#if></td>
+						<td class="averagePerOver number"><#if row.economyRate??>${row.economyRate?string("0.00")}</#if></td>					
 					</tr>
 					<#assign lastRow = row/>
 				</#list>
