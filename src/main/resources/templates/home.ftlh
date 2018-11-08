@@ -5,7 +5,7 @@
 		href="http://hampshirecb.play-cricket.com/">Hampshire Cricket
 		Board</a> affiliated indoor cricket league which holds its matches at the
 	Main Hall, <a
-		href="http://www.fareham.gov.uk/leisure/sport_and_fitness/leisurecentre.aspx">Fareham
+		href="https://www.everyoneactive.com/centre/fareham-leisure-centre/">Fareham
 		Leisure Centre</a>, Park Lane, Fareham (<a
 		href="https://www.google.com/maps/place/Fareham+Leisure+Centre/@50.8573839,-1.1872637,17z/data=!3m1!4b1!4m5!3m4!1s0x487468be4997762d:0x27530aee839dab5e!8m2!3d50.8573805!4d-1.185075">map</a>).
 	Matches are held on Sunday evenings, generally from 4.15 p.m. to 10.15
