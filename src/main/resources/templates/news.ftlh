@@ -16,11 +16,10 @@
 	</#if>
 </#macro>
 
-<@news end="2018-11-11">
-In commemoration of the centenary of the end of the First World War, there will be 
-<b>a two-minute silence</b> on Sunday 11th November. This will take place at about 6.15pm,
-between the Under-16 matches and the first senior games of the evening. All are welcome to
-come into the hall to participate in this.
+<@news end="2018-11-25">
+<b>A blue helmet</b> was found in the area between the courts after the last games on 11th November.
+It is now in the equipment store. If you think it might be yours, please ask one of the umpires the
+next time you are at the Leisure Centre.
 </@news>
 
 <#if started??>
