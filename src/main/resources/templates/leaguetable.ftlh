@@ -9,6 +9,8 @@
 	<@statusMessage table.status table.lastIncludedDate!"" table.toCome "table"/>
 </p>
 <p class="noprint">Click on a team to see all matches for that team.</p>
+<p>Teams are ranked by <b>average points per game played</b>, then if still equal 
+by <b>run rate</b>.</p>
 </#if>
 <table id="table">
 <thead>
