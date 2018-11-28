@@ -6,8 +6,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import uk.org.sehicl.website.data.Batsman;
 import uk.org.sehicl.website.data.Completeness;
@@ -226,5 +230,33 @@ public class BattingAverages implements Averages<BattingRow>
             }
             return answer;
         }
+    }
+
+    public BattingAverages merge(BattingAverages other)
+    {
+        Map<String, BattingRow> rowsByName = rows.stream().collect(
+                Collectors.toMap(row -> row.getPlayer().getName(), Function.identity()));
+        other.rows.stream().forEach(otherRow ->
+        {
+            String name = otherRow.getPlayer().getName();
+            BattingRow mergeRow = rowsByName.get(name);
+            if (mergeRow == null)
+                rowsByName.put(name, otherRow);
+            else
+            {
+                mergeRow.innings += otherRow.innings;
+                mergeRow.notOut += otherRow.notOut;
+                mergeRow.runs += otherRow.runs;
+                mergeRow.best = Stream
+                        .of(mergeRow.best, otherRow.best)
+                        .filter(Objects::nonNull)
+                        .sorted()
+                        .findFirst()
+                        .orElse(null);
+            }
+        });
+        rows.clear();
+        rows.addAll(new TreeSet<>(rowsByName.values()));
+        return this;
     }
 }

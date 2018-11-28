@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import uk.org.sehicl.website.data.Bowler;
 import uk.org.sehicl.website.data.Completeness;
@@ -55,6 +58,34 @@ public class BowlingAverages implements Averages<BowlingRow>
     public Status getStatus()
     {
         return status.getStatus();
+    }
+
+    public BowlingAverages merge(BowlingAverages other)
+    {
+        Map<String, BowlingRow> rowsByName = rows.stream().collect(
+                Collectors.toMap(row -> row.getPlayer().getName(), Function.identity()));
+        other.rows.stream().forEach(otherRow ->
+        {
+            String name = otherRow.getPlayer().getName();
+            BowlingRow mergeRow = rowsByName.get(name);
+            if (mergeRow == null)
+                rowsByName.put(name, otherRow);
+            else
+            {
+                mergeRow.balls += otherRow.balls;
+                mergeRow.wickets += otherRow.wickets;
+                mergeRow.runs += otherRow.runs;
+                mergeRow.best = Stream
+                        .of(mergeRow.best, otherRow.best)
+                        .filter(Objects::nonNull)
+                        .sorted()
+                        .findFirst()
+                        .orElse(null);
+            }
+        });
+        rows.clear();
+        rows.addAll(new TreeSet<>(rowsByName.values()));
+        return this;
     }
 
     public static class BowlingRow implements Comparable<BowlingRow>

@@ -1,5 +1,12 @@
 package uk.org.sehicl.website.page;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import uk.org.sehicl.website.Constants;
 import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.data.Team;
@@ -35,18 +42,37 @@ public class TeamAveragesPage extends Page
         current = true;
     }
 
-    public TeamAveragesPage(String teamId, int season, String uri)
+    public TeamAveragesPage(String teamId, Integer season, String uri)
     {
         super("averages", "teamaverages.ftlh", Section.ARCHIVE, uri);
         this.selector = new TeamSelector(teamId);
-        final Model model = ModelLoader.getModel(season);
-        team = model.getTeam(teamId);
-        final Rules rules = new Rules.Builder(season).build();
+        final Map<Integer, Model> modelsBySeason = IntStream
+                .rangeClosed(season == null ? Constants.FIRST_SEASON : season,
+                        season == null ? Constants.CURRENT_SEASON : season)
+                .boxed()
+                .collect(Collectors.toMap(Function.identity(), ModelLoader::getModel))
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue().getLeagues().stream().anyMatch(selector::isSelected))
+                .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
+        final Map<Integer, Rules> rulesBySeason = modelsBySeason.keySet().stream().collect(
+                Collectors.toMap(Function.identity(), s -> new Rules.Builder(s).build()));
         final Completeness completenessThreshold = Completeness.COMPLETE;
-        batting = new BattingAverages.Builder(model, selector, completenessThreshold, rules, null)
-                .build();
-        bowling = new BowlingAverages.Builder(model, selector, completenessThreshold, rules, null)
-                .build();
+        batting = modelsBySeason
+                .entrySet()
+                .stream()
+                .map(e -> new BattingAverages.Builder(e.getValue(), selector, completenessThreshold,
+                        rulesBySeason.get(e.getKey()), null).build())
+                .reduce(BattingAverages::merge)
+                .orElse(null);
+        bowling = modelsBySeason
+                .entrySet()
+                .stream()
+                .map(e -> new BowlingAverages.Builder(e.getValue(), selector, completenessThreshold,
+                        rulesBySeason.get(e.getKey()), null).build())
+                .reduce(BowlingAverages::merge)
+                .orElse(null);
+        team = modelsBySeason.values().stream().findFirst().get().getTeam(teamId);
         title = String.format("Averages: %s", team.getName());
         current = false;
     }
