@@ -1,12 +1,10 @@
 package uk.org.sehicl.website.page;
 
 import uk.org.sehicl.website.data.Completeness;
-import uk.org.sehicl.website.data.Model;
-import uk.org.sehicl.website.dataload.ModelLoader;
 import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.report.BowlingAverages;
 import uk.org.sehicl.website.report.LeagueSelector;
-import uk.org.sehicl.website.rules.Rules;
+import uk.org.sehicl.website.report.ModelAndRules;
 
 public class LeagueBowlingAveragesPage extends Page
 {
@@ -17,9 +15,8 @@ public class LeagueBowlingAveragesPage extends Page
     public LeagueBowlingAveragesPage(LeagueSelector selector, String uri)
     {
         super("averages", "leaguebowlingaverages.ftlh", Section.AVERAGES, uri);
-        final Model model = ModelLoader.getModel();
-        averages = new BowlingAverages.Builder(model, selector, Completeness.CONSISTENT,
-                new Rules.Builder().build(), 50).build();
+        averages = new BowlingAverages.Builder(selector, Completeness.CONSISTENT,
+                50, new ModelAndRules()).build();
         title = String.format("%s Bowling", selector.getName());
         current = true;
     }
@@ -27,9 +24,8 @@ public class LeagueBowlingAveragesPage extends Page
     public LeagueBowlingAveragesPage(LeagueSelector selector, int season, String uri)
     {
         super("averages", "leaguebowlingaverages.ftlh", Section.ARCHIVE, uri);
-        final Model model = ModelLoader.getModel(season);
-        averages = new BowlingAverages.Builder(model, selector, Completeness.COMPLETE,
-                new Rules.Builder(season).build(), 50).build();
+        averages = new BowlingAverages.Builder(selector, Completeness.COMPLETE,
+                50, new ModelAndRules(season)).build();
         title = String.format("%s Bowling - Season %d-%02d", selector.getName(), season + 1999,
                 season);
         current = false;

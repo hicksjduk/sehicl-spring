@@ -9,15 +9,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import uk.org.sehicl.website.data.Bowler;
 import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
-import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.data.Player;
 import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.data.TeamInMatch;
@@ -58,34 +55,6 @@ public class BowlingAverages implements Averages<BowlingRow>
     public Status getStatus()
     {
         return status.getStatus();
-    }
-
-    public BowlingAverages merge(BowlingAverages other)
-    {
-        Map<String, BowlingRow> rowsByName = rows.stream().collect(
-                Collectors.toMap(row -> row.getPlayer().getName(), Function.identity()));
-        other.rows.stream().forEach(otherRow ->
-        {
-            String name = otherRow.getPlayer().getName();
-            BowlingRow mergeRow = rowsByName.get(name);
-            if (mergeRow == null)
-                rowsByName.put(name, otherRow);
-            else
-            {
-                mergeRow.balls += otherRow.balls;
-                mergeRow.wickets += otherRow.wickets;
-                mergeRow.runs += otherRow.runs;
-                mergeRow.best = Stream
-                        .of(mergeRow.best, otherRow.best)
-                        .filter(Objects::nonNull)
-                        .sorted()
-                        .findFirst()
-                        .orElse(null);
-            }
-        });
-        rows.clear();
-        rows.addAll(new TreeSet<>(rowsByName.values()));
-        return this;
     }
 
     public static class BowlingRow implements Comparable<BowlingRow>
@@ -183,37 +152,37 @@ public class BowlingAverages implements Averages<BowlingRow>
 
     public static class Builder
     {
-        private final Model model;
         private final Map<String, BowlingRow> rowsByPlayerId = new HashMap<>();
         private final AveragesSelector selector;
         private final ReportStatus status = new ReportStatus();
         private final Completeness completenessThreshold;
-        private final Rules rules;
         private final Integer maxRows;
+        private final ModelAndRules[] seasonData;
 
-        public Builder(Model model, AveragesSelector selector, Completeness completenessThreshold,
-                Rules rules, Integer maxRows)
+        public Builder(AveragesSelector selector, Completeness completenessThreshold,
+                Integer maxRows, ModelAndRules... seasonData)
         {
-            this.model = model;
             this.selector = selector;
             this.completenessThreshold = completenessThreshold;
-            this.rules = rules;
             this.maxRows = maxRows;
+            this.seasonData = seasonData;
         }
 
         public BowlingAverages build()
         {
-            model.getLeagues().stream().filter(selector::isSelected).forEach(this::add);
+            Stream.of(seasonData).forEach(
+                    sd -> sd.model.getLeagues().stream().filter(selector::isSelected).forEach(
+                            l -> this.add(l, sd.rules)));
             return new BowlingAverages(this);
         }
 
-        private void add(League league)
+        private void add(League league, Rules rules)
         {
             league.getMatches().stream().filter(m -> selector.isSelected(m)).forEach(
-                    m -> this.add(league, m));
+                    m -> this.add(league, m, rules));
         }
 
-        private void add(League league, Match match)
+        private void add(League league, Match match, Rules rules)
         {
             boolean complete = completenessThreshold.compareTo(match.getCompleteness(rules)) <= 0;
             status.add(match, complete);
@@ -224,19 +193,19 @@ public class BowlingAverages implements Averages<BowlingRow>
                         .getTeams()
                         .stream()
                         .filter(t -> selector.isSelected(t, false))
-                        .forEach(t -> this.add(league, match, t));
+                        .forEach(t -> this.add(league, match, t, rules));
             }
         }
 
-        private void add(League league, Match match, TeamInMatch teamInMatch)
+        private void add(League league, Match match, TeamInMatch teamInMatch, Rules rules)
         {
             String teamId = Objects.equals(teamInMatch.getTeamId(), match.getHomeTeamId())
                     ? match.getAwayTeamId() : match.getHomeTeamId();
             final Team team = league.getTeam(teamId);
-            teamInMatch.getInnings().getBowlers().stream().forEach(b -> this.add(team, b));
+            teamInMatch.getInnings().getBowlers().stream().forEach(b -> this.add(team, b, rules));
         }
 
-        private void add(Team team, Bowler bowler)
+        private void add(Team team, Bowler bowler, Rules rules)
         {
             final String playerId = bowler.getPlayerId();
             BowlingRow row = rowsByPlayerId.get(playerId);

@@ -9,6 +9,11 @@ public class ModelAndRules
     public final Model model;
     public final Rules rules;
     
+    public ModelAndRules()
+    {
+        this(ModelLoader.getModel(), new Rules.Builder().build());
+    }
+
     public ModelAndRules(int season)
     {
         this(ModelLoader.getModel(season), new Rules.Builder(season).build());
