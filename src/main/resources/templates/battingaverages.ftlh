@@ -1,3 +1,4 @@
+<#include "ordinaldate.ftl"/>
 <#macro battingaverages averages current showTeam>
 	<#if averages.status != "UNSTARTED">
 		<p class="noprint">Click on a player to see that player's batting performances match-by-match,
