@@ -1,6 +1,7 @@
 <#macro battingaverages averages current showTeam>
 	<#if averages.status != "UNSTARTED">
 		<p>Players are ranked by runs scored.</p>
+		<p class="noprint">Click on a player to see that player's batting performances match-by-match.</p>
 		<table id="batav">
 			<thead>
 				<tr>
@@ -22,7 +23,9 @@
 						<td class="position number">
 							<#if (row?counter == 1) || (row.compareSortKeys(lastRow) != 0)>${row?counter}</#if>
 						</td>
-						<td class="name">${row.player.name}</td>
+						<td class="name">
+							<a href="?expandBatting=${row.player.id}#expanded">${row.player.name}</a>
+						</td>
 						<#if showTeam>
 							<td class="teamName name">
 								<#if current>

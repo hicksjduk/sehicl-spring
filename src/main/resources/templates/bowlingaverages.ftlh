@@ -2,6 +2,7 @@
 	<#if averages.status != "UNSTARTED">
 		<p>Players (and bowling performances, for determining best bowling)	are ranked by wickets 
 			taken, then average runs per over.</p>
+		<p class="noprint">Click on a player to see that player's bowling performances match-by-match.</p>
 		<table id="bowlav">
 			<thead>
 				<tr>
@@ -24,7 +25,9 @@
 						<td class="position number">
 							<#if (row?counter == 1) || (row.compareSortKeys(lastRow) != 0)>${row?counter}</#if>
 						</td>
-						<td class="name">${row.player.name}</td>
+						<td class="name">
+							<a href="?expandBowling=${row.player.id}#expanded">${row.player.name}</a>
+						</td>
 						<#if showTeam>
 							<td class="teamName name">
 								<#if current>
