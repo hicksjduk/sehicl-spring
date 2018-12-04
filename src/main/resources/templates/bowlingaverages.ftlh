@@ -22,17 +22,12 @@
 			</thead>
 			<tbody>
 				<#list averages.rows as row>
-					<#assign expand=row.performances?size != 0/>
 					<tr>
 						<td class="position number">
 							<#if (row?counter == 1) || (row.compareSortKeys(lastRow) != 0)>${row?counter}</#if>
 						</td>
 						<td class="name">
-							<#if expand>
-								<a id="expanded"><a href="?">${row.player.name}</a></a>
-							<#else>						
-								<a href="?expandBowling=${row.player.id}#expanded">${row.player.name}</a>
-							</#if>
+							<a href="javascript: toggleVisible('bowling${row?counter}')">${row.player.name}</a></a>
 						</td>
 						<#if showTeam>
 							<td class="teamName name">
@@ -50,21 +45,19 @@
 						<td class="averagePerWicket number"><#if row.averagePerWicket??>${row.averagePerWicket?string("0.00")}</#if></td>
 						<td class="averagePerOver number"><#if row.economyRate??>${row.economyRate?string("0.00")}</#if></td>					
 					</tr>
-					<#if expand>
-						<tr class="expandedBowling">
-							<td></td>
-							<td colspan="${showTeam?then(8, 7)}">
-								<ul>							
-								<#list row.performances as perf>
-									<li>${perf.matchDate?string("d MMM yy")}:
-									${perf.performance.wicketsTaken}/${perf.performance.runsConceded}
-									(${perf.overs} ov)
-									v ${perf.opponent.name}
-								</#list>
-								</ul>
-							</td>
-						</tr>
-					</#if>
+					<tr class="expandedBowling" id="bowling${row?counter}" hidden="true">
+						<td></td>
+						<td colspan="${showTeam?then(8, 7)}">
+							<ul>							
+							<#list row.performances as perf>
+								<li>${perf.matchDate?string("d MMM yy")}:
+								${perf.performance.wicketsTaken}/${perf.performance.runsConceded}
+								(${perf.overs} ov)
+								v ${perf.opponent.name}
+							</#list>
+							</ul>
+						</td>
+					</tr>
 					<#assign lastRow = row/>
 				</#list>
 			</tbody>

@@ -33,20 +33,21 @@ public class TemplateTest
 
     public void testResourcesPage()
     {
-        new PageTemplate(new StaticPage("resources", "resources.ftlh", Section.RESOURCES, "/resources",
-                "SEHICL Resources")).process(new OutputStreamWriter(System.out));
+        new PageTemplate(new StaticPage("resources", "resources.ftlh", Section.RESOURCES,
+                "/resources", "SEHICL Resources")).process(new OutputStreamWriter(System.out));
     }
 
     public void testRulesPage()
     {
-        new PageTemplate(new StaticPage("rules", "rules.ftlh", Section.RULES, "/rules", "SEHICL Rules"))
-                .process(new OutputStreamWriter(System.out));
+        new PageTemplate(
+                new StaticPage("rules", "rules.ftlh", Section.RULES, "/rules", "SEHICL Rules"))
+                        .process(new OutputStreamWriter(System.out));
     }
 
     public void testRecordsIndexPage()
     {
-        new PageTemplate(new StaticPage("records", "records/index.ftlh", Section.RECORDS, "/records",
-                "SEHICL Records")).process(new OutputStreamWriter(System.out));
+        new PageTemplate(new StaticPage("records", "records/index.ftlh", Section.RECORDS,
+                "/records", "SEHICL Records")).process(new OutputStreamWriter(System.out));
     }
 
     public void testRecordPerformancesPage()
@@ -150,7 +151,7 @@ public class TemplateTest
     public void testCurrentAveragesPage()
     {
         new PageTemplate(
-                new LeagueBattingAveragesPage(LeagueSelector.SENIOR, "/averages/batting/Senior", null))
+                new LeagueBattingAveragesPage(LeagueSelector.SENIOR, "/averages/batting/Senior"))
                         .process(new OutputStreamWriter(System.out));
     }
 
@@ -181,7 +182,8 @@ public class TemplateTest
 
     public void testDateResultsNoDate()
     {
-        new PageTemplate(new DateResultsPage("/results")).process(new OutputStreamWriter(System.out));
+        new PageTemplate(new DateResultsPage("/results"))
+                .process(new OutputStreamWriter(System.out));
     }
 
     public void testDateResultsWithDate() throws ParseException
@@ -192,13 +194,14 @@ public class TemplateTest
 
     public void testLeagueResults() throws ParseException
     {
-        new PageTemplate(new LeagueResultsPage("Division3",
-                "/results/league/Division3")).process(new OutputStreamWriter(System.out));
+        new PageTemplate(new LeagueResultsPage("Division3", "/results/league/Division3"))
+                .process(new OutputStreamWriter(System.out));
     }
 
     @Test
     public void testLoginPage()
     {
-        new PageTemplate(new LoginPage("/login", (UserManager) null)).process(new OutputStreamWriter(System.out));
+        new PageTemplate(new LoginPage("/login", (UserManager) null))
+                .process(new OutputStreamWriter(System.out));
     }
 }

@@ -125,8 +125,9 @@ public class BattingAverages implements Averages<BattingRow>
             return SK_COMPARATOR.compare(this, o);
         }
 
-        public void add(Batsman batsman, BattingPerformance performance)
+        public void add(BattingPerformance performance)
         {
+            Batsman batsman = performance.performance;
             innings++;
             notOut += batsman.isOut() ? 0 : 1;
             runs += batsman.getRunsScored();
@@ -134,8 +135,7 @@ public class BattingAverages implements Averages<BattingRow>
             {
                 best = batsman;
             }
-            if (performance != null)
-                performances.add(performance);
+            performances.add(performance);
         }
 
         public SortedSet<BattingPerformance> getPerformances()
@@ -152,16 +152,14 @@ public class BattingAverages implements Averages<BattingRow>
         private final Completeness completenessThreshold;
         private final Integer maxRows;
         private final ModelAndRules[] seasonData;
-        private final String expandId;
 
         public Builder(AveragesSelector selector, Completeness completenessThreshold,
-                Integer maxRows, String expandId, ModelAndRules... seasonData)
+                Integer maxRows, ModelAndRules... seasonData)
         {
             this.selector = selector;
             this.completenessThreshold = completenessThreshold;
             this.maxRows = maxRows;
             this.seasonData = seasonData;
-            this.expandId = expandId;
         }
 
         public BattingAverages build()
@@ -210,8 +208,7 @@ public class BattingAverages implements Averages<BattingRow>
                 row = new BattingRow(team.getPlayer(playerId), team);
                 rowsByPlayerId.put(playerId, row);
             }
-            row.add(batsman, playerId.equals(expandId)
-                    ? new BattingPerformance(matchDate, opponent, batsman) : null);
+            row.add(new BattingPerformance(matchDate, opponent, batsman));
         }
 
         public Collection<BattingRow> getRows()

@@ -133,8 +133,9 @@ public class BowlingAverages implements Averages<BowlingRow>
             return SK_COMPARATOR.compare(this, o);
         }
 
-        public void add(Bowler bowler, BowlingPerformance performance)
+        public void add(BowlingPerformance performance)
         {
+            final Bowler bowler = performance.performance;
             balls += bowler.getBallsBowled();
             runs += bowler.getRunsConceded();
             wickets += bowler.getWicketsTaken();
@@ -142,8 +143,7 @@ public class BowlingAverages implements Averages<BowlingRow>
             {
                 best = bowler;
             }
-            if (performance != null)
-                performances.add(performance);
+            performances.add(performance);
         }
 
         public int getWickets()
@@ -165,16 +165,14 @@ public class BowlingAverages implements Averages<BowlingRow>
         private final Completeness completenessThreshold;
         private final Integer maxRows;
         private final ModelAndRules[] seasonData;
-        private final String expandId;
 
         public Builder(AveragesSelector selector, Completeness completenessThreshold,
-                Integer maxRows, String expandId, ModelAndRules... seasonData)
+                Integer maxRows, ModelAndRules... seasonData)
         {
             this.selector = selector;
             this.completenessThreshold = completenessThreshold;
             this.maxRows = maxRows;
             this.seasonData = seasonData;
-            this.expandId = expandId;
         }
 
         public BowlingAverages build()
@@ -224,8 +222,7 @@ public class BowlingAverages implements Averages<BowlingRow>
                 row = new BowlingRow(team.getPlayer(playerId), team, rules);
                 rowsByPlayerId.put(playerId, row);
             }
-            row.add(bowler, playerId.equals(expandId)
-                    ? new BowlingPerformance(matchDate, opponent, bowler, rules) : null);
+            row.add(new BowlingPerformance(matchDate, opponent, bowler, rules));
         }
 
         public Collection<BowlingRow> getRows()
