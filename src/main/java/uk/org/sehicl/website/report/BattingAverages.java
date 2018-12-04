@@ -70,6 +70,7 @@ public class BattingAverages implements Averages<BattingRow>
         private int notOut;
         private int runs;
         private Batsman best;
+        private final SortedSet<BattingPerformance> performances = new TreeSet<>();
 
         public BattingRow(Player player, Team team)
         {
@@ -124,8 +125,9 @@ public class BattingAverages implements Averages<BattingRow>
             return SK_COMPARATOR.compare(this, o);
         }
 
-        public void add(Batsman batsman)
+        public void add(BattingPerformance batting)
         {
+            final Batsman batsman = batting.performance;
             innings++;
             notOut += batsman.isOut() ? 0 : 1;
             runs += batsman.getRunsScored();
@@ -133,6 +135,7 @@ public class BattingAverages implements Averages<BattingRow>
             {
                 best = batsman;
             }
+            performances.add(batting);
         }
     }
 
@@ -156,11 +159,9 @@ public class BattingAverages implements Averages<BattingRow>
 
         public BattingAverages build()
         {
-            Stream.of(seasonData).forEach(sd -> sd.model
-                    .getLeagues()
-                    .stream()
-                    .filter(selector::isSelected)
-                    .forEach(l -> add(l, sd.rules)));
+            Stream.of(seasonData).forEach(
+                    sd -> sd.model.getLeagues().stream().filter(selector::isSelected).forEach(
+                            l -> add(l, sd.rules)));
             return new BattingAverages(this);
         }
 
@@ -181,17 +182,19 @@ public class BattingAverages implements Averages<BattingRow>
                         .getTeams()
                         .stream()
                         .filter(t -> selector.isSelected(t, true))
-                        .forEach(t -> this.add(league, t));
+                        .forEach(t -> this.add(league, t, match.getDateTime(),
+                                league.getTeam(match.getOpponentId(t.getTeamId()))));
             }
         }
 
-        private void add(League league, TeamInMatch teamInMatch)
+        private void add(League league, TeamInMatch teamInMatch, Date matchDate, Team opponent)
         {
             final Team team = league.getTeam(teamInMatch.getTeamId());
-            teamInMatch.getInnings().getBatsmen().stream().forEach(b -> this.add(team, b));
+            teamInMatch.getInnings().getBatsmen().stream().forEach(
+                    b -> this.add(team, b, matchDate, opponent));
         }
 
-        private void add(Team team, Batsman batsman)
+        private void add(Team team, Batsman batsman, Date matchDate, Team opponent)
         {
             final String playerId = batsman.getPlayerId();
             BattingRow row = rowsByPlayerId.get(playerId);
@@ -200,7 +203,7 @@ public class BattingAverages implements Averages<BattingRow>
                 row = new BattingRow(team.getPlayer(playerId), team);
                 rowsByPlayerId.put(playerId, row);
             }
-            row.add(batsman);
+            row.add(new BattingPerformance(matchDate, opponent, batsman));
         }
 
         public Collection<BattingRow> getRows()
@@ -227,6 +230,29 @@ public class BattingAverages implements Averages<BattingRow>
                 }
             }
             return answer;
+        }
+    }
+
+    public static class BattingPerformance implements Comparable<BattingPerformance>
+    {
+        private final static Comparator<BattingPerformance> COMPARATOR = Comparator
+                .comparing(bp -> bp.matchDate);
+
+        public final Date matchDate;
+        public final Team opponent;
+        public final Batsman performance;
+
+        public BattingPerformance(Date matchDate, Team opponent, Batsman performance)
+        {
+            this.matchDate = matchDate;
+            this.opponent = opponent;
+            this.performance = performance;
+        }
+
+        @Override
+        public int compareTo(BattingPerformance other)
+        {
+            return COMPARATOR.compare(this, other);
         }
     }
 }

@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Stream;
@@ -74,6 +73,7 @@ public class BowlingAverages implements Averages<BowlingRow>
         private int runs;
         private int wickets;
         private Bowler best;
+        private final SortedSet<BowlingPerformance> performances = new TreeSet<>();
 
         public BowlingRow(Player player, Team team, Rules rules)
         {
@@ -133,7 +133,7 @@ public class BowlingAverages implements Averages<BowlingRow>
             return SK_COMPARATOR.compare(this, o);
         }
 
-        public void add(Bowler bowler)
+        public void add(Bowler bowler, Date matchDate, Team opponent)
         {
             balls += bowler.getBallsBowled();
             runs += bowler.getRunsConceded();
@@ -142,6 +142,7 @@ public class BowlingAverages implements Averages<BowlingRow>
             {
                 best = bowler;
             }
+            performances.add(new BowlingPerformance(matchDate, opponent, bowler));
         }
 
         public int getWickets()
@@ -199,13 +200,14 @@ public class BowlingAverages implements Averages<BowlingRow>
 
         private void add(League league, Match match, TeamInMatch teamInMatch, Rules rules)
         {
-            String teamId = Objects.equals(teamInMatch.getTeamId(), match.getHomeTeamId())
-                    ? match.getAwayTeamId() : match.getHomeTeamId();
+            String teamId = match.getOpponentId(teamInMatch.getTeamId());
+            Team opponent = league.getTeam(teamInMatch.getTeamId());
             final Team team = league.getTeam(teamId);
-            teamInMatch.getInnings().getBowlers().stream().forEach(b -> this.add(team, b, rules));
+            teamInMatch.getInnings().getBowlers().stream().forEach(
+                    b -> this.add(team, b, rules, match.getDateTime(), opponent));
         }
 
-        private void add(Team team, Bowler bowler, Rules rules)
+        private void add(Team team, Bowler bowler, Rules rules, Date matchDate, Team opponent)
         {
             final String playerId = bowler.getPlayerId();
             BowlingRow row = rowsByPlayerId.get(playerId);
@@ -214,7 +216,7 @@ public class BowlingAverages implements Averages<BowlingRow>
                 row = new BowlingRow(team.getPlayer(playerId), team, rules);
                 rowsByPlayerId.put(playerId, row);
             }
-            row.add(bowler);
+            row.add(bowler, matchDate, opponent);
         }
 
         public Collection<BowlingRow> getRows()
@@ -242,5 +244,29 @@ public class BowlingAverages implements Averages<BowlingRow>
             }
             return answer;
         }
+    }
+
+    public static class BowlingPerformance implements Comparable<BowlingPerformance>
+    {
+        private final static Comparator<BowlingPerformance> COMPARATOR = Comparator
+                .comparing(bp -> bp.matchDate);
+
+        public final Date matchDate;
+        public final Team opponent;
+        public final Bowler performance;
+
+        public BowlingPerformance(Date matchDate, Team opponent, Bowler performance)
+        {
+            this.matchDate = matchDate;
+            this.opponent = opponent;
+            this.performance = performance;
+        }
+
+        @Override
+        public int compareTo(BowlingPerformance other)
+        {
+            return COMPARATOR.compare(this, other);
+        }
+
     }
 }
