@@ -15,3 +15,8 @@ function mailTo(id, domain, addrDesc, linkText)
 	var answer = linkContent.link("mailto:" + mailAddr);
 	return answer;
 }
+
+function toggleVisible(id) {
+	var field = document.getElementById(id)
+	field.hidden = !field.hidden
+}

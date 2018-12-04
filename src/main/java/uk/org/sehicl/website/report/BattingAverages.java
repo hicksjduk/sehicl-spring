@@ -6,18 +6,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import uk.org.sehicl.website.data.Batsman;
 import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
-import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.data.Player;
 import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.data.TeamInMatch;
@@ -74,6 +70,7 @@ public class BattingAverages implements Averages<BattingRow>
         private int notOut;
         private int runs;
         private Batsman best;
+        private final SortedSet<BattingPerformance> performances = new TreeSet<>();
 
         public BattingRow(Player player, Team team)
         {
@@ -128,8 +125,9 @@ public class BattingAverages implements Averages<BattingRow>
             return SK_COMPARATOR.compare(this, o);
         }
 
-        public void add(Batsman batsman)
+        public void add(BattingPerformance performance)
         {
+            Batsman batsman = performance.performance;
             innings++;
             notOut += batsman.isOut() ? 0 : 1;
             runs += batsman.getRunsScored();
@@ -137,42 +135,48 @@ public class BattingAverages implements Averages<BattingRow>
             {
                 best = batsman;
             }
+            performances.add(performance);
+        }
+
+        public SortedSet<BattingPerformance> getPerformances()
+        {
+            return performances;
         }
     }
 
     public static class Builder
     {
-        private final Model model;
         private final Map<String, BattingRow> rowsByPlayerId = new HashMap<>();
         private final AveragesSelector selector;
         private final ReportStatus status = new ReportStatus();
         private final Completeness completenessThreshold;
-        private final Rules rules;
         private final Integer maxRows;
+        private final ModelAndRules[] seasonData;
 
-        public Builder(Model model, AveragesSelector selector, Completeness completenessThreshold,
-                Rules rules, Integer maxRows)
+        public Builder(AveragesSelector selector, Completeness completenessThreshold,
+                Integer maxRows, ModelAndRules... seasonData)
         {
-            this.model = model;
             this.selector = selector;
             this.completenessThreshold = completenessThreshold;
-            this.rules = rules;
             this.maxRows = maxRows;
+            this.seasonData = seasonData;
         }
 
         public BattingAverages build()
         {
-            model.getLeagues().stream().filter(selector::isSelected).forEach(this::add);
+            Stream.of(seasonData).forEach(
+                    sd -> sd.model.getLeagues().stream().filter(selector::isSelected).forEach(
+                            l -> add(l, sd.rules)));
             return new BattingAverages(this);
         }
 
-        private void add(League league)
+        private void add(League league, Rules rules)
         {
             league.getMatches().stream().filter(m -> selector.isSelected(m)).forEach(
-                    m -> this.add(league, m));
+                    m -> this.add(league, m, rules));
         }
 
-        private void add(League league, Match match)
+        private void add(League league, Match match, Rules rules)
         {
             boolean complete = completenessThreshold.compareTo(match.getCompleteness(rules)) <= 0;
             status.add(match, complete);
@@ -183,17 +187,19 @@ public class BattingAverages implements Averages<BattingRow>
                         .getTeams()
                         .stream()
                         .filter(t -> selector.isSelected(t, true))
-                        .forEach(t -> this.add(league, t));
+                        .forEach(t -> this.add(league, t, match.getDateTime(),
+                                league.getTeam(match.getOpponentId(t.getTeamId()))));
             }
         }
 
-        private void add(League league, TeamInMatch teamInMatch)
+        private void add(League league, TeamInMatch teamInMatch, Date matchDate, Team opponent)
         {
             final Team team = league.getTeam(teamInMatch.getTeamId());
-            teamInMatch.getInnings().getBatsmen().stream().forEach(b -> this.add(team, b));
+            teamInMatch.getInnings().getBatsmen().stream().forEach(
+                    b -> this.add(team, b, matchDate, opponent));
         }
 
-        private void add(Team team, Batsman batsman)
+        private void add(Team team, Batsman batsman, Date matchDate, Team opponent)
         {
             final String playerId = batsman.getPlayerId();
             BattingRow row = rowsByPlayerId.get(playerId);
@@ -202,7 +208,7 @@ public class BattingAverages implements Averages<BattingRow>
                 row = new BattingRow(team.getPlayer(playerId), team);
                 rowsByPlayerId.put(playerId, row);
             }
-            row.add(batsman);
+            row.add(new BattingPerformance(matchDate, opponent, batsman));
         }
 
         public Collection<BattingRow> getRows()
@@ -232,31 +238,41 @@ public class BattingAverages implements Averages<BattingRow>
         }
     }
 
-    public BattingAverages merge(BattingAverages other)
+    public static class BattingPerformance implements Comparable<BattingPerformance>
     {
-        Map<String, BattingRow> rowsByName = rows.stream().collect(
-                Collectors.toMap(row -> row.getPlayer().getName(), Function.identity()));
-        other.rows.stream().forEach(otherRow ->
+        private final static Comparator<BattingPerformance> COMPARATOR = Comparator
+                .comparing(bp -> bp.matchDate);
+
+        public final Date matchDate;
+        public final Team opponent;
+        public final Batsman performance;
+
+        public BattingPerformance(Date matchDate, Team opponent, Batsman performance)
         {
-            String name = otherRow.getPlayer().getName();
-            BattingRow mergeRow = rowsByName.get(name);
-            if (mergeRow == null)
-                rowsByName.put(name, otherRow);
-            else
-            {
-                mergeRow.innings += otherRow.innings;
-                mergeRow.notOut += otherRow.notOut;
-                mergeRow.runs += otherRow.runs;
-                mergeRow.best = Stream
-                        .of(mergeRow.best, otherRow.best)
-                        .filter(Objects::nonNull)
-                        .sorted()
-                        .findFirst()
-                        .orElse(null);
-            }
-        });
-        rows.clear();
-        rows.addAll(new TreeSet<>(rowsByName.values()));
-        return this;
+            this.matchDate = matchDate;
+            this.opponent = opponent;
+            this.performance = performance;
+        }
+
+        @Override
+        public int compareTo(BattingPerformance other)
+        {
+            return COMPARATOR.compare(this, other);
+        }
+
+        public Date getMatchDate()
+        {
+            return matchDate;
+        }
+
+        public Team getOpponent()
+        {
+            return opponent;
+        }
+
+        public Batsman getPerformance()
+        {
+            return performance;
+        }
     }
 }

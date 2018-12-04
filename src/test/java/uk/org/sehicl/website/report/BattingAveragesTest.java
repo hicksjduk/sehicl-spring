@@ -16,7 +16,6 @@ import org.junit.Test;
 import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Model;
-import uk.org.sehicl.website.dataload.ModelLoader;
 import uk.org.sehicl.website.report.BattingAverages.BattingRow;
 import uk.org.sehicl.website.report.ReportStatus.Status;
 import uk.org.sehicl.website.rules.Rules;
@@ -26,9 +25,8 @@ public class BattingAveragesTest
     @Test
     public void testIncompleteSeasonSenior()
     {
-        final BattingAverages averages = new BattingAverages.Builder(ModelLoader.getModel(17),
-                LeagueSelector.SENIOR, Completeness.COMPLETE, new Rules.Builder(17).build(), 50)
-                        .build();
+        final BattingAverages averages = new BattingAverages.Builder(LeagueSelector.SENIOR,
+                Completeness.COMPLETE, 50, new ModelAndRules(17)).build();
         checkAverages(averages, validate(getDate("2017-02-12"), Status.IN_PROGRESS, 3),
                 validate("DWallis", "D Wallis", "PortsmouthB", "Portsmouth B", 246, 66, true),
                 validate("DQuincey", "D Quincey", "Curdridge", "Curdridge", 198, 47, false),
@@ -104,9 +102,8 @@ public class BattingAveragesTest
     @Test
     public void testCompleteSeasonSenior()
     {
-        final BattingAverages averages = new BattingAverages.Builder(ModelLoader.getModel(16),
-                LeagueSelector.SENIOR, Completeness.COMPLETE, new Rules.Builder(16).build(), 25)
-                        .build();
+        final BattingAverages averages = new BattingAverages.Builder(LeagueSelector.SENIOR,
+                Completeness.COMPLETE, 25, new ModelAndRules(16)).build();
         checkAverages(averages, validate(getDate("2016-03-13"), Status.FINAL, 0),
                 validate("DClark", "D Clark", "BedhamptonA", "Bedhampton A", 325, 61, false),
                 validate("GMartin", "G Martin", "HaylingIsland", "Hayling Island", 271, 54, true),
@@ -151,9 +148,8 @@ public class BattingAveragesTest
     @Test
     public void testCompleteSeasonUnder16()
     {
-        final BattingAverages averages = new BattingAverages.Builder(ModelLoader.getModel(16),
-                LeagueSelector.COLTSUNDER16, Completeness.COMPLETE, new Rules.Builder(16).build(), 25)
-                        .build();
+        final BattingAverages averages = new BattingAverages.Builder(LeagueSelector.COLTSUNDER16,
+                Completeness.COMPLETE, 25, new ModelAndRules(16)).build();
         checkAverages(averages, validate(getDate("2016-03-13"), Status.FINAL, 0),
                 validate("BAnscombe0", "B Anscombe", "Petersfield0", "Petersfield", 277, 68, false),
                 validate("JDunn0", "J Dunn", "SarisburyAthletic", "Sarisbury Athletic", 262, 55,
@@ -196,9 +192,8 @@ public class BattingAveragesTest
     @Test
     public void testCompleteSeasonUnder13()
     {
-        final BattingAverages averages = new BattingAverages.Builder(ModelLoader.getModel(16),
-                LeagueSelector.COLTSUNDER13, Completeness.COMPLETE, new Rules.Builder(16).build(), 25)
-                        .build();
+        final BattingAverages averages = new BattingAverages.Builder(LeagueSelector.COLTSUNDER13,
+                Completeness.COMPLETE, 25, new ModelAndRules(16)).build();
         checkAverages(averages, validate(getDate("2016-03-13"), Status.FINAL, 0),
                 validate("FGadd0", "F Gadd", "PortsmouthSouthsea1", "Portsmouth & Southsea", 244,
                         65, false),
@@ -245,9 +240,9 @@ public class BattingAveragesTest
     @Test
     public void testEmptyModel()
     {
-        Model model = new Model();
-        final BattingAverages result = new BattingAverages.Builder(model, LeagueSelector.SENIOR,
-                Completeness.CONSISTENT, new Rules.Builder().build(), 50).build();
+        final BattingAverages result = new BattingAverages.Builder(LeagueSelector.SENIOR,
+                Completeness.CONSISTENT, 50,
+                new ModelAndRules(new Model(), new Rules.Builder().build())).build();
         checkAverages(result, validate(null, Status.UNSTARTED, 0));
     }
 
@@ -265,17 +260,18 @@ public class BattingAveragesTest
                     return l;
                 })
                 .forEach(model::addLeague);
-        final BattingAverages result = new BattingAverages.Builder(model, LeagueSelector.SENIOR,
-                Completeness.CONSISTENT, new Rules.Builder().build(), 50).build();
+        final BattingAverages result = new BattingAverages.Builder(LeagueSelector.SENIOR,
+                Completeness.CONSISTENT, 50, new ModelAndRules(model, new Rules.Builder().build()))
+                        .build();
         checkAverages(result, validate(null, Status.UNSTARTED, 0));
     }
 
     @Test
     public void testTeam()
     {
-        final BattingAverages result = new BattingAverages.Builder(ModelLoader.getModel(16),
-                new TeamSelector("OPCSTitchfield"), Completeness.COMPLETE,
-                new Rules.Builder(16).build(), null).build();
+        final BattingAverages result = new BattingAverages.Builder(
+                new TeamSelector("OPCSTitchfield"), Completeness.COMPLETE, null,
+                new ModelAndRules(16)).build();
         checkAverages(result, validate(getDate("2016-02-28"), Status.FINAL, 0),
                 validate("AWhite0", "A White", "OPCSTitchfield", "OPCS Titchfield", 6, 2, 82, 26,
                         false, 20.50),

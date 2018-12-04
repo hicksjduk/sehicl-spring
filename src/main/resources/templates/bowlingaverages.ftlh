@@ -1,5 +1,7 @@
 <#macro bowlingaverages averages current showTeam>
 	<#if averages.status != "UNSTARTED">
+		<p class="noprint">Click on a player to see that player's bowling performances match-by-match,
+		or to hide them if displayed.</p>
 		<p>Players (and bowling performances, for determining best bowling)	are ranked by wickets 
 			taken, then average runs per over.</p>
 		<table id="bowlav">
@@ -24,7 +26,9 @@
 						<td class="position number">
 							<#if (row?counter == 1) || (row.compareSortKeys(lastRow) != 0)>${row?counter}</#if>
 						</td>
-						<td class="name">${row.player.name}</td>
+						<td class="name">
+							<a href="javascript: toggleVisible('bowling${row?counter}')">${row.player.name}</a></a>
+						</td>
 						<#if showTeam>
 							<td class="teamName name">
 								<#if current>
@@ -40,6 +44,22 @@
 						<td class="bestBowling number">${row.best.wicketsTaken}/${row.best.runsConceded}</td>
 						<td class="averagePerWicket number"><#if row.averagePerWicket??>${row.averagePerWicket?string("0.00")}</#if></td>
 						<td class="averagePerOver number"><#if row.economyRate??>${row.economyRate?string("0.00")}</#if></td>					
+					</tr>
+					<tr class="expandedBowling" id="bowling${row?counter}" hidden="true">
+						<td></td>
+						<td colspan="${showTeam?then(8, 7)}">
+							<table>							
+							<#list row.performances as perf>
+								<tr>
+								<td class="figures number">${perf.performance.wicketsTaken}/${perf.performance.runsConceded}</td>
+								<td class="overs number">(${perf.overs} ov)</td>
+								<td class="match">${perf.matchDate?string("d MMM yy")}
+								v ${perf.opponent.name}
+								</td>
+								</tr>
+							</#list>
+							</table>
+						</td>
 					</tr>
 					<#assign lastRow = row/>
 				</#list>
