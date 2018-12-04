@@ -45,13 +45,15 @@
 					<tr class="expandedBatting" id="batting${row?counter}" hidden="true">
 						<td></td>
 						<td colspan="${showTeam?then(7, 6)}">
-							<ul>							
+							<table>							
 							<#list row.performances as perf>
-								<li>${perf.matchDate?string("d MMM yy")}:
-								${perf.performance.runsScored}${perf.performance.out?then("","*")}
-								v ${perf.opponent.name}
+								<tr>
+								<td class="score number">${perf.performance.runsScored}${perf.performance.out?then("","*")}</td>
+								<td class="match">${perf.matchDate?string("d MMM yy")}
+									v ${perf.opponent.name}</td
+								</tr>
 							</#list>
-							</ul>
+							</table>
 						</td>
 					</tr>
 					<#assign lastRow = row/>
