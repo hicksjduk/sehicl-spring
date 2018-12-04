@@ -150,7 +150,7 @@ public class TemplateTest
     public void testCurrentAveragesPage()
     {
         new PageTemplate(
-                new LeagueBattingAveragesPage(LeagueSelector.SENIOR, "/averages/batting/Senior"))
+                new LeagueBattingAveragesPage(LeagueSelector.SENIOR, "/averages/batting/Senior", null))
                         .process(new OutputStreamWriter(System.out));
     }
 

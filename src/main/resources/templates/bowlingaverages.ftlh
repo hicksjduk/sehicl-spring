@@ -1,8 +1,9 @@
 <#macro bowlingaverages averages current showTeam>
 	<#if averages.status != "UNSTARTED">
+		<p class="noprint">Click on a player to see that player's bowling performances match-by-match,
+		or to hide them if displayed.</p>
 		<p>Players (and bowling performances, for determining best bowling)	are ranked by wickets 
 			taken, then average runs per over.</p>
-		<p class="noprint">Click on a player to see that player's bowling performances match-by-match.</p>
 		<table id="bowlav">
 			<thead>
 				<tr>
@@ -21,12 +22,17 @@
 			</thead>
 			<tbody>
 				<#list averages.rows as row>
+					<#assign expand=row.performances?size != 0/>
 					<tr>
 						<td class="position number">
 							<#if (row?counter == 1) || (row.compareSortKeys(lastRow) != 0)>${row?counter}</#if>
 						</td>
 						<td class="name">
-							<a href="?expandBowling=${row.player.id}#expanded">${row.player.name}</a>
+							<#if expand>
+								<a id="expanded"><a href="?">${row.player.name}</a></a>
+							<#else>						
+								<a href="?expandBowling=${row.player.id}#expanded">${row.player.name}</a>
+							</#if>
 						</td>
 						<#if showTeam>
 							<td class="teamName name">
@@ -44,6 +50,21 @@
 						<td class="averagePerWicket number"><#if row.averagePerWicket??>${row.averagePerWicket?string("0.00")}</#if></td>
 						<td class="averagePerOver number"><#if row.economyRate??>${row.economyRate?string("0.00")}</#if></td>					
 					</tr>
+					<#if expand>
+						<tr class="expandedBowling">
+							<td></td>
+							<td colspan="${showTeam?then(8, 7)}">
+								<ul>							
+								<#list row.performances as perf>
+									<li>${perf.matchDate?string("d MMM yy")}:
+									${perf.performance.wicketsTaken}/${perf.performance.runsConceded}
+									(${perf.overs} ov)
+									v ${perf.opponent.name}
+								</#list>
+								</ul>
+							</td>
+						</tr>
+					</#if>
 					<#assign lastRow = row/>
 				</#list>
 			</tbody>

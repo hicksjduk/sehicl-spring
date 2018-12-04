@@ -12,21 +12,23 @@ public class LeagueBattingAveragesPage extends Page
     private final String title;
     private final boolean current;
 
-    public LeagueBattingAveragesPage(LeagueSelector selector, String uri)
+    public LeagueBattingAveragesPage(LeagueSelector selector, String uri, String expandBatting)
     {
         super("averages", "leaguebattingaverages.ftlh", Section.AVERAGES, uri);
-        averages = new BattingAverages.Builder(selector, 
-                Completeness.CONSISTENT, 50, new ModelAndRules()).build();
+        averages = new BattingAverages.Builder(selector, Completeness.CONSISTENT, 50, expandBatting,
+                new ModelAndRules()).build();
         title = String.format("%s Batting", selector.getName());
         current = true;
     }
 
-    public LeagueBattingAveragesPage(LeagueSelector selector, int season, String uri)
+    public LeagueBattingAveragesPage(LeagueSelector selector, int season, String uri,
+            String expandBatting)
     {
         super("averages", "leaguebattingaverages.ftlh", Section.ARCHIVE, uri);
-        averages = new BattingAverages.Builder(selector, 
-                Completeness.COMPLETE, 50, new ModelAndRules(season)).build();
-        title = String.format("%s Batting - Season %d-%02d", selector.getName(), season + 1999, season);
+        averages = new BattingAverages.Builder(selector, Completeness.COMPLETE, 50, expandBatting,
+                new ModelAndRules(season)).build();
+        title = String.format("%s Batting - Season %d-%02d", selector.getName(), season + 1999,
+                season);
         current = false;
     }
 

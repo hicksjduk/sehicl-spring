@@ -125,9 +125,8 @@ public class BattingAverages implements Averages<BattingRow>
             return SK_COMPARATOR.compare(this, o);
         }
 
-        public void add(BattingPerformance batting)
+        public void add(Batsman batsman, BattingPerformance performance)
         {
-            final Batsman batsman = batting.performance;
             innings++;
             notOut += batsman.isOut() ? 0 : 1;
             runs += batsman.getRunsScored();
@@ -135,7 +134,13 @@ public class BattingAverages implements Averages<BattingRow>
             {
                 best = batsman;
             }
-            performances.add(batting);
+            if (performance != null)
+                performances.add(performance);
+        }
+
+        public SortedSet<BattingPerformance> getPerformances()
+        {
+            return performances;
         }
     }
 
@@ -147,14 +152,16 @@ public class BattingAverages implements Averages<BattingRow>
         private final Completeness completenessThreshold;
         private final Integer maxRows;
         private final ModelAndRules[] seasonData;
+        private final String expandId;
 
         public Builder(AveragesSelector selector, Completeness completenessThreshold,
-                Integer maxRows, ModelAndRules... seasonData)
+                Integer maxRows, String expandId, ModelAndRules... seasonData)
         {
             this.selector = selector;
             this.completenessThreshold = completenessThreshold;
             this.maxRows = maxRows;
             this.seasonData = seasonData;
+            this.expandId = expandId;
         }
 
         public BattingAverages build()
@@ -203,7 +210,8 @@ public class BattingAverages implements Averages<BattingRow>
                 row = new BattingRow(team.getPlayer(playerId), team);
                 rowsByPlayerId.put(playerId, row);
             }
-            row.add(new BattingPerformance(matchDate, opponent, batsman));
+            row.add(batsman, playerId.equals(expandId)
+                    ? new BattingPerformance(matchDate, opponent, batsman) : null);
         }
 
         public Collection<BattingRow> getRows()
@@ -253,6 +261,21 @@ public class BattingAverages implements Averages<BattingRow>
         public int compareTo(BattingPerformance other)
         {
             return COMPARATOR.compare(this, other);
+        }
+
+        public Date getMatchDate()
+        {
+            return matchDate;
+        }
+
+        public Team getOpponent()
+        {
+            return opponent;
+        }
+
+        public Batsman getPerformance()
+        {
+            return performance;
         }
     }
 }

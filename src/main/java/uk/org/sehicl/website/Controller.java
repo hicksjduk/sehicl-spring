@@ -196,8 +196,8 @@ public class Controller
     {
         String uri = getRequestUri(req);
         return new PageTemplate(
-                new LeagueBattingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()), uri))
-                        .process();
+                new LeagueBattingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()), uri,
+                        req.getParameter("expandBatting"))).process();
     }
 
     @RequestMapping("/archive/batting/{selector}/{season}")
@@ -210,7 +210,7 @@ public class Controller
                         String.format("archive%d/%sBatting.html", season, selector),
                         Section.ARCHIVE, uri, "SEHICL Archive")
                 : new LeagueBattingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()),
-                        season, uri);
+                        season, uri, req.getParameter("expandBatting"));
         return new PageTemplate(page).process();
     }
 
@@ -219,8 +219,8 @@ public class Controller
     {
         String uri = getRequestUri(req);
         return new PageTemplate(
-                new LeagueBowlingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()), uri))
-                        .process();
+                new LeagueBowlingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()), uri,
+                        req.getParameter("expandBowling"))).process();
     }
 
     @RequestMapping("/archive/bowling/{selector}/{season}")
@@ -233,7 +233,7 @@ public class Controller
                         String.format("archive%d/%sBowling.html", season, selector),
                         Section.ARCHIVE, uri, "SEHICL Archive")
                 : new LeagueBowlingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()),
-                        season, uri);
+                        season, uri, req.getParameter("expandBowling"));
         return new PageTemplate(page).process();
     }
 
@@ -241,14 +241,16 @@ public class Controller
     public String currentTeamAverages(HttpServletRequest req, @PathVariable String teamId)
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new TeamAveragesPage(teamId, uri)).process();
+        return new PageTemplate(new TeamAveragesPage(teamId, uri, req.getParameter("expandBatting"),
+                req.getParameter("expandBowling"))).process();
     }
 
     @RequestMapping("/archive/teamAverages/{teamId}")
     public String archiveTeamAverages(HttpServletRequest req, @PathVariable String teamId)
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new TeamAveragesPage(teamId, null, uri)).process();
+        return new PageTemplate(new TeamAveragesPage(teamId, null, uri,
+                req.getParameter("expandBatting"), req.getParameter("expandBowling"))).process();
     }
 
     @RequestMapping("/archive/teamAverages/{teamId}/{season}")
@@ -256,7 +258,8 @@ public class Controller
             @PathVariable int season)
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new TeamAveragesPage(teamId, season, uri)).process();
+        return new PageTemplate(new TeamAveragesPage(teamId, season, uri,
+                req.getParameter("expandBatting"), req.getParameter("expandBowling"))).process();
     }
 
     @RequestMapping("/averages/byTeam")

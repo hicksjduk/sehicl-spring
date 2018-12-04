@@ -133,7 +133,7 @@ public class BowlingAverages implements Averages<BowlingRow>
             return SK_COMPARATOR.compare(this, o);
         }
 
-        public void add(Bowler bowler, Date matchDate, Team opponent)
+        public void add(Bowler bowler, BowlingPerformance performance)
         {
             balls += bowler.getBallsBowled();
             runs += bowler.getRunsConceded();
@@ -142,12 +142,18 @@ public class BowlingAverages implements Averages<BowlingRow>
             {
                 best = bowler;
             }
-            performances.add(new BowlingPerformance(matchDate, opponent, bowler));
+            if (performance != null)
+                performances.add(performance);
         }
 
         public int getWickets()
         {
             return wickets;
+        }
+
+        public SortedSet<BowlingPerformance> getPerformances()
+        {
+            return performances;
         }
     }
 
@@ -159,14 +165,16 @@ public class BowlingAverages implements Averages<BowlingRow>
         private final Completeness completenessThreshold;
         private final Integer maxRows;
         private final ModelAndRules[] seasonData;
+        private final String expandId;
 
         public Builder(AveragesSelector selector, Completeness completenessThreshold,
-                Integer maxRows, ModelAndRules... seasonData)
+                Integer maxRows, String expandId, ModelAndRules... seasonData)
         {
             this.selector = selector;
             this.completenessThreshold = completenessThreshold;
             this.maxRows = maxRows;
             this.seasonData = seasonData;
+            this.expandId = expandId;
         }
 
         public BowlingAverages build()
@@ -216,7 +224,8 @@ public class BowlingAverages implements Averages<BowlingRow>
                 row = new BowlingRow(team.getPlayer(playerId), team, rules);
                 rowsByPlayerId.put(playerId, row);
             }
-            row.add(bowler, matchDate, opponent);
+            row.add(bowler, playerId.equals(expandId)
+                    ? new BowlingPerformance(matchDate, opponent, bowler, rules) : null);
         }
 
         public Collection<BowlingRow> getRows()
@@ -254,18 +263,40 @@ public class BowlingAverages implements Averages<BowlingRow>
         public final Date matchDate;
         public final Team opponent;
         public final Bowler performance;
+        public final String overs;
 
-        public BowlingPerformance(Date matchDate, Team opponent, Bowler performance)
+        public BowlingPerformance(Date matchDate, Team opponent, Bowler performance, Rules rules)
         {
             this.matchDate = matchDate;
             this.opponent = opponent;
             this.performance = performance;
+            this.overs = rules.ballsToOvers(performance.getBallsBowled());
         }
 
         @Override
         public int compareTo(BowlingPerformance other)
         {
             return COMPARATOR.compare(this, other);
+        }
+
+        public Date getMatchDate()
+        {
+            return matchDate;
+        }
+
+        public Team getOpponent()
+        {
+            return opponent;
+        }
+
+        public Bowler getPerformance()
+        {
+            return performance;
+        }
+
+        public String getOvers()
+        {
+            return overs;
         }
 
     }

@@ -20,22 +20,23 @@ public class TeamAveragesPage extends Page
     private final Team team;
     private final boolean current;
 
-    public TeamAveragesPage(String teamId, String uri)
+    public TeamAveragesPage(String teamId, String uri, String expandBatting, String expandBowling)
     {
         super("averages", "teamaverages.ftlh", Section.AVERAGES, uri);
         this.selector = new TeamSelector(teamId);
         final Completeness completenessThreshold = Completeness.CONSISTENT;
         final ModelAndRules modelAndRules = new ModelAndRules();
         team = modelAndRules.model.getTeam(teamId);
-        batting = new BattingAverages.Builder(selector, completenessThreshold, null, modelAndRules)
-                .build();
-        bowling = new BowlingAverages.Builder(selector, completenessThreshold, null, modelAndRules)
-                .build();
+        batting = new BattingAverages.Builder(selector, completenessThreshold, null, expandBatting,
+                modelAndRules).build();
+        bowling = new BowlingAverages.Builder(selector, completenessThreshold, null, expandBowling,
+                modelAndRules).build();
         title = String.format("Averages: %s", team.getName());
         current = true;
     }
 
-    public TeamAveragesPage(String teamId, Integer season, String uri)
+    public TeamAveragesPage(String teamId, Integer season, String uri, String expandBat,
+            String expandBowl)
     {
         super("averages", "teamaverages.ftlh", Section.ARCHIVE, uri);
         this.selector = new TeamSelector(teamId);
@@ -46,10 +47,10 @@ public class TeamAveragesPage extends Page
                 .filter(sd -> sd.model.getLeagues().stream().anyMatch(selector::isSelected))
                 .toArray(ModelAndRules[]::new);
         final Completeness completenessThreshold = Completeness.COMPLETE;
-        batting = new BattingAverages.Builder(selector, completenessThreshold, null, seasonData)
-                .build();
-        bowling = new BowlingAverages.Builder(selector, completenessThreshold, null, seasonData)
-                .build();
+        batting = new BattingAverages.Builder(selector, completenessThreshold, null, expandBat,
+                seasonData).build();
+        bowling = new BowlingAverages.Builder(selector, completenessThreshold, null, expandBowl,
+                seasonData).build();
         team = seasonData[0].model.getTeam(teamId);
         title = String.format("Averages: %s", team.getName());
         current = false;

@@ -204,6 +204,10 @@ H1 {
 	white-space: nowrap;
 }
 
+#batav li {
+	list-style-type: none
+}
+
 #bowlav .number {
 	text-align: center;
 	padding-left: 10px;
@@ -214,6 +218,10 @@ H1 {
 	padding-right: 20px;
 	text-align: left;
 	white-space: nowrap;
+}
+
+#bowlav li {
+	list-style-type: none
 }
 
 #users th {
