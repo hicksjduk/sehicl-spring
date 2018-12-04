@@ -53,8 +53,8 @@
 								<tr>
 								<td class="figures number">${perf.performance.wicketsTaken}/${perf.performance.runsConceded}</td>
 								<td class="overs number">(${perf.overs} ov)</td>
-								<td class="match">${perf.matchDate?string("d MMM yy")}
-								v ${perf.opponent.name}
+								<td class="match">
+								v ${perf.opponent.name}, <@ordinalDate perf.matchDate "MMM" "yy"/>
 								</td>
 								</tr>
 							</#list>

@@ -49,8 +49,9 @@
 							<#list row.performances as perf>
 								<tr>
 								<td class="score number">${perf.performance.runsScored}${perf.performance.out?then("","*")}</td>
-								<td class="match">${perf.matchDate?string("d MMM yy")}
-									v ${perf.opponent.name}</td
+								<td class="match">
+									v ${perf.opponent.name}, <@ordinalDate perf.matchDate "MMM" "yy"/>
+								</td>
 								</tr>
 							</#list>
 							</table>
