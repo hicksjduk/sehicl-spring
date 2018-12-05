@@ -23,6 +23,12 @@ import uk.org.sehicl.website.rules.Rules;
 public abstract class Results
 {
     private final Collection<ResultDetails> results;
+    
+    public static ResultDetails getResult(League league, Match match, Rules rules)
+    {
+        return match.getPlayedMatch() == null ? new AwardedMatchDetails(league, match)
+                : new PlayedResultDetails(league, match, rules);
+    }
 
     protected Results(Collection<ResultDetails> results)
     {

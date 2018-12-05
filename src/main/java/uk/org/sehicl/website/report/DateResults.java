@@ -90,8 +90,7 @@ public class DateResults extends Results
             }
             if (include)
             {
-                results.add(match.getPlayedMatch() == null ? new AwardedMatchDetails(league, match)
-                        : new PlayedResultDetails(league, match, rules));
+                results.add(Results.getResult(league, match, rules));
             }
         }
     }
