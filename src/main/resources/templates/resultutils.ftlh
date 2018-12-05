@@ -6,10 +6,6 @@
 <tr>
 <#list [innings1, innings2] as inns>
 	<td class="teamscore">
-		<#if (inns?counter == 1) && ((innings1.team.id)??)>
-			<a name="${innings1.team.id}v${innings2.team.id}"></a>
-			<a name="${innings2.team.id}v${innings1.team.id}"></a>
-		</#if>
 		<#if (inns.team.id)??>
 			<a href="/fixtures/team/${inns.team.id}">${inns.team.name}</a>
 		<#else>
@@ -48,8 +44,6 @@
 
 <#macro walkover res>
 	<td class="teamscore" colspan="2">
-		<a name="${res.match.homeTeamId}v${res.match.awayTeamId}"></a>
-		<a name="${res.match.awayTeamId}v${res.match.homeTeamId}"></a>
 		<a href="/fixtures/team/${res.winnerId}">${res.winnerName}</a> beat 
 		<a href="/fixtures/team/${res.loserId}">${res.loserName}</a>  
 			by default (${res.reason})
