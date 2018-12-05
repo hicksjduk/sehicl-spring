@@ -171,6 +171,7 @@ ul.navigator li ul li
 #teamfix .result {
 	padding-left: 25px;
 	text-align: left;
+	white-space: nowrap;
 	padding-right: 500px
 }
 
