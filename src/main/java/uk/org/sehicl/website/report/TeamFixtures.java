@@ -14,6 +14,7 @@ import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
 import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.data.Team;
+import uk.org.sehicl.website.report.Results.ResultDetails;
 import uk.org.sehicl.website.rules.Rules;
 
 public class TeamFixtures
@@ -55,6 +56,7 @@ public class TeamFixtures
         private final String court;
         private final boolean home;
         private final String result;
+        private final ResultDetails resultDetails; 
 
         public Fixture(League league, Team team, Match match, Completeness completenessThreshold,
                 Rules rules)
@@ -66,6 +68,7 @@ public class TeamFixtures
             court = match.getCourt();
             result = completenessThreshold.compareTo(match.getCompleteness(rules)) <= 0
                     ? ResultFormatter.format(league, match, rules, team.getId()) : null;
+            resultDetails = result == null || match.getPlayedMatch() == null ? null : Results.getResult(league, match, rules);
         }
 
         public Team getOpponent()
@@ -86,6 +89,11 @@ public class TeamFixtures
         public String getResult()
         {
             return result;
+        }
+
+        public ResultDetails getResultDetails()
+        {
+            return resultDetails;
         }
 
         public boolean isHome()

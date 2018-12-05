@@ -170,7 +170,8 @@ ul.navigator li ul li
 
 #teamfix .result {
 	padding-left: 25px;
-	text-align: left
+	text-align: left;
+	padding-right: 500px
 }
 
 #teamfix .date {
