@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import uk.org.sehicl.website.data.AwardedMatch;
+import uk.org.sehicl.website.data.Innings;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
 import uk.org.sehicl.website.data.PlayedMatch;
@@ -44,25 +45,20 @@ public class ResultFormatter
                 }
                 else
                 {
-                    answer = String.format("%s by %s", teamId.equals(winner.getId()) ? "Won"
-                            : "Lost", margin);
+                    answer = String.format("%s by %s",
+                            teamId.equals(winner.getId()) ? "Won" : "Lost", margin);
                 }
             }
         }
         return answer;
     }
 
-    private static class TeamInMatchComparator implements Comparator<TeamInMatch>
-    {
-        @Override
-        public int compare(TeamInMatch o1, TeamInMatch o2)
-        {
-            return o2.getInnings().getRunsScored() - o1.getInnings().getRunsScored();
-        }
-    }
-
     private static abstract class Margin
     {
+        private static final Comparator<TeamInMatch> TEAM_IN_MATCH_COMPARATOR = Comparator
+                .comparing(TeamInMatch::getInnings,
+                        Comparator.comparingInt(Innings::getRunsScored).reversed());
+
         private final Team winner;
 
         public Margin(Team winner)
@@ -83,9 +79,8 @@ public class ResultFormatter
             {
                 PlayedMatch playedMatch = match.getPlayedMatch();
                 TeamInMatch[] teams = playedMatch.getTeams().toArray(new TeamInMatch[2]);
-                TeamInMatchComparator comparator = new TeamInMatchComparator();
-                Arrays.sort(teams, comparator);
-                if (comparator.compare(teams[0], teams[1]) == 0)
+                Arrays.sort(teams, TEAM_IN_MATCH_COMPARATOR);
+                if (TEAM_IN_MATCH_COMPARATOR.compare(teams[0], teams[1]) == 0)
                 {
                     answer = new TiedMargin();
                 }
@@ -154,8 +149,8 @@ public class ResultFormatter
         @Override
         public String toString()
         {
-            String answer = String.format("%d wicket%s", wicketsInHand, wicketsInHand == 1 ? ""
-                    : "s");
+            String answer = String.format("%d wicket%s", wicketsInHand,
+                    wicketsInHand == 1 ? "" : "s");
             return answer;
         }
     }

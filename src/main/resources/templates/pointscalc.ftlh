@@ -12,9 +12,9 @@
 	In a game won by default, the winning team receives
 	5 batting points and
 	5 bowling points as well as
-	12 points for winning. <br> Teams level on
-	points are ranked by <b>run rate</b>, which is the total number of runs
-	scored, divided by the total number of overs faced. For this purpose,
+	12 points for winning. <br> Teams are ranked by <b>average points per game played</b>, then if still equal 
+	by <b>run rate</b>, which is the total number of runs
+	scored divided by the total number of overs faced. For this purpose,
 	an innings where the batting side is all out counts as lasting the full
 	number of available overs, even if it is actually shorter.
 </p>

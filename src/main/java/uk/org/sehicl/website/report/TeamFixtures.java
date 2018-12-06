@@ -3,6 +3,7 @@ package uk.org.sehicl.website.report;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +14,7 @@ import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
 import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.data.Team;
+import uk.org.sehicl.website.report.Results.ResultDetails;
 import uk.org.sehicl.website.rules.Rules;
 
 public class TeamFixtures
@@ -45,11 +47,16 @@ public class TeamFixtures
 
     public static class Fixture implements Comparable<Fixture>
     {
+        private static final Comparator<Fixture> COMPARATOR = Comparator
+                .comparing(Fixture::getDateTime, Comparator.nullsLast(Comparator.naturalOrder()))
+                .thenComparing(Fixture::getOpponent);
+
         private final Team opponent;
         private final Date dateTime;
         private final String court;
         private final boolean home;
         private final String result;
+        private final ResultDetails resultDetails; 
 
         public Fixture(League league, Team team, Match match, Completeness completenessThreshold,
                 Rules rules)
@@ -61,6 +68,7 @@ public class TeamFixtures
             court = match.getCourt();
             result = completenessThreshold.compareTo(match.getCompleteness(rules)) <= 0
                     ? ResultFormatter.format(league, match, rules, team.getId()) : null;
+            resultDetails = result == null || match.getPlayedMatch() == null ? null : Results.getResult(league, match, rules);
         }
 
         public Team getOpponent()
@@ -83,6 +91,11 @@ public class TeamFixtures
             return result;
         }
 
+        public ResultDetails getResultDetails()
+        {
+            return resultDetails;
+        }
+
         public boolean isHome()
         {
             return home;
@@ -91,17 +104,7 @@ public class TeamFixtures
         @Override
         public int compareTo(Fixture o)
         {
-            int answer = 0;
-            if (dateTime != o.dateTime)
-            {
-                answer = dateTime == null ? 1
-                        : o.dateTime == null ? -1 : dateTime.compareTo(o.dateTime);
-            }
-            if (answer == 0)
-            {
-                answer = opponent.compareTo(o.opponent);
-            }
-            return answer;
+            return COMPARATOR.compare(this, o);
         }
     }
 

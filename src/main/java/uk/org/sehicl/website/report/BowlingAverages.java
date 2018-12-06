@@ -1,19 +1,19 @@
 package uk.org.sehicl.website.report;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.stream.Stream;
 
 import uk.org.sehicl.website.data.Bowler;
 import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
-import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.data.Player;
 import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.data.TeamInMatch;
@@ -58,6 +58,14 @@ public class BowlingAverages implements Averages<BowlingRow>
 
     public static class BowlingRow implements Comparable<BowlingRow>
     {
+        private final static Comparator<BowlingRow> SK_COMPARATOR = Comparator
+                .comparingInt(BowlingRow::getWickets)
+                .reversed()
+                .thenComparing(BowlingRow::getEconomyRate,
+                        Comparator.nullsLast(Comparator.naturalOrder()));
+        private final static Comparator<BowlingRow> COMPARATOR = SK_COMPARATOR
+                .thenComparing(BowlingRow::getPlayer);
+
         private final Player player;
         private final Team team;
         private final Rules rules;
@@ -65,6 +73,7 @@ public class BowlingAverages implements Averages<BowlingRow>
         private int runs;
         private int wickets;
         private Bowler best;
+        private final SortedSet<BowlingPerformance> performances = new TreeSet<>();
 
         public BowlingRow(Player player, Team team, Rules rules)
         {
@@ -116,32 +125,17 @@ public class BowlingAverages implements Averages<BowlingRow>
         @Override
         public int compareTo(BowlingRow o)
         {
-            int answer = compareSortKeys(o);
-            if (answer == 0)
-            {
-                answer = player.compareTo(o.player);
-            }
-            return answer;
+            return COMPARATOR.compare(this, o);
         }
 
         public int compareSortKeys(BowlingRow o)
         {
-            int answer = Integer.compare(o.wickets, wickets);
-            if (answer == 0)
-            {
-                answer = compareEconomyRates(getEconomyRate(), o.getEconomyRate());
-            }
-            return answer;
+            return SK_COMPARATOR.compare(this, o);
         }
 
-        private int compareEconomyRates(Double a, Double b)
+        public void add(BowlingPerformance performance)
         {
-            return Double.compare(a == null ? Double.MAX_VALUE : a,
-                    b == null ? Double.MAX_VALUE : b);
-        }
-
-        public void add(Bowler bowler)
-        {
+            final Bowler bowler = performance.performance;
             balls += bowler.getBallsBowled();
             runs += bowler.getRunsConceded();
             wickets += bowler.getWicketsTaken();
@@ -149,47 +143,53 @@ public class BowlingAverages implements Averages<BowlingRow>
             {
                 best = bowler;
             }
+            performances.add(performance);
         }
 
         public int getWickets()
         {
             return wickets;
         }
+
+        public SortedSet<BowlingPerformance> getPerformances()
+        {
+            return performances;
+        }
     }
 
     public static class Builder
     {
-        private final Model model;
         private final Map<String, BowlingRow> rowsByPlayerId = new HashMap<>();
         private final AveragesSelector selector;
         private final ReportStatus status = new ReportStatus();
         private final Completeness completenessThreshold;
-        private final Rules rules;
         private final Integer maxRows;
+        private final ModelAndRules[] seasonData;
 
-        public Builder(Model model, AveragesSelector selector, Completeness completenessThreshold,
-                Rules rules, Integer maxRows)
+        public Builder(AveragesSelector selector, Completeness completenessThreshold,
+                Integer maxRows, ModelAndRules... seasonData)
         {
-            this.model = model;
             this.selector = selector;
             this.completenessThreshold = completenessThreshold;
-            this.rules = rules;
             this.maxRows = maxRows;
+            this.seasonData = seasonData;
         }
 
         public BowlingAverages build()
         {
-            model.getLeagues().stream().filter(selector::isSelected).forEach(this::add);
+            Stream.of(seasonData).forEach(
+                    sd -> sd.model.getLeagues().stream().filter(selector::isSelected).forEach(
+                            l -> this.add(l, sd.rules)));
             return new BowlingAverages(this);
         }
 
-        private void add(League league)
+        private void add(League league, Rules rules)
         {
             league.getMatches().stream().filter(m -> selector.isSelected(m)).forEach(
-                    m -> this.add(league, m));
+                    m -> this.add(league, m, rules));
         }
 
-        private void add(League league, Match match)
+        private void add(League league, Match match, Rules rules)
         {
             boolean complete = completenessThreshold.compareTo(match.getCompleteness(rules)) <= 0;
             status.add(match, complete);
@@ -200,19 +200,20 @@ public class BowlingAverages implements Averages<BowlingRow>
                         .getTeams()
                         .stream()
                         .filter(t -> selector.isSelected(t, false))
-                        .forEach(t -> this.add(league, match, t));
+                        .forEach(t -> this.add(league, match, t, rules));
             }
         }
 
-        private void add(League league, Match match, TeamInMatch teamInMatch)
+        private void add(League league, Match match, TeamInMatch teamInMatch, Rules rules)
         {
-            String teamId = Objects.equals(teamInMatch.getTeamId(), match.getHomeTeamId())
-                    ? match.getAwayTeamId() : match.getHomeTeamId();
+            String teamId = match.getOpponentId(teamInMatch.getTeamId());
+            Team opponent = league.getTeam(teamInMatch.getTeamId());
             final Team team = league.getTeam(teamId);
-            teamInMatch.getInnings().getBowlers().stream().forEach(b -> this.add(team, b));
+            teamInMatch.getInnings().getBowlers().stream().forEach(
+                    b -> this.add(team, b, rules, match.getDateTime(), opponent));
         }
 
-        private void add(Team team, Bowler bowler)
+        private void add(Team team, Bowler bowler, Rules rules, Date matchDate, Team opponent)
         {
             final String playerId = bowler.getPlayerId();
             BowlingRow row = rowsByPlayerId.get(playerId);
@@ -221,7 +222,7 @@ public class BowlingAverages implements Averages<BowlingRow>
                 row = new BowlingRow(team.getPlayer(playerId), team, rules);
                 rowsByPlayerId.put(playerId, row);
             }
-            row.add(bowler);
+            row.add(new BowlingPerformance(matchDate, opponent, bowler, rules));
         }
 
         public Collection<BowlingRow> getRows()
@@ -249,5 +250,51 @@ public class BowlingAverages implements Averages<BowlingRow>
             }
             return answer;
         }
+    }
+
+    public static class BowlingPerformance implements Comparable<BowlingPerformance>
+    {
+        private final static Comparator<BowlingPerformance> COMPARATOR = Comparator
+                .comparing(bp -> bp.matchDate);
+
+        public final Date matchDate;
+        public final Team opponent;
+        public final Bowler performance;
+        public final String overs;
+
+        public BowlingPerformance(Date matchDate, Team opponent, Bowler performance, Rules rules)
+        {
+            this.matchDate = matchDate;
+            this.opponent = opponent;
+            this.performance = performance;
+            this.overs = rules.ballsToOvers(performance.getBallsBowled());
+        }
+
+        @Override
+        public int compareTo(BowlingPerformance other)
+        {
+            return COMPARATOR.compare(this, other);
+        }
+
+        public Date getMatchDate()
+        {
+            return matchDate;
+        }
+
+        public Team getOpponent()
+        {
+            return opponent;
+        }
+
+        public Bowler getPerformance()
+        {
+            return performance;
+        }
+
+        public String getOvers()
+        {
+            return overs;
+        }
+
     }
 }

@@ -32,6 +32,14 @@
 	person. The easiest way to do this is to click on the person's name in
 	the lists below.
 </p>
+<p>General contacts should be addressed to <@mailto address="contacts"/>.</p>
+<p>Non-member clubs who wish to enter one or more teams in the
+	League are asked to contact <@mailto address="secretary">the Secretary</@mailto> in the first instance.</p>
+<p>
+	Result sheets may be sent electronically to <@mailto address="fixturesec">the Fixture Secretary</@mailto>,
+	using one of the template documents available on the <a
+		href="/resources">Resources</a> page.
+</p>
 <p>Please let <@mailto address="website">the Webmaster</@mailto> know if any of the information below
 	is incomplete or incorrect.</p>
 <h2>
@@ -57,14 +65,6 @@
     </#list>
 	</tbody>
 </table>
-<p>General contacts should be addressed to <@mailto address="contacts"/>.</p>
-<p>Non-member clubs who wish to enter one or more teams in the
-	League are asked to contact <@mailto address="secretary">the Secretary</@mailto> in the first instance.</p>
-<p>
-	Result sheets may be sent electronically to <@mailto address="fixturesec">the Fixture Secretary</@mailto>,
-	using one of the template documents available on the <a
-		href="/resources">Resources</a> page.
-</p>
 <h2>
 	<a id="club">${clubTitle}</a>
 </h2>

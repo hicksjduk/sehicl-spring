@@ -1,12 +1,20 @@
 package uk.org.sehicl.website.data;
 
+import java.util.Comparator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@JsonPropertyOrder(value={"ballsBowled", "runs", "wickets", "notes"})
+@JsonPropertyOrder(value =
+{ "ballsBowled", "runs", "wickets", "notes" })
 public class Bowler extends Performance implements Comparable<Bowler>
 {
+    private static final Comparator<Bowler> COMPARATOR = Comparator
+            .comparing(Bowler::getWicketsTaken)
+            .reversed()
+            .thenComparingDouble(Bowler::getEconomyRate);
+    
     private int ballsBowled;
     private int runsConceded;
     private int wicketsTaken;
@@ -44,7 +52,7 @@ public class Bowler extends Performance implements Comparable<Bowler>
     {
         this.wicketsTaken = wicketsTaken;
     }
-    
+
     @JsonIgnore
     public double getEconomyRate()
     {
@@ -59,11 +67,6 @@ public class Bowler extends Performance implements Comparable<Bowler>
     @Override
     public int compareTo(Bowler o)
     {
-        int answer = o.wicketsTaken - wicketsTaken;
-        if (answer == 0)
-        {
-            answer = new Double(getEconomyRate()).compareTo(o.getEconomyRate());
-        }
-        return answer;
+        return COMPARATOR.compare(this, o);
     }
 }

@@ -2,6 +2,7 @@ package uk.org.sehicl.website.report;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -84,6 +85,19 @@ public class LeagueTable
 
     public static class TableRow implements Comparable<TableRow>
     {
+        public static Comparator<TableRow> sortKeyComparator(Rules rules)
+        {
+            final Comparator<TableRow> averagePointsComparator = Comparator.comparing(
+                    TableRow::getAveragePoints, Comparator.nullsLast(Comparator.reverseOrder()));
+            final Comparator<TableRow> pointsComparator = Comparator
+                    .comparingInt(TableRow::getPoints)
+                    .reversed();
+            final Comparator<TableRow> runRateComparator = Comparator.comparing(
+                    TableRow::getRunRate, Comparator.nullsLast(Comparator.reverseOrder()));
+            return (rules.isOrderByAveragePoints() ? averagePointsComparator : pointsComparator)
+                    .thenComparing(runRateComparator);
+        }
+
         private final Team team;
         private final Rules rules;
         private int won = 0;
@@ -94,11 +108,15 @@ public class LeagueTable
         private int runsScored = 0;
         private int runRateBalls = 0;
         private final List<Integer> deductionKeys = new ArrayList<>();
+        private final Comparator<TableRow> skComparator;
+        private final Comparator<TableRow> comparator;
 
         public TableRow(Team team, Rules rules)
         {
             this.team = team;
             this.rules = rules;
+            this.skComparator = sortKeyComparator(rules);
+            this.comparator = skComparator.thenComparing(TableRow::getTeam);
         }
 
         public int getPlayed()
@@ -169,23 +187,12 @@ public class LeagueTable
         @Override
         public int compareTo(TableRow o)
         {
-            int answer = compareSortFields(o);
-            return answer == 0 ? team.getName().compareTo(o.team.getName()) : answer;
+            return comparator.compare(this, o);
         }
 
         public int compareSortFields(TableRow o)
         {
-            int answer = o.getPoints() - getPoints();
-            if (answer == 0)
-            {
-                answer = compareRunRates(o.getRunRate(), getRunRate());
-            }
-            return answer;
-        }
-
-        private int compareRunRates(Double rr1, Double rr2)
-        {
-            return rr1 == rr2 ? 0 : rr1 == null ? 1 : rr2 == null ? -1 : rr1.compareTo(rr2);
+            return skComparator.compare(this, o);
         }
 
         public void add(Match match)
@@ -271,6 +278,12 @@ public class LeagueTable
         public List<Integer> getDeductionKeys()
         {
             return deductionKeys;
+        }
+
+        public Double getAveragePoints()
+        {
+            final int played = getPlayed();
+            return played == 0 ? null : getPoints() * 1.0 / played;
         }
     }
 

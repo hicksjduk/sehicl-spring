@@ -3,6 +3,7 @@ package uk.org.sehicl.website.data;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -14,6 +15,15 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 { "name", "teamsPromoted", "teamsRelegated", "team", "match", "tableNotes" })
 public class League implements Comparable<League>
 {
+    private static Comparator<League> comparator(String name)
+    {
+        boolean senior = name.charAt(0) != 'C';
+        return Comparator.comparing(League::getName,
+                Comparator.comparingInt((String n) -> n.charAt(0)).reversed().thenComparing(
+                        (String n) -> n.charAt(n.length() - 1), senior ? Comparator.naturalOrder()
+                                : Comparator.reverseOrder()));
+    }
+
     private String id;
     private String name;
     private final List<Team> teams = new ArrayList<>();
@@ -21,6 +31,7 @@ public class League implements Comparable<League>
     private int teamsRelegated;
     private final List<Match> matches = new ArrayList<>();
     private String tableNotes;
+    private Comparator<League> comparator;
 
     @JacksonXmlProperty(localName = "team")
     @JacksonXmlElementWrapper(useWrapping = false)
@@ -43,6 +54,7 @@ public class League implements Comparable<League>
     public void setName(String name)
     {
         this.name = name;
+        this.comparator = comparator(name);
     }
 
     @JacksonXmlProperty(isAttribute = true)
@@ -102,14 +114,9 @@ public class League implements Comparable<League>
     @Override
     public int compareTo(League o)
     {
-        int answer = o.name.charAt(0) - name.charAt(0);
-        if (answer == 0)
-        {
-            answer = name.startsWith("C") ? o.name.compareTo(name) : name.compareTo(o.name);
-        }
-        return answer;
+        return comparator.compare(this, o);
     }
-    
+
     public Team getTeam(String teamId)
     {
         Team answer = null;
@@ -123,7 +130,7 @@ public class League implements Comparable<League>
         }
         return answer;
     }
-    
+
     public Match getMatch(String teamId1, String teamId2)
     {
         Match answer = null;
@@ -132,7 +139,8 @@ public class League implements Comparable<League>
             final Collection<String> teamIds = new TreeSet<>(Arrays.asList(teamId1, teamId2));
             for (Match match : matches)
             {
-                if (teamIds.equals(new TreeSet<>(Arrays.asList(match.getHomeTeamId(), match.getAwayTeamId()))))
+                if (teamIds.equals(
+                        new TreeSet<>(Arrays.asList(match.getHomeTeamId(), match.getAwayTeamId()))))
                 {
                     answer = match;
                     break;

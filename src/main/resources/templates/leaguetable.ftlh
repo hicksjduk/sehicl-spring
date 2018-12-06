@@ -9,6 +9,8 @@
 	<@statusMessage table.status table.lastIncludedDate!"" table.toCome "table"/>
 </p>
 <p class="noprint">Click on a team to see all matches for that team.</p>
+<p>Teams are ranked by <b>average points per game played</b>, then if still equal 
+by <b>run rate</b>.</p>
 </#if>
 <table id="table">
 <thead>
@@ -22,17 +24,20 @@
 <th class="runrate number">RR</th>
 <th colspan="2">Ded</th>
 <th class="points number">Pts</th>
+<#if table.rules.orderByAveragePoints>
+<th class="averagepoints number">Pts/match</th>
+</#if>
 </tr>
 </thead>
 <tbody>
 <#list table.rows as row>
 <tr>
 <td class="position number">
-<#if (!lastRow??) || (row.compareSortFields(lastRow) != 0)>${row?counter}</#if>
+<#if (row?counter == 1) || (row.compareSortFields(lastRow) != 0)>${row?counter}</#if>
 </td>
 <td class="teamname ">
 <#if current>
-<a href="../fixtures/team/${row.team.id}">${row.team.name}</a>
+<a href="/fixtures/team/${row.team.id}">${row.team.name}</a>
 <#else>
 ${row.team.name}
 </#if>
@@ -48,11 +53,14 @@ ${row.team.name}
 <td class="dedkeys"><#if row.deductionKeys?size != 0>(${row.deductionKeys?join(", ")})</#if>
 </td>
 <td class="points number">${row.points}</td>
+<#if table.rules.orderByAveragePoints>
+<td class="averagepoints number">${(row.averagePoints?string("0.00"))!""}</td>
+</#if>
 </tr>
 <#if current && (row?counter == table.league.teamsPromoted ||
 (table.league.teamsRelegated != 0 && 
 row?counter == table.league.teams?size - table.league.teamsRelegated))>
-<tr><td colspan="12" class="linebelow">&nbsp;</td></tr>
+<tr><td colspan="13" class="linebelow">&nbsp;</td></tr>
 </#if>
 <#assign lastRow = row/>
 </#list>

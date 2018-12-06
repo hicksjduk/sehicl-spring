@@ -246,6 +246,13 @@ public class Controller
         return new PageTemplate(new TeamAveragesPage(teamId, uri)).process();
     }
 
+    @RequestMapping("/archive/teamAverages/{teamId}")
+    public String archiveTeamAverages(HttpServletRequest req, @PathVariable String teamId)
+    {
+        String uri = getRequestUri(req);
+        return new PageTemplate(new TeamAveragesPage(teamId, null, uri)).process();
+    }
+
     @RequestMapping("/archive/teamAverages/{teamId}/{season}")
     public String archiveTeamAverages(HttpServletRequest req, @PathVariable String teamId,
             @PathVariable int season)

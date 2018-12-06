@@ -33,7 +33,7 @@ public class Player implements Comparable<Player>
     @Override
     public int compareTo(Player o)
     {
-        return sortKey.compareTo(o.sortKey);
+        return sortKey.compareToIgnoreCase(o.sortKey);
     }
 
     private String getSortKey(String name)

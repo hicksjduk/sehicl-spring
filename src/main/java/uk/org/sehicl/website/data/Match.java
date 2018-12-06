@@ -1,6 +1,7 @@
 package uk.org.sehicl.website.data;
 
 import java.util.Date;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
@@ -124,6 +125,15 @@ public class Match
     {
         return dateTime == null || outcome == null ? Completeness.INCOMPLETE
                 : outcome.getCompleteness(rules);
+    }
+
+    public String getOpponentId(String teamId)
+    {
+        return Stream
+                .of(homeTeamId, awayTeamId)
+                .filter(id -> !id.equals(teamId))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override

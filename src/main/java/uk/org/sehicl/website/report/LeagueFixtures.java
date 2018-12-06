@@ -1,6 +1,7 @@
 package uk.org.sehicl.website.report;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.TreeSet;
 
 import uk.org.sehicl.website.data.Completeness;
@@ -33,6 +34,16 @@ public class LeagueFixtures
 
     public static class UnplayedMatch implements Comparable<UnplayedMatch>
     {
+        private static final Comparator<UnplayedMatch> COMPARATOR = Comparator
+                .comparing(UnplayedMatch::getMatch,
+                        Comparator
+                                .comparing(Match::getDateTime,
+                                        Comparator.nullsLast(Comparator.naturalOrder()))
+                                .thenComparing(Match::getCourt,
+                                        Comparator.nullsLast(Comparator.naturalOrder())))
+                .thenComparing(UnplayedMatch::getHomeTeam)
+                .thenComparing(UnplayedMatch::getAwayTeam);
+        
         private final League league;
         private final Match match;
         private final Team homeTeam;
@@ -69,26 +80,7 @@ public class LeagueFixtures
         @Override
         public int compareTo(UnplayedMatch o)
         {
-            int answer = compareNullSortsLast(match.getDateTime(), o.match.getDateTime());
-            if (answer == 0)
-            {
-                answer = compareNullSortsLast(match.getCourt(), o.match.getCourt());
-                if (answer == 0)
-                {
-                    answer = homeTeam.compareTo(awayTeam);
-                }
-            }
-            return answer;
-        }
-
-        private <T extends Comparable<T>> int compareNullSortsLast(T d1, T d2)
-        {
-            int answer = 0;
-            if (d1 != d2)
-            {
-                answer = d1 == null ? 1 : d2 == null ? -1 : d1.compareTo(d2);
-            }
-            return answer;
+            return COMPARATOR.compare(this, o);
         }
     }
 
