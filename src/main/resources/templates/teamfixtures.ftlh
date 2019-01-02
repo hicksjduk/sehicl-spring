@@ -26,15 +26,15 @@ or to hide them if displayed.</p>
 				<td class="opponent"><a
 					href="/fixtures/team/${row.opponent.id}">${row.opponent.name}</a></td>
 				<td class="homeAway">${row.home?then("H", "A")}</td>
-				<#if row.result??>
-					<td class="result">
+				<td class="result">
+					<#if row.result??>
 						<#if row.resultDetails??>
 							<a href="javascript:toggleVisible('result${row?counter}')">${row.result}</a>
 						<#else>
 							${row.result}
 						</#if>
-					</td>
-				</#if>
+					</#if>
+				</td>
 			</tr>
 			<#if row.resultDetails??>
 				<#assign res = row.resultDetails/>
