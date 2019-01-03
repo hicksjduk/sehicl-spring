@@ -28,6 +28,11 @@ League.
 The league programme will resume on Sunday 6th January.
 </@news>
 
+<@news end="2019-01-20">
+We regret that <b>Fareham & Crofton Under-13s have decided to withdraw from the League</b>.
+Their matches have been expunged from the records, in accordance with League rules.
+</@news>
+
 <#if started??>
 	</div>
 </#if>
