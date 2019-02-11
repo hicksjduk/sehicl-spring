@@ -5,9 +5,13 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import uk.org.sehicl.website.data.League;
+import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.dataload.ModelLoader;
 
 public class FixturesExporter
@@ -35,9 +39,18 @@ public class FixturesExporter
     private Stream<String> matchData(League l)
     {
         final String divNum = l.getId().replaceAll("[^\\d]", "");
-        return l.getMatches().stream().map(m -> String.format("%s,%s,%s,%s,%s,,,%s",
-                DATE_FORMATTER.format(m.getDateTime()), TIME_FORMATTER.format(m.getDateTime()),
-                m.getCourt(), divNum, l.getTeam(m.getHomeTeamId()).getName(),
-                l.getTeam(m.getAwayTeamId()).getName()));
+        final Map<String, String> teamNamesById = l
+                .getTeams()
+                .stream()
+                .collect(Collectors.toMap(Team::getId, Team::getName));
+        return l.getMatches().stream().map(m -> matchData(m.getDateTime(), m.getCourt(), divNum,
+                teamNamesById.get(m.getHomeTeamId()), teamNamesById.get(m.getAwayTeamId())));
+    }
+
+    private String matchData(Date dateTime, String court, String divNum, String homeTeamName,
+            String awayTeamName)
+    {
+        return String.format("%s,%s,%s,%s,%s,,,%s", DATE_FORMATTER.format(dateTime),
+                TIME_FORMATTER.format(dateTime), court, divNum, homeTeamName, awayTeamName);
     }
 }
