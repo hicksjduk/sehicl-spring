@@ -21037,12 +21037,12 @@
                         <wicketsLost>1</wicketsLost>
                         <ballsBowled>72</ballsBowled>
                         <batsman player="DAitken">
-                            <runs>27</runs>
-                            <out>false</out>
-                        </batsman>
-                        <batsman player="CCreal">
                             <runs>16</runs>
                             <out>true</out>
+                        </batsman>
+                        <batsman player="CCreal">
+                            <runs>27</runs>
+                            <out>false</out>
                         </batsman>
                         <batsman player="BClarke">
                             <runs>27</runs>
