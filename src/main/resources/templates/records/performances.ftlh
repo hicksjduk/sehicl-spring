@@ -34,6 +34,7 @@
 <@performance "Division 4" "IBM South Hants B" "17 all out" "2003-04"/>
 <@performance "" "Flutters" "17 all out" "2006-07"/>
 <@performance "Division 5" "OPCS Titchfield" "46 all out" "2017-18"/>
+<@performance "" "Portsmouth & Southsea C" "46 all out" "2018-19"/>
 <@performance "Colts Under-16" "Portsmouth" "14 all out" "2006-07"/>
 <@performance "Colts Under-13" "Portsmouth & Southsea" "15 all out" "2014-15"/>
 </tbody>
