@@ -21,6 +21,7 @@
 	<a href="/archive/presentation/2018">
 	The 2018 presentation evening</a> was on Sunday 25th March;
 	click the link for information and pictures from the evening.
+	The 2019 presentation evening will be on Sunday 7th April.
 </p>
 <p>Please report any broken links, mis-spelled names or other errors
 	to 	<@mailto address="website" description="SEHICL Webmaster">
