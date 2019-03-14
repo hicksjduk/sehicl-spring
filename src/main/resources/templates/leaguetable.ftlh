@@ -75,7 +75,14 @@ row?counter == table.league.teams?size - table.league.teamsRelegated))>
 </ul>
 </#if>
 <#if table.league.tableNotes??>
-<p><b>${table.league.tableNotes}</b></p>
+<p><b>
+<#list table.league.tableNotes?split("\n") as line>
+	<#if (line?counter > 1)>
+		<br>
+	</#if>
+	${line}
+</#list>
+</b></p>
 </#if>
 
 </#list>
