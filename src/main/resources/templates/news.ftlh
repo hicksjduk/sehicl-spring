@@ -16,7 +16,7 @@
 	</#if>
 </#macro>
 
-<@news end="2019-04-01">
+<@news end="2019-04-07">
 Congratulations to <b>Havant Under-13s</b> on clinching the first of the seven
 divisional championships for the season. The end-of-season presentation evening,
 at which all seven champions will play exhibition games and award winners will
