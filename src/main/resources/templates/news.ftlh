@@ -16,21 +16,11 @@
 	</#if>
 </#macro>
 
-<@news end="2019-01-20">
-Congratulations to <b>James Gradwell of Swanmore</b> who took 5 for 11 against Droxford
-on 16th December. This was a record for Division 5, and is probably the fourth-best bowling
-analysis ever recorded in the League.
-</@news>
-
-<@news end="2019-01-06">
-<b>A very happy Christmas and best wishes for the New Year</b> to everyone involved in the
-League.
-The league programme will resume on Sunday 6th January.
-</@news>
-
-<@news end="2019-01-20">
-We regret that <b>Fareham & Crofton Under-13s have decided to withdraw from the League</b>.
-Their matches have been expunged from the records, in accordance with League rules.
+<@news end="2019-04-01">
+Congratulations to <b>Havant Under-13s</b> on clinching the first of the seven
+divisional championships for the season. The end-of-season presentation evening,
+at which all seven champions will play exhibition games and award winners will
+receive their trophies, is on <u>Sunday 7th April</u>.
 </@news>
 
 <#if started??>
