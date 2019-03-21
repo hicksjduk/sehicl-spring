@@ -156,6 +156,14 @@ public class Controller
                 uri, "SEHICL Sporting & Efficiency")).process();
     }
 
+    @RequestMapping("/presentation")
+    public String presentationEvening(HttpServletRequest req)
+    {
+        String uri = getRequestUri(req);
+        return new PageTemplate(new StaticPage("presentation", "presentation/schedule.ftlh", Section.HOME,
+                uri, "SEHICL Presentation Evening")).process();
+    }
+
     @RequestMapping("/archive/presentation/{season}")
     public String presentationEvening(HttpServletRequest req, @PathVariable String season)
     {
