@@ -17,8 +17,9 @@
 </#macro>
 
 <@news end="2019-04-07">
-Congratulations to <b>Havant Under-13s</b> on clinching the first of the seven
-divisional championships for the season. The end-of-season presentation evening,
+Congratulations to <b>Waterlooville C</b> and 
+<b>Havant Under-13s</b> on clinching their respective
+divisional championships. The end-of-season presentation evening,
 at which all seven champions will play exhibition games and award winners will
 receive their trophies, is on <u>Sunday 7th April</u>.
 </@news>
