@@ -19,6 +19,7 @@
 <@news end="2019-04-07">
 Congratulations to 
 <b>Havant A</b>, 
+<b>Afghan Society Portsmouth</b>, 
 <b>Waterlooville C</b>, 
 <b>Gosport Borough Under-16s</b> and 
 <b>Havant Under-13s</b> on clinching their respective
