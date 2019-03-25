@@ -7,19 +7,19 @@
 <dd>Exhibition matches:
 <ul>
 <li>Colts Under-13 Champions (Havant) v Under-13 Select VI
-<li>Colts Under-16 Champions (TBC) v Under-16 Select VI
+<li>Colts Under-16 Champions (Gosport Borough) v Under-16 Select VI
 </ul>
 <dt>7.00pm
 <dd>Presentation of Colts awards
 <dt>7.30pm
 <dd>Exhibition match (8-a-side):
-Division 1 Champions (TBC) v the Mayor of Fareham's VIII
+Division 1 Champions (Havant A) v the Mayor of Fareham's VIII
 <dt>8.30pm
 <dd>Presentation of Senior awards by the Mayor of Fareham, Cllr Susan Bayford
 <dt>9.00pm
 <dd>Exhibition matches:
 <ul>
 <li>Division 2 Champions (TBC) v Division 3 Champions (TBC)
-<li>Division 4 Champions (TBC) v Division 5 Champions (Waterlooville C)
+<li>Division 4 Champions (Afghan Society Portsmouth) v Division 5 Champions (Waterlooville C)
 </ul>
 </dl>
