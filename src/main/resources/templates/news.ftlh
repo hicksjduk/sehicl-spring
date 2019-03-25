@@ -17,7 +17,10 @@
 </#macro>
 
 <@news end="2019-04-07">
-Congratulations to <b>Waterlooville C</b> and 
+Congratulations to 
+<b>Havant A</b>, 
+<b>Waterlooville C</b>, 
+<b>Gosport Borough Under-16s</b> and 
 <b>Havant Under-13s</b> on clinching their respective
 divisional championships. The <a href="presentation">end-of-season presentation evening</a>,
 at which all seven champions will play exhibition games and award winners will
