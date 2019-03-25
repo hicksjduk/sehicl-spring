@@ -159,7 +159,7 @@ public class BowlingAverages implements Averages<BowlingRow>
 
     public static class Builder
     {
-        private final Map<String, BowlingRow> rowsByPlayerName = new HashMap<>();
+        private final Map<String, BowlingRow> rowsByUniqueId = new HashMap<>();
         private final AveragesSelector selector;
         private final ReportStatus status = new ReportStatus();
         private final Completeness completenessThreshold;
@@ -216,19 +216,19 @@ public class BowlingAverages implements Averages<BowlingRow>
         private void add(Team team, Bowler bowler, Rules rules, Date matchDate, Team opponent)
         {
             final Player player = team.getPlayer(bowler.getPlayerId());
-            final String playerName = player.getName();
-            BowlingRow row = rowsByPlayerName.get(playerName);
+            final String uniqueId = selector.getUniqueId(player);
+            BowlingRow row = rowsByUniqueId.get(uniqueId);
             if (row == null)
             {
                 row = new BowlingRow(player, team, rules);
-                rowsByPlayerName.put(playerName, row);
+                rowsByUniqueId.put(uniqueId, row);
             }
             row.add(new BowlingPerformance(matchDate, opponent, bowler, rules));
         }
 
         public Collection<BowlingRow> getRows()
         {
-            SortedSet<BowlingRow> sortedRows = new TreeSet<>(rowsByPlayerName.values());
+            SortedSet<BowlingRow> sortedRows = new TreeSet<>(rowsByUniqueId.values());
             Collection<BowlingRow> answer;
             if (maxRows == null || maxRows >= sortedRows.size())
             {

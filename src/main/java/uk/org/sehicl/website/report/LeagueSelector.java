@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
+import uk.org.sehicl.website.data.Player;
 import uk.org.sehicl.website.data.TeamInMatch;
 
 public enum LeagueSelector implements AveragesSelector
@@ -41,5 +42,11 @@ public enum LeagueSelector implements AveragesSelector
     public String getName()
     {
         return name;
+    }
+
+    @Override
+    public String getUniqueId(Player player)
+    {
+        return player.getId();
     }
 }

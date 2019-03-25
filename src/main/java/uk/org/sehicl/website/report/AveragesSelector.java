@@ -2,6 +2,7 @@ package uk.org.sehicl.website.report;
 
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
+import uk.org.sehicl.website.data.Player;
 import uk.org.sehicl.website.data.TeamInMatch;
 
 public interface AveragesSelector
@@ -11,4 +12,6 @@ public interface AveragesSelector
     boolean isSelected(Match match);
     
     boolean isSelected(TeamInMatch teamInMatch, boolean batting);
+    
+    String getUniqueId(Player player);
 }

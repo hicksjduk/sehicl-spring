@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
+import uk.org.sehicl.website.data.Player;
 import uk.org.sehicl.website.data.TeamInMatch;
 
 public class TeamSelector implements AveragesSelector
@@ -35,5 +36,11 @@ public class TeamSelector implements AveragesSelector
     {
         boolean answer = batting == Objects.equals(teamInMatch.getTeamId(), teamId);
         return answer;
+    }
+
+    @Override
+    public String getUniqueId(Player player)
+    {
+        return player.getName();
     }
 }

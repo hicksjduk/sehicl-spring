@@ -146,7 +146,7 @@ public class BattingAverages implements Averages<BattingRow>
 
     public static class Builder
     {
-        private final Map<String, BattingRow> rowsByPlayerName = new HashMap<>();
+        private final Map<String, BattingRow> rowsByUniqueId = new HashMap<>();
         private final AveragesSelector selector;
         private final ReportStatus status = new ReportStatus();
         private final Completeness completenessThreshold;
@@ -202,19 +202,19 @@ public class BattingAverages implements Averages<BattingRow>
         private void add(Team team, Batsman batsman, Date matchDate, Team opponent)
         {
             final Player player = team.getPlayer(batsman.getPlayerId());
-            final String playerName = player.getName();
-            BattingRow row = rowsByPlayerName.get(playerName);
+            final String uniqueId = selector.getUniqueId(player);
+            BattingRow row = rowsByUniqueId.get(uniqueId);
             if (row == null)
             {
                 row = new BattingRow(player, team);
-                rowsByPlayerName.put(playerName, row);
+                rowsByUniqueId.put(uniqueId, row);
             }
             row.add(new BattingPerformance(matchDate, opponent, batsman));
         }
 
         public Collection<BattingRow> getRows()
         {
-            SortedSet<BattingRow> sortedRows = new TreeSet<>(rowsByPlayerName.values());
+            SortedSet<BattingRow> sortedRows = new TreeSet<>(rowsByUniqueId.values());
             Collection<BattingRow> answer;
             if (maxRows == null || maxRows >= sortedRows.size())
             {
