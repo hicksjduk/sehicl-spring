@@ -15,7 +15,7 @@
 <li>Sporting and Efficiency: TBC
 <li>Colts Under-13 batting: Charlie Whitfield (Havant)
 <li>Colts Under-13 bowling: Matty Hayward (Havant)
-<li>Colts Under-16 batting: Toby Collighan (Portsmouth & Southsea)
+<li>Colts Under-16 batting: Tristan Collighan (Portsmouth & Southsea)
 <li>Colts Under-16 bowling: Callum Aitken (Gosport Borough)
 <li>Colts Under-13 champions: Havant
 <li>Colts Under-16 champions: Gosport Borough
