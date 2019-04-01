@@ -1,7 +1,11 @@
 <#include "ordinaldate.ftl"/>
 <h1>${(fixtures.league.name)!"Fixtures"}</h1>
 <#if fixtures.rows?size == 0>
-	Fixtures will be published shortly.
+	<#if fixtures.matchesExist>
+		All matches have been played - there are no outstanding fixtures.
+	<#else>
+		Fixtures will be published shortly.
+	</#if>
 <#else>
 	<p class="noprint">
 		<#if fixtures.league??>

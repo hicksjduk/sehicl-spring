@@ -15,11 +15,13 @@ public class LeagueFixtures
 {
     private final League league;
     private final Collection<UnplayedMatch> rows;
+    private final boolean matchesExist;
 
     private LeagueFixtures(Builder builder)
     {
         league = builder.leagueId == null ? null : builder.model.getLeague(builder.leagueId);
         rows = builder.matches;
+        matchesExist = builder.matchesExist;
     }
 
     public League getLeague()
@@ -30,6 +32,11 @@ public class LeagueFixtures
     public Collection<UnplayedMatch> getRows()
     {
         return rows;
+    }
+
+    public boolean isMatchesExist()
+    {
+        return matchesExist;
     }
 
     public static class UnplayedMatch implements Comparable<UnplayedMatch>
@@ -91,6 +98,7 @@ public class LeagueFixtures
         private final Collection<UnplayedMatch> matches = new TreeSet<>();
         private final Completeness completenessThreshold;
         private final Rules rules;
+        private boolean matchesExist;
 
         public Builder(Model model, String leagueId, Completeness completenessThreshold,
                 Rules rules)
@@ -122,6 +130,7 @@ public class LeagueFixtures
             league
                     .getMatches()
                     .stream()
+                    .peek(m -> matchesExist = true)
                     .filter(m -> completenessThreshold.compareTo(m.getCompleteness(rules)) > 0)
                     .forEach(m -> matches.add(new UnplayedMatch(league, m)));
         }
