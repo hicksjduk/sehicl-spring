@@ -19,7 +19,7 @@ Division 1 Champions (Havant A) v the Mayor of Fareham's VIII
 <dt>9.00pm
 <dd>Exhibition matches:
 <ul>
-<li>Division 2 Champions (TBC) v Division 3 Champions (TBC)
+<li>Division 2 Champions (Fareham & Crofton A) v Division 3 Champions (Hambledon A)
 <li>Division 4 Champions (Afghan Society Portsmouth) v Division 5 Champions (Waterlooville C)
 </ul>
 </dl>

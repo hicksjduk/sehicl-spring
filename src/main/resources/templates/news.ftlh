@@ -19,6 +19,8 @@
 <@news end="2019-04-07">
 Congratulations to 
 <b>Havant A</b>, 
+<b>Fareham & Crofton A</b>, 
+<b>Hambledon A</b>, 
 <b>Afghan Society Portsmouth</b>, 
 <b>Waterlooville C</b>, 
 <b>Gosport Borough Under-16s</b> and 
