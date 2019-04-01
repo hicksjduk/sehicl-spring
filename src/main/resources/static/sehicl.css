@@ -370,6 +370,10 @@ H1 {
 	margin-top: 1em
 }
 
+#schedule dd {
+	font-weight: normal
+}
+
 ul.deductions {
 	list-style: none;
 }

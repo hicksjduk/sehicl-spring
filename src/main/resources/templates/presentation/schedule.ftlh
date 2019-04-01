@@ -2,7 +2,7 @@
 <p>The Presentation Evening for the 2018/19 season will be held at
 		Fareham Leisure Centre on Sunday 7th April.</p>
 <h2>Order of events</h2>
-<dl>
+<dl id="schedule">
 <dt>6.00pm
 <dd>Exhibition matches:
 <ul>
