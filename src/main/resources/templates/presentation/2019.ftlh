@@ -60,7 +60,7 @@
 		 -->
 		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
 			innings("Hambledon A", 68, 6, 10.4, "B White 2/6", "M Frost 2/19")
-			innings("Fareham & Crofton A", 71, 2, 5.5, "D Wimble 27*", "M frost 25*")/>
+			innings("Fareham & Crofton A", 71, 2, 5.5, "D Wimble 27*", "M Frost 25*")/>
 		<@exhibitionMatch "Division 4 Champions v Division 5 Champions"
 			innings("Afghan Society Portsmouth", 129, 3, 12, "H Peruzi 29*", "S Mahboob 26*", 
 				"Jahanzeb Habib 20")
