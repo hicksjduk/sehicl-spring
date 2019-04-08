@@ -58,18 +58,13 @@
 
 		</tr>
 		 -->
-		<#-- 
 		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
-			innings("St James Casuals", 111, 5, 12, "G West 31*", "D Turner 2/19")
-			innings("Portsmouth & Southsea A", 112, 1, 8.5, "T Benfield 28*", "O Kanavan 28*",
-				"J Davies 26*")/>
-		 -->
-		<#-- 
+			innings("Hambledon A", 68, 6, 10.4, "B White 2/6", "M Frost 2/19")
+			innings("Fareham & Crofton A", 71, 2, 5.5, "D Wimble 27*", "M frost 25*")/>
 		<@exhibitionMatch "Division 4 Champions v Division 5 Champions"
 			innings("Afghan Society Portsmouth", 129, 3, 12, "H Peruzi 29*", "S Mahboob 26*", 
 				"Jahanzeb Habib 20")
-			innings("Waterlooville C", 58, 6, 10.2, "Z Saddiqi 3/3")/>
-		 -->
+			innings("Waterlooville C", 58, 6, 6.2, "Hassan 3/3")/>
 	</@games>
 	<@awards "The Senior awards were presented by Cllr Susan Bayford, Mayor of
 		Fareham, accompanied by her Consort, Alderman Brian Bayford, and assisted by League
