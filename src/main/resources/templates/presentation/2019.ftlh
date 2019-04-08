@@ -15,13 +15,11 @@
 				alt="Colts Under-13 Select VI"><br>The Colts Under-13 Select side
 
 		</tr>
-		<#-- 
 		<@exhibitionMatch "Under-16"
-			innings("Under-16 Select VI", 186, 5, 12, "T Seve 70*", "T Wallis 39", 
-				"J Hovey 22", "O Jameson 2/35", "T Wingham 2/39")
-			innings("Hambledon", 99, 3, 12, "E Moger 28*", "C Pratt 25*")
+			innings("Under-16 Select VI", 140, 3, 12, "J Collett 31*", "A Taw 25*",
+				"A Sajijohn 2/24")
+			innings("Gosport Borough", 125, 2, 12, "O Creal 27*", "C Creal 25*")
 		/>
-		 -->
 		<tr>
 			<td colspan="2"><img border="0" src="/graphics/presentation2019/IMG_3138.jpg"
 				alt="Colts Under-16 Select VI"><br>The Colts Under-16 Select side
@@ -68,9 +66,9 @@
 		 -->
 		<#-- 
 		<@exhibitionMatch "Division 4 Champions v Division 5 Champions"
-			innings("Sarisbury Athletic", 123, 2, 12, "P Jewell 26*", "C Sanders 25*")
-			innings("Hambledon C", 84, 6, 10.2, "T Toogood 45", "K Hammond 2/3",
-				"C Sanders 2/15")/>
+			innings("Afghan Society Portsmouth", 129, 3, 12, "H Peruzi 29*", "S Mahboob 26*", 
+				"Jahanzeb Habib 20")
+			innings("Waterlooville C", 58, 6, 10.2, "Z Saddiqi 3/3")/>
 		 -->
 	</@games>
 	<@awards "The Senior awards were presented by Cllr Susan Bayford, Mayor of
