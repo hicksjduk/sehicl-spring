@@ -12,7 +12,7 @@
 <dt>7.00pm
 <dd>Presentation of Colts awards:
 <ul>
-<li>Sporting and Efficiency: TBC
+<li>Sporting and Efficiency: Hambledon A Under-16s and Hambledon Sharks Under-13s (shared)
 <li>Colts Under-13 batting: Charlie Whitfield (Havant)
 <li>Colts Under-13 bowling: Matty Hayward (Havant)
 <li>Colts Under-16 batting: Tristan Collighan (Portsmouth & Southsea)
@@ -26,7 +26,7 @@ Division 1 Champions (Havant A) v the Mayor of Fareham's VIII
 <dt>8.30pm
 <dd>Presentation of Senior awards by the Mayor of Fareham, Cllr Susan Bayford:
 <ul>
-<li>Sporting and Efficiency: TBC
+<li>Sporting and Efficiency: Gosport Borough B
 <li>Senior batting: Hakim Peruzi (Afghan Society Portsmouth)
 <li>Senior bowling: Anurag Sharma (XIIth Men A)
 <li>Division 5 champions: Waterlooville C
