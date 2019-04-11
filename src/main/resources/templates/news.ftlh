@@ -16,18 +16,10 @@
 	</#if>
 </#macro>
 
-<@news end="2019-04-07">
+<@news end="2019-04-30">
 Congratulations to 
-<b>Havant A</b>, 
-<b>Fareham & Crofton A</b>, 
-<b>Hambledon A</b>, 
-<b>Afghan Society Portsmouth</b>, 
-<b>Waterlooville C</b>, 
-<b>Gosport Borough Under-16s</b> and 
-<b>Havant Under-13s</b> on clinching their respective
-divisional championships. The <a href="presentation">end-of-season presentation evening</a>,
-at which all seven champions will play exhibition games and award winners will
-receive their trophies, is on <u>Sunday 7th April</u>.
+<b>Harry Hovey</b> of Bedhampton A, who scored 85 on 17th March and thus broke the record for the 
+highest individual score made in Division 1 - a record that had stood for 20 years. 
 </@news>
 
 <#if started??>

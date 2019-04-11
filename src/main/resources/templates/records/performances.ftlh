@@ -42,7 +42,7 @@
 <a id="hiscore"></a>Highest individual score</h2>
 <table border="0">
 <tbody>
-<@performance "Division 1" "South Hants" "81*" "1988-89" "R Marston"/>
+<@performance "Division 1" "Bedhampton A" "85" "2018-19" "H Hovey"/>
 <@performance "Division 2" "United Services" "102*" "1988-89" "P Barsby"/>
 <@performance "Division 3" "Locks Heath B" "84" "1999-2000" "R Higgins"/>
 <@performance "Division 4" "OPCS Titchfield" "95*" "2016-17" "A Jagadeesh"/>
