@@ -16,10 +16,11 @@
 	</#if>
 </#macro>
 
-<@news end="2019-04-30">
-Congratulations to 
-<b>Harry Hovey</b> of Bedhampton A, who scored 85 on 17th March and thus broke the record for the 
-highest individual score made in Division 1 - a record that had stood for 20 years. 
+<@news>
+<b>The League is looking for a new Secretary</b>. Anyone interested in taking on this role is requested to
+contact <@mailto address="secretary" description="SEHICL Secretary">
+	Adam Smith, the current Secretary
+	</@mailto>, to find out what the job entails. 
 </@news>
 
 <#if started??>
