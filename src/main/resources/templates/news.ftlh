@@ -23,7 +23,7 @@ to <@mailto address="fixturesec">the Fixture Secretary</@mailto> as soon as poss
 Please note that the deadline for requesting changes to the fixture list is 
 <u>Friday 27th September</u>; after that date, changes will only be made in exceptional
 circumstances.
-<br>The <a href="/dutyRota">duty rota</a> will be published shortly.
+<br><b>The <a href="/dutyRota">duty rota</a> is also now available</b>.
 </@news>
 
 <@news>
