@@ -20,7 +20,7 @@
 <@performance "Division 3" "United Services" "207 for 1" "1997-98"/>
 <@performance "Division 4" "ServiceMaster" "207 for 0" "2014-15"/>
 <@performance "Division 5" "Portsmouth C" "214 for 2" "2017-18"/>
-<@performance "Division 6" "Knowle Village" "130 all out" "2019-20"/>
+<@performance "Division 6" "Hambledon C" "147 for 2" "2019-20"/>
 <@performance "Colts Under-16" "Havant" "269 for 1" "2003-04"/>
 <@performance "Colts Under-13" "Portsmouth" "227 for 1" "2017-18"/>
 </tbody>
