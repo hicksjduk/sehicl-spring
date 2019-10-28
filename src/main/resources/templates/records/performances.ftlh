@@ -21,6 +21,7 @@
 <@performance "Division 4" "ServiceMaster" "207 for 0" "2014-15"/>
 <@performance "Division 5" "Portsmouth C" "214 for 2" "2017-18"/>
 <@performance "Division 6" "Hambledon C" "147 for 2" "2019-20"/>
+<@performance "" "Bedhampton B" "147 for 4" "2019-20"/>
 <@performance "Colts Under-16" "Havant" "269 for 1" "2003-04"/>
 <@performance "Colts Under-13" "Portsmouth" "227 for 1" "2017-18"/>
 </tbody>
@@ -35,7 +36,7 @@
 <@performance "Division 4" "IBM South Hants B" "17 all out" "2003-04"/>
 <@performance "" "Flutters" "17 all out" "2006-07"/>
 <@performance "Division 5" "OPCS Titchfield" "30 all out" "2018-19"/>
-<@performance "Division 6" "OPCS Titchfield" "63 for 4" "2019-20"/>
+<@performance "Division 6" "Portsmouth Academics" "51 all out" "2019-20"/>
 <@performance "Colts Under-16" "Portsmouth" "14 all out" "2006-07"/>
 <@performance "Colts Under-13" "Portsmouth & Southsea" "15 all out" "2014-15"/>
 </tbody>
@@ -64,7 +65,7 @@
 <@performance "Division 3" "Portchester B" "5 for 10" "2003-04" "S Gale"/>
 <@performance "Division 4" "Harting" "5 for 7" "1988-89" "S Kyte"/>
 <@performance "Division 5" "Swanmore" "5 for 11" "2018-19" "J Gradwell"/>
-<@performance "Division 6" "Bedhampton B" "2 for 13" "2019-20" "S Robinson"/>
+<@performance "Division 6" "Bedhampton B" "3 for 13" "2019-20" "R Basketter"/>
 <@performance "Colts Under-16" "Fareham & Crofton" "5 for 25" "2017-18" "S Khan"/>
 <@performance "Colts Under-13" "Hambledon" "4 for 0" "2008-09" "S Le-Clercq"/>
 </tbody>
