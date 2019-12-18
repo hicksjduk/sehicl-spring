@@ -43,14 +43,19 @@ public class FixturesExporter
                 .getTeams()
                 .stream()
                 .collect(Collectors.toMap(Team::getId, Team::getName));
-        return l.getMatches().stream().map(m -> matchData(m.getDateTime(), m.getCourt(), divNum,
-                teamNamesById.get(m.getHomeTeamId()), teamNamesById.get(m.getAwayTeamId())));
+        return l
+                .getMatches()
+                .stream()
+                .map(m -> matchData(m.getDateTime(), m.getCourt(), divNum,
+                        teamNamesById.get(m.getHomeTeamId()),
+                        teamNamesById.get(m.getAwayTeamId())));
     }
 
     private String matchData(Date dateTime, String court, String divNum, String homeTeamName,
             String awayTeamName)
     {
-        return String.format("%s,%s,%s,%s,%s,,,%s", DATE_FORMATTER.format(dateTime),
-                TIME_FORMATTER.format(dateTime), court, divNum, homeTeamName, awayTeamName);
+        return String
+                .format("%s,%s,%s,%s,%s,,,%s", DATE_FORMATTER.format(dateTime),
+                        TIME_FORMATTER.format(dateTime), court, divNum, homeTeamName, awayTeamName);
     }
 }
