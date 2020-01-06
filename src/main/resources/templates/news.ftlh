@@ -16,6 +16,11 @@
 	</#if>
 </#macro>
 
+<@news end="2020-01-19">
+Congratulations to <b>Fareham & Crofton,</b> who registered a new record score for Division 4
+by making 211 against Gosport Borough B on 5th January. 
+</@news>
+
 <@news>
 <b>The League is looking for a new Secretary</b>. Anyone interested in taking on this role is requested to
 contact <@mailto address="secretary" description="SEHICL Secretary">
