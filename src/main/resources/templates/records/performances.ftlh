@@ -64,7 +64,7 @@
 <@performance "Division 3" "Portchester B" "5 for 10" "2003-04" "S Gale"/>
 <@performance "Division 4" "Harting" "5 for 7" "1988-89" "S Kyte"/>
 <@performance "Division 5" "Swanmore" "5 for 11" "2018-19" "J Gradwell"/>
-<@performance "Division 6" "Bedhampton B" "3 for 13" "2019-20" "R Basketter"/>
+<@performance "Division 6" "Droxford" "4 for 15" "2019-20" "J Odell"/>
 <@performance "Colts Under-16" "Fareham & Crofton" "5 for 25" "2017-18" "S Khan"/>
 <@performance "Colts Under-13" "Hambledon" "4 for 0" "2008-09" "S Le-Clercq"/>
 </tbody>
