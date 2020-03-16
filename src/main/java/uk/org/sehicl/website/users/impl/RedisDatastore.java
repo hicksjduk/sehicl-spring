@@ -181,8 +181,8 @@ public class RedisDatastore implements UserDatastore
     {
         long now = new Date().getTime();
         List<SessionData> expiredSessions = new ArrayList<>();
-        try (Cursor<Entry<Object, Object>> c = ops.scan("session",
-                new ScanOptionsBuilder().build()))
+        try (Cursor<Entry<Object, Object>> c = ops
+                .scan("session", new ScanOptionsBuilder().build()))
         {
             c.forEachRemaining(e ->
             {
@@ -200,8 +200,9 @@ public class RedisDatastore implements UserDatastore
         if (!expiredSessions.isEmpty())
         {
             ops.delete("session", expiredSessions.stream().mapToLong(SessionData::getId).toArray());
-            ops.delete("usersession",
-                    expiredSessions.stream().mapToLong(SessionData::getUserId).toArray());
+            ops
+                    .delete("usersession",
+                            expiredSessions.stream().mapToLong(SessionData::getUserId).toArray());
         }
     }
 
@@ -277,48 +278,22 @@ public class RedisDatastore implements UserDatastore
     public Collection<Long> getAllUserIds()
     {
         String bucket = "user";
-        Collection<Long> answer = ops.keys(bucket).stream().map(Long.class::cast).collect(Collectors.toSet());
+        Collection<Long> answer = ops
+                .keys(bucket)
+                .stream()
+                .map(Long.class::cast)
+                .collect(Collectors.toSet());
         return answer;
     }
 
     @Override
     public void deleteUser(long id)
     {
+        User user = getUserById(id);
+        if (user == null)
+            return;
         ops.delete("user", id);
-        tidyDanglingReferences();
+        ops.delete("email", user.getEmail());
     }
-    
-    private void tidyDanglingReferences()
-    {
-        tidyDanglingReferences("email", User::getId);
-        tidyDanglingReferences("reset", PasswordReset::getUserId);
-        tidyDanglingReferences("session", SessionData::getUserId);
-        tidyDanglingReferences("userSession", SessionData::getUserId);
-    }
-    
-    @SuppressWarnings("unchecked")
-    private <T> void tidyDanglingReferences(String bucket, ToLongFunction<T> userIdGetter)
-    {
-        List<Object> keysToDelete = new ArrayList<>();
-        try (Cursor<Entry<Object, Object>> c = ops.scan(bucket, new ScanOptionsBuilder().build()))
-        {
-            c.forEachRemaining(e ->
-            {
-                final T obj = (T) e.getValue();
-                long userId = userIdGetter.applyAsLong(obj);
-                if (!ops.hasKey("user", userId))
-                {
-                    keysToDelete.add(e.getKey());
-                }
-            });
-        }
-        catch (IOException ex)
-        {
-            throw new RuntimeException("Error closing cursor", ex);
-        }
-        if (keysToDelete.isEmpty())
-        {
-            ops.delete(bucket, keysToDelete.toArray());
-        }
-    }
+
 }
