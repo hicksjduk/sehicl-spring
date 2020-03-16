@@ -22,6 +22,7 @@ import uk.org.sehicl.website.page.ActivatePage;
 import uk.org.sehicl.website.page.ArchiveIndexPage;
 import uk.org.sehicl.website.page.ContactsPage;
 import uk.org.sehicl.website.page.DateResultsPage;
+import uk.org.sehicl.website.page.DeleteUserPage;
 import uk.org.sehicl.website.page.FullContactsPage;
 import uk.org.sehicl.website.page.HomePage;
 import uk.org.sehicl.website.page.LeagueBattingAveragesPage;
@@ -41,6 +42,7 @@ import uk.org.sehicl.website.page.StaticPage;
 import uk.org.sehicl.website.page.TeamAveragesIndexPage;
 import uk.org.sehicl.website.page.TeamAveragesPage;
 import uk.org.sehicl.website.page.TeamFixturesPage;
+import uk.org.sehicl.website.page.UserDetailsPage;
 import uk.org.sehicl.website.report.LeagueSelector;
 import uk.org.sehicl.website.template.PageTemplate;
 import uk.org.sehicl.website.users.EmailException;
@@ -465,6 +467,55 @@ public class Controller
         return new PageTemplate(new ActivatePage(uri, user)).process();
     }
 
+    @RequestMapping(path = "/userDetails/{userId}")
+    public String userDetails(HttpServletRequest req, HttpServletResponse resp,
+            @PathVariable long userId) throws IOException
+    {
+        final UserSession userSession = new UserSession(req);
+        if (userManager.sessionHasRole(userSession.getToken(), "admin"))
+        {
+            String uri = getRequestUri(req);
+            User user = userManager.getUserById(userId);
+            return new PageTemplate(new UserDetailsPage(uri, user)).process();
+        }
+        userSession.setRedirectTarget(req.getRequestURI());
+        resp.sendRedirect("/login");
+        return "";
+    }
+    
+    @RequestMapping(path = "/deleteUser/{userId}", method = RequestMethod.GET)
+    public String deleteUser(HttpServletRequest req, HttpServletResponse resp,
+            @PathVariable long userId) throws IOException
+    {
+        final UserSession userSession = new UserSession(req);
+        if (userManager.sessionHasRole(userSession.getToken(), "admin"))
+        {
+            String uri = getRequestUri(req);
+            User user = userManager.getUserById(userId);
+            return new PageTemplate(new DeleteUserPage(uri, user, false)).process();
+        }
+        userSession.setRedirectTarget(req.getRequestURI());
+        resp.sendRedirect("/login");
+        return "";
+    }
+    
+    @RequestMapping(path = "/deleteUser/{userId}", method = RequestMethod.POST)
+    public String deleteUserConfirmed(HttpServletRequest req, HttpServletResponse resp,
+            @PathVariable long userId) throws IOException
+    {
+        final UserSession userSession = new UserSession(req);
+        if (userManager.sessionHasRole(userSession.getToken(), "admin"))
+        {
+            String uri = getRequestUri(req);
+            User user = userManager.getUserById(userId);
+            userManager.deleteUser(userId);
+            return new PageTemplate(new DeleteUserPage(uri, user, true)).process();
+        }
+        userSession.setRedirectTarget(req.getRequestURI());
+        resp.sendRedirect("/login");
+        return "";
+    }
+    
     @RequestMapping(path = "/pwdReset/{resetId}", method = RequestMethod.GET)
     public String passwordReset(HttpServletRequest req, @PathVariable long resetId)
             throws IOException

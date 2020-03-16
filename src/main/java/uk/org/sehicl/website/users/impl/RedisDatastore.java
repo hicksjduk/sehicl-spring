@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
+import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
 
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -278,5 +279,46 @@ public class RedisDatastore implements UserDatastore
         String bucket = "user";
         Collection<Long> answer = ops.keys(bucket).stream().map(Long.class::cast).collect(Collectors.toSet());
         return answer;
+    }
+
+    @Override
+    public void deleteUser(long id)
+    {
+        ops.delete("user", id);
+        tidyDanglingReferences();
+    }
+    
+    private void tidyDanglingReferences()
+    {
+        tidyDanglingReferences("email", User::getId);
+        tidyDanglingReferences("reset", PasswordReset::getUserId);
+        tidyDanglingReferences("session", SessionData::getUserId);
+        tidyDanglingReferences("userSession", SessionData::getUserId);
+    }
+    
+    @SuppressWarnings("unchecked")
+    private <T> void tidyDanglingReferences(String bucket, ToLongFunction<T> userIdGetter)
+    {
+        List<Object> keysToDelete = new ArrayList<>();
+        try (Cursor<Entry<Object, Object>> c = ops.scan(bucket, new ScanOptionsBuilder().build()))
+        {
+            c.forEachRemaining(e ->
+            {
+                final T obj = (T) e.getValue();
+                long userId = userIdGetter.applyAsLong(obj);
+                if (!ops.hasKey("user", userId))
+                {
+                    keysToDelete.add(e.getKey());
+                }
+            });
+        }
+        catch (IOException ex)
+        {
+            throw new RuntimeException("Error closing cursor", ex);
+        }
+        if (keysToDelete.isEmpty())
+        {
+            ops.delete(bucket, keysToDelete.toArray());
+        }
     }
 }

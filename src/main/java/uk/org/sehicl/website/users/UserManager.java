@@ -259,4 +259,9 @@ public class UserManager
             }
         });
     }
+    
+    public void deleteUser(long userId)
+    {
+        datastore.deleteUser(userId);
+    }
 }

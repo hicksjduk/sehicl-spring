@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
@@ -37,10 +38,11 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         User answer = null;
         try (Connection conn = connect())
         {
-            final PreparedStatement stmt = conn.prepareStatement(
-                    "select u.id, u.name, u.email, u.club, u.status, u.failures, u.password, r.role "
-                            + "from user u left outer join role r " + "on u.id = r.user_id "
-                            + "where u.email = ?");
+            final PreparedStatement stmt = conn
+                    .prepareStatement(
+                            "select u.id, u.name, u.email, u.club, u.status, u.failures, u.password, r.role "
+                                    + "from user u left outer join role r " + "on u.id = r.user_id "
+                                    + "where u.email = ?");
             stmt.setString(1, email);
             final ResultSet rs = stmt.executeQuery();
             answer = getUser(rs);
@@ -59,9 +61,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         {
             int index = 1;
             answer = new User(rs.getLong(index++), rs.getString(index++), rs.getString(index++),
-                    rs.getString(index++), Status.valueOf(rs
-                            .getString(index++)
-                            .toUpperCase()),
+                    rs.getString(index++), Status.valueOf(rs.getString(index++).toUpperCase()),
                     rs.getInt(index++), rs.getString(index++), false);
             do
             {
@@ -82,10 +82,11 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         User answer = null;
         try (Connection conn = connect())
         {
-            final PreparedStatement stmt = conn.prepareStatement(
-                    "select id, u.name, u.email, u.club, u.status, u.failures, u.password, r.role "
-                            + "from user u left outer join role r " + "on u.id = r.user_id "
-                            + "where u.id = ?");
+            final PreparedStatement stmt = conn
+                    .prepareStatement(
+                            "select id, u.name, u.email, u.club, u.status, u.failures, u.password, r.role "
+                                    + "from user u left outer join role r " + "on u.id = r.user_id "
+                                    + "where u.id = ?");
             stmt.setLong(1, id);
             final ResultSet rs = stmt.executeQuery();
             answer = getUser(rs);
@@ -102,8 +103,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         List<Long> answer = new LinkedList<>();
         try (Connection conn = connect())
         {
-            final ResultSet rs = conn.createStatement().executeQuery(
-                    "select id from user");
+            final ResultSet rs = conn.createStatement().executeQuery("select id from user");
             while (rs.next())
             {
                 answer.add(rs.getLong(1));
@@ -133,8 +133,9 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         SessionData answer = null;
         try (Connection conn = connect())
         {
-            final PreparedStatement stmt = conn.prepareStatement(
-                    "select id, user_id, expiry " + "from session " + "where user_id = ?");
+            final PreparedStatement stmt = conn
+                    .prepareStatement(
+                            "select id, user_id, expiry " + "from session " + "where user_id = ?");
             stmt.setLong(1, id);
             final ResultSet rs = stmt.executeQuery();
             answer = getSession(rs);
@@ -152,8 +153,9 @@ public class LocalDatabaseUserDatastore implements UserDatastore
         SessionData answer = null;
         try (Connection conn = connect())
         {
-            final PreparedStatement stmt = conn.prepareStatement(
-                    "select id, user_id, expiry " + "from session " + "where id = ?");
+            final PreparedStatement stmt = conn
+                    .prepareStatement(
+                            "select id, user_id, expiry " + "from session " + "where id = ?");
             stmt.setLong(1, id);
             final ResultSet rs = stmt.executeQuery();
             answer = getSession(rs);
@@ -208,8 +210,9 @@ public class LocalDatabaseUserDatastore implements UserDatastore
     {
         try (Connection conn = connect())
         {
-            final PreparedStatement stmt = conn.prepareStatement("insert into user "
-                    + "(club, email, password, status, name) values (?, ?, ?, ?, ?)");
+            final PreparedStatement stmt = conn
+                    .prepareStatement("insert into user "
+                            + "(club, email, password, status, name) values (?, ?, ?, ?, ?)");
             int index = 1;
             stmt.setString(index++, club);
             stmt.setString(index++, email);
@@ -233,9 +236,10 @@ public class LocalDatabaseUserDatastore implements UserDatastore
     {
         try (Connection conn = connect())
         {
-            final PreparedStatement stmt = conn.prepareStatement("update user "
-                    + "set club = ?, email = ?, password = ?, status = ?, name = ?, failures = ?) "
-                    + "where id = ?");
+            final PreparedStatement stmt = conn
+                    .prepareStatement("update user "
+                            + "set club = ?, email = ?, password = ?, status = ?, name = ?, failures = ?) "
+                            + "where id = ?");
             int index = 1;
             stmt.setString(index++, user.getClub());
             stmt.setString(index++, user.getEmail());
@@ -275,7 +279,7 @@ public class LocalDatabaseUserDatastore implements UserDatastore
     public void clearExpiredResets()
     {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -283,6 +287,26 @@ public class LocalDatabaseUserDatastore implements UserDatastore
     {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void deleteUser(long id)
+    {
+        try (Connection conn = connect())
+        {
+            List<String> statements = Arrays
+                    .asList("delete from session where user_id = ?",
+                            "delete from role where user_id = ?", "delete from user where id = ?");
+            for (String sql : statements)
+            {
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setLong(1, id);
+                ps.execute();
+            }
+        }
+        catch (SQLException ex)
+        {
+        }
     }
 
 }

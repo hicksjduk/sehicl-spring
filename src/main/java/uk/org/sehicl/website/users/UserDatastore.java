@@ -30,4 +30,6 @@ public interface UserDatastore
     PasswordReset getPasswordReset(long id);
 
     void clearExpiredResets();
+    
+    void deleteUser(long id);
 }
