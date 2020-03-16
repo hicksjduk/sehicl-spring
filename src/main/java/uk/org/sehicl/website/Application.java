@@ -9,6 +9,7 @@ import uk.org.sehicl.website.users.EmailSender;
 import uk.org.sehicl.website.users.UserDatastore;
 import uk.org.sehicl.website.users.UserManager;
 import uk.org.sehicl.website.users.impl.LocalDatabaseUserDatastore;
+import uk.org.sehicl.website.users.impl.LocalFileSender;
 import uk.org.sehicl.website.users.impl.RedisDatastore;
 import uk.org.sehicl.website.users.impl.SendgridSender;
 
@@ -47,6 +48,8 @@ public class Application
     @Bean
     EmailSender emailSender()
     {
+        if (System.getProperty("localmail") != null)
+            return new LocalFileSender();
         return new SendgridSender();
     }
 }

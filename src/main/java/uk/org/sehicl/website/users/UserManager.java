@@ -52,7 +52,7 @@ public class UserManager
     }
 
     public User registerUser(String email, String name, String club, String password,
-            String activationPageAddress) throws UserException, EmailException
+            String activationPageAddress, String userDetailsPageAddress) throws UserException, EmailException
     {
         User answer = new User(name, email, club, Status.INACTIVE, 0, password, true);
         if (!isBlocked(email))
@@ -64,7 +64,7 @@ public class UserManager
             }
             answer = datastore.createUser(email, name, club, Status.INACTIVE, password);
             sendActivationEmail(answer, activationPageAddress);
-            notifyAdmin("register", answer);
+            notifyAdmin("register", answer, userDetailsPageAddress);
         }
         return answer;
     }
@@ -106,10 +106,10 @@ public class UserManager
         }
     }
 
-    private void notifyAdmin(String action, User user) throws UserException
+    private void notifyAdmin(String action, User user, String userDetailsPageAddress) throws UserException
     {
         StringWriter sw = new StringWriter();
-        new AdminNotifyMailTemplate(user).process(sw);
+        new AdminNotifyMailTemplate(user, userDetailsPageAddress).process(sw);
         try
         {
             emailer.sendEmail(String.format("User action: %s", action), sw.toString(),
@@ -163,7 +163,7 @@ public class UserManager
         User answer = null;
         try
         {
-            answer = setUserStatus(id, status, false);
+            answer = setUserStatus(id, status, null, false);
         }
         catch (EmailException e)
         {
@@ -171,7 +171,7 @@ public class UserManager
         return answer;
     }
 
-    private User setUserStatus(long id, Status status, boolean notifyAdmin)
+    private User setUserStatus(long id, Status status, String userDetailsPageAddress, boolean notifyAdmin)
             throws UserException, EmailException
     {
         final User answer = datastore.getUserById(id);
@@ -183,7 +183,7 @@ public class UserManager
         datastore.updateUser(answer);
         if (notifyAdmin && status == Status.ACTIVE)
         {
-            notifyAdmin("activate", answer);
+            notifyAdmin("activate", answer, userDetailsPageAddress);
         }
         return answer;
     }
@@ -237,7 +237,7 @@ public class UserManager
     public User reconfirmUser(long id) throws UserException
     {
         final User answer = setUserStatusNoNotify(id, Status.ACTIVE);
-        notifyAdmin("reconfirm", answer);
+        notifyAdmin("reconfirm", answer, null);
         return answer;
     }
 

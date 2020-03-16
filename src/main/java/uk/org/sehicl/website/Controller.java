@@ -160,8 +160,8 @@ public class Controller
     public String presentationEvening(HttpServletRequest req)
     {
         String uri = getRequestUri(req);
-        return new PageTemplate(new StaticPage("presentation", "presentation/schedule.ftlh", Section.HOME,
-                uri, "SEHICL Presentation Evening")).process();
+        return new PageTemplate(new StaticPage("presentation", "presentation/schedule.ftlh",
+                Section.HOME, uri, "SEHICL Presentation Evening")).process();
     }
 
     @RequestMapping("/archive/presentation/{season}")
@@ -388,8 +388,11 @@ public class Controller
         {
             try
             {
-                login.validateAndRemind(
-                        URI.create(req.getRequestURL().toString()).resolve("/pwdReset").toString());
+                login
+                        .validateAndRemind(URI
+                                .create(req.getRequestURL().toString())
+                                .resolve("/pwdReset")
+                                .toString());
             }
             catch (EmailException e)
             {
@@ -426,10 +429,16 @@ public class Controller
                 passwordConf, agreement != null);
         try
         {
-            User user = register.validateAndRegister(URI
-                    .create(req.getRequestURL().toString())
-                    .resolve("/activate")
-                    .toString());
+            User user = register
+                    .validateAndRegister(
+                            URI
+                                    .create(req.getRequestURL().toString())
+                                    .resolve("/activate")
+                                    .toString(),
+                            URI
+                                    .create(req.getRequestURL().toString())
+                                    .resolve("/userDetails")
+                                    .toString());
             final Page page = user == null ? new RegisterPage(uri, register)
                     : new RegisterConfPage(uri, user);
             answer = new PageTemplate(page).process();

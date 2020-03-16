@@ -144,13 +144,14 @@ public class Register
     private String message;
 
     private final UserManager userManager;
-    
+
     public Register(UserManager userManager)
     {
         this(userManager, null, null, null, null, null, false);
     }
 
-    public Register(UserManager userManager, String email, String name, String club, String password, String passwordConf, boolean agreement)
+    public Register(UserManager userManager, String email, String name, String club,
+            String password, String passwordConf, boolean agreement)
     {
         this.userManager = userManager;
         validation.email = email;
@@ -176,7 +177,8 @@ public class Register
         return validation;
     }
 
-    public User validateAndRegister(String activationPageAddress) throws EmailException
+    public User validateAndRegister(String activationPageAddress, String userDetailsPageAddress)
+            throws EmailException
     {
         User answer = null;
         boolean valid = true;
@@ -218,8 +220,9 @@ public class Register
         {
             try
             {
-                answer = userManager.registerUser(validation.email, validation.name,
-                        validation.club, validation.password, activationPageAddress);
+                answer = userManager
+                        .registerUser(validation.email, validation.name, validation.club,
+                                validation.password, activationPageAddress, userDetailsPageAddress);
             }
             catch (UserException e)
             {
