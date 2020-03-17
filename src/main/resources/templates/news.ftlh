@@ -25,6 +25,11 @@ to get their awards to them.
 </@news>
 
 <@news>
+<b>Our sponsors Game Set and Match are offering a 10% discount to participants in the League.</b> Click
+on the image below to find out more.
+</@news>
+
+<@news>
 <b>The League is looking for a new Secretary</b>. Anyone interested in taking on this role is requested to
 contact <@mailto address="secretary" description="SEHICL Secretary">
 	Adam Smith, the current Secretary,

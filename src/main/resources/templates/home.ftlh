@@ -1,6 +1,8 @@
 <h1>Welcome!</h1>
 <#include "news.ftlh"/>
 <p>
+<a href="/graphics/gsam-sehicl.png">
+<img src="/graphics/gsam-sehicl-small.png" align="left" style="display: inline-block"></a>
 	<b>South East Hampshire (Fareham) Indoor Cricket League</b> is a <a
 		href="http://hampshirecb.play-cricket.com/">Hampshire Cricket
 		Board</a> affiliated indoor cricket league which holds its matches at the
