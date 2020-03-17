@@ -17,10 +17,11 @@
 	the Mayor of Fareham, presents the senior teams' awards, and the
 	evening culminates with an eight-a-side challenge match between the
 	Mayor of Fareham's VIII and the Division 1 champions' VIII.
-	<a href="/archive/presentation/2019">
+	<#-- <a href="/archive/presentation/2019">
 	The 2019 presentation evening</a> was on Sunday 7th April;
-	click the link for information and pictures from the evening.
-	The 2020 presentation evening will be on Sunday 29th March.
+	click the link for information and pictures from the evening.-->
+	Unfortunately, the 2020 presentation evening, which was due to take place on Sunday 29th March,
+	had to be cancelled due to the coronavirus outbreak. 
 </p>
 <p>Please report any broken links, mis-spelled names or other errors
 	to 	<@mailto address="website" description="SEHICL Webmaster">
