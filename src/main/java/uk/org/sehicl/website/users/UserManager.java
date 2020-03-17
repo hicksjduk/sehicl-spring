@@ -4,6 +4,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import uk.org.sehicl.website.template.ActivationMailTemplate;
@@ -55,7 +56,7 @@ public class UserManager
             String activationPageAddress, String userDetailsPageAddress) throws UserException, EmailException
     {
         User answer = new User(name, email, club, Status.INACTIVE, 0, password, true);
-        if (!isBlocked(email))
+        if (!isBlocked(answer))
         {
             final User user = datastore.getUserByEmail(email);
             if (user != null)
@@ -67,6 +68,13 @@ public class UserManager
             notifyAdmin("register", answer, userDetailsPageAddress);
         }
         return answer;
+    }
+
+    private boolean isBlocked(User user)
+    {
+        if (isBlocked(user.getEmail()))
+            return true;
+        return StringUtils.equals(user.getName(), user.getClub());
     }
 
     private boolean isBlocked(String email)
