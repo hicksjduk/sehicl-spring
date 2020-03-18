@@ -58,6 +58,7 @@
 	<@award 2017 "D Wallis" "Portsmouth B" "271"/>
 	<@award 2018 "C Pratt" "Hambledon B" "285"/>
 	<@award 2019 "H Peruzi" "Afghan Society Portsmouth" "313"/>
+    <@award 2020 "B White" "St James Casuals" "321"/>
 </tbody>
 </table>
 
@@ -92,6 +93,7 @@
 	<@award 2017 "J Lewis" "Hambledon B" "13"/>
 	<@award 2018 "F Gadd" "United Services" "13"/>
 	<@award 2019 "A Sharma" "XIIth Men A" "17"/>
+    <@award 2020 "F Gadd" "Havant A" "12"/>
 </tbody>
 </table>
 
@@ -123,6 +125,7 @@
 	<@award 2017 "J Kooner-Evans" "Portsmouth A" "276"/>
 	<@award 2018 "C Pratt" "Hambledon" "274"/>
 	<@award 2019 "T Collighan" "Portsmouth & Southsea" "317"/>
+    <@award 2020 "W Parvin" "Hambledon A" "254"/>
 </tbody>
 </table>
 
@@ -154,6 +157,7 @@
 	<@award 2017 "F Gadd" "Portsmouth & Southsea" "9"/>
 	<@award 2018 "H Woolf" "Portsmouth A" "11"/>
 	<@award 2019 "C Aitken" "Gosport Borough" "9"/>
+    <@award 2020 "J Oliver" "Hambledon A" "9"/>
 </tbody>
 </table>
 
@@ -185,6 +189,7 @@
 	<@award 2017 "J Oliver" "Havant" "247"/>
 	<@award 2018 "J Smitherman" "Portsmouth" "223"/>
 	<@award 2019 "C Whitfield" "Havant" "161"/>
+    <@award 2020 "R Reynolds" "Waterlooville" "204"/>
 </tbody>
 </table>
 
@@ -216,6 +221,7 @@
 	<@award 2017 "J Oliver" "Havant" "14"/>
 	<@award 2018 "B Eales" "Portsmouth" "8"/>
 	<@award 2019 "M Hayward" "Havant" "7"/>
+    <@award 2020 "B Hardman" "Hambledon" "9"/>
 </tbody>
 </table>
 </div>
