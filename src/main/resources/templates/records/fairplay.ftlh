@@ -41,6 +41,7 @@
 <@award 2017 "Havant B"/>
 <@award 2018 "Emsworth B"/>
 <@award 2019 "Gosport Borough B"/>
+<@award 2020 "Clanfield"/>
 </tbody>
 </table>
 
@@ -69,6 +70,7 @@
 <@award 2017 "Havant Under-13, Waterlooville Under-16 (shared)"/>
 <@award 2018 "Hambledon Under-16"/>
 <@award 2019 "Hambledon A Under-16, Hambledon Sharks Under-13 (shared)"/>
+<@award 2020 "Havant Under-16"/>
 </tbody>
 </table>
 </div>
