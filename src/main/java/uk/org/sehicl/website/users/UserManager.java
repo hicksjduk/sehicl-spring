@@ -4,7 +4,6 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import uk.org.sehicl.website.template.ActivationMailTemplate;
@@ -72,9 +71,10 @@ public class UserManager
 
     private boolean isBlocked(User user)
     {
-        if (isBlocked(user.getEmail()))
-            return true;
-        return StringUtils.equals(user.getName(), user.getClub());
+        return false;
+//        if (isBlocked(user.getEmail()))
+//            return true;
+//        return StringUtils.equals(user.getName(), user.getClub());
     }
 
     private boolean isBlocked(String email)
