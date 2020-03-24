@@ -3,7 +3,10 @@ package uk.org.sehicl.website;
 import java.io.IOException;
 import java.net.URI;
 import java.text.ParseException;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,7 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonParserFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -427,6 +437,12 @@ public class Controller
         final String password = req.getParameter("password");
         final String passwordConf = req.getParameter("passwordConf");
         final String agreement = req.getParameter("agreement");
+        final String recaptchaResponse = req.getParameter("g-recaptcha-response");
+        if (!notARobot(recaptchaResponse))
+        {
+            resp.sendRedirect("/register");
+            return "";
+        }
         final Register register = new Register(userManager, email, name, club, password,
                 passwordConf, agreement != null);
         try
@@ -482,7 +498,7 @@ public class Controller
         resp.sendRedirect("/login");
         return "";
     }
-    
+
     @RequestMapping(path = "/deleteUser/{userId}", method = RequestMethod.GET)
     public String deleteUser(HttpServletRequest req, HttpServletResponse resp,
             @PathVariable long userId) throws IOException
@@ -498,7 +514,7 @@ public class Controller
         resp.sendRedirect("/login");
         return "";
     }
-    
+
     @RequestMapping(path = "/deleteUser/{userId}", method = RequestMethod.POST)
     public String deleteUserConfirmed(HttpServletRequest req, HttpServletResponse resp,
             @PathVariable long userId) throws IOException
@@ -515,7 +531,7 @@ public class Controller
         resp.sendRedirect("/login");
         return "";
     }
-    
+
     @RequestMapping(path = "/pwdReset/{resetId}", method = RequestMethod.GET)
     public String passwordReset(HttpServletRequest req, @PathVariable long resetId)
             throws IOException
@@ -595,5 +611,28 @@ public class Controller
                 .toString();
         userManager.sendReconfirmationEmails(reconfirmationPageAddress);
         return "Emails sent";
+    }
+
+    private boolean notARobot(String recaptchaResponse) throws IOException
+    {
+        HttpPost post = new HttpPost("https://www.google.com/recaptcha/api/siteverify");
+        post
+                .setEntity(new UrlEncodedFormEntity(Arrays
+                        .asList(new BasicNameValuePair("secret",
+                                "6LeSmeMUAAAAALn-PVzZgCTpAJDmb6y_UhWloumz"),
+                                new BasicNameValuePair("response", recaptchaResponse))));
+        String body;
+        try (CloseableHttpResponse response = HttpClients.createDefault().execute(post))
+        {
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode != HttpStatus.OK.value())
+                return false;
+            try (Scanner scanner = new Scanner(response.getEntity().getContent()))
+            {
+                body = scanner.useDelimiter("\\A").next();
+            }
+        }
+        Map<String, Object> m = JsonParserFactory.getJsonParser().parseMap(body);
+        return m.getOrDefault("success", Boolean.FALSE).equals(Boolean.TRUE);
     }
 }

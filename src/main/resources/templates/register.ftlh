@@ -44,6 +44,9 @@
 		</tr>
 	</table>
 <#include "dataprotectionagreement.ftlh"/>
+    <p>
+        <div class="g-recaptcha" data-sitekey="6LeSmeMUAAAAABB6fwVDb44l5t63maMnKdRzONMp"></div>
+    </p>
 	<p>
 		<input type="Submit" value="Submit">
 	</p>
