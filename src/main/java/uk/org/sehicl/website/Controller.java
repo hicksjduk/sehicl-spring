@@ -60,6 +60,7 @@ import uk.org.sehicl.website.users.Reconfirm;
 import uk.org.sehicl.website.users.Register;
 import uk.org.sehicl.website.users.Reset;
 import uk.org.sehicl.website.users.User;
+import uk.org.sehicl.website.users.UserDatastore;
 import uk.org.sehicl.website.users.UserException;
 import uk.org.sehicl.website.users.UserManager;
 
@@ -68,7 +69,7 @@ public class Controller
 {
     @Autowired
     private UserManager userManager;
-
+    
     private String getRequestUri(HttpServletRequest req)
     {
         String answer = Stream
@@ -624,7 +625,7 @@ public class Controller
         post
                 .setEntity(new UrlEncodedFormEntity(Arrays
                         .asList(new BasicNameValuePair("secret",
-                                "6LeSmeMUAAAAALn-PVzZgCTpAJDmb6y_UhWloumz"),
+                                System.getenv("RECAPTCHA_SECRET")),
                                 new BasicNameValuePair("response", recaptchaResponse))));
         String responseBody;
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(post))
