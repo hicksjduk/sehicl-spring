@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.text.ParseException;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -627,18 +626,20 @@ public class Controller
                         .asList(new BasicNameValuePair("secret",
                                 "6LeSmeMUAAAAALn-PVzZgCTpAJDmb6y_UhWloumz"),
                                 new BasicNameValuePair("response", recaptchaResponse))));
-        String body;
+        String responseBody;
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(post))
         {
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode != HttpStatus.OK.value())
+            if (response.getStatusLine().getStatusCode() != HttpStatus.OK.value())
                 return false;
             try (Scanner scanner = new Scanner(response.getEntity().getContent()))
             {
-                body = scanner.useDelimiter("\\A").next();
+                responseBody = scanner.useDelimiter("\\A").next();
             }
         }
-        Map<String, Object> m = JsonParserFactory.getJsonParser().parseMap(body);
-        return m.getOrDefault("success", Boolean.FALSE).equals(Boolean.TRUE);
+        return JsonParserFactory
+                .getJsonParser()
+                .parseMap(responseBody)
+                .getOrDefault("success", Boolean.FALSE)
+                .equals(Boolean.TRUE);
     }
 }
