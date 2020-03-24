@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.HashOperations;
@@ -76,8 +77,12 @@ public class RedisDatastore implements UserDatastore
             URI uri = URI.create(uriString);
             answer.setHostName(uri.getHost());
             answer.setPort(uri.getPort());
-            final String password = uri.getUserInfo().split(":")[1];
-            answer.setPassword(password);
+            String userInfo = uri.getUserInfo();
+            if (!StringUtils.isEmpty(userInfo))
+            {
+                final String password = userInfo.split(":")[1];
+                answer.setPassword(password);
+            }
         }
         return answer;
     }
