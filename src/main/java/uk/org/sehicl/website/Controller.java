@@ -60,7 +60,6 @@ import uk.org.sehicl.website.users.Reconfirm;
 import uk.org.sehicl.website.users.Register;
 import uk.org.sehicl.website.users.Reset;
 import uk.org.sehicl.website.users.User;
-import uk.org.sehicl.website.users.UserDatastore;
 import uk.org.sehicl.website.users.UserException;
 import uk.org.sehicl.website.users.UserManager;
 
