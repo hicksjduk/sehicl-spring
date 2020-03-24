@@ -27,6 +27,9 @@
 			<td>${(reset.validation.passwordConfMessage)!""}</td>
 		</tr>
 	</table>
+    <p>
+        <div class="g-recaptcha" data-sitekey="6LeSmeMUAAAAABB6fwVDb44l5t63maMnKdRzONMp"></div>
+    </p>
 	<p>
 		<input name="Reset" type="Submit" value="Reset"/>
 	</p>

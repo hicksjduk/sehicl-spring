@@ -547,6 +547,12 @@ public class Controller
         String uri = getRequestUri(req);
         final String password = req.getParameter("password");
         final String passwordConf = req.getParameter("passwordConf");
+        final String recaptchaResponse = req.getParameter("g-recaptcha-response");
+        if (!notARobot(recaptchaResponse))
+        {
+            resp.sendRedirect(String.format("/pwdReset/%d", resetId));
+            return "";
+        }
         final Reset reset = new Reset(resetId, userManager);
         if (reset.validateAndReset(password, passwordConf))
         {
