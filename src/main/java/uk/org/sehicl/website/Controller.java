@@ -347,18 +347,21 @@ public class Controller
                 return "";
             }
         }
-        try
+        else
         {
-            login
-                    .validateAndRemind(URI
-                            .create(req.getRequestURL().toString())
-                            .resolve("/pwdReset")
-                            .toString());
-        }
-        catch (EmailException e)
-        {
-            resp.sendRedirect(String.format("/emailError?message=%s", e.getMessage()));
-            return "";
+            try
+            {
+                login
+                        .validateAndRemind(URI
+                                .create(req.getRequestURL().toString())
+                                .resolve("/pwdReset")
+                                .toString());
+            }
+            catch (EmailException e)
+            {
+                resp.sendRedirect(String.format("/emailError?message=%s", e.getMessage()));
+                return "";
+            }
         }
         return new PageTemplate(new LoginPage(getRequestUri(req), login)).process();
     }
