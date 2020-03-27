@@ -333,15 +333,14 @@ public class Controller
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        Login login = new Login(userManager, email, password);
+        Login login = new Login(userManager, req.getParameter("email"),
+                req.getParameter("password"));
         if (req.getParameter("Login") != null)
         {
             Long token = login.validateAndLogin();
             if (token != null)
             {
-                final UserSession userSession = new UserSession(req);
+                UserSession userSession = new UserSession(req);
                 userSession.setToken(token);
                 resp.sendRedirect(userSession.getRedirectTarget());
                 return "";
@@ -375,20 +374,14 @@ public class Controller
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public String register(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
-        final String email = req.getParameter("email");
-        String name = req.getParameter("name");
-        String club = req.getParameter("club");
-        String password = req.getParameter("password");
-        String passwordConf = req.getParameter("passwordConf");
-        String agreement = req.getParameter("agreement");
-        String recaptchaResponse = req.getParameter("g-recaptcha-response");
-        if (!notARobot(recaptchaResponse))
+        if (!realPerson(req))
         {
             resp.sendRedirect("/register");
             return "";
         }
-        Register register = new Register(userManager, email, name, club, password, passwordConf,
-                agreement != null);
+        Register register = new Register(userManager, req.getParameter("email"),
+                req.getParameter("name"), req.getParameter("club"), req.getParameter("password"),
+                req.getParameter("passwordConf"), req.getParameter("agreement") != null);
         try
         {
             User user = register
@@ -429,7 +422,7 @@ public class Controller
     public String userDetails(HttpServletRequest req, HttpServletResponse resp,
             @PathVariable long userId) throws IOException
     {
-        final UserSession userSession = new UserSession(req);
+        UserSession userSession = new UserSession(req);
         if (userManager.sessionHasRole(userSession.getToken(), "admin"))
         {
             User user = userManager.getUserById(userId);
@@ -444,7 +437,7 @@ public class Controller
     public String deleteUser(HttpServletRequest req, HttpServletResponse resp,
             @PathVariable long userId) throws IOException
     {
-        final UserSession userSession = new UserSession(req);
+        UserSession userSession = new UserSession(req);
         if (userManager.sessionHasRole(userSession.getToken(), "admin"))
         {
             User user = userManager.getUserById(userId);
@@ -459,7 +452,7 @@ public class Controller
     public String deleteUserConfirmed(HttpServletRequest req, HttpServletResponse resp,
             @PathVariable long userId) throws IOException
     {
-        final UserSession userSession = new UserSession(req);
+        UserSession userSession = new UserSession(req);
         if (userManager.sessionHasRole(userSession.getToken(), "admin"))
         {
             User user = userManager.getUserById(userId);
@@ -483,16 +476,13 @@ public class Controller
     public String passwordReset(HttpServletRequest req, HttpServletResponse resp,
             @PathVariable long resetId) throws IOException
     {
-        String password = req.getParameter("password");
-        String passwordConf = req.getParameter("passwordConf");
-        String recaptchaResponse = req.getParameter("g-recaptcha-response");
-        if (!notARobot(recaptchaResponse))
+        if (!realPerson(req))
         {
             resp.sendRedirect(String.format("/pwdReset/%d", resetId));
             return "";
         }
         Reset reset = new Reset(resetId, userManager);
-        if (reset.validateAndReset(password, passwordConf))
+        if (reset.validateAndReset(req.getParameter("password"), req.getParameter("passwordConf")))
         {
             resp.sendRedirect("/login");
             return "";
@@ -513,10 +503,8 @@ public class Controller
     public String reconfirm(HttpServletRequest req, HttpServletResponse resp,
             @PathVariable long userId) throws IOException
     {
-        String agreement = req.getParameter("agreement");
-        boolean agreed = agreement != null;
         Reconfirm reconfirm = new Reconfirm(userId, userManager);
-        if (reconfirm.validateAndReconfirm(agreed))
+        if (reconfirm.validateAndReconfirm(req.getParameter("agreement") != null))
         {
             resp.sendRedirect("/reconfConf");
             return "";
@@ -552,27 +540,26 @@ public class Controller
         return "Emails sent";
     }
 
-    private boolean notARobot(String recaptchaResponse) throws IOException
+    private boolean realPerson(HttpServletRequest req) throws IOException
     {
         HttpPost post = new HttpPost("https://www.google.com/recaptcha/api/siteverify");
         post
                 .setEntity(new UrlEncodedFormEntity(Arrays
                         .asList(new BasicNameValuePair("secret", System.getenv("RECAPTCHA_SECRET")),
-                                new BasicNameValuePair("response", recaptchaResponse))));
-        String responseBody;
+                                new BasicNameValuePair("response",
+                                        req.getParameter("g-recaptcha-response")))));
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(post))
         {
             if (response.getStatusLine().getStatusCode() != HttpStatus.OK.value())
                 return false;
             try (Scanner scanner = new Scanner(response.getEntity().getContent()))
             {
-                responseBody = scanner.useDelimiter("\\A").next();
+                return JsonParserFactory
+                        .getJsonParser()
+                        .parseMap(scanner.useDelimiter("\\A").next())
+                        .getOrDefault("success", Boolean.FALSE)
+                        .equals(Boolean.TRUE);
             }
         }
-        return JsonParserFactory
-                .getJsonParser()
-                .parseMap(responseBody)
-                .getOrDefault("success", Boolean.FALSE)
-                .equals(Boolean.TRUE);
     }
 }
