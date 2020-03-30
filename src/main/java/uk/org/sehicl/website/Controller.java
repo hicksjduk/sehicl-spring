@@ -620,7 +620,7 @@ public class Controller
 
     private boolean notARobot(String recaptchaResponse) throws IOException
     {
-        HttpPost post = new HttpPost("https://www.google.com/recaptcha/api/siteverify");
+        HttpPost post = new HttpPost(System.getenv("RECAPTCHA_URL"));
         post
                 .setEntity(new UrlEncodedFormEntity(Arrays
                         .asList(new BasicNameValuePair("secret",
