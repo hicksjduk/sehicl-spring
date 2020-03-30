@@ -19,6 +19,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,7 +69,7 @@ public class Controller
 {
     @Autowired
     private UserManager userManager;
-    
+
     private String getRequestUri(HttpServletRequest req)
     {
         String answer = Stream
@@ -618,13 +619,15 @@ public class Controller
         return "Emails sent";
     }
 
+    @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")
+    private String recaptchaUrl;
+
     private boolean notARobot(String recaptchaResponse) throws IOException
     {
-        HttpPost post = new HttpPost(System.getenv("RECAPTCHA_URL"));
+        HttpPost post = new HttpPost(recaptchaUrl);
         post
                 .setEntity(new UrlEncodedFormEntity(Arrays
-                        .asList(new BasicNameValuePair("secret",
-                                System.getenv("RECAPTCHA_SECRET")),
+                        .asList(new BasicNameValuePair("secret", System.getenv("RECAPTCHA_SECRET")),
                                 new BasicNameValuePair("response", recaptchaResponse))));
         String responseBody;
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(post))
