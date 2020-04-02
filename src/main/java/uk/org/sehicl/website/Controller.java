@@ -381,8 +381,8 @@ public class Controller
     {
         String answer = "";
         String uri = getRequestUri(req);
-        final String email = req.getParameter("email");
-        final String password = req.getParameter("password");
+        final String email = getParameter(req, "email");
+        final String password = getParameter(req, "password");
         final Login login = new Login(userManager, email, password);
         boolean redisplay = true;
         if (req.getParameter("Login") != null)
@@ -431,11 +431,11 @@ public class Controller
     {
         String answer = "";
         String uri = getRequestUri(req);
-        final String email = req.getParameter("email");
-        final String name = req.getParameter("name");
-        final String club = req.getParameter("club");
-        final String password = req.getParameter("password");
-        final String passwordConf = req.getParameter("passwordConf");
+        final String email = getParameter(req, "email");
+        final String name = getParameter(req, "name");
+        final String club = getParameter(req, "club");
+        final String password = getParameter(req, "password");
+        final String passwordConf = getParameter(req, "passwordConf");
         final String agreement = req.getParameter("agreement");
         final String recaptchaResponse = req.getParameter("g-recaptcha-response");
         if (!notARobot(recaptchaResponse))
@@ -545,8 +545,8 @@ public class Controller
             @PathVariable long resetId) throws IOException
     {
         String uri = getRequestUri(req);
-        final String password = req.getParameter("password");
-        final String passwordConf = req.getParameter("passwordConf");
+        final String password = getParameter(req, "password");
+        final String passwordConf = getParameter(req, "passwordConf");
         final String recaptchaResponse = req.getParameter("g-recaptcha-response");
         if (!notARobot(recaptchaResponse))
         {
@@ -644,5 +644,11 @@ public class Controller
                 .parseMap(responseBody)
                 .getOrDefault("success", Boolean.FALSE)
                 .equals(Boolean.TRUE);
+    }
+    
+    String getParameter(HttpServletRequest req, String name)
+    {
+        String value = req.getParameter(name);
+        return value == null ? null : value.trim();
     }
 }
