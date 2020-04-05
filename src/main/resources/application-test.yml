@@ -1,0 +1,6 @@
+server:
+    port: 8082
+sendgrid:
+    server: localhost:8081
+recaptcha:
+    url: http://localhost:8081/recaptcha

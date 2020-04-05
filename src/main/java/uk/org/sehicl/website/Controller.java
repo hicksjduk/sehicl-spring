@@ -19,6 +19,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -540,9 +541,12 @@ public class Controller
         return "Emails sent";
     }
 
+    @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")
+    private String recaptchaUrl;
+
     private boolean realPerson(HttpServletRequest req) throws IOException
     {
-        HttpPost post = new HttpPost("https://www.google.com/recaptcha/api/siteverify");
+        HttpPost post = new HttpPost(recaptchaUrl);
         post
                 .setEntity(new UrlEncodedFormEntity(Arrays
                         .asList(new BasicNameValuePair("secret", System.getenv("RECAPTCHA_SECRET")),
@@ -561,5 +565,11 @@ public class Controller
                         .equals(Boolean.TRUE);
             }
         }
+    }
+
+    String getParameter(HttpServletRequest req, String name)
+    {
+        String value = req.getParameter(name);
+        return value == null ? null : value.trim();
     }
 }

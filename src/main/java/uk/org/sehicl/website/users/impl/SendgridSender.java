@@ -3,6 +3,9 @@ package uk.org.sehicl.website.users.impl;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
+
 import com.sendgrid.Content;
 import com.sendgrid.Email;
 import com.sendgrid.Mail;
@@ -16,6 +19,9 @@ import uk.org.sehicl.website.users.EmailSender;
 
 public class SendgridSender implements EmailSender
 {
+    @Value("${sendgrid.server:}")
+    private String sendGridServer;
+    
     @Override
     public void sendEmail(String subject, String messageText, Addressee... addressees)
             throws EmailException
@@ -34,7 +40,10 @@ public class SendgridSender implements EmailSender
     
     private void send(Mail mail) throws EmailException
     {
-        SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+        boolean serverConfigured = !StringUtils.isEmpty(sendGridServer);
+        SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"), serverConfigured);
+        if (serverConfigured)
+            sg.setHost(sendGridServer);
         Request req = new Request();
         req.setMethod(Method.POST);
         req.setEndpoint("mail/send");
