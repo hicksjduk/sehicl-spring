@@ -4,7 +4,7 @@ Your e-mail address (to which this message was sent) is your user name.</p>
 <p>Before you can use your account, you must activate it, which you can do by
 clicking the link below, or copying the address and pasting it into the address bar of your
 Web browser.</p>
-<#assign addr>${activationPageAddress}/${user.id?string.computer}</#assign>
+<#assign addr>${serverAddress}activate/${user.id?string.computer}</#assign>
 <p> 
 <a href="${addr}">${addr}</a>
 </p>

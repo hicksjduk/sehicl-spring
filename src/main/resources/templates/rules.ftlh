@@ -666,7 +666,8 @@ If two or more teams are equal according to the above criteria, they shall share
 		and under 15 years (girls) on the 1st September prior to the start of
 		the current indoor season.</li>
 
-	<li>The pitch length will be 21 yards.</li>
+	<li>The pitch length will be the ECB recommended length for Under-13 cricket.
+		(As of 2019 this is 19 yards.) </li>
 
 	<li>When a batsman reaches a personal total of 20 runs he shall
 		retire, but may return to the crease at the fall of the fifth wicket.

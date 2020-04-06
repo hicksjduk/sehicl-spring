@@ -5,12 +5,12 @@ import uk.org.sehicl.website.users.User;
 public class ActivationMail
 {
     private final User user;
-    private final String activationPageAddress;
+    private final String serverAddress;
 
-    public ActivationMail(User user, String activationPageAddress)
+    public ActivationMail(User user, String serverAddress)
     {
         this.user = user;
-        this.activationPageAddress = activationPageAddress;
+        this.serverAddress = serverAddress;
     }
 
     public User getUser()
@@ -18,8 +18,8 @@ public class ActivationMail
         return user;
     }
 
-    public String getActivationPageAddress()
+    public String getServerAddress()
     {
-        return activationPageAddress;
+        return serverAddress;
     }
 }

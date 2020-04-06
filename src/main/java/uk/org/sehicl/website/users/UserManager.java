@@ -52,10 +52,10 @@ public class UserManager
     }
 
     public User registerUser(String email, String name, String club, String password,
-            String activationPageAddress) throws UserException, EmailException
+            String serverAddress) throws UserException, EmailException
     {
         User answer = new User(name, email, club, Status.INACTIVE, 0, password, true);
-        if (!isBlocked(email))
+        if (!isBlocked(answer))
         {
             final User user = datastore.getUserByEmail(email);
             if (user != null)
@@ -63,10 +63,18 @@ public class UserManager
                 throw new UserException(Message.emailAlreadyExists);
             }
             answer = datastore.createUser(email, name, club, Status.INACTIVE, password);
-            sendActivationEmail(answer, activationPageAddress);
-            notifyAdmin("register", answer);
+            sendActivationEmail(answer, serverAddress);
+            notifyAdmin("register", answer, serverAddress);
         }
         return answer;
+    }
+
+    private boolean isBlocked(User user)
+    {
+        return false;
+//        if (isBlocked(user.getEmail()))
+//            return true;
+//        return StringUtils.equals(user.getName(), user.getClub());
     }
 
     private boolean isBlocked(String email)
@@ -75,10 +83,10 @@ public class UserManager
         return answer;
     }
 
-    private void sendActivationEmail(User user, String activationPageAddress) throws UserException
+    private void sendActivationEmail(User user, String serverAddress) throws UserException
     {
         StringWriter sw = new StringWriter();
-        new ActivationMailTemplate(user, activationPageAddress).process(sw);
+        new ActivationMailTemplate(user, serverAddress).process(sw);
         try
         {
             emailer.sendEmail("Activate your SEHICL account", sw.toString(),
@@ -106,10 +114,10 @@ public class UserManager
         }
     }
 
-    private void notifyAdmin(String action, User user) throws UserException
+    private void notifyAdmin(String action, User user, String serverAddress) throws UserException
     {
         StringWriter sw = new StringWriter();
-        new AdminNotifyMailTemplate(user).process(sw);
+        new AdminNotifyMailTemplate(user, serverAddress).process(sw);
         try
         {
             emailer.sendEmail(String.format("User action: %s", action), sw.toString(),
@@ -163,7 +171,7 @@ public class UserManager
         User answer = null;
         try
         {
-            answer = setUserStatus(id, status, false);
+            answer = setUserStatus(id, status, null, false);
         }
         catch (EmailException e)
         {
@@ -171,7 +179,7 @@ public class UserManager
         return answer;
     }
 
-    private User setUserStatus(long id, Status status, boolean notifyAdmin)
+    private User setUserStatus(long id, Status status, String userDetailsPageAddress, boolean notifyAdmin)
             throws UserException, EmailException
     {
         final User answer = datastore.getUserById(id);
@@ -183,7 +191,7 @@ public class UserManager
         datastore.updateUser(answer);
         if (notifyAdmin && status == Status.ACTIVE)
         {
-            notifyAdmin("activate", answer);
+            notifyAdmin("activate", answer, userDetailsPageAddress);
         }
         return answer;
     }
@@ -237,7 +245,7 @@ public class UserManager
     public User reconfirmUser(long id) throws UserException
     {
         final User answer = setUserStatusNoNotify(id, Status.ACTIVE);
-        notifyAdmin("reconfirm", answer);
+        notifyAdmin("reconfirm", answer, null);
         return answer;
     }
 
@@ -258,5 +266,10 @@ public class UserManager
                 throw new RuntimeException("Error sending activation e-mail", e);
             }
         });
+    }
+    
+    public void deleteUser(long userId)
+    {
+        datastore.deleteUser(userId);
     }
 }

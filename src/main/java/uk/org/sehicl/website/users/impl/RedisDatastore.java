@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.HashOperations;
@@ -76,8 +77,12 @@ public class RedisDatastore implements UserDatastore
             URI uri = URI.create(uriString);
             answer.setHostName(uri.getHost());
             answer.setPort(uri.getPort());
-            final String password = uri.getUserInfo().split(":")[1];
-            answer.setPassword(password);
+            String userInfo = uri.getUserInfo();
+            if (!StringUtils.isEmpty(userInfo))
+            {
+                final String password = userInfo.split(":")[1];
+                answer.setPassword(password);
+            }
         }
         return answer;
     }
@@ -180,8 +185,8 @@ public class RedisDatastore implements UserDatastore
     {
         long now = new Date().getTime();
         List<SessionData> expiredSessions = new ArrayList<>();
-        try (Cursor<Entry<Object, Object>> c = ops.scan("session",
-                new ScanOptionsBuilder().build()))
+        try (Cursor<Entry<Object, Object>> c = ops
+                .scan("session", new ScanOptionsBuilder().build()))
         {
             c.forEachRemaining(e ->
             {
@@ -199,8 +204,9 @@ public class RedisDatastore implements UserDatastore
         if (!expiredSessions.isEmpty())
         {
             ops.delete("session", expiredSessions.stream().mapToLong(SessionData::getId).toArray());
-            ops.delete("usersession",
-                    expiredSessions.stream().mapToLong(SessionData::getUserId).toArray());
+            ops
+                    .delete("usersession",
+                            expiredSessions.stream().mapToLong(SessionData::getUserId).toArray());
         }
     }
 
@@ -276,7 +282,22 @@ public class RedisDatastore implements UserDatastore
     public Collection<Long> getAllUserIds()
     {
         String bucket = "user";
-        Collection<Long> answer = ops.keys(bucket).stream().map(Long.class::cast).collect(Collectors.toSet());
+        Collection<Long> answer = ops
+                .keys(bucket)
+                .stream()
+                .map(Long.class::cast)
+                .collect(Collectors.toSet());
         return answer;
     }
+
+    @Override
+    public void deleteUser(long id)
+    {
+        User user = getUserById(id);
+        if (user == null)
+            return;
+        ops.delete("user", id);
+        ops.delete("email", user.getEmail());
+    }
+
 }

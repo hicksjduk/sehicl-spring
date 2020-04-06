@@ -159,7 +159,7 @@ public class BowlingAverages implements Averages<BowlingRow>
 
     public static class Builder
     {
-        private final Map<String, BowlingRow> rowsByPlayerId = new HashMap<>();
+        private final Map<String, BowlingRow> rowsByUniqueId = new HashMap<>();
         private final AveragesSelector selector;
         private final ReportStatus status = new ReportStatus();
         private final Completeness completenessThreshold;
@@ -215,19 +215,20 @@ public class BowlingAverages implements Averages<BowlingRow>
 
         private void add(Team team, Bowler bowler, Rules rules, Date matchDate, Team opponent)
         {
-            final String playerId = bowler.getPlayerId();
-            BowlingRow row = rowsByPlayerId.get(playerId);
+            final Player player = team.getPlayer(bowler.getPlayerId());
+            final String uniqueId = selector.getUniqueId(player);
+            BowlingRow row = rowsByUniqueId.get(uniqueId);
             if (row == null)
             {
-                row = new BowlingRow(team.getPlayer(playerId), team, rules);
-                rowsByPlayerId.put(playerId, row);
+                row = new BowlingRow(player, team, rules);
+                rowsByUniqueId.put(uniqueId, row);
             }
             row.add(new BowlingPerformance(matchDate, opponent, bowler, rules));
         }
 
         public Collection<BowlingRow> getRows()
         {
-            SortedSet<BowlingRow> sortedRows = new TreeSet<>(rowsByPlayerId.values());
+            SortedSet<BowlingRow> sortedRows = new TreeSet<>(rowsByUniqueId.values());
             Collection<BowlingRow> answer;
             if (maxRows == null || maxRows >= sortedRows.size())
             {

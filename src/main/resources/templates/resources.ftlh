@@ -4,7 +4,7 @@
 <li>
 	
 <p>
-<a href="/resources/TeamSheet.xlsx">Team sheet</a> - <i>Excel spreadsheet</i>
+<a href="/resources/TeamSheet.pdf">Team sheet</a> - <i>PDF document, printing 2 sheets per A4 page.</i>
 </p>
 	
 </li>

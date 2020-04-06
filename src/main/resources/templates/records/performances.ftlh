@@ -18,8 +18,9 @@
 <@performance "Division 1" "Havant A" "206 for 3" "2009-10"/>
 <@performance "Division 2" "United Services" "192 for 3" "1991-92"/>
 <@performance "Division 3" "United Services" "207 for 1" "1997-98"/>
-<@performance "Division 4" "ServiceMaster" "207 for 0" "2014-15"/>
+<@performance "Division 4" "Fareham & Crofton" "211 all out" "2019-20"/>
 <@performance "Division 5" "Portsmouth C" "214 for 2" "2017-18"/>
+<@performance "Division 6" "Droxford" "162 for 1" "2019-20"/>
 <@performance "Colts Under-16" "Havant" "269 for 1" "2003-04"/>
 <@performance "Colts Under-13" "Portsmouth" "227 for 1" "2017-18"/>
 </tbody>
@@ -33,7 +34,8 @@
 <@performance "Division 3" "Cyanamid" "12 all out" "1988-89"/>
 <@performance "Division 4" "IBM South Hants B" "17 all out" "2003-04"/>
 <@performance "" "Flutters" "17 all out" "2006-07"/>
-<@performance "Division 5" "OPCS Titchfield" "46 all out" "2017-18"/>
+<@performance "Division 5" "OPCS Titchfield" "30 all out" "2018-19"/>
+<@performance "Division 6" "Portsmouth Academics" "51 all out" "2019-20"/>
 <@performance "Colts Under-16" "Portsmouth" "14 all out" "2006-07"/>
 <@performance "Colts Under-13" "Portsmouth & Southsea" "15 all out" "2014-15"/>
 </tbody>
@@ -42,11 +44,13 @@
 <a id="hiscore"></a>Highest individual score</h2>
 <table border="0">
 <tbody>
-<@performance "Division 1" "South Hants" "81*" "1988-89" "R Marston"/>
+<@performance "Division 1" "Bedhampton A" "85" "2018-19" "H Hovey"/>
 <@performance "Division 2" "United Services" "102*" "1988-89" "P Barsby"/>
 <@performance "Division 3" "Locks Heath B" "84" "1999-2000" "R Higgins"/>
 <@performance "Division 4" "OPCS Titchfield" "95*" "2016-17" "A Jagadeesh"/>
 <@performance "Division 5" "Afghan Society Portsmouth" "71*" "2017-18" "H Peruzi"/>
+<@performance "" "XIIth Men B" "71" "2018-19" "Saleem"/>
+<@performance "Division 6" "Knowle Village" "65" "2019-20" "P Dennis"/>
 <@performance "Colts Under-16" "Portsmouth & Southsea" "97" "2010-11" "T Benfield"/>
 <@performance "Colts Under-13" "Havant" "122" "2010-11" "H Hovey"/>
 </tbody>
@@ -59,7 +63,8 @@
 <@performance "Division 2" "Portsmouth & Southsea" "5 for 12" "2013-14" "K Dunstan"/>
 <@performance "Division 3" "Portchester B" "5 for 10" "2003-04" "S Gale"/>
 <@performance "Division 4" "Harting" "5 for 7" "1988-89" "S Kyte"/>
-<@performance "Division 5" "Hambledon C" "4 for 10" "2017-18" "H Glanfield"/>
+<@performance "Division 5" "Swanmore" "5 for 11" "2018-19" "J Gradwell"/>
+<@performance "Division 6" "Droxford" "4 for 15" "2019-20" "J Odell"/>
 <@performance "Colts Under-16" "Fareham & Crofton" "5 for 25" "2017-18" "S Khan"/>
 <@performance "Colts Under-13" "Hambledon" "4 for 0" "2008-09" "S Le-Clercq"/>
 </tbody>

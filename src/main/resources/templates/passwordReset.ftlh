@@ -27,6 +27,7 @@
 			<td>${(reset.validation.passwordConfMessage)!""}</td>
 		</tr>
 	</table>
+    <#include "recaptcha.ftlh"/>
 	<p>
 		<input name="Reset" type="Submit" value="Reset"/>
 	</p>

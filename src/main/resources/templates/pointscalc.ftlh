@@ -8,11 +8,13 @@
 	6 points per innings.<br> Bowling points:
 	1 point per wicket taken. If the batting side has fewer than six
 	players, and the missing player(s) would have been required to bat if
-	present, a bowling bonus point is awarded for each missing player.<br>
+	present, a wicket is counted, and a bowling bonus point awarded,
+	for each missing player.<br>
 	In a game won by default, the winning team receives
 	5 batting points and
 	5 bowling points as well as
-	12 points for winning. <br> Teams are ranked by <b>average points per game played</b>, then if still equal 
+	12 points for winning. The losing team scores no points.
+	<br> Teams are ranked by <b>average points per game played</b>, then if still equal 
 	by <b>run rate</b>, which is the total number of runs
 	scored divided by the total number of overs faced. For this purpose,
 	an innings where the batting side is all out counts as lasting the full

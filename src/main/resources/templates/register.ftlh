@@ -44,6 +44,7 @@
 		</tr>
 	</table>
 <#include "dataprotectionagreement.ftlh"/>
+    <#include "recaptcha.ftlh"/>
 	<p>
 		<input type="Submit" value="Submit">
 	</p>

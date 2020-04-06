@@ -73,6 +73,8 @@
 	<@winner 2016 "Waterlooville A"/>
 	<@winner 2017 "Waterlooville A"/>
 	<@winner 2018 "Waterlooville A"/>
+	<@winner 2019 "Havant A"/>
+    <@winner 2020 "Havant A"/>
 </@div>
 
 <@div "Division 2" "from 1986-87 for the Barretts Shield">
@@ -113,6 +115,8 @@
 	<@winner 2016 "Purbrook"/>
 	<@winner 2017 "Portsmouth & Southsea A"/>
 	<@winner 2018 "Portsmouth & Southsea A"/>
+	<@winner 2019 "Fareham & Crofton A"/>
+    <@winner 2020 "Hambledon A"/>
 </@div>
 
 <@div "Division 3" "for the Ferguson Shield">
@@ -148,6 +152,8 @@
 	<@winner 2016 "Gosport Borough A"/>
 	<@winner 2017 "Petersfield"/>
 	<@winner 2018 "St James Casuals"/>
+	<@winner 2019 "Hambledon A"/>
+    <@winner 2020 "Havant B"/>
 </@div>
 
 <@div "Division 4", "for the Joan Vause Shield">
@@ -182,10 +188,18 @@
 	<@winner 2016 "Gosport Borough B"/>
 	<@winner 2017 "Hambledon B"/>
 	<@winner 2018 "Sarisbury Athletic"/>
+	<@winner 2019 "Afghan Society Portsmouth"/>
+    <@winner 2020 "Fareham & Crofton"/>
 </@div>
 
 <@div "Division 5", "for the Brian Ravenhall Memorial Shield">
 	<@winner 2018 "Hambledon C"/>
+	<@winner 2019 "Waterlooville C"/>
+    <@winner 2020 "Hambledon B"/>
+</@div>
+
+<@div "Division 6">
+    <@winner 2020 "Knowle Village"/>
 </@div>
 
 <@div "Colts" "from 1986-87 for the Peter Faulkner Shield">
@@ -229,6 +243,8 @@
 	<@winner 2016 "Petersfield"/>
 	<@winner 2017 "Portsmouth & Southsea"/>
 	<@winner 2018 "Hambledon"/>
+	<@winner 2019 "Gosport Borough"/>
+    <@winner 2020 "Havant"/>
 </@div>
 
 <@div "Colts Under-13" "for the Ron Cross MBE Trophy">
@@ -253,6 +269,8 @@
 	<@winner 2016 "Havant"/>
 	<@winner 2017 "Havant"/>
 	<@winner 2018 "Hambledon"/>
+	<@winner 2019 "Havant"/>
+    <@winner 2020 "Hambledon"/>
 </@div>
 
 </div>

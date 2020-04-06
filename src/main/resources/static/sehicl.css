@@ -143,6 +143,10 @@ ul.navigator li ul li
 	white-space: nowrap;
 }
 
+table#teamfix td:last-child {
+	width: 100%
+}
+
 #teamfix .time {
 	padding-left: 10px;
 	padding-right: 10px;
@@ -172,7 +176,6 @@ ul.navigator li ul li
 	padding-left: 25px;
 	text-align: left;
 	white-space: nowrap;
-	padding-right: 500px
 }
 
 #teamfix .date {
@@ -365,6 +368,10 @@ H1 {
 
 #presentation dt {
 	margin-top: 1em
+}
+
+#schedule dd {
+	font-weight: normal
 }
 
 ul.deductions {

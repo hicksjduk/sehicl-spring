@@ -23,7 +23,7 @@ public class UserException extends Exception
                                                 "User not found"), resetTokenNotFound(
                                                         "Specified reset token does not exist, or has expired");
 
-        private final String message;
+        public final String message;
 
         private Message(String message)
         {
