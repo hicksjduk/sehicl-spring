@@ -5,12 +5,12 @@ import uk.org.sehicl.website.users.User;
 public class AdminNotifyMail
 {
     private final User user;
-    private final String userDetailsPageAddress;
+    private final String serverAddress;
 
-    public AdminNotifyMail(User user, String userDetailsPageAddress)
+    public AdminNotifyMail(User user, String serverAddress)
     {
         this.user = user;
-        this.userDetailsPageAddress = userDetailsPageAddress;
+        this.serverAddress = serverAddress;
     }
 
     public User getUser()
@@ -18,8 +18,8 @@ public class AdminNotifyMail
         return user;
     }
 
-    public String getUserDetailsPageAddress()
+    public String getServerAddress()
     {
-        return userDetailsPageAddress;
+        return serverAddress;
     }
 }

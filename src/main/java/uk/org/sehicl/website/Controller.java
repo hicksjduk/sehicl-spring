@@ -387,14 +387,7 @@ public class Controller
         {
             User user = register
                     .validateAndRegister(
-                            URI
-                                    .create(req.getRequestURL().toString())
-                                    .resolve("/activate")
-                                    .toString(),
-                            URI
-                                    .create(req.getRequestURL().toString())
-                                    .resolve("/userDetails")
-                                    .toString());
+                            URI.create(req.getRequestURL().toString()).resolve("/").toString());
             return new PageTemplate(user == null ? new RegisterPage(getRequestUri(req), register)
                     : new RegisterConfPage(getRequestUri(req), user)).process();
         }

@@ -177,7 +177,7 @@ public class Register
         return validation;
     }
 
-    public User validateAndRegister(String activationPageAddress, String userDetailsPageAddress)
+    public User validateAndRegister(String serverAddress)
             throws EmailException
     {
         User answer = null;
@@ -222,7 +222,7 @@ public class Register
             {
                 answer = userManager
                         .registerUser(validation.email, validation.name, validation.club,
-                                validation.password, activationPageAddress, userDetailsPageAddress);
+                                validation.password, serverAddress);
             }
             catch (UserException e)
             {

@@ -52,7 +52,7 @@ public class UserManager
     }
 
     public User registerUser(String email, String name, String club, String password,
-            String activationPageAddress, String userDetailsPageAddress) throws UserException, EmailException
+            String serverAddress) throws UserException, EmailException
     {
         User answer = new User(name, email, club, Status.INACTIVE, 0, password, true);
         if (!isBlocked(answer))
@@ -63,8 +63,8 @@ public class UserManager
                 throw new UserException(Message.emailAlreadyExists);
             }
             answer = datastore.createUser(email, name, club, Status.INACTIVE, password);
-            sendActivationEmail(answer, activationPageAddress);
-            notifyAdmin("register", answer, userDetailsPageAddress);
+            sendActivationEmail(answer, serverAddress);
+            notifyAdmin("register", answer, serverAddress);
         }
         return answer;
     }
@@ -83,10 +83,10 @@ public class UserManager
         return answer;
     }
 
-    private void sendActivationEmail(User user, String activationPageAddress) throws UserException
+    private void sendActivationEmail(User user, String serverAddress) throws UserException
     {
         StringWriter sw = new StringWriter();
-        new ActivationMailTemplate(user, activationPageAddress).process(sw);
+        new ActivationMailTemplate(user, serverAddress).process(sw);
         try
         {
             emailer.sendEmail("Activate your SEHICL account", sw.toString(),
@@ -114,10 +114,10 @@ public class UserManager
         }
     }
 
-    private void notifyAdmin(String action, User user, String userDetailsPageAddress) throws UserException
+    private void notifyAdmin(String action, User user, String serverAddress) throws UserException
     {
         StringWriter sw = new StringWriter();
-        new AdminNotifyMailTemplate(user, userDetailsPageAddress).process(sw);
+        new AdminNotifyMailTemplate(user, serverAddress).process(sw);
         try
         {
             emailer.sendEmail(String.format("User action: %s", action), sw.toString(),
