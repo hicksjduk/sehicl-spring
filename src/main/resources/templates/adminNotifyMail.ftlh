@@ -1,7 +1,7 @@
 Account details:
 <br>User ID:
 <#if serverAddress??> 
-    <a href="${serverAddress}userDetails/${user.id?string.computer}">${user.id?string.computer}</a>
+    <a href=${serverAddress}userDetails/${user.id?string.computer}>${user.id?string.computer}</a>
 <#else>
     ${user.id?string.computer}
 </#if>
