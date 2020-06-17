@@ -38,49 +38,54 @@ var match = ${jsonResult?no_esc};
 			<tr>
 				<td>${bat}</td>
 				<td><input type="text" 
-						list="${(inns == 1)?then('homeplayers', 'awayplayers')}" 
-						name="batsman${inns}${bat}" ${(bat <= 4)?then('required', '')}></td>
-				<td><select id="howout${inns}${bat}" name="howout${inns}${bat}" onchange="howOutChanged(${inns}, ${bat})">
-						<option value="dnb" selected>Did not bat</option>
-						<option value="notout;score">Not out</option>
-						<option value="retired;score">Retired</option>
-						<option value="runout;score;out">Run out</option>
-						<option value="bowled;score;bowler;out">Bowled</option>
-						<option value="caught;score;bowler;out">Caught</option>
-						<option value="stumped;score;bowler;out">Stumped</option>
-						<option value="lbw;score;bowler;out">LBW</option>
-						<option value="absentno">Absent</option>
-						<option value="absentout;out">Absent out</option>
-						<option value="retiredhurtno;score">Retired hurt - not out</option>
-						<option value="retiredhurt;score;out">Retired hurt - out </option>
-						<option value="hitwicket;score;bowler;out">Hit wicket</option>
-						<option value="handledball;score;out">Handled ball</option>
-						<option value="obstructing;score;out">Obstructing the field</option>
-						<option value="timedout;score;out">Timed out</option>
+						list="${(inns == 1)?then('homeplayers', 'awayplayers')}"
+						id="batsman${inns}${bat}" 
+						name="${playerDataField.BATSMAN}${inns}${bat}"></td>
+				<td><select id="howout${inns}${bat}" 
+				        name="${playerDataField.BATSMAN}${inns}${bat}" 
+				        onchange="howOutChanged(${inns}, ${bat})">
+				    <#list howOut as k, ho>
+				        <option value="${ho.attribute}" ${(ho?counter == 1)?then("selected", "")}>${ho.text}</option>
+				    </#list>
 				</select></td>
 				<td><input type="text" 
 					onchange="refreshBowlerWickets(${inns})"
-					name="bowlerwicket${inns}${bat}" 
+                    id="wicketbowler${inns}${bat}" 
+					name="${playerDataField.WICKET_BOWLER}${inns}${bat}" 
 					list="${(inns == 1)?then('awayplayers', 'homeplayers')}" 
 					disabled></td>
-				<td><input type="number" name="runsScored${inns}${bat}" min="0" disabled onchange="refreshTotal(${inns})"></td>
+				<td><input type="number" name="${playerDataField.RUNS_SCORED}${inns}${bat}"
+				    id="runsscored${inns}${bat}" 
+				    min="0" disabled onchange="refreshTotal(${inns})"></td>
 			</tr>
 			</#list>
 			<tr>
 				<th colspan="4" style="text-align: right;">Extras</th>
-				<td><input type="number" name="extras${inns}" min="0" required onchange="refreshTotal(${inns})"></td>
+				<td><input type="number" 
+				id="extras${inns}" 
+                name="${inningsDataField.EXTRAS}${inns}" 
+				min="0" required onchange="refreshTotal(${inns})"></td>
 			</tr>
 			<tr>
 				<th colspan="4" style="text-align: right;">Total</th>
-				<td><input type="number" readonly id="total${inns}" min="0"></td>
+				<td><input type="number" readonly 
+				id="total${inns}" 
+                name="${inningsDataField.TOTAL}${inns}" 
+				min="0"></td>
 			</tr>
 			<tr>
 				<th colspan="4" style="text-align: right;">Wickets</th>
-				<td><input type="number" readonly id="wickets${inns}" min="0"></td>
+				<td><input type="number" readonly 
+				id="wickets${inns}" 
+                name="${inningsDataField.WICKETS}${inns}" 
+				min="0"></td>
 			</tr>
 			<tr>
 				<th colspan="4" style="text-align: right;">Overs</th>
-				<td><input type="number" readonly id="overs${inns}" min="0"></td>
+				<td><input type="number" readonly 
+				id="overs${inns}" 
+                name="${inningsDataField.OVERS}${inns}" 
+				min="0"></td>
 			</tr>
 		</table>
 		<table style="width: 40%; border: 1px solid black; float: right;">
@@ -97,8 +102,11 @@ var match = ${jsonResult?no_esc};
 				<td><input type="text"
 						onchange="refreshBowlerWickets(${inns})" 
 						list="${(inns == 2)?then('homeplayers', 'awayplayers')}" 
-						name="bowler${inns}${bowl}" ${(bowl <= 4)?then('required', '')}></td>
-				<td><select name="overs${inns}${bowl}" onchange="refreshOvers(${inns})">
+                        id="bowler${inns}${bowl}" 
+						name="${playerDataField.BOWLER}${inns}${bowl}"></td>
+				<td><select name="${playerDataField.OVERS}${inns}${bowl}"
+				    id="overs${inns}${bowl}"
+				    onchange="refreshOvers(${inns})">
 					<#list 0..3 as overs>
 						<option value="${overs * 6}">${overs}</option>
 					</#list>
@@ -108,8 +116,10 @@ var match = ${jsonResult?no_esc};
 						</#list>
 					</#list>
 				</select></td>
-				<td><input type="number" name="runsConceded${inns}${bowl}" min="0"></td>
-				<td><input type="number" name="wickets${inns}${bowl}" 
+				<td><input type="number" name="${playerDataField.RUNS_CONCEDED}${inns}${bowl}" 
+				    id="runsConceded${inns}${bowl}" min="0"></td>
+				<td><input type="number" 
+				    name="${playerDataField.WICKETS}${inns}${bowl}"
 					id="wickets${inns}${bowl}" readonly min="0"></td>
 			</tr>
 			</#list>

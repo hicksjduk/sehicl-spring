@@ -1,198 +1,221 @@
 package uk.org.sehicl.website.resultentry;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.OptionalInt;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.apache.commons.lang3.StringUtils;
 
-import uk.org.sehicl.website.OrdinalDateFormatter;
 import uk.org.sehicl.website.data.League;
-import uk.org.sehicl.website.data.Match;
-import uk.org.sehicl.website.data.Model;
-import uk.org.sehicl.website.data.Player;
 import uk.org.sehicl.website.data.Team;
+import uk.org.sehicl.website.report.ModelAndRules;
+import uk.org.sehicl.website.resultentry.MatchData.ResultException;
+import uk.org.sehicl.website.rules.Rules;
 
-@JsonPropertyOrder({ "date", "time", "court", "leagueId", "leagueName", "homeTeam", "awayTeam" })
 public class Result
 {
-    private final static OrdinalDateFormatter DATE_FORMAT = new OrdinalDateFormatter(
-            new SimpleDateFormat("d MMMM yyyy"));
-    private final static DateFormat TIME_FORMAT = new SimpleDateFormat("h:mm");
+    private final MatchData match;
+    private final InningsData[] innings;
+    private final Rules rules;
+    private final Map<String, List<String>> validationErrors = new HashMap<>();
 
-    public final String date;
-    public final String time;
-    public final String court;
-    public final String leagueId;
-    public final String leagueName;
-    public final TeamData homeTeam;
-    public final TeamData awayTeam;
-
-    public Result(Model model, String leagueId, String homeTeamId, String awayTeamId)
-            throws ResultException
+    public Result(ModelAndRules modelAndRules, String leagueId, String homeTeamId,
+            String awayTeamId, UnaryOperator<String> dataGetter) throws ResultException
     {
-        final League league = model.getLeague(leagueId);
-        if (league == null)
-            throw ResultException.create("League %s not found", leagueId);
-        this.leagueId = league.getId();
-        leagueName = league.getName();
-        Team ht = league.getTeam(homeTeamId);
-        if (ht == null)
-            throw ResultException.create("Team %s not found in league %s", homeTeamId, leagueId);
-        homeTeam = getTeamData(league, homeTeamId);
-        awayTeam = getTeamData(league, awayTeamId);
-        Match match = league
-                .getMatches()
+        this.rules = modelAndRules.rules;
+        this.match = new MatchData(modelAndRules.model, leagueId, homeTeamId, awayTeamId);
+        boolean homeBattingFirst = dataGetter.apply("battingFirst").equals("hometeam");
+        League league = modelAndRules.model.getLeague(leagueId);
+        innings = Stream
+                .of(new InningsData(dataGetter, homeBattingFirst ? 1 : 2,
+                        league.getTeam(homeTeamId), league.getTeam(awayTeamId)),
+                        new InningsData(dataGetter, homeBattingFirst ? 2 : 1,
+                                league.getTeam(awayTeamId), league.getTeam(homeTeamId)))
+                .sorted(Comparator.comparing((InningsData id) -> id.sequence))
+                .toArray(InningsData[]::new);
+    }
+
+    public void validate()
+    {
+        int maxBallsPerInnings = rules.getOversPerInnings() * rules.getBallsPerOver();
+        IntStream.rangeClosed(0, 1).forEach(i -> validate(innings[i], rules, i + 1));
+        if (innings[0].wickets < rules.getMaxWickets() && innings[0].balls != maxBallsPerInnings)
+            addError(InningsDataField.OVERS.getFieldName(1),
+                    "First innings must be %d overs if the batting side is not all out",
+                    rules.getOversPerInnings());
+        if (innings[1].wickets < rules.getMaxWickets() && innings[1].balls != maxBallsPerInnings
+                && innings[1].total <= innings[0].total)
+            addError(InningsDataField.OVERS.getFieldName(2),
+                    "Second innings must be %d overs if the batting side is not all out "
+                            + "and does not win",
+                    rules.getOversPerInnings());
+    }
+
+    private void validate(InningsData inns, Rules rules, int inningsNumber)
+    {
+        if (inns.extras.isEmpty())
+            addError(InningsDataField.EXTRAS.getFieldName(inningsNumber), "Extras must be entered");
+        if (inns.balls > rules.getOversPerInnings() * rules.getBallsPerOver())
+            addError(InningsDataField.OVERS.getFieldName(inningsNumber),
+                    "Innings cannot be more than %d overs", rules.getOversPerInnings());
+        int runsConcededByBowlers = inns.bowlers
                 .stream()
-                .filter(m -> m.getHomeTeamId().equals(homeTeamId)
-                        && m.getAwayTeamId().equals(awayTeamId))
-                .findFirst()
-                .orElse(null);
-        if (match == null)
-            throw ResultException
-                    .create("Match between %s and %s not found in league %s", homeTeamId,
-                            awayTeamId, leagueId);
-        date = DATE_FORMAT.format(match.getDateTime());
-        time = TIME_FORMAT.format(match.getDateTime());
-        court = match.getCourt();
+                .map(b -> b.runsConceded)
+                .filter(OptionalInt::isPresent)
+                .mapToInt(OptionalInt::getAsInt)
+                .sum();
+        if (runsConcededByBowlers > inns.total)
+            addError(InningsDataField.TOTAL.getFieldName(inningsNumber),
+                    "Innings total cannot be less than the total number of runs conceded by the bowlers (%d)",
+                    runsConcededByBowlers);
+        List<String> bowlerNames = inns.bowlers
+                .stream()
+                .map(b -> b.name)
+                .filter(StringUtils::isNotBlank)
+                .distinct()
+                .collect(Collectors.toList());
+        IntStream
+                .range(0, inns.batsmen.size())
+                .forEach(i -> validate(inns.batsmen.get(i), inningsNumber, i + 1, bowlerNames));
+        IntStream
+                .range(0, inns.bowlers.size())
+                .forEach(i -> validate(inns.bowlers.get(i), inningsNumber, i + 1));
     }
 
-    public Result(Model model, String leagueId, String homeTeamId, String awayTeamId,
-            UnaryOperator<String> fieldExtractor) throws ResultException
+    private void validate(BatsmanData batsman, int inningsNumber, int batsmanNumber,
+            List<String> bowlerNames)
     {
-        this(model, leagueId, homeTeamId, awayTeamId);
-        
-    }
-
-    private TeamData getTeamData(League l, String teamId) throws ResultException
-    {
-        Team t = l.getTeam(teamId);
-        if (t == null)
-            throw ResultException.create("Team %s not found in league %s", teamId, leagueId);
-        return new TeamData(t);
-    }
-
-    public TeamData getHomeTeam()
-    {
-        return homeTeam;
-    }
-
-    public String getDate()
-    {
-        return date;
-    }
-
-    public String getTime()
-    {
-        return time;
-    }
-
-    public String getCourt()
-    {
-        return court;
-    }
-
-    public String getLeagueId()
-    {
-        return leagueId;
-    }
-
-    public String getLeagueName()
-    {
-        return leagueName;
-    }
-
-    public TeamData getAwayTeam()
-    {
-        return awayTeam;
-    }
-
-    @SuppressWarnings("serial")
-    public static class ResultException extends Exception
-    {
-        public static ResultException create(String message, Object... args)
+        if (StringUtils.isBlank(batsman.name))
+            addError(PlayerDataField.BATSMAN.getFieldName(inningsNumber, batsmanNumber),
+                    "Batsman's name must be entered");
+        if (batsman.howOut.creditedToBowler())
         {
-            int lastIndex = args.length - 1;
-            boolean lastArgIsThrowable = lastIndex >= 0 && args[lastIndex] instanceof Throwable;
-            return lastArgIsThrowable
-                    ? new ResultException(
-                            String.format(message, Arrays.copyOfRange(args, 0, lastIndex)),
-                            (Throwable) args[lastIndex])
-                    : new ResultException(String.format(message, args));
+            if (StringUtils.isBlank(batsman.bowler))
+                addError(PlayerDataField.WICKET_BOWLER.getFieldName(inningsNumber, batsmanNumber),
+                        "Bowler's name must be entered for dismissal type: %s",
+                        batsman.howOut.getText());
+            else if (!bowlerNames.contains(batsman.bowler))
+                addError(PlayerDataField.WICKET_BOWLER.getFieldName(inningsNumber, batsmanNumber),
+                        "Bowler must be one of those who bowled");
         }
-
-        private ResultException(String arg0, Throwable arg1)
-        {
-            super(arg0, arg1);
-        }
-
-        private ResultException(String arg0)
-        {
-            super(arg0);
-        }
-
-        private ResultException(Throwable arg0)
-        {
-            super(arg0);
-        }
+        if (batsman.howOut.canHaveScore() && batsman.runsScored.isEmpty())
+            addError(PlayerDataField.RUNS_SCORED.getFieldName(inningsNumber, batsmanNumber),
+                    "Batsman batted so a score must be entered");
     }
 
-    public static class TeamData
+    private void validate(BowlerData bowler, int inningsNumber, int bowlerNumber)
     {
-        public final String id;
-        public final String name;
-        public final List<PlayerData> players;
+        if (StringUtils.isBlank(bowler.name))
+            addError(PlayerDataField.BOWLER.getFieldName(inningsNumber, bowlerNumber),
+                    "Bowler's name must be entered");
+        if (bowler.runsConceded.isEmpty())
+            addError(PlayerDataField.RUNS_CONCEDED.getFieldName(inningsNumber, bowlerNumber),
+                    "Runs conceded must be entered");
+    }
 
-        public TeamData(Team t)
+    private void addError(String field, String message, Object... messageParameters)
+    {
+        validationErrors
+                .computeIfAbsent(field, f -> new ArrayList<>())
+                .add(String.format(message, messageParameters));
+    }
+
+    public static class InningsData
+    {
+        private final int sequence;
+        private final Team battingTeam;
+        private final Team bowlingTeam;
+        private final OptionalInt extras;
+        private final int total;
+        private final int wickets;
+        private final int balls;
+        private final List<BatsmanData> batsmen;
+        private final List<BowlerData> bowlers;
+
+        public InningsData(UnaryOperator<String> dataGetter, int sequence, Team battingTeam,
+                Team bowlingTeam)
         {
-            this.id = t.getId();
-            this.name = t.getName();
-            this.players = t
-                    .getPlayers()
-                    .stream()
-                    .sorted()
-                    .map(PlayerData::new)
+            this.sequence = sequence;
+            this.battingTeam = battingTeam;
+            this.bowlingTeam = bowlingTeam;
+            batsmen = IntStream
+                    .rangeClosed(1, 6)
+                    .mapToObj(seq -> new BatsmanData(dataGetter, sequence, seq))
+                    .filter(d -> StringUtils.isNotBlank(d.name) || d.runsScored.isPresent()
+                            || StringUtils.isNotBlank(d.bowler))
                     .collect(Collectors.toList());
-        }
-
-        public String getName()
-        {
-            return name;
-        }
-
-        public String getId()
-        {
-            return id;
-        }
-
-        public List<PlayerData> getPlayers()
-        {
-            return players;
+            bowlers = IntStream
+                    .rangeClosed(1, 6)
+                    .mapToObj(seq -> new BowlerData(dataGetter, sequence, seq))
+                    .filter(d -> StringUtils.isNotBlank(d.name) || d.balls != 0
+                            || d.runsConceded.isPresent())
+                    .collect(Collectors.toList());
+            extras = Stream
+                    .of(InningsDataField.EXTRAS.getValue(dataGetter, sequence))
+                    .filter(StringUtils::isNotBlank)
+                    .map(String::strip)
+                    .mapToInt(Integer::parseInt)
+                    .findFirst();
+            total = Stream
+                    .concat(Stream.of(extras), batsmen.stream().map(b -> b.runsScored))
+                    .filter(OptionalInt::isPresent)
+                    .mapToInt(OptionalInt::getAsInt)
+                    .sum();
+            wickets = batsmen
+                    .stream()
+                    .map(b -> b.howOut)
+                    .filter(Objects::nonNull)
+                    .mapToInt(ho -> ho.isOut() ? 1 : 0)
+                    .sum();
+            balls = bowlers.stream().mapToInt(b -> b.balls).sum();
         }
     }
 
-    public static class PlayerData
+    public static class BatsmanData
     {
-        public final String id;
-        public final String name;
+        private final String name;
+        private final HowOut howOut;
+        private final String bowler;
+        private final OptionalInt runsScored;
 
-        public PlayerData(Player p)
+        public BatsmanData(UnaryOperator<String> dataGetter, int innings, int sequence)
         {
-            this.id = p.getId();
-            this.name = p.getName();
+            name = PlayerDataField.BATSMAN.getValue(dataGetter, innings, sequence).strip();
+            howOut = HowOut
+                    .valueOf(PlayerDataField.HOW_OUT.getValue(dataGetter, innings, sequence));
+            bowler = PlayerDataField.WICKET_BOWLER.getValue(dataGetter, innings, sequence).strip();
+            runsScored = Stream
+                    .of(PlayerDataField.RUNS_SCORED.getValue(dataGetter, innings, sequence))
+                    .filter(StringUtils::isNotBlank)
+                    .map(String::strip)
+                    .mapToInt(Integer::parseInt)
+                    .findFirst();
         }
+    }
 
-        public String getId()
-        {
-            return id;
-        }
+    public static class BowlerData
+    {
+        private final String name;
+        private final int balls;
+        private final OptionalInt runsConceded;
 
-        public String getName()
+        public BowlerData(UnaryOperator<String> dataGetter, int innings, int sequence)
         {
-            return name;
+            name = PlayerDataField.BOWLER.getValue(dataGetter, innings, sequence);
+            balls = Integer.parseInt(PlayerDataField.OVERS.getValue(dataGetter, innings, sequence));
+            runsConceded = Stream
+                    .of(PlayerDataField.RUNS_CONCEDED.getValue(dataGetter, innings, sequence))
+                    .filter(StringUtils::isNotBlank)
+                    .mapToInt(Integer::parseInt)
+                    .findFirst();
         }
     }
 }

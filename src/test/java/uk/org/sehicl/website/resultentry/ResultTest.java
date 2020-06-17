@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import uk.org.sehicl.website.dataload.ModelLoader;
-import uk.org.sehicl.website.resultentry.Result.ResultException;
+import uk.org.sehicl.website.resultentry.MatchData.ResultException;
 
 public class ResultTest
 {
@@ -60,31 +60,31 @@ public class ResultTest
     @Test(expected = ResultException.class)
     public void testCreateResultLeagueNotFound() throws ResultException
     {
-        new Result(ModelLoader.getModel(18), "rubbish", "rubbish", "rubbish");
+        new MatchData(ModelLoader.getModel(18), "rubbish", "rubbish", "rubbish");
     }
 
     @Test(expected = ResultException.class)
     public void testCreateResultHomeTeamNotFound() throws ResultException
     {
-        new Result(ModelLoader.getModel(18), "Division5", "rubbish", "rubbish");
+        new MatchData(ModelLoader.getModel(18), "Division5", "rubbish", "rubbish");
     }
 
     @Test(expected = ResultException.class)
     public void testCreateResultAwayTeamNotFound() throws ResultException
     {
-        new Result(ModelLoader.getModel(18), "Division5", "OPCSTitchfield", "rubbish");
+        new MatchData(ModelLoader.getModel(18), "Division5", "OPCSTitchfield", "rubbish");
     }
 
     @Test(expected = ResultException.class)
     public void testCreateResultMatchNotFound() throws ResultException
     {
-        new Result(ModelLoader.getModel(18), "Division5", "OPCSTitchfield", "PortsmouthSouthseaB");
+        new MatchData(ModelLoader.getModel(18), "Division5", "OPCSTitchfield", "PortsmouthSouthseaB");
     }
 
     @Test
     public void testCreateResultMatchFound() throws ResultException
     {
-        final Result result = new Result(ModelLoader.getModel(18), "Division5",
+        final MatchData result = new MatchData(ModelLoader.getModel(18), "Division5",
                 "PortsmouthSouthseaB", "OPCSTitchfield");
         assertThat(result.homeTeam.name).isEqualTo("Portsmouth & Southsea B");
         assertThat(result.awayTeam.name).isEqualTo("OPCS Titchfield");
@@ -98,7 +98,7 @@ public class ResultTest
     @Test
     public void testJsonUnmarshal() throws Exception
     {
-        final Result result = new Result(ModelLoader.getModel(18), "Division5", "PortsmouthSouthseaB", "OPCSTitchfield");
+        final MatchData result = new MatchData(ModelLoader.getModel(18), "Division5", "PortsmouthSouthseaB", "OPCSTitchfield");
         final Writer sw = new StringWriter();
         final ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);

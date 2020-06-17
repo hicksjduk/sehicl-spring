@@ -31,12 +31,12 @@ function setTeamName(batSequence, name)
 
 function batsmanNameField(inns, sequence)
 {
-	return document.getElementsByName("batsman" + inns + sequence)[0]
+	return document.getElementById("batsman" + inns + sequence)
 }
 
 function bowlerTakingWicketField(inns, sequence)
 {
-	return document.getElementsByName("bowlerwicket" + inns + sequence)[0]
+	return document.getElementById("wicketbowler" + inns + sequence)
 }
 
 function howOutField(inns, sequence)
@@ -46,17 +46,17 @@ function howOutField(inns, sequence)
 
 function runsScoredField(inns, sequence)
 {
-	return document.getElementsByName("runsScored" + inns + sequence)[0]
+	return document.getElementById("runsscored" + inns + sequence)
 }
 
 function bowlerNameField(inns, sequence)
 {
-	return document.getElementsByName("bowler" + inns + sequence)[0]
+	return document.getElementById("bowler" + inns + sequence)
 }
 
 function bowlerWicketsField(inns, sequence)
 {
-	return document.getElementsByName("wickets" + inns + sequence)[0]
+	return document.getElementById("wickets" + inns + sequence)
 }
 
 function howOutChanged(innings, batsman)
@@ -85,7 +85,7 @@ function refreshWicketCount(innings)
 
 function refreshTotal(innings)
 {
-	var total = Number(document.getElementsByName("extras" + innings)[0].value) || 0;
+	var total = Number(document.getElementById("extras" + innings).value) || 0;
 	for (bat = 1; bat <= 6; bat++)
 	{
 		total = total + Number(runsScoredField(innings, bat).value) || 0;
@@ -98,7 +98,7 @@ function refreshOvers(innings)
 	var balls = 0;
 	for (bowler = 1; bowler < 7; bowler++)
 	{
-		balls += Number(document.getElementsByName("overs" + innings + bowler)[0].value);
+		balls += Number(document.getElementById("overs" + innings + bowler).value);
 	}
 	document.getElementById("overs" + innings).value = toOvers(balls);
 }

@@ -55,7 +55,7 @@ import uk.org.sehicl.website.page.TeamAveragesPage;
 import uk.org.sehicl.website.page.TeamFixturesPage;
 import uk.org.sehicl.website.page.UserDetailsPage;
 import uk.org.sehicl.website.report.LeagueSelector;
-import uk.org.sehicl.website.resultentry.Result.ResultException;
+import uk.org.sehicl.website.resultentry.MatchData.ResultException;
 import uk.org.sehicl.website.template.PageTemplate;
 import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.Login;
