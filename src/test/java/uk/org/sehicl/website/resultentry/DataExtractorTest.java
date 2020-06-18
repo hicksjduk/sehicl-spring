@@ -7,6 +7,7 @@ import static org.mockito.Mockito.*;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,6 +18,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.org.sehicl.website.resultentry.MatchData.InningsData;
 import uk.org.sehicl.website.rules.Rules;
+import uk.org.thehickses.cartesian.CartesianProductBuilder;
+import uk.org.thehickses.cartesian.Combination;
 
 @ExtendWith(MockitoExtension.class)
 class DataExtractorTest
@@ -76,190 +79,46 @@ class DataExtractorTest
 
     static Stream<Arguments> testGetInnings()
     {
-        return Stream
-                .of(arguments(1, "hometeam", "", "", "", "", null),
-                        arguments(1, "hometeam", "4", "", "", "",
-                                new InningsData(true, 4, null, null, null)),
-                        arguments(1, "hometeam", "", "", "", "", null),
-                        arguments(1, "hometeam", "4", "", "", "",
-                                new InningsData(true, 4, null, null, null)),
-                        arguments(1, "hometeam", "", "15", "", "",
-                                new InningsData(true, null, 15, null, null)),
-                        arguments(1, "hometeam", "4", "15", "", "",
-                                new InningsData(true, 4, 15, null, null)),
-                        arguments(1, "hometeam", "", "", "2", "",
-                                new InningsData(true, null, null, 2, null)),
-                        arguments(1, "hometeam", "4", "", "2", "",
-                                new InningsData(true, 4, null, 2, null)),
-                        arguments(1, "hometeam", "", "", "2", "",
-                                new InningsData(true, null, null, 2, null)),
-                        arguments(1, "hometeam", "4", "", "2", "",
-                                new InningsData(true, 4, null, 2, null)),
-                        arguments(1, "hometeam", "", "15", "2", "",
-                                new InningsData(true, null, 15, 2, null)),
-                        arguments(1, "hometeam", "4", "15", "2", "",
-                                new InningsData(true, 4, 15, 2, null)),
-                        arguments(1, "hometeam", "", "", "", "11.2",
-                                new InningsData(true, null, null, null, 68)),
-                        arguments(1, "hometeam", "4", "", "", "11.2",
-                                new InningsData(true, 4, null, null, 68)),
-                        arguments(1, "hometeam", "", "", "", "11.2",
-                                new InningsData(true, null, null, null, 68)),
-                        arguments(1, "hometeam", "4", "", "", "11.2",
-                                new InningsData(true, 4, null, null, 68)),
-                        arguments(1, "hometeam", "", "15", "", "11.2",
-                                new InningsData(true, null, 15, null, 68)),
-                        arguments(1, "hometeam", "4", "15", "", "11.2",
-                                new InningsData(true, 4, 15, null, 68)),
-                        arguments(1, "hometeam", "", "", "2", "11.2",
-                                new InningsData(true, null, null, 2, 68)),
-                        arguments(1, "hometeam", "4", "", "2", "11.2",
-                                new InningsData(true, 4, null, 2, 68)),
-                        arguments(1, "hometeam", "", "", "2", "11.2",
-                                new InningsData(true, null, null, 2, 68)),
-                        arguments(1, "hometeam", "4", "", "2", "11.2",
-                                new InningsData(true, 4, null, 2, 68)),
-                        arguments(1, "hometeam", "", "15", "2", "11.2",
-                                new InningsData(true, null, 15, 2, 68)),
-                        arguments(1, "hometeam", "4", "15", "2", "11.2",
-                                new InningsData(true, 4, 15, 2, 68)),
-                        arguments(2, "hometeam", "", "", "", "", null),
-                        arguments(2, "hometeam", "4", "", "", "",
-                                new InningsData(false, 4, null, null, null)),
-                        arguments(2, "hometeam", "", "", "", "", null),
-                        arguments(2, "hometeam", "4", "", "", "",
-                                new InningsData(false, 4, null, null, null)),
-                        arguments(2, "hometeam", "", "15", "", "",
-                                new InningsData(false, null, 15, null, null)),
-                        arguments(2, "hometeam", "4", "15", "", "",
-                                new InningsData(false, 4, 15, null, null)),
-                        arguments(2, "hometeam", "", "", "2", "",
-                                new InningsData(false, null, null, 2, null)),
-                        arguments(2, "hometeam", "4", "", "2", "",
-                                new InningsData(false, 4, null, 2, null)),
-                        arguments(2, "hometeam", "", "", "2", "",
-                                new InningsData(false, null, null, 2, null)),
-                        arguments(2, "hometeam", "4", "", "2", "",
-                                new InningsData(false, 4, null, 2, null)),
-                        arguments(2, "hometeam", "", "15", "2", "",
-                                new InningsData(false, null, 15, 2, null)),
-                        arguments(2, "hometeam", "4", "15", "2", "",
-                                new InningsData(false, 4, 15, 2, null)),
-                        arguments(2, "hometeam", "", "", "", "11.2",
-                                new InningsData(false, null, null, null, 68)),
-                        arguments(2, "hometeam", "4", "", "", "11.2",
-                                new InningsData(false, 4, null, null, 68)),
-                        arguments(2, "hometeam", "", "", "", "11.2",
-                                new InningsData(false, null, null, null, 68)),
-                        arguments(2, "hometeam", "4", "", "", "11.2",
-                                new InningsData(false, 4, null, null, 68)),
-                        arguments(2, "hometeam", "", "15", "", "11.2",
-                                new InningsData(false, null, 15, null, 68)),
-                        arguments(2, "hometeam", "4", "15", "", "11.2",
-                                new InningsData(false, 4, 15, null, 68)),
-                        arguments(2, "hometeam", "", "", "2", "11.2",
-                                new InningsData(false, null, null, 2, 68)),
-                        arguments(2, "hometeam", "4", "", "2", "11.2",
-                                new InningsData(false, 4, null, 2, 68)),
-                        arguments(2, "hometeam", "", "", "2", "11.2",
-                                new InningsData(false, null, null, 2, 68)),
-                        arguments(2, "hometeam", "4", "", "2", "11.2",
-                                new InningsData(false, 4, null, 2, 68)),
-                        arguments(2, "hometeam", "", "15", "2", "11.2",
-                                new InningsData(false, null, 15, 2, 68)),
-                        arguments(2, "hometeam", "4", "15", "2", "11.2",
-                                new InningsData(false, 4, 15, 2, 68)),
-                        arguments(1, "awayteam", "", "", "", "", null),
-                        arguments(1, "awayteam", "4", "", "", "",
-                                new InningsData(false, 4, null, null, null)),
-                        arguments(1, "awayteam", "", "", "", "", null),
-                        arguments(1, "awayteam", "4", "", "", "",
-                                new InningsData(false, 4, null, null, null)),
-                        arguments(1, "awayteam", "", "15", "", "",
-                                new InningsData(false, null, 15, null, null)),
-                        arguments(1, "awayteam", "4", "15", "", "",
-                                new InningsData(false, 4, 15, null, null)),
-                        arguments(1, "awayteam", "", "", "2", "",
-                                new InningsData(false, null, null, 2, null)),
-                        arguments(1, "awayteam", "4", "", "2", "",
-                                new InningsData(false, 4, null, 2, null)),
-                        arguments(1, "awayteam", "", "", "2", "",
-                                new InningsData(false, null, null, 2, null)),
-                        arguments(1, "awayteam", "4", "", "2", "",
-                                new InningsData(false, 4, null, 2, null)),
-                        arguments(1, "awayteam", "", "15", "2", "",
-                                new InningsData(false, null, 15, 2, null)),
-                        arguments(1, "awayteam", "4", "15", "2", "",
-                                new InningsData(false, 4, 15, 2, null)),
-                        arguments(1, "awayteam", "", "", "", "11.2",
-                                new InningsData(false, null, null, null, 68)),
-                        arguments(1, "awayteam", "4", "", "", "11.2",
-                                new InningsData(false, 4, null, null, 68)),
-                        arguments(1, "awayteam", "", "", "", "11.2",
-                                new InningsData(false, null, null, null, 68)),
-                        arguments(1, "awayteam", "4", "", "", "11.2",
-                                new InningsData(false, 4, null, null, 68)),
-                        arguments(1, "awayteam", "", "15", "", "11.2",
-                                new InningsData(false, null, 15, null, 68)),
-                        arguments(1, "awayteam", "4", "15", "", "11.2",
-                                new InningsData(false, 4, 15, null, 68)),
-                        arguments(1, "awayteam", "", "", "2", "11.2",
-                                new InningsData(false, null, null, 2, 68)),
-                        arguments(1, "awayteam", "4", "", "2", "11.2",
-                                new InningsData(false, 4, null, 2, 68)),
-                        arguments(1, "awayteam", "", "", "2", "11.2",
-                                new InningsData(false, null, null, 2, 68)),
-                        arguments(1, "awayteam", "4", "", "2", "11.2",
-                                new InningsData(false, 4, null, 2, 68)),
-                        arguments(1, "awayteam", "", "15", "2", "11.2",
-                                new InningsData(false, null, 15, 2, 68)),
-                        arguments(1, "awayteam", "4", "15", "2", "11.2",
-                                new InningsData(false, 4, 15, 2, 68)),
-                        arguments(2, "awayteam", "", "", "", "", null),
-                        arguments(2, "awayteam", "4", "", "", "",
-                                new InningsData(true, 4, null, null, null)),
-                        arguments(2, "awayteam", "", "", "", "", null),
-                        arguments(2, "awayteam", "4", "", "", "",
-                                new InningsData(true, 4, null, null, null)),
-                        arguments(2, "awayteam", "", "15", "", "",
-                                new InningsData(true, null, 15, null, null)),
-                        arguments(2, "awayteam", "4", "15", "", "",
-                                new InningsData(true, 4, 15, null, null)),
-                        arguments(2, "awayteam", "", "", "2", "",
-                                new InningsData(true, null, null, 2, null)),
-                        arguments(2, "awayteam", "4", "", "2", "",
-                                new InningsData(true, 4, null, 2, null)),
-                        arguments(2, "awayteam", "", "", "2", "",
-                                new InningsData(true, null, null, 2, null)),
-                        arguments(2, "awayteam", "4", "", "2", "",
-                                new InningsData(true, 4, null, 2, null)),
-                        arguments(2, "awayteam", "", "15", "2", "",
-                                new InningsData(true, null, 15, 2, null)),
-                        arguments(2, "awayteam", "4", "15", "2", "",
-                                new InningsData(true, 4, 15, 2, null)),
-                        arguments(2, "awayteam", "", "", "", "11.2",
-                                new InningsData(true, null, null, null, 68)),
-                        arguments(2, "awayteam", "4", "", "", "11.2",
-                                new InningsData(true, 4, null, null, 68)),
-                        arguments(2, "awayteam", "", "", "", "11.2",
-                                new InningsData(true, null, null, null, 68)),
-                        arguments(2, "awayteam", "4", "", "", "11.2",
-                                new InningsData(true, 4, null, null, 68)),
-                        arguments(2, "awayteam", "", "15", "", "11.2",
-                                new InningsData(true, null, 15, null, 68)),
-                        arguments(2, "awayteam", "4", "15", "", "11.2",
-                                new InningsData(true, 4, 15, null, 68)),
-                        arguments(2, "awayteam", "", "", "2", "11.2",
-                                new InningsData(true, null, null, 2, 68)),
-                        arguments(2, "awayteam", "4", "", "2", "11.2",
-                                new InningsData(true, 4, null, 2, 68)),
-                        arguments(2, "awayteam", "", "", "2", "11.2",
-                                new InningsData(true, null, null, 2, 68)),
-                        arguments(2, "awayteam", "4", "", "2", "11.2",
-                                new InningsData(true, 4, null, 2, 68)),
-                        arguments(2, "awayteam", "", "15", "2", "11.2",
-                                new InningsData(true, null, 15, 2, 68)),
-                        arguments(2, "awayteam", "4", "15", "2", "11.2",
-                                new InningsData(true, 4, 15, 2, 68)));
+        return CartesianProductBuilder
+                .of(new DataPair(null, null), new DataPair("", null), new DataPair("4", 4))
+                .and(new DataPair(null, null), new DataPair("", null), new DataPair("15", 15))
+                .and(new DataPair(null, null), new DataPair("", null), new DataPair("2", 2))
+                .and(new DataPair(null, null), new DataPair("", null), new DataPair("11.3", 69))
+                .and(1, 2)
+                .and("hometeam", "awayteam")
+                .build()
+                .map(DataExtractorTest::testGetInnings);
+    }
+
+    static Arguments testGetInnings(Combination comb)
+    {
+        DataPair extras = comb.next(DataPair.class);
+        DataPair total = comb.next(DataPair.class);
+        DataPair wickets = comb.next(DataPair.class);
+        DataPair overs = comb.next(DataPair.class);
+        int sequence = comb.nextInt();
+        String battingFirst = comb.next(String.class);
+        String[] batFirstValues = { "hometeam", "awayteam" };
+        boolean allMatch = Stream
+                .of(extras, total, wickets, overs)
+                .map(dp -> dp.source)
+                .allMatch(StringUtils::isEmpty);
+        InningsData expected = allMatch ? null
+                : new InningsData(battingFirst.equals(batFirstValues[sequence - 1]), extras.target,
+                        total.target, wickets.target, overs.target);
+        return arguments(sequence, battingFirst, extras.source, total.source, wickets.source,
+                overs.source, expected);
+    }
+    
+    private static class DataPair
+    {
+        public String source;
+        public Integer target;
+
+        public DataPair(String source, Integer target)
+        {
+            this.source = source;
+            this.target = target;
+        }
     }
 }
