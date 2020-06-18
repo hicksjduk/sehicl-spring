@@ -170,6 +170,23 @@ public class Rules
         return answer;
     }
 
+    public Integer oversToBalls(String overs)
+    {
+        if (overs == null)
+            return null;
+        if (overs.matches("\\d+"))
+            return Integer.parseInt(overs) * ballsPerOver;
+        if (overs.matches("\\d+\\.\\d+"))
+        {
+            String[] split = overs.split("\\.");
+            int balls = Integer.parseInt(split[1]);
+            if (balls >= ballsPerOver)
+                return null;
+            return Integer.parseInt(split[0]) * ballsPerOver + balls;
+        }
+        return null;
+    }
+
     public static class Builder
     {
         private int pointsPerWin = 12;
@@ -190,12 +207,12 @@ public class Rules
         private int minRunsForBattingHighlight = 20;
         private int minWicketsForBowlingHighlight = 2;
         private boolean orderByAveragePoints = true;
-        
+
         public Builder()
         {
             this(null);
         }
-        
+
         public Builder(Integer season)
         {
             if (season != null && season < 15)

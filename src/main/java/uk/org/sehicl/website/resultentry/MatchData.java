@@ -4,9 +4,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import uk.org.sehicl.website.OrdinalDateFormatter;
@@ -23,13 +25,14 @@ public class MatchData
             new SimpleDateFormat("d MMMM yyyy"));
     private final static DateFormat TIME_FORMAT = new SimpleDateFormat("h:mm");
 
-    public final String date;
-    public final String time;
-    public final String court;
-    public final String leagueId;
-    public final String leagueName;
-    public final TeamData homeTeam;
-    public final TeamData awayTeam;
+    private final String date;
+    private final String time;
+    private final String court;
+    private final String leagueId;
+    private final String leagueName;
+    private final TeamData homeTeam;
+    private final TeamData awayTeam;
+    private List<InningsData> innings;
 
     public MatchData(Model model, String leagueId, String homeTeamId, String awayTeamId)
             throws ResultException
@@ -42,8 +45,8 @@ public class MatchData
         Team ht = league.getTeam(homeTeamId);
         if (ht == null)
             throw ResultException.create("Team %s not found in league %s", homeTeamId, leagueId);
-        homeTeam = getTeamData(league, homeTeamId);
-        awayTeam = getTeamData(league, awayTeamId);
+        homeTeam = getTeamData(league, homeTeamId, true);
+        awayTeam = getTeamData(league, awayTeamId, false);
         Match match = league
                 .getMatches()
                 .stream()
@@ -60,19 +63,37 @@ public class MatchData
         court = match.getCourt();
     }
 
-    public MatchData(Model model, String leagueId, String homeTeamId, String awayTeamId,
-            UnaryOperator<String> fieldExtractor) throws ResultException
+    public void enrich(DataExtractor extractor)
     {
-        this(model, leagueId, homeTeamId, awayTeamId);
-        
+        innings = IntStream
+                .rangeClosed(1, 2)
+                .mapToObj(sequence -> getInnings(extractor, sequence))
+                .collect(Collectors.toList());
     }
 
-    private TeamData getTeamData(League l, String teamId) throws ResultException
+    private InningsData getInnings(DataExtractor extractor, int innings)
+    {
+        InningsData answer = extractor.getInnings(innings);
+        answer
+                .setBatting(IntStream
+                        .rangeClosed(1, 6)
+                        .mapToObj(sequence -> extractor.getBatting(innings, sequence))
+                        .collect(Collectors.toList()));
+        answer
+                .setBowling(IntStream
+                        .rangeClosed(1, 6)
+                        .mapToObj(sequence -> extractor.getBowling(innings, sequence))
+                        .collect(Collectors.toList()));
+        return answer;
+    }
+
+    private TeamData getTeamData(League l, String teamId, boolean isHome) throws ResultException
     {
         Team t = l.getTeam(teamId);
         if (t == null)
             throw ResultException.create("Team %s not found in league %s", teamId, leagueId);
-        return new TeamData(t);
+        TeamData answer = new TeamData(t);
+        return answer;
     }
 
     public TeamData getHomeTeam()
@@ -109,7 +130,17 @@ public class MatchData
     {
         return awayTeam;
     }
-    
+
+    public List<InningsData> getInningsData()
+    {
+        return innings;
+    }
+
+    public void setInnings(List<InningsData> innings)
+    {
+        this.innings = innings;
+    }
+
     @SuppressWarnings("serial")
     public static class ResultException extends Exception
     {
@@ -140,11 +171,13 @@ public class MatchData
         }
     }
 
+    @JsonInclude(Include.NON_NULL)
     public static class TeamData
     {
         public final String id;
         public final String name;
         public final List<PlayerData> players;
+        public InningsData innings;
 
         public TeamData(Team t)
         {
@@ -172,17 +205,92 @@ public class MatchData
         {
             return players;
         }
+
+        public InningsData getInnings()
+        {
+            return innings;
+        }
+
+        public void setInnings(InningsData innings)
+        {
+            this.innings = innings;
+        }
+    }
+
+    public static class InningsData
+    {
+        private final boolean homeTeamBatting;
+        private final Integer extras;
+        private final Integer total;
+        private final Integer wickets;
+        private final Integer balls;
+        private List<BattingData> batting;
+        private List<BowlingData> bowling;
+
+        public InningsData(boolean homeTeamBatting, Integer extras, Integer total, Integer wickets, Integer balls)
+        {
+            this.homeTeamBatting = homeTeamBatting;
+            this.extras = extras;
+            this.total = total;
+            this.wickets = wickets;
+            this.balls = balls;
+        }
+
+        public boolean isHomeTeamBatting()
+        {
+            return homeTeamBatting;
+        }
+
+        public Integer getExtras()
+        {
+            return extras;
+        }
+
+        public Integer getTotal()
+        {
+            return total;
+        }
+
+        public Integer getWickets()
+        {
+            return wickets;
+        }
+
+        public Integer getBalls()
+        {
+            return balls;
+        }
+
+        public List<BattingData> getBatting()
+        {
+            return batting;
+        }
+
+        public void setBatting(List<BattingData> batting)
+        {
+            this.batting = batting;
+        }
+
+        public List<BowlingData> getBowling()
+        {
+            return bowling;
+        }
+
+        public void setBowling(List<BowlingData> bowling)
+        {
+            this.bowling = bowling;
+        }
     }
 
     public static class PlayerData
     {
-        public final String id;
-        public final String name;
+        private final String id;
+        private final String name;
 
-        public PlayerData(Player p)
+        public PlayerData(Player player)
         {
-            this.id = p.getId();
-            this.name = p.getName();
+            this.id = player.getId();
+            this.name = player.getName();
         }
 
         public String getId()
@@ -193,6 +301,78 @@ public class MatchData
         public String getName()
         {
             return name;
+        }
+    }
+
+    public static class BattingData
+    {
+        private final String batsman;
+        private final HowOut howOut;
+        private final String bowler;
+        private final Integer runs;
+
+        public BattingData(String batsman, HowOut howOut, String bowler, Integer runs)
+        {
+            this.batsman = batsman;
+            this.howOut = howOut;
+            this.bowler = bowler;
+            this.runs = runs;
+        }
+
+        public String getBatsman()
+        {
+            return batsman;
+        }
+
+        public HowOut getHowOut()
+        {
+            return howOut;
+        }
+
+        public String getBowler()
+        {
+            return bowler;
+        }
+
+        public Integer getRuns()
+        {
+            return runs;
+        }
+    }
+
+    public static class BowlingData
+    {
+        private final String bowler;
+        private final Integer balls;
+        private final Integer runs;
+        private final int wickets;
+
+        public BowlingData(String bowler, Integer balls, Integer runs, Integer wickets)
+        {
+            this.bowler = bowler;
+            this.balls = balls;
+            this.runs = runs;
+            this.wickets = wickets;
+        }
+
+        public String getBowler()
+        {
+            return bowler;
+        }
+
+        public Integer getBalls()
+        {
+            return balls;
+        }
+
+        public Integer getRuns()
+        {
+            return runs;
+        }
+
+        public Integer getWickets()
+        {
+            return wickets;
         }
     }
 }

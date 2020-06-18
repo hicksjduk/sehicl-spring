@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
+
 public enum HowOut
 {
     DID_NOT_BAT("Did not bat"),
@@ -26,6 +28,13 @@ public enum HowOut
 
     private String text;
     private List<Flag> flags;
+
+    public static HowOut fromString(String str)
+    {
+        if (StringUtils.isBlank(str))
+            return null;
+        return HowOut.valueOf(str);
+    }
 
     private HowOut(String text, Flag... flags)
     {

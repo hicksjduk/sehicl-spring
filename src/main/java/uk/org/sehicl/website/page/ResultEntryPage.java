@@ -46,7 +46,7 @@ public class ResultEntryPage extends Page
     @Override
     public String getTitle()
     {
-        return String.format("SEHICL result: %s v %s", result.homeTeam.name, result.awayTeam.name);
+        return String.format("SEHICL result: %s v %s", result.getHomeTeam().name, result.getAwayTeam().name);
     }
 
     public MatchData getResult()
