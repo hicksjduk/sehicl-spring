@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
 import static org.mockito.Mockito.*;
 
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
@@ -16,6 +17,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import uk.org.sehicl.website.resultentry.MatchData.BattingData;
 import uk.org.sehicl.website.resultentry.MatchData.InningsData;
 import uk.org.sehicl.website.rules.Rules;
 import uk.org.thehickses.cartesian.CartesianProductBuilder;
@@ -108,6 +110,60 @@ class DataExtractorTest
                         total.target, wickets.target, overs.target);
         return arguments(sequence, battingFirst, extras.source, total.source, wickets.source,
                 overs.source, expected);
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void testGetBatting(int innings, int sequence, String batsman, String howOut, String runs,
+            String bowler, BattingData expected)
+    {
+        when(fieldExtractor.apply("BATSMAN" + innings + sequence)).thenReturn(batsman);
+        when(fieldExtractor.apply("HOW_OUT" + innings + sequence)).thenReturn(howOut);
+        when(fieldExtractor.apply("WICKET_BOWLER" + innings + sequence)).thenReturn(bowler);
+        when(fieldExtractor.apply("RUNS_SCORED" + innings + sequence)).thenReturn(runs);
+        BattingData result = extractor.getBatting(innings, sequence);
+        if (expected == null)
+            assertThat(result).isNull();
+        else
+        {
+            assertThat(result.getBatsman()).isEqualTo(expected.getBatsman());
+            assertThat(result.getHowOut()).isEqualTo(expected.getHowOut());
+            assertThat(result.getBowler()).isEqualTo(expected.getBowler());
+            assertThat(result.getRuns()).isEqualTo(expected.getRuns());
+        }
+    }
+    
+    static Stream<Arguments> testGetBatting()
+    {
+        return CartesianProductBuilder
+                .of(1, 2)
+                .and(1, 2, 3, 4, 5, 6)
+                .and(null, "", "Jeremy")
+                .and(null, "", "DID_NOT_BAT", "BOWLED")
+                .and(new DataPair(null, null), new DataPair("", null), new DataPair("25", 25))
+                .and(null, "", "Peter")
+                .build()
+                .map(DataExtractorTest::testGetBatting);
+    }
+
+    static Arguments testGetBatting(Combination comb)
+    {
+        int sequence = comb.nextInt();
+        int innings = comb.nextInt();
+        String batsman = comb.next(String.class);
+        String howOut = comb.next(String.class);
+        DataPair score = comb.next(DataPair.class);
+        String bowler = comb.next(String.class);
+        boolean dataFound = Stream
+                .of(batsman, bowler, score.source, "DID_NOT_BAT".equals(howOut) ? null : howOut)
+                .anyMatch(StringUtils::isNotBlank);
+        BattingData expected = dataFound
+                ? new BattingData(StringUtils.isBlank(batsman) ? null : batsman,
+                        StringUtils.isBlank(howOut) ? null : HowOut.fromString(howOut),
+                        StringUtils.isBlank(bowler) ? null : bowler, score.target)
+                : null;
+        return arguments(innings, sequence, batsman, howOut == null ? "" : howOut.toString(),
+                score.source, bowler, expected);
     }
     
     private static class DataPair
