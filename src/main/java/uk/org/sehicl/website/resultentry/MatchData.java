@@ -345,7 +345,7 @@ public class MatchData
         private final String bowler;
         private final Integer balls;
         private final Integer runs;
-        private final int wickets;
+        private final Integer wickets;
 
         public BowlingData(String bowler, Integer balls, Integer runs, Integer wickets)
         {

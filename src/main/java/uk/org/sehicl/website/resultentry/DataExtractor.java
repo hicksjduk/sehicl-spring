@@ -42,17 +42,19 @@ public class DataExtractor
 
     public BattingData getBatting(int innings, int sequence)
     {
-        String batsman = nullIfBlank(PlayerDataField.BATSMAN.get(fieldExtractor, innings, sequence));
+        String batsman = nullIfBlank(
+                PlayerDataField.BATSMAN.get(fieldExtractor, innings, sequence));
         HowOut howOut = PlayerDataField.HOW_OUT
                 .get(fieldExtractor, HowOut::fromString, innings, sequence);
         Integer runs = PlayerDataField.RUNS_SCORED.getInt(fieldExtractor, innings, sequence);
-        String bowler = nullIfBlank(PlayerDataField.WICKET_BOWLER.get(fieldExtractor, innings, sequence));
-        if (batsman != null || (howOut != null && howOut != HowOut.DID_NOT_BAT)
-                || runs != null || bowler != null)
+        String bowler = nullIfBlank(
+                PlayerDataField.WICKET_BOWLER.get(fieldExtractor, innings, sequence));
+        if (batsman != null || (howOut != null && howOut != HowOut.DID_NOT_BAT) || runs != null
+                || bowler != null)
             return new BattingData(batsman, howOut, bowler, runs);
         return null;
     }
-    
+
     private String nullIfBlank(String str)
     {
         if (StringUtils.isBlank(str))
@@ -62,9 +64,8 @@ public class DataExtractor
 
     public BowlingData getBowling(int innings, int sequence)
     {
-        String bowler = PlayerDataField.BOWLER.get(fieldExtractor, innings, sequence);
-        Integer balls = PlayerDataField.OVERS
-                .get(fieldExtractor, rules::oversToBalls, innings, sequence);
+        String bowler = nullIfBlank(PlayerDataField.BOWLER.get(fieldExtractor, innings, sequence));
+        Integer balls = PlayerDataField.OVERS.getInt(fieldExtractor, innings, sequence);
         Integer runs = PlayerDataField.RUNS_CONCEDED.getInt(fieldExtractor, innings, sequence);
         Integer wickets = PlayerDataField.WICKETS.getInt(fieldExtractor, innings, sequence);
         if (bowler != null || (balls != null && balls > 0) || runs != null || wickets != null)
