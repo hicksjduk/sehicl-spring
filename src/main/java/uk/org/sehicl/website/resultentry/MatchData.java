@@ -25,6 +25,7 @@ public class MatchData
             new SimpleDateFormat("d MMMM yyyy"));
     private final static DateFormat TIME_FORMAT = new SimpleDateFormat("h:mm");
 
+    private final String uri;
     private final String date;
     private final String time;
     private final String court;
@@ -34,9 +35,10 @@ public class MatchData
     private final TeamData awayTeam;
     private List<InningsData> innings;
 
-    public MatchData(Model model, String leagueId, String homeTeamId, String awayTeamId)
+    public MatchData(String uri, Model model, String leagueId, String homeTeamId, String awayTeamId)
             throws ResultException
     {
+        this.uri = uri;
         final League league = model.getLeague(leagueId);
         if (league == null)
             throw ResultException.create("League %s not found", leagueId);
@@ -94,6 +96,11 @@ public class MatchData
             throw ResultException.create("Team %s not found in league %s", teamId, leagueId);
         TeamData answer = new TeamData(t);
         return answer;
+    }
+
+    public String getUri()
+    {
+        return uri;
     }
 
     public TeamData getHomeTeam()

@@ -5,7 +5,7 @@ var match = ${jsonResult?no_esc};
 
 <h2>${result.homeTeam.name} v ${result.awayTeam.name}</h2>
 <p>${result.leagueName}, ${result.date} at ${result.time}, court ${result.court}.</p>
-<form onreset="batFirstChanged(0)">
+<form onreset="batFirstChanged(0)" action='${result.uri}' method="post">
 	<datalist id="homeplayers">
 		<#list result.homeTeam.players as p> 
 		<option value="${p.name}">
@@ -42,7 +42,7 @@ var match = ${jsonResult?no_esc};
 						id="batsman${inns}${bat}" 
 						name="${playerDataField.BATSMAN}${inns}${bat}"></td>
 				<td><select id="howout${inns}${bat}" 
-				        name="${playerDataField.BATSMAN}${inns}${bat}" 
+				        name="${playerDataField.HOW_OUT}${inns}${bat}" 
 				        onchange="howOutChanged(${inns}, ${bat})">
 				    <#list howOut as k, ho>
 				        <option value="${ho.attribute}" ${(ho?counter == 1)?then("selected", "")}>${ho.text}</option>

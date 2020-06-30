@@ -536,8 +536,8 @@ public class Controller
         return "Emails sent";
     }
     
-    @RequestMapping(path = "/result/{leagueId}/{homeTeamId}/{awayTeamId}")
-    public String resultEntry(HttpServletRequest req, @PathVariable String leagueId,
+    @RequestMapping(path = "/result/{leagueId}/{homeTeamId}/{awayTeamId}", method = RequestMethod.GET)
+    public String resultEntryGet(HttpServletRequest req, @PathVariable String leagueId,
             @PathVariable String homeTeamId,
             @PathVariable String awayTeamId)
             throws IOException
@@ -546,6 +546,24 @@ public class Controller
         try
         {
             return new PageTemplate(new ResultEntryPage(uri, null, leagueId, homeTeamId, awayTeamId))
+                    .process();
+        }
+        catch (ResultException e)
+        {
+            return e.getMessage();
+        }
+    }
+   
+    @RequestMapping(path = "/result/{leagueId}/{homeTeamId}/{awayTeamId}", method = RequestMethod.POST)
+    public String resultEntryPost(HttpServletRequest req, @PathVariable String leagueId,
+            @PathVariable String homeTeamId,
+            @PathVariable String awayTeamId)
+            throws IOException
+    {
+        String uri = getRequestUri(req);
+        try
+        {
+            return new PageTemplate(new ResultEntryPage(uri, null, leagueId, homeTeamId, awayTeamId, req::getParameter))
                     .process();
         }
         catch (ResultException e)
