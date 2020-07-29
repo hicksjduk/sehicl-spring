@@ -1,3 +1,11 @@
+function initPage()
+{
+	if (match.inningsData == null)
+		return null;
+	battingFirstField().selectedIndex = match.inningsData[0].homeTeamBatting ? 0 : 1;
+	batFirstChanged();
+}
+
 function batFirstChanged(selection)
 {
 	if (selection == null)

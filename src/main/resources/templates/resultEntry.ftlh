@@ -1,6 +1,7 @@
 <script language="javascript" src="/result.js" type="text/javascript"></script>
 <script language="javascript">
 var match = ${jsonResult?no_esc};
+window.onload = initPage; 
 </script>
 
 <h2>${result.homeTeam.name} v ${result.awayTeam.name}</h2>
@@ -18,8 +19,11 @@ var match = ${jsonResult?no_esc};
 	</datalist>
 	<fieldset style="width: 20%;">
 		Which team batted first? <select id="battingfirst" name="battingfirst" onchange="batFirstChanged()">
-			<option value="hometeam">${result.homeTeam.name}</option>
-			<option value="awayteam">${result.awayTeam.name}</option>
+		    <#if result.innings??>
+		       <#assign batFirst = result.innings[0].homeTeamBatting?then("h", "a")/>
+		    </#if>
+			<option value="hometeam" <#if batFirst!"" == "h">selected</#if>>${result.homeTeam.name}</option>
+			<option value="awayteam" <#if batFirst!"" == "a">selected</#if>>${result.awayTeam.name}</option>
 		</select>
 	</fieldset>
 	<#list 1..2 as inns>

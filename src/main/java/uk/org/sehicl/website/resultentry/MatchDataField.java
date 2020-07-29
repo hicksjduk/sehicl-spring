@@ -4,7 +4,7 @@ import java.util.function.UnaryOperator;
 
 public enum MatchDataField
 {
-    TEAM_BATTING_FIRST("battingFirst");
+    TEAM_BATTING_FIRST("battingfirst");
     
     private final String fieldName;
     
