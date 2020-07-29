@@ -16,12 +16,11 @@
 	</#if>
 </#macro>
 
-<@news end="2020-03-29">
-<b>Coronavirus</b>
-<p>Following the latest changes to Government advice, the remainder of the 2019/20 season is
-<b><u>cancelled</u></b>. There will be no matches on 22nd March, and the end-of-season presentation
-evening on 29th March will not take place. We will be in touch with award winners later to arrange
-to get their awards to them.
+<@news>
+We are still hoping to <b>start the 2020/21 season</b> on the scheduled date of 27th September.
+However, we have been advised that the Leisure Centre is not currently in a position to accept
+bookings, so our planned schedule cannot be confirmed.
+<br>Further information will be communicated as soon as we have it.
 </@news>
 
 <@news>
