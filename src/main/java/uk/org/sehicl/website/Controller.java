@@ -291,10 +291,22 @@ public class Controller
         return new PageTemplate(new LeagueFixturesPage(getRequestUri(req))).process();
     }
 
+    @RequestMapping("/fixtures/{season}")
+    public String leagueFixtures(HttpServletRequest req, @PathVariable int season)
+    {
+        return new PageTemplate(new LeagueFixturesPage(season, getRequestUri(req))).process();
+    }
+
     @RequestMapping("/fixtures/league/{leagueId}")
     public String leagueFixtures(HttpServletRequest req, @PathVariable String leagueId)
     {
         return new PageTemplate(new LeagueFixturesPage(leagueId, getRequestUri(req))).process();
+    }
+
+    @RequestMapping("/fixtures/league/{leagueId}/{season}")
+    public String leagueFixtures(HttpServletRequest req, @PathVariable String leagueId, @PathVariable int season)
+    {
+        return new PageTemplate(new LeagueFixturesPage(season, leagueId, getRequestUri(req))).process();
     }
 
     @RequestMapping("/results")

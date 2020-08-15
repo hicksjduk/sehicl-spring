@@ -14,12 +14,14 @@ import uk.org.sehicl.website.rules.Rules;
 public class LeagueFixtures
 {
     private final League league;
+    private final Integer season;
     private final Collection<UnplayedMatch> rows;
     private final boolean matchesExist;
 
     private LeagueFixtures(Builder builder)
     {
         league = builder.leagueId == null ? null : builder.model.getLeague(builder.leagueId);
+        season = builder.season;
         rows = builder.matches;
         matchesExist = builder.matchesExist;
     }
@@ -27,6 +29,11 @@ public class LeagueFixtures
     public League getLeague()
     {
         return league;
+    }
+
+    public Integer getSeason()
+    {
+        return season;
     }
 
     public Collection<UnplayedMatch> getRows()
@@ -94,16 +101,18 @@ public class LeagueFixtures
     public static class Builder
     {
         private final Model model;
+        private final Integer season;
         private final String leagueId;
         private final Collection<UnplayedMatch> matches = new TreeSet<>();
         private final Completeness completenessThreshold;
         private final Rules rules;
         private boolean matchesExist;
 
-        public Builder(Model model, String leagueId, Completeness completenessThreshold,
+        public Builder(Model model, Integer season, String leagueId, Completeness completenessThreshold,
                 Rules rules)
         {
             this.model = model;
+            this.season = season;
             this.leagueId = leagueId;
             this.completenessThreshold = completenessThreshold;
             this.rules = rules;

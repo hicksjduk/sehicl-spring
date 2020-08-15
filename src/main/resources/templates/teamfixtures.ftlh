@@ -1,7 +1,8 @@
 <#include "ordinaldate.ftl"/>
 <#include "resultutils.ftlh"/>
+<#assign season><#if fixtures.season??>/${fixtures.season}<#else></#if></#assign>
 <h1>${fixtures.team.name} 
-(<a href="/fixtures/league/${fixtures.league.id}">${fixtures.league.name}</a>)
+(<a href="/fixtures/league/${fixtures.league.id}${season}">${fixtures.league.name}</a>)
 </h1>
 <p class="noprint">Click on an opponent to see all matches for that team.</p>
 <p class="noprint">Click on a result to see the match details,
@@ -24,7 +25,7 @@ or to hide them if displayed.</p>
 				<td class="time">${row.dateTime?string("h:mm")}</td>
 				<td class="court">${row.court}</td>
 				<td class="opponent"><a
-					href="/fixtures/team/${row.opponent.id}">${row.opponent.name}</a></td>
+					href="/fixtures/team/${row.opponent.id}${season}">${row.opponent.name}</a></td>
 				<td class="homeAway">${row.home?then("H", "A")}</td>
 				<td class="result">
 					<#if row.result??>

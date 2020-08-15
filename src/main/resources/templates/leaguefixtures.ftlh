@@ -7,6 +7,7 @@
 		Fixtures will be published shortly.
 	</#if>
 <#else>
+    <#assign season><#if fixtures.season??>/${fixtures.season}<#else></#if></#assign>
 	<p class="noprint">
 		<#if fixtures.league??>
 			Click on a team to see all matches for that team.
@@ -35,12 +36,12 @@
 				<#assign lastTime = time/>
 				<td class="court">${row.match.court}</td>
 				<td class="teams">
-					<a href="/fixtures/team/${row.homeTeam.id}">${row.homeTeam.name}</a> 
+					<a href="/fixtures/team/${row.homeTeam.id}${season}">${row.homeTeam.name}</a> 
 						v 
-					<a href="/fixtures/team/${row.awayTeam.id}">${row.awayTeam.name}</a>
+					<a href="/fixtures/team/${row.awayTeam.id}${season}">${row.awayTeam.name}</a>
 				<#if !(fixtures.league??)>
 					<td class="division">
-						<a href="/fixtures/league/${row.league.id}">${row.league.name}</a>
+						<a href="/fixtures/league/${row.league.id}${season}">${row.league.name}</a>
 					</td>
 				</#if>
 			</tr>

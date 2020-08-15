@@ -22,12 +22,14 @@ public class TeamFixtures
     private final Team team;
     private final League league;
     private final Collection<Fixture> rows;
+    private final Integer season;
 
     private TeamFixtures(Builder builder)
     {
         rows = new TreeSet<>(builder.fixtures);
         team = builder.team;
         league = builder.league;
+        season = builder.season;
     }
 
     public Collection<Fixture> getRows()
@@ -43,6 +45,11 @@ public class TeamFixtures
     public League getLeague()
     {
         return league;
+    }
+
+    public Integer getSeason()
+    {
+        return season;
     }
 
     public static class Fixture implements Comparable<Fixture>
@@ -114,16 +121,18 @@ public class TeamFixtures
         private final String teamId;
         private Team team;
         private League league;
+        private Integer season;
         private final Completeness completenessThreshold;
         private final Rules rules;
         private final List<Fixture> fixtures = new ArrayList<>();
 
-        public Builder(Model model, String teamId, Completeness completenessThreshold, Rules rules)
+        public Builder(Model model, String teamId, Integer season, Completeness completenessThreshold, Rules rules)
         {
             this.model = model;
             this.teamId = teamId;
             this.completenessThreshold = completenessThreshold;
             this.rules = rules;
+            this.season = season;
         }
 
         public TeamFixtures build()

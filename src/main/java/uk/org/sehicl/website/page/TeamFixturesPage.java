@@ -16,7 +16,7 @@ public class TeamFixturesPage extends Page
     {
         super("fixtures", "teamfixtures.ftlh", Section.FIXTURES, uri);
         final Model model = ModelLoader.getModel();
-        fixtures = new TeamFixtures.Builder(model, teamId, Completeness.CONSISTENT,
+        fixtures = new TeamFixtures.Builder(model, teamId, null, Completeness.CONSISTENT,
                 new Rules.Builder().build()).build();
         title = String.format("Fixtures: %s", fixtures.getTeam().getName());
     }
@@ -25,7 +25,7 @@ public class TeamFixturesPage extends Page
     {
         super("fixtures", "teamfixtures.ftlh", Section.ARCHIVE, uri);
         final Model model = ModelLoader.getModel(season);
-        fixtures = new TeamFixtures.Builder(model, teamId, Completeness.COMPLETE,
+        fixtures = new TeamFixtures.Builder(model, teamId, season, Completeness.COMPLETE,
                 new Rules.Builder(season).build()).build();
         title = String.format("Fixtures: %s (%d-%02d)", fixtures.getTeam().getName(), season + 1999,
                 season);
