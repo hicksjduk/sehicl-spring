@@ -17,7 +17,7 @@
 </#macro>
 
 <@news>
-We are still hoping to <b>start the 2020/21 season</b> on the scheduled date of 27th September.
+We are still hoping to <b>start the 2020/21 season</b> on the scheduled date of 4th October.
 However, we have been advised that the Leisure Centre is not currently in a position to accept
 bookings, so our planned schedule cannot be confirmed.
 <br>Further information will be communicated as soon as we have it.
