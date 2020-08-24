@@ -227,7 +227,7 @@
 		<phone>01489 896692</phone>
 		<phone>07988806693</phone>
 		<role name="Secretary">
-			<email id="secretary" />
+			<email id="sehiclsecretary" domain="outlook.com" />
 		</role>
 		<role name="Secretary" club="Hampshire Bowman">
 			<email id="bowman.secretary" />

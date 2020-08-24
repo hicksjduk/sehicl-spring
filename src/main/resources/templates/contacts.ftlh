@@ -34,7 +34,7 @@
 </p>
 <p>General contacts should be addressed to <@mailto address="contacts"/>.</p>
 <p>Non-member clubs who wish to enter one or more teams in the
-	League are asked to contact <@mailto address="secretary">the Secretary</@mailto> in the first instance.</p>
+	League are asked to contact <@mailto address="sehiclsecretary" domain="outlook.com">the Secretary</@mailto> in the first instance.</p>
 <p>
 	Result sheets may be sent electronically to <@mailto address="fixturesec">the Fixture Secretary</@mailto>,
 	using one of the template documents available on the <a
@@ -52,7 +52,7 @@
             <td class="role">${contact.role.name}</td>
             <td>
             <#if contact.role.email??>
-            	<@mailto address=contact.role.email>${contact.name}</@mailto>
+                <@mailto address=contact.role.email.id domain=contact.role.email.domain!"">${contact.name}</@mailto>
             <#else>
             	${contact.name}
             </#if>
@@ -79,14 +79,14 @@
 			<#if contact.role.name == "Secretary">
             	<#if contacts.restricted>
 		            <#if contact.role.email??>
-        		    	<@mailto address=contact.role.email>${contact.name}</@mailto>
+                        <@mailto address=contact.role.email.id domain=contact.role.email.domain!"">${contact.name}</@mailto>
             		<#else>
             			${contact.name}
             		</#if>
             	<#else>
             		${contact.role.name}:
     				<#if contact.role.email??>
-        		    	<@mailto address=contact.role.email>${contact.name}</@mailto>
+        		    	<@mailto address=contact.role.email.id domain=contact.role.email.domain!"">${contact.name}</@mailto>
             		<#else>
             			${contact.name}
             		</#if>

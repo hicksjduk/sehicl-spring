@@ -30,7 +30,7 @@ on the image below to find out more.
 
 <@news>
 <b>The League is looking for a new Secretary</b>. Anyone interested in taking on this role is requested to
-contact <@mailto address="secretary" description="SEHICL Secretary">
+contact <@mailto address="sehiclsecretary" domain="outlook.com" description="SEHICL Secretary">
 	Adam Smith, the current Secretary,
 	</@mailto> to find out what the job entails. 
 </@news>
