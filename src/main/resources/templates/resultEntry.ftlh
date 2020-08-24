@@ -1,7 +1,7 @@
 <script language="javascript" src="/result.js" type="text/javascript"></script>
 <script language="javascript">
 var match = ${jsonResult?no_esc};
-window.onload = initPage; 
+window.onload = () => initPage(); 
 </script>
 
 <h2>${result.homeTeam.name} v ${result.awayTeam.name}</h2>

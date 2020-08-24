@@ -3,6 +3,8 @@ function initPage()
 	if (match.inningsData == null)
 		return null;
 	battingFirstField().selectedIndex = match.inningsData[0].homeTeamBatting ? 0 : 1;
+	alert("Hello");
+	batsmanNameField(1, 1).value = "Jeremy";
 	batFirstChanged();
 }
 
