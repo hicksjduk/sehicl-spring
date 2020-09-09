@@ -26,6 +26,8 @@ public enum HowOut
     OBSTRUCTING_FIELD("Obstructing the field", Flag.CAN_HAVE_SCORE, Flag.IS_OUT),
     TIMED_OUT("Timed out", Flag.IS_OUT);
 
+    private static String SEPARATOR = ";";
+    
     private String text;
     private List<Flag> flags;
 
@@ -33,7 +35,7 @@ public enum HowOut
     {
         if (StringUtils.isBlank(str))
             return null;
-        return HowOut.valueOf(str);
+        return HowOut.valueOf(str.split(SEPARATOR)[0]);
     }
 
     private HowOut(String text, Flag... flags)
@@ -71,7 +73,7 @@ public enum HowOut
     {
         return Stream
                 .concat(Stream.of(this.toString()), flags.stream().map(f -> f.value))
-                .collect(Collectors.joining(";"));
+                .collect(Collectors.joining(SEPARATOR));
     }
 
     private static enum Flag

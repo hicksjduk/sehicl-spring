@@ -129,7 +129,7 @@ class DataExtractorTest
         {
             assertThat(result.getBatsman()).isEqualTo(expected.getBatsman());
             assertThat(result.getHowOut()).isEqualTo(expected.getHowOut());
-            assertThat(result.getBowler()).isEqualTo(expected.getBowler());
+            assertThat(result.getWicketBowler()).isEqualTo(expected.getWicketBowler());
             assertThat(result.getRuns()).isEqualTo(expected.getRuns());
         }
     }

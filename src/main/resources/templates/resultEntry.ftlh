@@ -1,7 +1,6 @@
 <script language="javascript" src="/result.js" type="text/javascript"></script>
 <script language="javascript">
 var match = ${jsonResult?no_esc};
-window.onload = () => initPage(); 
 </script>
 
 <h2>${result.homeTeam.name} v ${result.awayTeam.name}</h2>
@@ -27,6 +26,7 @@ window.onload = () => initPage();
 		</select>
 	</fieldset>
 	<#list 1..2 as inns>
+	<#assign innsData=(result.inningsData[inns-1])!{}/>
 	<br /> <br />
 	<fieldset>
 		<legend id="bat${inns}TeamName">Innings of ${[result.homeTeam, result.awayTeam][inns - 1].name}</legend>
@@ -39,25 +39,29 @@ window.onload = () => initPage();
 				<th>Runs</th>
 			</tr>
 			<#list 1..6 as bat>
+			<#assign batData=(innsData.batting[bat-1])!{}/>
 			<tr>
 				<td>${bat}</td>
 				<td><input type="text" 
 						list="${(inns == 1)?then('homeplayers', 'awayplayers')}"
 						id="batsman${inns}${bat}" 
-						name="${playerDataField.BATSMAN}${inns}${bat}"></td>
+						name="${playerDataField.BATSMAN}${inns}${bat}"
+						value="${(batData.batsman)!""}"></td>
+                <#assign selectedHowOut=(batData.howOut)!howOut?keys[0]/>
 				<td><select id="howout${inns}${bat}" 
 				        name="${playerDataField.HOW_OUT}${inns}${bat}" 
 				        onchange="howOutChanged(${inns}, ${bat})">
 				    <#list howOut as k, ho>
-				        <option value="${ho.attribute}" ${(ho?counter == 1)?then("selected", "")}>${ho.text}</option>
+				        <option value="${ho.attribute}" ${(selectedHowOut == k)?then("selected", "")}>${ho.text}</option>
 				    </#list>
 				</select></td>
 				<td><input type="text" 
 					onchange="refreshBowlerWickets(${inns})"
                     id="wicketbowler${inns}${bat}" 
 					name="${playerDataField.WICKET_BOWLER}${inns}${bat}" 
-					list="${(inns == 1)?then('awayplayers', 'homeplayers')}" 
-					disabled></td>
+					list="${(inns == 1)?then('awayplayers', 'homeplayers')}"
+					value="${(batData.wicketBowler)!""}" 
+					${(howOut.get(selectedHowOut).creditedToBowler)?then("", "disabled")}></td>
 				<td><input type="number" name="${playerDataField.RUNS_SCORED}${inns}${bat}"
 				    id="runsscored${inns}${bat}" 
 				    min="0" disabled onchange="refreshTotal(${inns})"></td>

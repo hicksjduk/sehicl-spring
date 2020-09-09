@@ -315,14 +315,14 @@ public class MatchData
     {
         private final String batsman;
         private final HowOut howOut;
-        private final String bowler;
+        private final String wicketBowler;
         private final Integer runs;
 
-        public BattingData(String batsman, HowOut howOut, String bowler, Integer runs)
+        public BattingData(String batsman, HowOut howOut, String wicketBowler, Integer runs)
         {
             this.batsman = batsman;
             this.howOut = howOut;
-            this.bowler = bowler;
+            this.wicketBowler = wicketBowler;
             this.runs = runs;
         }
 
@@ -336,9 +336,9 @@ public class MatchData
             return howOut;
         }
 
-        public String getBowler()
+        public String getWicketBowler()
         {
-            return bowler;
+            return wicketBowler;
         }
 
         public Integer getRuns()
