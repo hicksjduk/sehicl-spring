@@ -20,7 +20,7 @@
 <b>Latest Covid-19 news</b>
 <br>Today (22nd September), the Leisure Centre have advised us that they are still not in a position to allow us
 to play there, and they have no idea when that will change. Also, the Prime Minister has announced that from
-Monday 28th September, the "rule of six" is to be extended to cover adult indoor sport.
+Monday 28th September, the "rule of six" is to be extended to cover indoor team sports.
 <br>Consequently, there seems no prospect that League play will be able to commence on our target date of
 4th October.
 <br>Further information will be published here as soon as anything changes.
