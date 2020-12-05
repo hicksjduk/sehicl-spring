@@ -17,10 +17,10 @@
 </#macro>
 
 <@news>
-<b>Latest Covid-19 news</b>
+<b>Cancellation of the 2020/21 season</b>
 <br>The committee met on 30th November, to consider the possibilities for running some kind of 
 truncated 2020/21 season after Christmas. It is clear that other for under-18s, it is completely
-impossible for indoor cricket to be played in conformance with the current regulations, for any
+impossible for indoor cricket to be played in conformance with the current Covid-19 regulations, for any
 tier.
 <br>We did consider trying
 to run a Colts league from the beginning of January, but have since been informed that the Leisure
