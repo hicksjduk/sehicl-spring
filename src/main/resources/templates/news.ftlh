@@ -19,7 +19,7 @@
 <@news>
 <b>Cancellation of the 2020/21 season</b>
 <br>The committee met on 30th November, to consider the possibilities for running some kind of 
-truncated season after Christmas. It is clear that other for under-18s, it is completely
+truncated season after Christmas. It is clear that other than for under-18s, it is completely
 impossible for indoor cricket to be played in conformance with the current Covid-19 regulations, for any
 tier.
 <br>We did consider trying
