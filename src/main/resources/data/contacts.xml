@@ -19,14 +19,20 @@
 	</person>
 
 	<person>
-		<name>Keith Shimman</name>
- 		<address>5 Northfield Avenue, Fareham PO14 1DY</address>
-		<phone>07734325096</phone>
- 		<role name="Treasurer">
-			<email id="treasurer" />
-		</role>
+		<name>Sally Priddy</name>
+        <role name="Secretary">
+            <email id="sehiclsecretary" domain="outlook.com" />
+        </role>
 	</person>
 
+    <person>
+        <name>Keith Shimman</name>
+        <address>5 Northfield Avenue, Fareham PO14 1DY</address>
+        <phone>07734325096</phone>
+        <role name="Treasurer">
+            <email id="treasurer" />
+        </role>
+    </person>
 	<person>
 		<name>Hamid Khan</name>
 		<address>Flat 3, Saville Court, 37 Clarendon Parade, Southsea PO5 2ET</address>
@@ -226,9 +232,6 @@
 		<address>Woodstock House, Church Road, Swanmore SO32 2PU</address>
 		<phone>01489 896692</phone>
 		<phone>07988806693</phone>
-		<role name="Secretary">
-			<email id="sehiclsecretary" domain="outlook.com" />
-		</role>
 		<role name="Secretary" club="Hampshire Bowman">
 			<email id="bowman.secretary" />
 		</role>

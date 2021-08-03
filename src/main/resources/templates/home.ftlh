@@ -22,8 +22,6 @@
 	<#-- <a href="/archive/presentation/2019">
 	The 2019 presentation evening</a> was on Sunday 7th April;
 	click the link for information and pictures from the evening.-->
-	Unfortunately, the 2020 presentation evening, which was due to take place on Sunday 29th March,
-	had to be cancelled due to the coronavirus outbreak. 
 </p>
 <p>Please report any broken links, mis-spelled names or other errors
 	to 	<@mailto address="website" description="SEHICL Webmaster">
