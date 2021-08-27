@@ -18,9 +18,7 @@
 
 <@news>
 <b>2021/22 season</b>
-<br>It is hoped to run a full season in 2021/22, starting on 10th October. However, 
-the start date is dependent on the completion of construction work at the Leisure Centre,
-which may be complete by then but might not. The fixture list is currently under construction. 
+<br>We now have confirmation that the 2021/22 season will start on <b>Sunday 10th October</b>. 
 <br>Spaces are still available; any clubs who are interested in entering one or more teams during the coming
 season are invited to contact <@mailto address="sehiclsecretary" domain="outlook.com" description="SEHICL Secretary">
     the Secretary</@mailto>. 
