@@ -56,14 +56,16 @@ public enum NavigatorSection
         BiFunction<String, String, NavigatorItem> itemMaker = (section, discipline) ->
         {
             final String title = String.format("%s %s", section, discipline);
-            final String url = String.format("/averages/%s/%s", discipline.toLowerCase(),
-                    section.replaceAll("\\W+", ""));
+            final String url = String
+                    .format("/averages/%s/%s", discipline.toLowerCase(),
+                            section.replaceAll("\\W+", ""));
             return new NavigatorItem(title, url);
         };
         Stream
                 .of("Senior", "Colts Under-16", "Colts Under-13")
-                .flatMap(section -> Stream.of("Batting", "Bowling").map(
-                        discipline -> itemMaker.apply(section, discipline)))
+                .flatMap(section -> Stream
+                        .of("Batting", "Bowling")
+                        .map(discipline -> itemMaker.apply(section, discipline)))
                 .forEach(builder);
         builder.accept(new NavigatorItem("By team", "/averages/byTeam"));
         return builder.build().toArray(NavigatorItem[]::new);
@@ -83,6 +85,7 @@ public enum NavigatorSection
     {
         final NavigatorItem[] answer = IntStream
                 .range(4, Constants.CURRENT_SEASON)
+                .filter(i -> i != 21)
                 .mapToObj(s -> new NavigatorItem(String.format("%d-%02d", s + 1999, s),
                         String.format("/archive/season/%d", s)))
                 .toArray(NavigatorItem[]::new);

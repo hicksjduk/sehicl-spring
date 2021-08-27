@@ -42,6 +42,7 @@ public class TeamAveragesPage extends Page
         final ModelAndRules[] seasonData = IntStream
                 .rangeClosed(season == null ? Constants.FIRST_SEASON : season,
                         season == null ? Constants.CURRENT_SEASON : season)
+                .filter(i -> i != 21)
                 .mapToObj(ModelAndRules::new)
                 .filter(sd -> sd.model.getLeagues().stream().anyMatch(selector::isSelected))
                 .toArray(ModelAndRules[]::new);
