@@ -68,6 +68,8 @@
 <h2>
 	<a id="club">${clubTitle}</a>
 </h2>
+The list of club contacts for the 2021/22 season is being finalised, and will be published when known.
+<#-- 
 <table>
 	<tbody>
 	<#assign lastClub = ""/>
@@ -105,3 +107,4 @@
     </#list>
 	</tbody>
 </table>
+ -->
