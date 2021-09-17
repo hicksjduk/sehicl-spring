@@ -24,17 +24,9 @@
 		</#if>
 		</b>
 </p>
-<p>
-	All e-mail contacts should be made using the e-mail addresses assigned
-	to the relevant roles in the League's domain (that is, addresses ending
-	with <i>sehicl.org.uk</i>). This ensures that when the person
-	performing a role changes, the e-mail is still routed to the correct
-	person. The easiest way to do this is to click on the person's name in
-	the lists below.
-</p>
 <p>General contacts should be addressed to <@mailto address="contacts"/>.</p>
 <p>Non-member clubs who wish to enter one or more teams in the
-	League are asked to contact <@mailto address="sehiclsecretary" domain="outlook.com">the Secretary</@mailto> in the first instance.</p>
+	League are asked to contact <@mailto address="secretary">the Secretary</@mailto> in the first instance.</p>
 <p>
 	Result sheets may be sent electronically to <@mailto address="fixturesec">the Fixture Secretary</@mailto>,
 	using one of the template documents available on the <a
@@ -68,8 +60,6 @@
 <h2>
 	<a id="club">${clubTitle}</a>
 </h2>
-The list of club contacts for the 2021/22 season is being finalised, and will be published when known.
-<#-- 
 <table>
 	<tbody>
 	<#assign lastClub = ""/>
@@ -107,4 +97,3 @@ The list of club contacts for the 2021/22 season is being finalised, and will be
     </#list>
 	</tbody>
 </table>
- -->

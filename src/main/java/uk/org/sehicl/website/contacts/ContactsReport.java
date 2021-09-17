@@ -27,7 +27,7 @@ public class ContactsReport
                 }
                 else
                 {
-                    int roleIndex = ClubContacts.ROLES.indexOf(role.getName());
+                    int roleIndex = ClubContacts.roleIndex(role.getName());
                     if (roleIndex == 0 || (!restricted && roleIndex > 0))
                     {
                         clubContacts.add(new ContactDetails(person, role));
