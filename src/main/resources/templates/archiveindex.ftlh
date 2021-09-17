@@ -3,8 +3,10 @@
 	the relevant season.</p>
 <ul>
 	<#list 4..<currentSeason as season>
+	   <#if season != 21>
         <li>
             <a href="/archive/season/${season}">${(1999+season)?string.computer}-${season?string("00")}</a>
         </li>
+        </#if>
 	</#list>
 </ul>
