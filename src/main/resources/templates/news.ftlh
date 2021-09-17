@@ -17,11 +17,12 @@
 </#macro>
 
 <@news>
-<b>2021/22 season</b>
-<br>We now have confirmation that the 2021/22 season will start on <b>Sunday 10th October</b>. 
-<br>Spaces are still available; any clubs who are interested in entering one or more teams during the coming
-season are invited to contact <@mailto address="sehiclsecretary" domain="outlook.com" description="SEHICL Secretary">
-    the Secretary</@mailto>. 
+The 2021/22 season will start on <b>Sunday 10th October</b>. The fixture list will be published in the next
+few days. 
+<br>The League is now closed to new entries for the coming season. However, any clubs who are interested 
+in entering one or more new teams in the 2022/23
+season are invited to contact <@mailto address="secretary" description="SEHICL Secretary">
+    the Secretary</@mailto> to join the waiting list. 
 </@news>
 
 
