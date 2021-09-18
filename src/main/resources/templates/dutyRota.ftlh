@@ -1,4 +1,4 @@
-<h1>Duty team rota 2019-20</h1>
+<h1>Duty team rota 2021-22</h1>
 <p>
 	<a href="/rules#sectionT">Article T</a> of the League's rules states
 	that the designated duty team for each evening must attend and operate
@@ -9,30 +9,30 @@
 -->
 <table id="dutyrota">
 	<tbody>
-		<@duty "29th September" "Havant A" />
-		<@duty "13th October" "Waterlooville A" />
-		<@duty "20th October" "Knowle Village" />
-		<@duty "27th October" "Swanmore" />
-		<@duty "3rd November" "Portsmouth A" />
-		<@duty "10th November" "Clanfield" />
-		<@duty "17th November" "Portsmouth B" />
-		<@duty "24th November" "Curdridge" />
-		<@duty "1st December" "Waterlooville B" />
-		<@duty "8th December" "Havant B" />
-		<@duty "15th December" "Hambledon B" />
-		<@duty "22nd December" "Railway Triangle" />
-		<@duty "5th January" "Hambledon A" />
-		<@duty "12th January" "Portsmouth & Southsea B" />
-		<@duty "19th January" "Portsmouth & Southsea A" />
-		<@duty "26th January" "St James Casuals" />
-		<@duty "2nd February" "Hambledon C" />
-		<@duty "09th February" "Droxford" />
-		<@duty "16th February" "Afghan Society Portsmouth" />
-		<@duty "23rd February" "Havant A" />
-		<@duty "1st March" "United Services" />
-		<@duty "08th March" "Sarisbury Athletic" />
-		<@duty "15th March" "Portsmouth C" />
-		<@duty "22nd March" "Portsmouth B" />
+        <@duty "10th October" "Droxford" />
+        <@duty "17th October" "Bosham" />
+        <@duty "24th October" "United Services" />
+        <@duty "31st October" "Waterlooville A" />
+        <@duty "7th November" "Hambledon A" />
+        <@duty "14th November" "Knowle Village" />
+        <@duty "21st November" "Swanmore" />
+        <@duty "28th November" "Portsmouth University A" />
+        <@duty "5th December" "Barracuda" />
+        <@duty "12th December" "Portsmouth A" />
+        <@duty "19th December" "Curdridge" />
+        <@duty "2nf January" "Havant A" />
+        <@duty "9th January" "Portsmouth & Southsea" />
+        <@duty "16th January" "Westbourne" />
+        <@duty "23rd January" "Clanfield B" />
+        <@duty "30th January" "Portsmouth University B" />
+        <@duty "6th February" "Waterlooville B" />
+        <@duty "13th February" "Afghan Society Portsmouth" />
+        <@duty "20th February" "Portsmouth C" />
+        <@duty "27th February" "Havant B" />
+        <@duty "6th March" "XIIth Men B" />
+        <@duty "13th March" "Clanfield A" />
+        <@duty "20th March" "Hambledon C" />
+        <@duty "27th March" "Hambledon B" />
 	</tbody>
 </table>
 
