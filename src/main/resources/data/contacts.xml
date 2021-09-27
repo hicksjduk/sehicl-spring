@@ -81,19 +81,23 @@
 
 	<person>
 		<name>Matt Bradley</name>
-		<phone>02392 591576</phone>
 		<phone>07788 897780</phone>
 		<role name="Secretary" club="Clanfield">
 			<email id="m.bradley50" domain="hotmail.co.uk" />
 		</role>
-		<role name="Captain" club="Clanfield B" />
 	</person>
 
 	<person>
-		<name>Mike Collins</name>
-		<phone>07905 373054</phone>
-		<role name="Captain" club="Clanfield A" />
+		<name>Alex Andrews</name>
+		<phone>07305 643469</phone>
+		<role name="A team" club="Clanfield" />
 	</person>
+
+    <person>
+        <name>Phil Weaver</name>
+        <phone>07969 972524</phone>
+        <role name="B team" club="Clanfield" />
+    </person>
 
 	<person>
 		<name>Matt Cozens</name>
@@ -295,7 +299,6 @@
 
 	<person>
 		<name>Alex Johnson</name>
-		<address>14 Northwood Road, Portsmouth PO2 9QT</address>
 		<phone>07760348447</phone>
 		<role name="Secretary" club="Hayling Island">
 			<email id="haylingcricket" domain="gmail.com" />
