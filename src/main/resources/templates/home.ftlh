@@ -19,6 +19,7 @@
 	the Mayor of Fareham, presents the senior teams' awards, and the
 	evening culminates with an eight-a-side challenge match between the
 	Mayor of Fareham's VIII and the Division 1 champions' VIII.
+	The 2022 presentation evening will be on <b>Sunday 3rd April</b>.
 	<#-- <a href="/archive/presentation/2019">
 	The 2019 presentation evening</a> was on Sunday 7th April;
 	click the link for information and pictures from the evening.-->
