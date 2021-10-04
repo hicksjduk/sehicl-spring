@@ -20,7 +20,7 @@
         <@duty "5th December" "Barracuda" />
         <@duty "12th December" "Portsmouth A" />
         <@duty "19th December" "Curdridge" />
-        <@duty "2nf January" "Havant A" />
+        <@duty "2nd January" "Havant A" />
         <@duty "9th January" "Portsmouth & Southsea" />
         <@duty "16th January" "Westbourne" />
         <@duty "23rd January" "Clanfield B" />
