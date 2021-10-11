@@ -36,13 +36,6 @@ uniform colour across a team.
 longer mandatory. 
 </@news>
 
-<@news>
-The League is now closed to new entries for the coming season. However, any clubs who are interested 
-in entering one or more new teams in the 2022/23
-season are invited to contact <@mailto address="secretary" description="SEHICL Secretary">
-    the Secretary</@mailto> to join the waiting list. 
-</@news>
-
 <#if started??>
 	</div>
 </#if>
