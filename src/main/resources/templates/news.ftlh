@@ -27,7 +27,8 @@ kit - not, for example, football or rugby shirts, and no shorts.
 <li>The colour of shirts and trousers must
 be uniform for all members of the same team.
 <li>Pads worn by batters and wicketkeepers must be white.
-<li>To avoid a clash with the colour of the ball, red kit may not be worn. 
+<li>To avoid a clash with the colour of the ball, red kit may not be worn. If in doubt over the
+acceptability of a kit colour, please consult the committee before wearing it.
 </ul>
 Whether white or coloured kit is worn, shoes may be coloured, and need not be of 
 uniform colour across a team.
