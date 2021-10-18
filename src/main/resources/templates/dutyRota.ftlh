@@ -26,7 +26,7 @@
         <@duty "23rd January" "Clanfield B" />
         <@duty "30th January" "Portsmouth University B" />
         <@duty "6th February" "Waterlooville B" />
-        <@duty "13th February" "Afghan Society Portsmouth" />
+        <@duty "13th February" "Friends United" />
         <@duty "20th February" "Portsmouth C" />
         <@duty "27th February" "Havant B" />
         <@duty "6th March" "XIIth Men B" />

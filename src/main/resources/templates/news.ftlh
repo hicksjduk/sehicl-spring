@@ -16,6 +16,11 @@
 	</#if>
 </#macro>
 
+<@news end="2021-11-07">
+Please note that <b>the team previously known as Afghan Society Portsmouth has changed
+its name to <u>Friends United</u>.</b>
+</@news>
+
 <@news>
 We would like to remind all teams that <b>playing in coloured clothing is now permitted in the League</b>. 
 The provisions
