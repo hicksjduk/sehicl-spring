@@ -34,15 +34,6 @@
 	</person>
 
 	<person>
-		<name>Sameen Mahboob</name>
-		<phone>07428 784754</phone>
-		<role name="Secretary" club="Friends United">
-			<email id="Sameen2000" domain="hotmail.co.uk" />
-		</role>
-		<role name="Captain" club="Friends United" />
-	</person>
-
-	<person>
 		<name>Matt Wake</name>
 		<phone>07824 466432</phone>
 		<role name="Secretary" club="Barracuda">
@@ -108,8 +99,8 @@
 	</person>
 
 	<person>
-		<name>Nick Hillier</name>
-		<phone>07846 811572</phone>
+		<name>Alan Bollard</name>
+		<phone>07787 522702</phone>
 		<role name="Captain" club="Curdridge" />
 	</person>
 
@@ -175,6 +166,15 @@
 		<phone>07751 866827</phone>
 		<role name="Under-13" club="Fareham &amp; Crofton" />
 	</person>
+
+    <person>
+        <name>Sameen Mahboob</name>
+        <phone>07428 784754</phone>
+        <role name="Secretary" club="Friends United">
+            <email id="Sameen2000" domain="hotmail.co.uk" />
+        </role>
+        <role name="Captain" club="Friends United" />
+    </person>
 
 	<person>
 		<name>Barbara Cooke</name>
