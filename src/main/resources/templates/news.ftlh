@@ -16,18 +16,23 @@
 	</#if>
 </#macro>
 
+<@news end="2021-11-30">
+<b>Two helmets were left behind by players playing on 24th October.</b> They can be
+reclaimed from reception at the Leisure Centre.
+</@news>
+
 <@news end="2021-11-07">
 Please note that <b>the team previously known as Afghan Society Portsmouth has changed
 its name to <u>Friends United</u>.</b>
 </@news>
 
-<@news start="2021-11-01" end="2021-11-18">
-Please note that <b>the Fixture Secretary will be out of e-mail contact</b> for a few days around the
-second weekend in November. Results submitted after Monday 8th, and those from the matches played
-on Sunday 14th, will not appear on the website until Wednesday 17th at the latest.
+<@news start= "2021-11-01" end="2021-11-18">
+<b>The Fixture Secretary will be out of e-mail contact</b> around the
+second weekend in November. There may therefore be a delay of a few days before results 
+appear on the website.
 </@news>
 
-<@news>
+<@news end="2021-11-15">
 We would like to remind all teams that <b>playing in coloured clothing is now permitted in the League</b>. 
 The provisions
 in the rules that require the wearing of white kit have been set aside. The following
