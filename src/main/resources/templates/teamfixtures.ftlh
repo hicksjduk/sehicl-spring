@@ -42,11 +42,13 @@ or to hide them if displayed.</p>
 				<tr id="result${row?counter}" hidden="true">
 					<td colspan="6" style="padding-left: 25px">
 						<table id="reslist">
-							<#if res.match.playedMatch??>
-								<@match res.firstInnings res.secondInnings res.maxWickets/>
-							<#else>
-								<@walkover res/>
-							</#if>
+                            <#if res.match.playedMatch??>
+                                <@match res.firstInnings res.secondInnings res.maxWickets/>
+                            <#elseif res.match.awardedMatch??>
+                                <@walkover res/>
+                            <#elseif res.match.unplayedMatch??>
+                                <@voidMatch res/>
+                            </#if>
 						</table>
 					</td>
 				</tr>

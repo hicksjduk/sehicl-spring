@@ -18,16 +18,18 @@ import uk.org.sehicl.website.data.Match;
 import uk.org.sehicl.website.data.PlayedMatch;
 import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.data.TeamInMatch;
+import uk.org.sehicl.website.data.UnplayedMatch;
 import uk.org.sehicl.website.rules.Rules;
 
 public abstract class Results
 {
     private final Collection<ResultDetails> results;
-    
+
     public static ResultDetails getResult(League league, Match match, Rules rules)
     {
-        return match.getPlayedMatch() == null ? new AwardedMatchDetails(league, match)
-                : new PlayedResultDetails(league, match, rules);
+        return match.getPlayedMatch() != null ? new PlayedResultDetails(league, match, rules)
+                : match.getAwardedMatch() != null ? new AwardedMatchDetails(league, match)
+                        : new UnplayedMatchDetails(league, match);
     }
 
     protected Results(Collection<ResultDetails> results)
@@ -132,14 +134,16 @@ public abstract class Results
 
         private static Comparator<Batsman> battingComparator(Team battingTeam)
         {
-            return Comparator.<Batsman>naturalOrder().thenComparing(
-                    b -> battingTeam.getPlayer(b.getPlayerId()));
+            return Comparator
+                    .<Batsman> naturalOrder()
+                    .thenComparing(b -> battingTeam.getPlayer(b.getPlayerId()));
         }
 
         private static Comparator<Bowler> bowlingComparator(Team bowlingTeam)
         {
-            return Comparator.<Bowler>naturalOrder().thenComparing(
-                    b -> bowlingTeam.getPlayer(b.getPlayerId()));
+            return Comparator
+                    .<Bowler> naturalOrder()
+                    .thenComparing(b -> bowlingTeam.getPlayer(b.getPlayerId()));
         }
 
         public InningsDetails(boolean first, Innings innings, Team battingTeam, Team bowlingTeam,
@@ -200,8 +204,8 @@ public abstract class Results
 
         private String format(Batsman b)
         {
-            String answer = addNotes(
-                    String.format("%s %d%s", battingTeam.getPlayer(b.getPlayerId()).getName(),
+            String answer = addNotes(String
+                    .format("%s %d%s", battingTeam.getPlayer(b.getPlayerId()).getName(),
                             b.getRunsScored(), b.isOut() ? "" : "*"),
                     b.getNotes());
             return answer;
@@ -209,8 +213,8 @@ public abstract class Results
 
         private String format(Bowler b)
         {
-            String answer = addNotes(
-                    String.format("%s %d/%d", bowlingTeam.getPlayer(b.getPlayerId()).getName(),
+            String answer = addNotes(String
+                    .format("%s %d/%d", bowlingTeam.getPlayer(b.getPlayerId()).getName(),
                             b.getWicketsTaken(), b.getRunsConceded()),
                     b.getNotes());
             return answer;
@@ -266,6 +270,51 @@ public abstract class Results
         public String getLoserName()
         {
             return loserName;
+        }
+
+        public String getReason()
+        {
+            return reason;
+        }
+    }
+
+    public static class UnplayedMatchDetails extends ResultDetails
+    {
+        private final String homeName;
+        private final String homeId;
+        private final String awayName;
+        private final String awayId;
+        private final String reason;
+
+        public UnplayedMatchDetails(League league, Match match)
+        {
+            super(league, match);
+            UnplayedMatch unplayedMatch = match.getUnplayedMatch();
+            homeId = match.getHomeTeamId();
+            homeName = league.getTeam(homeId).getName();
+            awayId = match.getAwayTeamId();
+            awayName = league.getTeam(awayId).getName();
+            reason = unplayedMatch.getReason();
+        }
+
+        public String getHomeName()
+        {
+            return homeName;
+        }
+
+        public String getHomeId()
+        {
+            return homeId;
+        }
+
+        public String getAwayName()
+        {
+            return awayName;
+        }
+
+        public String getAwayId()
+        {
+            return awayId;
         }
 
         public String getReason()

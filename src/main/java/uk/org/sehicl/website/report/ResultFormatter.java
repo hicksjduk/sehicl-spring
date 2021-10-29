@@ -50,6 +50,10 @@ public class ResultFormatter
                 }
             }
         }
+        else if (match.getUnplayedMatch() != null)
+        {
+            answer = String.format("Not played (%s)", match.getUnplayedMatch().getReason());
+        }
         return answer;
     }
 
