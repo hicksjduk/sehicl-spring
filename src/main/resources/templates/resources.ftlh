@@ -13,7 +13,7 @@
 <li>
 	
 <p>
-<a href="/resources/ScoreSheet.doc">Score sheet</a> - <i>Word document</i>
+<a href="/resources/ScoreSheet.pdf">Score sheet</a> - <i>PDF document</i>
 </p>
 	
 </li>
