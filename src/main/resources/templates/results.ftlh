@@ -61,8 +61,10 @@
 		<#assign lastRes = res/>
 		<#if res.match.playedMatch??>
 			<@match res.firstInnings res.secondInnings res.maxWickets/>
-		<#else>
+		<#elseif res.match.awardedMatch??>
 			<@walkover res/>
+        <#elseif res.match.unplayedMatch??>
+            <@voidMatch res/>
 		</#if>
 	</#list>
 

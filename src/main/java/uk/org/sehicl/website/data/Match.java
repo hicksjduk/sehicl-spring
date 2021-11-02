@@ -14,7 +14,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import uk.org.sehicl.website.rules.Rules;
 
 @JsonPropertyOrder(value =
-{ "date", "pitch", "homeTeam", "awayTeam", "playedMatch", "awardedMatch" })
+{ "date", "pitch", "homeTeam", "awayTeam", "playedMatch", "awardedMatch", "unplayedMatch" })
 public class Match
 {
     private Date dateTime;
@@ -99,6 +99,12 @@ public class Match
         return filterOutcome(AwardedMatch.class);
     }
 
+    @JsonInclude(Include.NON_NULL)
+    public UnplayedMatch getUnplayedMatch()
+    {
+        return filterOutcome(UnplayedMatch.class);
+    }
+
     private <T extends Outcome> T filterOutcome(Class<T> type)
     {
         return outcome != null && type.isAssignableFrom(outcome.getClass()) ? type.cast(outcome)
@@ -119,6 +125,11 @@ public class Match
     public void setAwardedMatch(AwardedMatch awardedMatch)
     {
         outcome = awardedMatch;
+    }
+
+    public void setUnplayedMatch(UnplayedMatch unplayedMatch)
+    {
+        outcome = unplayedMatch;
     }
 
     public Completeness getCompleteness(Rules rules)

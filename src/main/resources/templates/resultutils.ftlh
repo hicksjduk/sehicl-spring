@@ -43,9 +43,17 @@
 </#macro>
 
 <#macro walkover res>
+    <td class="teamscore" colspan="2">
+        <a href="/fixtures/team/${res.winnerId}">${res.winnerName}</a> beat 
+        <a href="/fixtures/team/${res.loserId}">${res.loserName}</a>  
+            by default (${res.reason})
+    </td>
+</#macro>
+
+<#macro voidMatch res>
 	<td class="teamscore" colspan="2">
-		<a href="/fixtures/team/${res.winnerId}">${res.winnerName}</a> beat 
-		<a href="/fixtures/team/${res.loserId}">${res.loserName}</a>  
-			by default (${res.reason})
+        <a href="/fixtures/team/${res.homeId}">${res.homeName}</a> v 
+        <a href="/fixtures/team/${res.awayId}">${res.awayName}</a>:
+		Not played (${res.reason})
 	</td>
 </#macro>

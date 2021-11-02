@@ -25,6 +25,7 @@ import uk.org.sehicl.website.data.PlayedMatch;
 import uk.org.sehicl.website.data.PointsDeduction;
 import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.data.TeamInMatch;
+import uk.org.sehicl.website.data.UnplayedMatch;
 import uk.org.sehicl.website.report.ReportStatus.Status;
 import uk.org.sehicl.website.rules.Rules;
 
@@ -103,6 +104,7 @@ public class LeagueTable
         private int won = 0;
         private int lost = 0;
         private int tied = 0;
+        private int unplayed = 0;
         private int battingPoints = 0;
         private int bowlingPoints = 0;
         private int runsScored = 0;
@@ -121,7 +123,7 @@ public class LeagueTable
 
         public int getPlayed()
         {
-            return won + lost + tied;
+            return won + lost + tied + unplayed;
         }
 
         public int getWon()
@@ -198,6 +200,7 @@ public class LeagueTable
         public void add(Match match)
         {
             add(match.getAwardedMatch());
+            add(match.getUnplayedMatch());
             add(match.getPlayedMatch());
         }
 
@@ -216,6 +219,12 @@ public class LeagueTable
                     lost++;
                 }
             }
+        }
+
+        private void add(UnplayedMatch unplayedMatch)
+        {
+            if (unplayedMatch != null && unplayedMatch.getCountAsPlayed())
+                unplayed++;
         }
 
         private void add(PlayedMatch playedMatch)
