@@ -72,7 +72,7 @@ public class ModelLoader
         try
         {
             Transformer transformer = TransformerFactory
-                    .newDefaultInstance()
+                    .newInstance()
                     .newTransformer(new StreamSource(str));
             return is -> transform(transformer, is);
         }
