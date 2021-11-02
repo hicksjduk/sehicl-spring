@@ -16,6 +16,14 @@
 	</#if>
 </#macro>
 
+<@news>
+<b>With the recent increase in the number of Covid-19 cases,</b> the committee is aware that this
+may lead to clubs having difficulty in raising a team. If this applies to your side, and the problem
+can be solved by including players who ordinarily would be ineligible to play for that team, we
+invite you to contact us, <u>in advance of the game</u>, to discuss the situation.
+Contact details for committee members can be found on <a href="/contacts">the Contacts page</a>.
+</@news>
+
 <@news end="2021-11-30">
 <b>Two helmets were left behind by players playing on 24th October.</b> They can be
 reclaimed from reception at the Leisure Centre.
