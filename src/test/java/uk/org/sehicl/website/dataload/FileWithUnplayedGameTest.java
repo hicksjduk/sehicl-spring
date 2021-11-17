@@ -16,17 +16,12 @@ public class FileWithUnplayedGameTest
     public void test()
     {
         Model model = ModelLoader.getModel(22);
-        Match match = model
+        assertEquals(2, model
                 .getLeagues()
                 .stream()
                 .map(League::getMatches)
                 .flatMap(Collection::stream)
-                .filter(m -> m.getUnplayedMatch() != null)
-                .findFirst()
-                .orElse(null);
-        assertNotNull(match);
-        assertEquals("Both teams failed to turn up", match.getUnplayedMatch().getReason());
-        assertTrue(match.getUnplayedMatch().getCountAsPlayed());
+                .filter(m -> m.getUnplayedMatch() != null).count());
         assertEquals(7, model.getLeagues().size());
         assertEquals(36,
                 model
