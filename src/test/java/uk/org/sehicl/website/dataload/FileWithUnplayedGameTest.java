@@ -7,7 +7,6 @@ import java.util.Collection;
 import org.junit.Test;
 
 import uk.org.sehicl.website.data.League;
-import uk.org.sehicl.website.data.Match;
 import uk.org.sehicl.website.data.Model;
 
 public class FileWithUnplayedGameTest
@@ -16,14 +15,14 @@ public class FileWithUnplayedGameTest
     public void test()
     {
         Model model = ModelLoader.getModel(22);
-        assertEquals(2, model
+        assertEquals(1, model
                 .getLeagues()
                 .stream()
                 .map(League::getMatches)
                 .flatMap(Collection::stream)
                 .filter(m -> m.getUnplayedMatch() != null).count());
         assertEquals(7, model.getLeagues().size());
-        assertEquals(36,
+        assertEquals(28,
                 model
                         .getLeagues()
                         .stream()

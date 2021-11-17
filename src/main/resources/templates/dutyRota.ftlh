@@ -16,7 +16,7 @@
         <@duty "7th November" "Hambledon A" />
         <@duty "14th November" "Knowle Village" />
         <@duty "21st November" "Swanmore" />
-        <@duty "28th November" "Portsmouth University A" />
+        <@duty "28th November" "To be confirmed" />
         <@duty "5th December" "Barracuda" />
         <@duty "12th December" "Portsmouth A" />
         <@duty "19th December" "Curdridge" />
@@ -24,7 +24,7 @@
         <@duty "9th January" "Portsmouth & Southsea" />
         <@duty "16th January" "Westbourne" />
         <@duty "23rd January" "Clanfield B" />
-        <@duty "30th January" "Portsmouth University B" />
+        <@duty "30th January" "Portsmouth University" />
         <@duty "6th February" "Waterlooville B" />
         <@duty "13th February" "Friends United" />
         <@duty "20th February" "Portsmouth C" />

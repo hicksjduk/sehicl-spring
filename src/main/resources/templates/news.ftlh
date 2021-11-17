@@ -25,6 +25,10 @@ Contact details for committee members can be found on <a href="/contacts">the Co
 </@news>
 
 <@news end="2021-11-30">
+<b>Portsmouth University B have withdrawn from the League.</b>
+</@news>
+
+<@news end="2021-11-30">
 <b>Two helmets were left behind by players playing on 24th October.</b> They can be
 reclaimed from reception at the Leisure Centre.
 </@news>
