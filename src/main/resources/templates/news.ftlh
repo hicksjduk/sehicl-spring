@@ -29,17 +29,6 @@ Contact details for committee members can be found on <a href="/contacts">the Co
 reclaimed from reception at the Leisure Centre.
 </@news>
 
-<@news end="2021-11-07">
-Please note that <b>the team previously known as Afghan Society Portsmouth has changed
-its name to <u>Friends United</u>.</b>
-</@news>
-
-<@news start= "2021-11-01" end="2021-11-18">
-<b>The Fixture Secretary will be out of e-mail contact</b> around the
-second weekend in November. There may therefore be a delay of a few days before results 
-appear on the website.
-</@news>
-
 <@news end="2021-11-15">
 We would like to remind all teams that <b>playing in coloured clothing is now permitted in the League</b>. 
 The provisions
