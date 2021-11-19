@@ -28,7 +28,9 @@ public class FileWithUnplayedGameTest
                 .flatMap(m -> Stream.of(m.getHomeTeamId(), m.getAwayTeamId()))
                 .sorted()
                 .collect(Collectors.toCollection(ArrayDeque::new));
-        Stream.of("EmsworthA", "FriendsUnited").forEach(id -> assertEquals(id, actualIds.pop()));
+        Stream
+                .of("EmsworthA", "FriendsUnited", "PortsmouthUniversity", "PortsmouthUniversityB")
+                .forEach(id -> assertEquals(id, actualIds.pop()));
         assertTrue(actualIds.isEmpty());
         Deque<Integer> matchCounts = model
                 .getLeagues()
@@ -37,7 +39,7 @@ public class FileWithUnplayedGameTest
                 .map(League::getMatches)
                 .map(Collection::size)
                 .collect(Collectors.toCollection(ArrayDeque::new));
-        Stream.of(30, 30, 45, 36, 28, 36, 36).forEach(c -> assertEquals(c, matchCounts.pop()));
+        Stream.of(30, 30, 45, 36, 29, 36, 36).forEach(c -> assertEquals(c, matchCounts.pop()));
         assertTrue(matchCounts.isEmpty());
     }
 }
