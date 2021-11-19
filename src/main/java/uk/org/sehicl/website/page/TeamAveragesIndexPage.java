@@ -4,6 +4,7 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Model;
@@ -20,7 +21,15 @@ public class TeamAveragesIndexPage extends Page
         super("averages", "teamaveragesindex.ftlh", Section.AVERAGES, uri);
         final Model model = ModelLoader.getModel();
         teamsByLeague = new TreeMap<>();
-        model.getLeagues().stream().forEach(l -> teamsByLeague.put(l, new TreeSet<>(l.getTeams())));
+        model
+                .getLeagues()
+                .stream()
+                .forEach(l -> teamsByLeague
+                        .put(l, l
+                                .getTeams()
+                                .stream()
+                                .filter(t -> !t.isExcludedFromTables())
+                                .collect(Collectors.toCollection(TreeSet::new))));
     }
 
     @Override
