@@ -490,8 +490,7 @@
 		<role name="Secretary" club="Portsmouth University">
 			<email id="thomas.harris" domain="port.ac.uk" />
 		</role>
-		<role name="A team" club="Portsmouth University" />
-		<role name="B team" club="Portsmouth University" />
+		<role name="Captain" club="Portsmouth University" />
 	</person>
 
 	<person>
