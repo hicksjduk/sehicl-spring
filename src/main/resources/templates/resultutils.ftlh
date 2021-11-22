@@ -52,8 +52,16 @@
 
 <#macro voidMatch res>
 	<td class="teamscore" colspan="2">
-        <a href="/fixtures/team/${res.homeId}">${res.homeName}</a> v 
-        <a href="/fixtures/team/${res.awayId}">${res.awayName}</a>:
+        <@teamDetails res.homeTeam/> v 
+        <@teamDetails res.awayTeam/>:
 		Not played (${res.reason})
 	</td>
+</#macro>
+
+<#macro teamDetails team>
+    <#if (team.id)?? && !team.excludedFromTables>
+        <a href="/fixtures/team/${team.id}">${team.name}</a>
+    <#else>
+        ${team.name}
+    </#if>
 </#macro>

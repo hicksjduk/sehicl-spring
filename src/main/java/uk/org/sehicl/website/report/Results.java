@@ -280,46 +280,32 @@ public abstract class Results
 
     public static class UnplayedMatchDetails extends ResultDetails
     {
-        private final String homeName;
-        private final String homeId;
-        private final String awayName;
-        private final String awayId;
+        private final Team homeTeam;
+        private final Team awayTeam;
         private final String reason;
 
         public UnplayedMatchDetails(League league, Match match)
         {
             super(league, match);
             UnplayedMatch unplayedMatch = match.getUnplayedMatch();
-            homeId = match.getHomeTeamId();
-            homeName = league.getTeam(homeId).getName();
-            awayId = match.getAwayTeamId();
-            awayName = league.getTeam(awayId).getName();
+            homeTeam = league.getTeam(match.getHomeTeamId());
+            awayTeam = league.getTeam(match.getAwayTeamId());
             reason = unplayedMatch.getReason();
-        }
-
-        public String getHomeName()
-        {
-            return homeName;
-        }
-
-        public String getHomeId()
-        {
-            return homeId;
-        }
-
-        public String getAwayName()
-        {
-            return awayName;
-        }
-
-        public String getAwayId()
-        {
-            return awayId;
         }
 
         public String getReason()
         {
             return reason;
+        }
+
+        public Team getHomeTeam()
+        {
+            return homeTeam;
+        }
+
+        public Team getAwayTeam()
+        {
+            return awayTeam;
         }
     }
 }

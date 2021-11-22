@@ -24,8 +24,13 @@ or to hide them if displayed.</p>
 				<td class="date"><@ordinalDate row.dateTime "MMM" "yy"/></td>
 				<td class="time">${row.dateTime?string("h:mm")}</td>
 				<td class="court">${row.court}</td>
-				<td class="opponent"><a
-					href="/fixtures/team/${row.opponent.id}${season}">${row.opponent.name}</a></td>
+				<td class="opponent">
+				    <#if row.opponent.excludedFromTables>
+				        ${row.opponent.name}
+				    <#else>
+				        <a href="/fixtures/team/${row.opponent.id}${season}">${row.opponent.name}</a>
+				    </#if>
+				</td>
 				<td class="homeAway">${row.home?then("H", "A")}</td>
 				<td class="result">
 					<#if row.result??>
