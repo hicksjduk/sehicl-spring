@@ -24,6 +24,23 @@ invite you to contact us, <u>in advance of the game</u>, to discuss the situatio
 Contact details for committee members can be found on <a href="/contacts">the Contacts page</a>.
 </@news>
 
+<@news>
+<b>The attention of everyone involved in the League is drawn to the following important Covid precautions</b>,
+which were sent to club secretaries at the beginning of the season but have not been widely followed so far.
+<ul>
+<li>The changing rooms at the Leisure Centre are available for use, but we strongly advise players to arrive in their kit and ready to play.
+<li>Participants are asked to try to arrive no earlier than 20 minutes before the scheduled start time of their game.
+<li>Scorers are asked to bring their own pens and clipboards. Scoresheets will be provided as usual, but pens will not be available, nor will anything to rest a scoresheet on.
+<li>The submission of hard-copy result sheets is strongly discouraged. Those who are unable or unwilling to submit results via email are asked to arrange for another member of their team to do so.
+<li>Participants are not required to wear a face covering - and those actually playing should not wear one unless advised to do so by a doctor - but are welcome to do so if they wish.
+<li>Balls, stumps and other things that are touched by multiple people will be sanitised between innings and between matches. The duty team is asked to sanitise the scoreboards at the end of the evening. Suitable sanitising equipment will be provided.
+<li>Nobody who has recently tested positive for Covid-19, or who has Covid-like symptoms, should come to the Leisure Centre.
+<li>If a team thinks they may have problems raising a side because of players contracting Covid, they are asked to give as much notice as possible to the umpires' co-ordinator and the opposition. A team that is unable to raise a side for this reason can call off the game without penalty, provided that they contact the umpires' co-ordinator and the opposition, <u>by telephone</u>, no later than 2pm on the day of the game.
+<li>We strongly urge that the number of spectators be limited - for Colts games no more than one person should accompany each player to the Leisure Centre if at all possible - and that safe distances should be left between people of different households.
+<li><u>During play, the members of the batting side who are not actually batting must stand in the hall, in the area between the two courts.</u>
+</ul>
+</@news>
+
 <@news end="2021-11-30">
 <b>Portsmouth University B have withdrawn from the League.</b>
 </@news>
