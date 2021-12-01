@@ -37,7 +37,7 @@ which were sent to club secretaries at the beginning of the season but have not 
 <li>Nobody who has recently tested positive for Covid-19, or who has Covid-like symptoms, should come to the Leisure Centre.
 <li>If a team thinks they may have problems raising a side because of players contracting Covid, they are asked to give as much notice as possible to the umpires' co-ordinator and the opposition. A team that is unable to raise a side for this reason can call off the game without penalty, provided that they contact the umpires' co-ordinator and the opposition, <u>by telephone</u>, no later than 2pm on the day of the game.
 <li>We strongly urge that the number of spectators be limited - for Colts games no more than one person should accompany each player to the Leisure Centre if at all possible - and that safe distances should be left between people of different households.
-<li><u>During play, the members of the batting side who are not actually batting must stand in the hall, in the area between the two courts.</u>
+<li>During play, the members of the batting side who are not actually batting <u>must not</u> cluster around the door leading to the hall. Only the next batter to come in may stand there. All other members of the batting side who wish to watch the game must do so from the viewing gallery upstairs.
 </ul>
 </@news>
 
