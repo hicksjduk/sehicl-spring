@@ -27,5 +27,15 @@
             </unplayedMatch>
         </xsl:copy>
     </xsl:template>
+    <xsl:template
+        match="match[contains(homeTeam/@id, 'Hayling') and contains(awayTeam/@id, 'Railway')]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+            <unplayedMatch>
+                <reason>Players self-isolating due to Covid</reason>
+                <countAsPlayed>false</countAsPlayed>
+            </unplayedMatch>
+        </xsl:copy>
+    </xsl:template>
 </xsl:stylesheet>
 
