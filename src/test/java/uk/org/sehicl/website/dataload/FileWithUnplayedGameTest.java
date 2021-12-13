@@ -30,7 +30,8 @@ public class FileWithUnplayedGameTest
                 .collect(Collectors.toCollection(ArrayDeque::new));
         Stream
                 .of("EmsworthA", "FriendsUnited", "PortsmouthUniversity", "PortsmouthUniversityB",
-                        "HaylingIsland", "RailwayTriangle").sorted()
+                        "HaylingIsland", "RailwayTriangle", "HampshireBowman", "HambledonA")
+                .sorted()
                 .forEach(id -> assertEquals(id, actualIds.pop()));
         assertTrue(actualIds.isEmpty());
         Deque<Integer> matchCounts = model
