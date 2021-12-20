@@ -32,7 +32,7 @@ public class FileWithUnplayedGameTest
                 .of("EmsworthA", "FriendsUnited", "PortsmouthUniversity", "PortsmouthUniversityB",
                         "HaylingIsland", "HaylingIsland", "RailwayTriangle", "HampshireBowman",
                         "HambledonA", "RailwayTriangle", "PortsmouthC", "WaterloovilleB",
-                        "HampshireBowman", "HavantA", "Droxford", "EmsworthB")
+                        "HampshireBowman", "HavantA", "Droxford", "EmsworthB", "Barracuda", "Westbourne")
                 .sorted()
                 .forEach(id -> assertEquals(id, actualIds.pop()));
         assertTrue(actualIds.isEmpty());
