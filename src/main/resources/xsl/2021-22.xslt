@@ -42,5 +42,17 @@
         match="match[contains(homeTeam/@id, 'Railway') and contains(awayTeam/@id, 'PortsmouthC')]">
         <xsl:call-template name="isolation"/>
     </xsl:template>
+    <xsl:template
+        match="match[contains(homeTeam/@id, 'Bowman') and contains(awayTeam/@id, 'HavantA')]">
+        <xsl:call-template name="isolation"/>
+    </xsl:template>
+    <xsl:template
+        match="match[contains(homeTeam/@id, 'Hayling') and contains(awayTeam/@id, 'Waterlooville')]">
+        <xsl:call-template name="isolation"/>
+    </xsl:template>
+    <xsl:template
+        match="match[contains(homeTeam/@id, 'Droxford') and contains(awayTeam/@id, 'Emsworth')]">
+        <xsl:call-template name="isolation"/>
+    </xsl:template>
 </xsl:stylesheet>
 

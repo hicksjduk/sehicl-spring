@@ -30,8 +30,9 @@ public class FileWithUnplayedGameTest
                 .collect(Collectors.toCollection(ArrayDeque::new));
         Stream
                 .of("EmsworthA", "FriendsUnited", "PortsmouthUniversity", "PortsmouthUniversityB",
-                        "HaylingIsland", "RailwayTriangle", "HampshireBowman", "HambledonA",
-                        "RailwayTriangle", "PortsmouthC")
+                        "HaylingIsland", "HaylingIsland", "RailwayTriangle", "HampshireBowman",
+                        "HambledonA", "RailwayTriangle", "PortsmouthC", "WaterloovilleB",
+                        "HampshireBowman", "HavantA", "Droxford", "EmsworthB")
                 .sorted()
                 .forEach(id -> assertEquals(id, actualIds.pop()));
         assertTrue(actualIds.isEmpty());
