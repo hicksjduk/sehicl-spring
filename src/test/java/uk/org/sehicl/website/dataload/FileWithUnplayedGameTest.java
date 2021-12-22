@@ -43,7 +43,7 @@ public class FileWithUnplayedGameTest
                 .map(League::getMatches)
                 .map(Collection::size)
                 .collect(Collectors.toCollection(ArrayDeque::new));
-        Stream.of(30, 30, 45, 36, 29, 36, 36).forEach(c -> assertEquals(c, matchCounts.pop()));
+        Stream.of(28, 27, 42, 33, 26, 34, 34).forEach(c -> assertEquals(c, matchCounts.pop()));
         assertTrue(matchCounts.isEmpty());
     }
 }
