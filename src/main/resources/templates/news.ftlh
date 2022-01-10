@@ -18,7 +18,8 @@
 
 <@news end="2022-01-30">
 <b><u>All matches scheduled for 16th and 23rd January have been cancelled</u></b>
-<br>As a result of the current situation with Covid-related call-offs, the committee has decided to
+<br>With the sustained high levels of new Covid cases in the last few weeks and the ever-present 
+likelihood of close contact pinging rearing its head, the committee has decided to
 cancel the matches due to be played on 16th and 23rd January. We remain hopeful that play
 can resume on 30th January, but are monitoring the situation and will make further announcements in
 due course.
