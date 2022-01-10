@@ -60,5 +60,7 @@
     </xsl:template>
     
     <xsl:template match="match[starts-with(date, '2022-01-0')]"/>
+    <xsl:template match="match[starts-with(date, '2022-01-16')]"/>
+    <xsl:template match="match[starts-with(date, '2022-01-23')]"/>
 </xsl:stylesheet>
 

@@ -16,11 +16,11 @@
 	</#if>
 </#macro>
 
-<@news end="2022-01-09">
-<b><u>All matches scheduled for 2nd and 9th January have been cancelled</u></b>
+<@news end="2022-01-30">
+<b><u>All matches scheduled for 16th and 23rd January have been cancelled</u></b>
 <br>As a result of the current situation with Covid-related call-offs, the committee has decided to
-cancel the matches due to be played on the first two Sundays in January. We remain hopeful that play
-can resume on 16th January, but are monitoring the situation and will make further announcements in
+cancel the matches due to be played on 16th and 23rd January. We remain hopeful that play
+can resume on 30th January, but are monitoring the situation and will make further announcements in
 due course.
 </@news>
 
