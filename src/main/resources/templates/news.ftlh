@@ -16,13 +16,13 @@
 	</#if>
 </#macro>
 
-<@news end="2022-01-30">
-<b><u>All matches scheduled for 16th and 23rd January have been cancelled</u></b>
-<br>With the sustained high levels of new Covid cases in the last few weeks and the ever-present 
-likelihood of close contact pinging rearing its head, the committee has decided to
-cancel the matches due to be played on 16th and 23rd January. We remain hopeful that play
-can resume on 30th January, but are monitoring the situation and will make further announcements in
-due course.
+<@news end="2022-02-01">
+<b><u>League play will resume on 30th January</u></b>
+<br>Following the cancellation of League matches on the first four Sundays in January,
+the committee has decided that play will resume on 30th January.
+<br>We will make available hand sanitiser at the admin table, and wipes will also be provided.
+We do, however, remind clubs that they have a responsibility for their players' safety, 
+and if there is anything they want to do in addition to our measures (see below), please do so.
 </@news>
 
 <@news>
@@ -48,15 +48,6 @@ which were sent to club secretaries at the beginning of the season but have not 
 <li>We strongly urge that the number of spectators be limited - for Colts games no more than one person should accompany each player to the Leisure Centre if at all possible - and that safe distances should be left between people of different households.
 <li>During play, the members of the batting side who are not actually batting <u>must not</u> cluster around the door leading to the hall. Only the next batter to come in may stand there. All other members of the batting side who wish to watch the game must do so from the viewing gallery upstairs.
 </ul>
-</@news>
-
-<@news end="2021-11-30">
-<b>Portsmouth University B have withdrawn from the League.</b>
-</@news>
-
-<@news end="2021-11-30">
-<b>Two helmets were left behind by players playing on 24th October.</b> They can be
-reclaimed from reception at the Leisure Centre.
 </@news>
 
 <@news end="2021-11-15">
