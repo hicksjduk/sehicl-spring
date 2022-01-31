@@ -16,14 +16,20 @@
 	</#if>
 </#macro>
 
-<@news end="2022-02-01">
-<b><u>League play will resume on 30th January</u></b>
+<@news end="2022-02-15">
+<b><u>League play has resumed</u></b>
 <br>Following the cancellation of League matches on the first four Sundays in January,
-the committee has decided that play will resume on 30th January.
-<br>We will make available hand sanitiser at the admin table, and wipes will also be provided.
+play resumed on 30th January.
+<br>Hand sanitiser and wipes are available on match nights at the admin table.
 We do, however, remind clubs that they have a responsibility for their players' safety, 
 and if there is anything they want to do in addition to our measures (see below), please do so.
 </@news>
+
+<@news end="2022-02-14">
+Unfortunately, <b>Emsworth Under-16s have withdrawn from the League</b>. In accordance with
+League rules, all the games they have played to date have been expunged from the records.
+</@news>
+
 
 <@news>
 <b>With the recent increase in the number of Covid-19 cases,</b> the committee is aware that this
