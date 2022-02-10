@@ -16,6 +16,14 @@
 	</#if>
 </#macro>
 
+<@news end="2022-03-13">
+Players are reminded that <b>kit bags MUST NOT be left in the changing rooms</b>.
+From Sunday 27th February, the studio opposite the doors to court B will be
+available, and bags should be left there. Before then, bags should be left in the
+corridor between the two entrances to the hall, neatly arranged along the wall
+so that the corridor is not blocked. Thank you for your co-operation.
+</@news>
+
 <@news end="2022-02-15">
 <b><u>League play has resumed</u></b>
 <br>Following the cancellation of League matches on the first four Sundays in January,
