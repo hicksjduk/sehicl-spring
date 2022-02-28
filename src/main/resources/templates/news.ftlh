@@ -16,7 +16,13 @@
 	</#if>
 </#macro>
 
-<@news end="2022-03-13">
+<@news end="2022-03-27">
+Players are reminded that <b>kit bags MUST NOT be left in the changing rooms</b>.
+The studio opposite the doors to court B is
+available, and bags should be left there. Thank you for your co-operation.
+</@news>
+
+<@news end="2022-02-27">
 Players are reminded that <b>kit bags MUST NOT be left in the changing rooms</b>.
 From Sunday 27th February, the studio opposite the doors to court B will be
 available, and bags should be left there. Before then, bags should be left in the
