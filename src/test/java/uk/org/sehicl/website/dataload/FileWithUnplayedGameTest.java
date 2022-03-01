@@ -1,6 +1,6 @@
 package uk.org.sehicl.website.dataload;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayDeque;
 import java.util.Collection;
@@ -32,10 +32,11 @@ public class FileWithUnplayedGameTest
                 .of("EmsworthA", "FriendsUnited", "PortsmouthUniversity", "PortsmouthUniversityB",
                         "HaylingIsland", "HaylingIsland", "RailwayTriangle", "HampshireBowman",
                         "HambledonA", "RailwayTriangle", "PortsmouthC", "WaterloovilleB",
-                        "HampshireBowman", "HavantA", "Droxford", "EmsworthB", "Barracuda", "Westbourne")
+                        "HampshireBowman", "HavantA", "Droxford", "EmsworthB", "Barracuda",
+                        "Westbourne", "Grayshott", "Havant0")
                 .sorted()
-                .forEach(id -> assertEquals(id, actualIds.pop()));
-        assertTrue(actualIds.isEmpty());
+                .forEach(id -> assertThat(actualIds.pop()).isEqualTo(id));
+        assertThat(actualIds.isEmpty());
         Deque<Integer> matchCounts = model
                 .getLeagues()
                 .stream()
@@ -43,7 +44,9 @@ public class FileWithUnplayedGameTest
                 .map(League::getMatches)
                 .map(Collection::size)
                 .collect(Collectors.toCollection(ArrayDeque::new));
-        Stream.of(26, 25, 38, 30, 25, 30, 30).forEach(c -> assertEquals(c, matchCounts.pop()));
-        assertTrue(matchCounts.isEmpty());
+        Stream
+                .of(26, 25, 38, 30, 25, 23, 30)
+                .forEach(c -> assertThat(matchCounts.pop()).isEqualTo(c));
+        assertThat(matchCounts.isEmpty());
     }
 }
