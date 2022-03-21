@@ -33,7 +33,7 @@ public class FileWithUnplayedGameTest
                         "HaylingIsland", "HaylingIsland", "RailwayTriangle", "HampshireBowman",
                         "HambledonA", "RailwayTriangle", "PortsmouthC", "WaterloovilleB",
                         "HampshireBowman", "HavantA", "Droxford", "EmsworthB", "Barracuda",
-                        "Westbourne", "Grayshott", "Havant0")
+                        "Westbourne", "Grayshott", "Havant0", "HaylingIsland", "PortsmouthC")
                 .sorted()
                 .forEach(id -> assertThat(actualIds.pop()).isEqualTo(id));
         assertThat(actualIds.isEmpty());

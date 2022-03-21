@@ -62,6 +62,10 @@
         match="match[contains(homeTeam/@id, 'Grayshott') and contains(awayTeam/@id, 'Havant')]">
         <xsl:call-template name="isolation"/>
     </xsl:template>
+    <xsl:template
+        match="match[contains(homeTeam/@id, 'Hayling') and contains(awayTeam/@id, 'PortsmouthC')]">
+        <xsl:call-template name="isolation"/>
+    </xsl:template>
     
     <xsl:template match="match[starts-with(date, '2022-01-0')]"/>
     <xsl:template match="match[starts-with(date, '2022-01-16')]"/>
