@@ -45,7 +45,7 @@ League rules, all the games they have played to date have been expunged from the
 </@news>
 
 
-<@news>
+<@news end="2022-03-27">
 <b>With the recent increase in the number of Covid-19 cases,</b> the committee is aware that this
 may lead to clubs having difficulty in raising a team. If this applies to your side, and the problem
 can be solved by including players who ordinarily would be ineligible to play for that team, we
@@ -53,7 +53,7 @@ invite you to contact us, <u>in advance of the game</u>, to discuss the situatio
 Contact details for committee members can be found on <a href="/contacts">the Contacts page</a>.
 </@news>
 
-<@news>
+<@news end="2022-04-03">
 <b>The attention of everyone involved in the League is drawn to the following important Covid precautions</b>,
 which were sent to club secretaries at the beginning of the season but have not been widely followed so far.
 <ul>
