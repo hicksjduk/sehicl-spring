@@ -1,44 +1,37 @@
 <h1>Presentation Evening</h1>
-<p>The Presentation Evening for the 2018/19 season will be held at
-		Fareham Leisure Centre on Sunday 7th April.</p>
+<p>The Presentation Evening for the 2021/22 season will be held at
+		Fareham Leisure Centre on Sunday 3rd April.</p>
 <h2>Order of events</h2>
-<dl id="schedule">
-<dt>6.00pm
-<dd>Exhibition matches:
+<p>6.00pm: Exhibition matches
 <ul>
-<li>Colts Under-13 Champions (Havant) v Under-13 Select VI
-<li>Colts Under-16 Champions (Gosport Borough) v Under-16 Select VI
+<li>Colts Under-13 Champions (Grayshott) v Under-13 Select VI
+<li>Colts Under-16 Champions (Hambledon Jets) v Under-16 Select VI
 </ul>
-<dt>7.00pm
-<dd>Presentation of Colts awards:
+<p>7.00pm: Presentation of Colts awards
 <ul>
-<li>Sporting and Efficiency: Hambledon A Under-16s and Hambledon Sharks Under-13s (shared)
-<li>Colts Under-13 batting: Charlie Whitfield (Havant)
-<li>Colts Under-13 bowling: Matty Hayward (Havant)
-<li>Colts Under-16 batting: Tristan Collighan (Portsmouth & Southsea)
-<li>Colts Under-16 bowling: Callum Aitken (Gosport Borough)
-<li>Colts Under-13 champions: Havant
-<li>Colts Under-16 champions: Gosport Borough
+<li>Sporting and Efficiency: Hambledon Under-13s
+<li>Colts Under-13 batting: Henry O'Hara (Portsmouth & Southsea)
+<li>Colts Under-13 bowling: Henry Ferrett (Portsmouth & Southsea)
+<li>Colts Under-16 batting: TBC
+<li>Colts Under-16 bowling: TBC
+<li>Colts Under-13 champions: Grayshott
+<li>Colts Under-16 champions: Hambledon Jets
 </ul>
-<dt>7.30pm
-<dd>Exhibition match (8-a-side):
-Division 1 Champions (Havant A) v the Mayor of Fareham's VIII
-<dt>8.30pm
-<dd>Presentation of Senior awards by the Mayor of Fareham, Cllr Susan Bayford:
+<p>7.30pm: Exhibition match (8-a-side),
+Division 1 Champions (TBC) v the Mayor of Fareham's VIII
+<p>8.30pm: Presentation of Senior awards by the Mayor of Fareham, Cllr Pam Bryant
 <ul>
-<li>Sporting and Efficiency: Gosport Borough B
-<li>Senior batting: Hakim Peruzi (Afghan Society Portsmouth)
-<li>Senior bowling: Anurag Sharma (XIIth Men A)
-<li>Division 5 champions: Waterlooville C
-<li>Division 4 champions: Afghan Society Portsmouth
-<li>Division 3 champions: Hambledon A
-<li>Division 2 champions: Fareham & Crofton A
-<li>Division 1 champions: Havant A
+<li>Sporting and Efficiency: Clanfield B
+<li>Senior batting: TBC
+<li>Senior bowling: TBC
+<li>Division 5 champions: Havant C
+<li>Division 4 champions: Droxford
+<li>Division 3 champions: Fareham & Crofton
+<li>Division 2 champions: Havant B
+<li>Division 1 champions: TBC
 </ul>
-<dt>9.00pm
-<dd>Exhibition matches:
+<p>9.00pm: Exhibition matches
 <ul>
-<li>Division 2 Champions (Fareham & Crofton A) v Division 3 Champions (Hambledon A)
-<li>Division 4 Champions (Afghan Society Portsmouth) v Division 5 Champions (Waterlooville C)
+<li>Division 2 Champions (Havant B) v Division 3 Champions (Fareham & Crofton)
+<li>Division 4 Champions (Droxford) v Division 5 Champions (Havant C)
 </ul>
-</dl>
