@@ -12,7 +12,7 @@
 <li>Sporting and Efficiency: Hambledon Under-13s
 <li>Colts Under-13 batting: Henry O'Hara (Portsmouth & Southsea)
 <li>Colts Under-13 bowling: Henry Ferrett (Portsmouth & Southsea)
-<li>Colts Under-16 batting: Ephraim Royle (Gosport Borough
+<li>Colts Under-16 batting: Ephraim Royle (Gosport Borough)
 <li>Colts Under-16 bowling: Alfie Cole (Portsmouth A)
 <li>Colts Under-13 champions: Grayshott
 <li>Colts Under-16 champions: Hambledon Jets
