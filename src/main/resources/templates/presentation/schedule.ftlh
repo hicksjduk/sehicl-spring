@@ -23,7 +23,7 @@ Division 1 Champions (Havant A) v the Mayor of Fareham's VIII
 <ul>
 <li>Sporting and Efficiency: Clanfield B
 <li>Senior batting: Matt Bradley (Clanfield A)
-<li>Senior bowling: Conor Clark (Fareham & Crofton)
+<li>Senior bowling: Connor Clark (Fareham & Crofton)
 <li>Division 5 champions: Havant C
 <li>Division 4 champions: Droxford
 <li>Division 3 champions: Fareham & Crofton
