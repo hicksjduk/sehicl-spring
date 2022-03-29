@@ -12,23 +12,23 @@
 <li>Sporting and Efficiency: Hambledon Under-13s
 <li>Colts Under-13 batting: Henry O'Hara (Portsmouth & Southsea)
 <li>Colts Under-13 bowling: Henry Ferrett (Portsmouth & Southsea)
-<li>Colts Under-16 batting: TBC
-<li>Colts Under-16 bowling: TBC
+<li>Colts Under-16 batting: Ephraim Royle (Gosport Borough
+<li>Colts Under-16 bowling: A Cole (Portsmouth A)
 <li>Colts Under-13 champions: Grayshott
 <li>Colts Under-16 champions: Hambledon Jets
 </ul>
 <p>7.30pm: Exhibition match (8-a-side),
-Division 1 Champions (TBC) v the Mayor of Fareham's VIII
+Division 1 Champions (Havant A) v the Mayor of Fareham's VIII
 <p>8.30pm: Presentation of Senior awards by the Mayor of Fareham, Cllr Pam Bryant
 <ul>
 <li>Sporting and Efficiency: Clanfield B
-<li>Senior batting: TBC
-<li>Senior bowling: TBC
+<li>Senior batting: Matt Bradley (Clanfield A)
+<li>Senior bowling: Conor Clark (Fareham & Crofton)
 <li>Division 5 champions: Havant C
 <li>Division 4 champions: Droxford
 <li>Division 3 champions: Fareham & Crofton
 <li>Division 2 champions: Havant B
-<li>Division 1 champions: TBC
+<li>Division 1 champions: Havant A
 </ul>
 <p>9.00pm: Exhibition matches
 <ul>
