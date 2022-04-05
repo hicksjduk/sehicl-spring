@@ -31,7 +31,7 @@
 				</ul>
 			</td>
 		</tr>
-		<#if (season >= 8)> 
+		<#if (season >= 8 && season != 20)> 
 		<tr>
 			<td colspan="3" align="center"><a href="/archive/presentation/${(2000 + season)?string.computer}">
 				Presentation Evening</a></td>
