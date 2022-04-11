@@ -54,11 +54,9 @@
 				to the captain of Havant A 
 
 		</tr>
-		<#--
 		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
-			innings("Hambledon A", 68, 6, 10.4, "B White 2/6", "M Frost 2/19")
-			innings("Fareham & Crofton A", 71, 2, 5.5, "D Wimble 27*", "M Frost 25*")/>
-        -->
+			innings("Havant B", 101, 6, 11.5, "O Jones 34", "A Gardner 20", "J Headon 3/13", "C Clark 2/18")
+			innings("Fareham & Crofton", 103, 2, 10.1, "J Headon 26*")/>
 		<@exhibitionMatch "Division 4 Champions v Division 5 Champions"
 			innings("Droxford", 102, 3, 12, "C Potter 27*", "T Clark 26*", 
 				"M Martin 2/23")
