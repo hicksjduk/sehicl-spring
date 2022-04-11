@@ -58,11 +58,11 @@
 		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
 			innings("Hambledon A", 68, 6, 10.4, "B White 2/6", "M Frost 2/19")
 			innings("Fareham & Crofton A", 71, 2, 5.5, "D Wimble 27*", "M Frost 25*")/>
+        -->
 		<@exhibitionMatch "Division 4 Champions v Division 5 Champions"
-			innings("Afghan Society Portsmouth", 129, 3, 12, "H Peruzi 29*", "S Mahboob 26*", 
-				"Jahanzeb Habib 20")
-			innings("Waterlooville C", 58, 6, 6.2, "Hassan 3/3")/>
-		-->
+			innings("Droxford", 102, 3, 12, "C Potter 27*", "T Clark 26*", 
+				"M Martin 2/23")
+			innings("Havant C", 105, 3, 11.1, "N Baiju 24*")/>
 	</@games>
 	<@awards "The Senior awards were presented by Cllr Pam Bryant, Mayor of
 		Fareham, assisted by League Chairman Richard Matthews.">
