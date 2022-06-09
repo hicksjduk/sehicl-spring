@@ -262,6 +262,7 @@
 		</role>
 	</person>
 
+<!-- 
 	<person>
 		<name>Jeremy Bulled</name>
 		<phone></phone>
@@ -269,7 +270,7 @@
 			<email id="jeremybulled" domain="gmail.com" />
 		</role>
 	</person>
-
+ -->
 	<person>
 		<name>Harry Gadd</name>
 		<phone>07305 425041</phone>
@@ -292,6 +293,9 @@
 	<person>
 		<name>Graham Burns</name>
 		<phone>07500 952629</phone>
+        <role name="Secretary" club="Havant">
+            <email id="grahamburns1983" domain="icloud.com" />
+        </role>
 		<role name="Under-16" club="Havant" />
 		<role name="Under-13" club="Havant" />
 	</person>
