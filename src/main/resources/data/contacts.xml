@@ -37,7 +37,7 @@
 		<name>Matt Wake</name>
 		<phone>07824 466432</phone>
 		<role name="Secretary" club="Barracuda">
-			<email id="Mattwake76" domain="hotmail.com" />
+			<email id="barracuda.secretary" />
 		</role>
 		<role name="Captain" club="Barracuda" />
 	</person>
@@ -46,55 +46,44 @@
 		<name>Phillip Williams</name>
 		<phone>07882 321103</phone>
 		<role name="Secretary" club="Bedhampton">
-			<email id="phillip_williams" domain="outlook.com" />
+			<email id="bedhampton.secretary" />
 		</role>
 	</person>
 
 	<person>
-		<name>Tom Clay</name>
-		<phone>07717 504087</phone>
+		<name>Ross Basketter</name>
+		<phone>07970 290358</phone>
 		<role name="Captain" club="Bedhampton" />
 	</person>
 
-	<person>
-		<name>Adam Selves</name>
-		<phone>07930 547635</phone>
-		<role name="Secretary" club="Bosham">
-			<email id="Boshamcricketclub" domain="gmail.com" />
-		</role>
-	</person>
+    <person>
+        <name>Gulzamir Saddiqi</name>
+        <phone>07454 983187</phone>
+        <role name="Secretary" club="Buffalo Portsmouth">
+            <email id="buffalo.secretary" />
+        </role>
+        <role name="Captain" club="Buffalo Portsmouth" />
+    </person>
 
-	<person>
-		<name>Elliott Purser</name>
-		<phone>07490 891811</phone>
-		<role name="Captain" club="Bosham" />
-	</person>
+    <person>
+        <name>John Windebank</name>
+        <phone>07815 749962</phone>
+        <role name="Secretary" club="Clanfield">
+            <email id="clanfield.secretary" />
+        </role>
+    </person>
 
 	<person>
 		<name>Matt Bradley</name>
 		<phone>07788 897780</phone>
-		<role name="Secretary" club="Clanfield">
-			<email id="m.bradley50" domain="hotmail.co.uk" />
-		</role>
+		<role name="Captain" club="Clanfield"/>
 	</person>
-
-	<person>
-		<name>Alex Andrews</name>
-		<phone>07305 643469</phone>
-		<role name="A team" club="Clanfield" />
-	</person>
-
-    <person>
-        <name>Phil Weaver</name>
-        <phone>07969 972524</phone>
-        <role name="B team" club="Clanfield" />
-    </person>
 
 	<person>
 		<name>Matt Cozens</name>
-		<phone>07920113179</phone>
+		<phone>07920 113179</phone>
 		<role name="Secretary" club="Curdridge">
-			<email id="lfcmc1" domain="gmail.com" />
+			<email id="curdridge.secretary" />
 		</role>
 	</person>
 
@@ -111,7 +100,7 @@
 			<email id="chairman" />
 		</role>
 		<role name="Secretary" club="Denmead">
-			<email id="matthews-richard3" domain="sky.com" />
+			<email id="denmead.secretary" />
 		</role>
 		<role name="Captain" club="Denmead" />
 	</person>
@@ -120,7 +109,7 @@
 		<name>John Odell</name>
 		<phone>07775 568258</phone>
 		<role name="Secretary" club="Droxford">
-			<email id="DCC" domain="johnodell.co.uk" />
+			<email id="droxford.secretary" />
 		</role>
 		<role name="Captain" club="Droxford" />
 	</person>
@@ -129,69 +118,59 @@
 		<name>Nick Webb</name>
 		<phone>07920485406</phone>
 		<role name="Secretary" club="Emsworth">
-			<email id="nick.webb21" domain="yahoo.co.uk" />
+			<email id="emsworth.secretary" />
 		</role>
-		<role name="Under-16" club="Emsworth" />
-		<role name="Under-13" club="Emsworth" />
 	</person>
 
 	<person>
 		<name>Dan Webb</name>
 		<phone>07876 015320</phone>
-		<role name="A team" club="Emsworth" />
-	</person>
-
-	<person>
-		<name>Tom Bigwood</name>
-		<phone>07368 434211</phone>
-		<role name="B team" club="Emsworth" />
+		<role name="Captain" club="Emsworth" />
 	</person>
 
 	<person>
 		<name>Mike Townson</name>
 		<phone>07753444057</phone>
 		<role name="Secretary" club="Fareham &amp; Crofton">
-			<email id="mjtownson" domain="msn.com" />
+			<email id="fareham.secretary" />
 		</role>
 	</person>
 
 	<person>
-		<name>Dan Wimble</name>
-		<phone>07842 110210</phone>
+		<name>Andrew Martin</name>
+		<phone>07392 018371</phone>
 		<role name="Captain" club="Fareham &amp; Crofton" />
 	</person>
 
 	<person>
 		<name>Mike Rayner</name>
 		<phone>07751 866827</phone>
-		<role name="Under-13" club="Fareham &amp; Crofton" />
+		<role name="Under-16" club="Fareham &amp; Crofton" />
 	</person>
 
     <person>
-        <name>Sameen Mahboob</name>
-        <phone>07428 784754</phone>
-        <role name="Secretary" club="Friends United">
-            <email id="Sameen2000" domain="hotmail.co.uk" />
-        </role>
-        <role name="Captain" club="Friends United" />
+        <name>Jeff Wylde</name>
+        <phone>07579 797870</phone>
+        <role name="Under-13" club="Fareham &amp; Crofton" />
     </person>
 
 	<person>
 		<name>Pete Robson</name>
+		<phone>07710 294870</phone>
 		<role name="Secretary" club="Gosport Borough">
-			<email id="peter.robson820" domain="ntlworld.com" />
+			<email id="gosport.secretary" />
 		</role>
 	</person>
 
 	<person>
-		<name>Jacob Harris</name>
-		<phone>07717 417020</phone>
+		<name>TBC</name>
+		<!--phone>07717 417020</phone-->
 		<role name="A team" club="Gosport Borough" />
 	</person>
 
 	<person>
-		<name>Scott Taylor</name>
-		<phone>07734 029699</phone>
+        <name>TBC</name>
+        <!--phone>07717 417020</phone-->
 		<role name="B team" club="Gosport Borough" />
 	</person>
 
@@ -202,25 +181,16 @@
 	</person>
 
 	<person>
-		<name>Jordyn Dore</name>
-		<phone>07776 817317</phone>
+        <name>TBC</name>
+        <!--phone>07717 417020</phone-->
 		<role name="Under-13" club="Gosport Borough" />
-	</person>
-
-	<person>
-		<name>Mark Le Mare</name>
-		<phone>07488 250642</phone>
-		<role name="Secretary" club="Grayshott">
-			<email id="Mark.le.mare" domain="icloud.com" />
-		</role>
-		<role name="Under-13" club="Grayshott" />
 	</person>
 
 	<person>
 		<name>Seb Duggan</name>
 		<phone>07786 333184</phone>
 		<role name="Secretary" club="Hambledon">
-			<email id="seb" domain="sebduggan.com" />
+			<email id="hambledon.secretary" />
 		</role>
 	</person>
 
@@ -243,18 +213,22 @@
 	</person>
 
 	<person>
-		<name>Ian Pratt</name>
-		<phone>07742 595416</phone>
-		<role name="Under-16 Jets" club="Hambledon" />
-		<role name="Under-16 Sharks" club="Hambledon" />
-		<role name="Under-13" club="Hambledon" />
+		<name>Jamie Lewis</name>
+		<phone>‭07415 299017‬</phone>
+		<role name="Under-16" club="Hambledon" />
 	</person>
+
+    <person>
+        <name>Ian Pratt</name>
+        <phone>07742 595416</phone>
+        <role name="Under-13" club="Hambledon" />
+    </person>
 
 	<person>
 		<name>Adam Smith</name>
 		<phone>07988806693</phone>
 		<role name="Secretary" club="Hampshire Bowman">
-			<email id="adammichaelmsmith" domain="outlook.com" />
+			<email id="bowman.secretary" />
 		</role>
 		<role name="Captain" club="Hampshire Bowman" />
 		<role name="Umpires' Co-ordinator">
@@ -262,24 +236,23 @@
 		</role>
 	</person>
 
-<!-- 
 	<person>
-		<name>Jeremy Bulled</name>
-		<phone></phone>
+		<name>Simon Morgan</name>
+		<phone>07714 447323</phone>
 		<role name="Secretary" club="Havant">
-			<email id="jeremybulled" domain="gmail.com" />
+			<email id="havant.secretary" />
 		</role>
 	</person>
- -->
+
 	<person>
 		<name>Harry Gadd</name>
-		<phone>07305 425041</phone>
+		<phone>07572 620283</phone>
 		<role name="A team" club="Havant" />
 	</person>
 
 	<person>
-		<name>Alex Whitfield</name>
-		<phone>07809 375333</phone>
+		<name>Alex Gardner</name>
+		<phone>07920 004412</phone>
 		<role name="B team" club="Havant" />
 	</person>
 
@@ -289,35 +262,32 @@
 		<role name="C team" club="Havant" />
 	</person>
 
-
 	<person>
-		<name>Graham Burns</name>
-		<phone>07500 952629</phone>
-        <role name="Secretary" club="Havant">
-            <email id="grahamburns1983" domain="icloud.com" />
-        </role>
+		<name>TBC</name>
+		<phone></phone>
 		<role name="Under-16" club="Havant" />
-		<role name="Under-13" club="Havant" />
 	</person>
 
-	<person>
-		<name>Joe Barber</name>
-		<role name="Secretary" club="Hayling Island">
-			<email id="haylingcricket" domain="gmail.com" />
-		</role>
-	</person>
+    <person>
+        <name>TBC</name>
+        <phone></phone>
+        <role name="Under-13" club="Havant" />
+    </person>
 
-	<person>
-		<name>Callum Cells</name>
-		<phone>07765 411294</phone>
-		<role name="Captain" club="Hayling Island" />
-	</person>
+    <person>
+        <name>Baiju Kurian</name>
+        <phone>07815 313185</phone>
+        <role name="Secretary" club="Kerala">
+            <email id="kerala.secretary" />
+        </role>
+        <role name="Captain" club="Kerala" />
+    </person>
 
 	<person>
 		<name>Dan McLeish</name>
 		<phone>07876 701019</phone>
 		<role name="Secretary" club="Knowle Village">
-			<email id="Dannymc82" domain="btinternet.com" />
+			<email id="knowle.secretary" />
 		</role>
 	</person>
 
@@ -328,24 +298,8 @@
 	</person>
 
 	<person>
-		<name>Andrew Clarke</name>
-		<phone>07909 918522</phone>
-		<role name="Secretary" club="Locks Heath">
-			<email id="clarke.andy" domain="yahoo.co.uk" />
-		</role>
-		<role name="Under-13" club="Locks Heath" />
-	</person>
-
-	<person>
-		<name>Helen Iliff</name>
-		<phone>07809 870431</phone>
-		<role name="Under-13" club="Locks Heath" />
-	</person>
-
-	<person>
 		<name>Jeremy Hicks</name>
 		<address>5 Odell Close, Fareham PO16 7RL</address>
-		<phone>01329312895</phone>
 		<phone>07528755967</phone>
 		<role name="Fixture Secretary">
 			<email id="fixturesec" />
@@ -357,41 +311,45 @@
 			<email id="dpo" />
 		</role>
 		<role name="Secretary" club="OPCS Titchfield">
-			<email id="jeremy" domain="thehickses.org.uk" />
+			<email id="opcs.secretary" />
 		</role>
 		<role name="Captain" club="OPCS Titchfield" />
 	</person>
 
 	<person>
-		<name>Rick Marston</name>
-		<phone>07724138531</phone>
-		<role name="Secretary" club="Portsmouth">
-			<email id="rickj.marston" domain="gmail.com" />
+		<name>Helen Klemm</name>
+		<phone>07816 489496</phone>
+		<role name="Secretary" club="Petersfield">
+			<email id="petersfield.secretary" />
 		</role>
-		<role name="A team" club="Portsmouth" />
 	</person>
 
-	<person>
-		<name>Nicky Wyatt</name>
-		<phone>07771 691662</phone>
-		<role name="B team" club="Portsmouth" />
-	</person>
+    <person>
+        <name>Dan Roots</name>
+        <phone>07906 388856</phone>
+        <role name="Under-13" club="Petersfield"/>
+    </person>
 
-	<person>
-		<name>Tim Bailey</name>
-		<phone>07919 376530</phone>
-		<role name="C team" club="Portsmouth" />
-	</person>
+    <person>
+        <name>Alan Walton</name>
+        <phone>07703 531369</phone>
+        <role name="Secretary" club="Portsmouth">
+            <email id="portsmouth.secretary" />
+        </role>
+    </person>
 
-	<person>
-		<name>Tim Hill</name>
-		<phone>07969 464241</phone>
-		<role name="Under-16 (A and B)" club="Portsmouth" />
-	</person>
+    <person>
+        <name>Jo Stretton</name>
+        <phone>07756 261174</phone>
+        <role name="A team" club="Portsmouth" />
+    </person>
 
-	<person>
-		<name>Alistair Thompson</name>
-		<phone>07970 162225</phone>
+    <person>
+        <name>Rick Marston</name>
+        <phone>07724138531</phone>
+        <role name="B team" club="Portsmouth" />
+		<role name="Under-16 A" club="Portsmouth" />
+        <role name="Under-16 B" club="Portsmouth" />
 		<role name="Under-13" club="Portsmouth" />
 	</person>
 
@@ -399,13 +357,13 @@
 		<name>Jason Manning</name>
 		<phone>07902 711254</phone>
 		<role name="Secretary" club="Portsmouth Academics">
-			<email id="jasonmanning63" domain="yahoo.co.uk" />
+			<email id="academics.secretary" />
 		</role>
-		<role name="Captain" club="Portsmouth Academics" />
 	</person>
 
 	<person>
 		<name>Jon Scowen</name>
+        <phone>07714 243112</phone>
 		<role name="Captain" club="Portsmouth Academics" />
 	</person>
 
@@ -413,7 +371,7 @@
 		<name>Louise Etherington</name>
 		<phone>07720 248535</phone>
 		<role name="Secretary" club="Portsmouth &amp; Southsea">
-			<email id="louetheringtonpandscc" domain="gmail.com" />
+			<email id="southsea.secretary" />
 		</role>
 	</person>
 
@@ -432,9 +390,9 @@
 
 	<person>
 		<name>James Ireson</name>
-		<phone>01424 576054</phone>
+		<phone>07712 217242</phone>
 		<role name="Secretary" club="Railway Triangle">
-			<email id="james.ireson" domain="hotmail.com" />
+			<email id="triangle.secretary" />
 		</role>
 	</person>
 
@@ -445,24 +403,10 @@
 	</person>
 
 	<person>
-		<name>Cris Kemp</name>
-		<phone>07787 590934</phone>
-		<role name="Secretary" club="Rowner">
-			<email id="Cris17993" domain="gmail.com" />
-		</role>
-	</person>
-
-	<person>
-		<name>James Osborn</name>
-		<phone>07787 400966</phone>
-		<role name="Captain" club="Rowner" />
-	</person>
-
-	<person>
 		<name>Oliver Rowe</name>
 		<phone>07816 332324</phone>
 		<role name="Secretary" club="Swanmore">
-			<email id="Orowe30" domain="hotmail.com" />
+			<email id="swanmore.secretary" />
 		</role>
 	</person>
 
@@ -473,39 +417,16 @@
 	</person>
 
 	<person>
-		<name>Linda Judd</name>
-		<phone>07552 608505</phone>
-		<role name="Secretary" club="United Services">
-			<email id="linda.m.judd" domain="outlook.com" />
-		</role>
-	</person>
-
-	<person>
-		<name>Farai Shoko</name>
-		<phone>07497 368427</phone>
-		<role name="Captain" club="United Services" />
-	</person>
-
-	<person>
-		<name>Tom Harris</name>
-		<phone>07446 127883</phone>
-		<role name="Secretary" club="Portsmouth University">
-			<email id="thomas.harris" domain="port.ac.uk" />
-		</role>
-		<role name="Captain" club="Portsmouth University" />
-	</person>
-
-	<person>
 		<name>Natalie Croft</name>
 		<phone>07775 023316</phone>
 		<role name="Secretary" club="Waterlooville">
-			<email id="croftn11" domain="gmail.com" />
+			<email id="waterlooville.secretary" />
 		</role>
 	</person>
 
 	<person>
 		<name>Archie Reynolds</name>
-		<phone>07578 456211</phone>
+		<phone>07502 949226</phone>
 		<role name="A team" club="Waterlooville" />
 	</person>
 
@@ -526,13 +447,8 @@
 		<name>Ben Cowdry</name>
 		<phone>07761 478596</phone>
 		<role name="Secretary" club="Westbourne">
-			<email id="bencowdry" domain="hotmail.co.uk" />
+			<email id="westbourne.secretary" />
 		</role>
-	</person>
-
-	<person>
-		<name>Stephen Malley</name>
-		<phone>07983 284773</phone>
 		<role name="Captain" club="Westbourne" />
 	</person>
 
@@ -540,7 +456,7 @@
 		<name>Jeremy Penny</name>
 		<phone>07970700837</phone>
 		<role name="Secretary" club="XIIth Men">
-			<email id="Jayster07" domain="icloud.com" />
+			<email id="xiithmen.secretary" />
 		</role>
 	</person>
 
