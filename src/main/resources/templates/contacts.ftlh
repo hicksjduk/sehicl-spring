@@ -82,7 +82,7 @@
             		<#else>
             			${contact.name}
             		</#if>
-            		<#if contact.address??><br>${contact.address}</#if>
+            		<#-- <#if contact.address??><br>${contact.address}</#if> --> 
             		<#if contact.phoneNumbers?size != 0><br>${contact.phoneNumbers?join(", ")}</#if>
             	</#if>
             <#else>
