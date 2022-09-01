@@ -114,20 +114,19 @@
 	and Match Fees in an approved account and shall be responsible for
 	keeping records of all the League's financial transactions. All
 	payments made by the League by Cheque shall bear the signature of the
-	Treasurer.<br> Every club must complete a Records Update form in
-	full and return it to the Honorary Secretary by 1st July. Any
-	incomplete form will incur a fee of &pound;5.00 per enquiry made to
-	establish full information for publication. Any Records Update form
-	returned after 1st July will incur a fine of &pound;5.00 for each full
-	or part week late, up to a maximum of &pound;20.00. (Therefore &pound;5
-	for forms received from 2nd to 8th July, &pound;10 for forms received
-	from 9th to 15th July, &pound;15 for forms received from 16th to 22nd
-	July, and &pound;20 for forms received from 23rd to 31st July.) If any
-	club's Records Update form is not received before the end of July, that
-	club will automatically be deemed to have withdrawn from the League,
-	and the place occupied by each team of that club will be offered to a
-	team on the waiting list. The Secretary will dispatch record update
-	forms within a week of the AGM.
+	Treasurer.<br> 
+	Every club must complete a Records Update form in full and return it to the 
+	Honorary Secretary by 31st July. Any incomplete form will incur a fee of £5.00 
+	per enquiry made to establish full information for publication. Any Records Update 
+	form returned after 31st July will incur a fine of £5.00 for each full or part week late, 
+	up to a maximum of £20.00. (Therefore £5 for forms received from 1st to 7th August, 
+	£10 for forms received from 8th to 14th August, £15 for forms received from 
+	15th to 21st August, and £20 for forms received from 22nd to 31st August.) 
+	If any club's Records Update form is not received before the end of August, 
+	that club will automatically be deemed to have withdrawn from the League, 
+	and the place occupied by each team of that club will be offered to a team 
+	on the waiting list. The Secretary will dispatch record update forms within 
+	a week of the AGM.
 </p>
 <a name="sectionF"></a>
 <h2>F. Extra - ordinary General Meeting</h2>
@@ -197,9 +196,8 @@
 <h2>J. Arrangement of Matches</h2>
 <p>Dates and times shall be decided by the Fixture Secretary and
 	approved by the Committee. All member clubs shall be notified by email
-	when the fixtures are available on the website for their perusal. Each
-	team in a Division will play every other team in the Division once
-	during the season. Any clashes or difficulties with dates and times of
+	when the fixtures are available on the website for their perusal. 
+    Any clashes or difficulties with dates and times of
 	their club's fixtures have to be notified to the fixture secretary in
 	writing (email acceptable) within 14 days of the publishing date
 	otherwise, only in exceptional circumstances, will they be changed
@@ -264,33 +262,30 @@ If two or more teams are equal according to the above criteria, they shall share
 <a name="sectionM"></a>
 <h2>M. Promotion and Relegation</h2>
 <p>
-	<ul compact>
-	<li>The team finishing bottom of Division 1 shall be relegated to Division 2, 
-	and the team finishing top of Division 2 shall be promoted to Division 1.
-	<li>The bottom two teams in Division 2 shall be relegated to Division 3,
-	and the top two teams in Division 3 shall be promoted to Division 2.
-	<li>The bottom two teams in Division 3 shall be relegated to Division 4,
-	and the top two teams in Division 4 shall be promoted to Division 3.
-	<li>The bottom two teams in Division 4 shall be relegated to Division 5,
-	and the top two teams in Division 5 shall be promoted to Division 4.
-	</ul>
-	 <br>
-	Any club not wishing to carry on playing next season should notify the
-	Honorary Secretary by the 30th April. <br> <br> The WINNERS
-	and RUNNERS-UP in Division I may be nominated to represent the League
-	in the H.C.A. County Indoor Six-A-Side Championships at the discretion
-	of the Committee.
+	The number of teams to be promoted and relegated between each pair 
+	of adjacent divisions shall be specified by the Committee not later 
+	than the end of December in the relevant season. In the event of teams 
+	withdrawing from divisions other than the bottom one, the Committee 
+	shall direct how the vacancies thus caused shall be filled; in general, 
+	preference shall be given to promoting additional teams, over not 
+	relegating relegated teams.
 </p>
 <a name="sectionN"></a>
 <h2>N. Clothing</h2>
-<p>All players (including Colts) will wear normal accepted cricket
-	clothing (white shirts, flannels and light coloured socks) and
-	equipment - this includes wicketkeepers wearing pads and gloves.
-	Footwear will be light coloured soled WHITE or mainly white shoes or
-	boots. Nails or spikes are not permitted. NB. the rules of the Leisure
-	Centre require the wearing of NON MARKING soled footwear on court.
-	Personal equipment (pads etc) should be in serviceable and clean
-	condition.</p>
+<p>
+All players (including Colts) shall wear normal accepted cricket clothing – 
+shirts, trousers and socks – which may be of any colour including white. 
+The colour of shirts and trousers must be uniform for all members of the same team. 
+To avoid a clash with the colour of the ball, red kit may not be worn. 
+Where an undershirt is worn whose sleeves are longer than those of the team shirt, 
+it may be of any colour except red, and need not be uniform across a team.
+<br>If in doubt over the acceptability of a kit colour, please consult the committee before wearing it.
+<br>Pads worn by batters and wicketkeepers must be white.
+<br>Shoes may be of any colour, and need not be of uniform colour across a team. 
+The rules of the Leisure Centre require that shoes worn must have non-marking soles.
+<br>All personal equipment – clothing, shoes, pads, gloves and helmets – must be in serviceable 
+and clean condition.
+</p>
 <a name="sectionO"></a>
 <h2>O. Scoring</h2>
 <p>
@@ -345,10 +340,10 @@ If two or more teams are equal according to the above criteria, they shall share
 
 	<li>No Under-13 player is allowed to play in any senior match.<br>
 		Any Under-16 player who wishes to play in a senior match can only do
-		so with written permission from parent/guardian. NOTE - Secretary to
-		dispatch forms and clubs are to get parents/guardians to complete
-		prior to start of season. Forms will be held centrally in the cupboard
-		at Fareham Leisure Centre for Umpire's reference.<br> All players
+		so with written permission from parent/guardian. Clubs are responsible 
+		for obtaining parental consent for any such player, and the team captain 
+		shall confirm that all required consents have been obtained by completing 
+		the appropriate details on the team sheet.<br> All players
 		aged under 18 participating in a senior game must wear a helmet when
 		fielding within the 'No-ball' line at time of delivery.
 	</li>
@@ -403,13 +398,10 @@ If two or more teams are equal according to the above criteria, they shall share
 	to provide for manning of both scoreboards throughout the evening
 	senior programme. The Duty Team must be in attendance at all times
 	during senior play and ensure that the scoreboards show the up to date
-	situation of the game in progress. In event of the absence of a member
-	of the Duty Team providing scoreboard service during the match then the
-	Captains of the teams involved in the match shall record the absence on
-	the match report card. The Duty Team shall be drawn from member clubs
-	of all senior divisions, but when a member of the Officers and
-	Management Committee is a bona fide playing member of a League team
-	then the team shall be excused from the Duty Rota. <br> PENALTIES:
+	situation of the game in progress. The Duty Team shall be drawn from 
+	member clubs of all senior divisions, but teams from any club 
+	that supplies a member of the Committee and/or an Umpire 
+	may be excused from the Duty Rota, at the discretion of the Committee. <br> PENALTIES:
 	In the event of the Duty Team being reported by the umpires of a match
 	that no scoreboard service was provided by the Duty Team then ONE point
 	shall be deducted from the playing record of the Duty Team for EACH
@@ -423,7 +415,7 @@ If two or more teams are equal according to the above criteria, they shall share
 	Umpires Co-ordinator. They will be given at least 7 days notice when
 	they are required. Failure to attend will result in a 6-point deduction
 	per match. <br> In the event of the duty umpire failing to attend
-	a batsman will stand at square leg before or after his innings without
+	a batter will stand at square leg before or after his innings without
 	penalty to the team.
 </p>
 <a name="sectionU"></a>
@@ -464,22 +456,24 @@ If two or more teams are equal according to the above criteria, they shall share
 			<li>The interval between innings to be kept as short as
 				possible.</li>
 
-			<li>Two batsmen shall be at the wicket at all times during the
+			<li>Two batters shall be at the wicket at all times during the
 				innings. In the event of a team losing five wickets within the
 				permitted twelve overs, the last man shall continue batting with the
 				fifth man out remaining at the wicket as the non - striker.</li>
 
-			<li>When a batsman reaches a personal total of 25 runs he shall
-				retire, but may return to the crease at the fall of the fifth
-				wicket. Retired batsmen MUST return in the order of retirement and
-				take the place of the dismissed or retiring batsman. Two "live"
-				batsmen shall be at the wicket until such time as the fifth wicket
-				has fallen. The batsman shall retire again when he has scored an
+			<li>When a batter reaches a personal total of 25 runs he shall retire 
+			    (unless no other batter is available to take his place), but may 
+			    return to the crease when all the other members of his team have batted, 
+			    and all but one of them have either retired or been dismissed. Retired batters 
+			    MUST return in the order of retirement and
+				take the place of the dismissed or retiring batter. Two "live"
+				batters shall be at the wicket until such time as the fifth wicket
+				has fallen. The batter shall retire again when he has scored an
 				additional 25 runs on his return to the crease.</li>
 
 			<li>A "No Ball" shall be called if any ball pitches short of the
 				line on the mat, or if the ball rises and passes above shoulder
-				height of the batsman standing in his normal stance, irrespective of
+				height of the batter standing in his normal stance, irrespective of
 				where the ball had pitched.</li>
 
 			<li>The laws relating to wides shall be strictly interpreted by
@@ -535,32 +529,32 @@ If two or more teams are equal according to the above criteria, they shall share
 
 			<li>A ball struck to hit the ceiling or one or more of the side
 				or back walls shall count as 1 run even if the subsequently hits the
-				boundary wall. 2 additional runs shall be scored if the batsmen
+				boundary wall. 2 additional runs shall be scored if the batters
 				complete a run. If the ball is struck to hit the ceiling or back or
-				sidewall and a batsman is run out, 1 run shall be scored.</li>
+				sidewall and a batter is run out, 1 run shall be scored.</li>
 
 			<li>2 runs shall be scored if the striker plays the ball and it
-				does not hit the wall direct and the batsmen complete a run.</li>
+				does not hit the wall direct and the batters complete a run.</li>
 
 			<li>A Bye shall count as 1 extra if the ball hits a wall; a
 				leg-bye shall count as one extra if the ball hits a wall. In each
-				case if the batsmen complete a run 2 additional extras shall be
+				case if the batters complete a run 2 additional extras shall be
 				scored.</li>
 
-			<li>2 Byes or 2 leg-byes shall be scored if the batsmen complete
+			<li>2 Byes or 2 leg-byes shall be scored if the batters complete
 				a run without the ball hitting a wall.</li>
 
 			<li>NO BALL
 				<ol style="list-style-type: lower-roman">
 
-					<li>If the batsmen do not run when a No Ball is called, a
+					<li>If the batters do not run when a No Ball is called, a
 						penalty of 1 run shall be credited under extras.</li>
 
-					<li>If the batsman does not strike the ball and completes a
+					<li>If the batter does not strike the ball and completes a
 						run, 3 runs shall be credited under extras.</li>
 
 					<li>If the Striker hits a No Ball, that strikes a wall or
-						ceiling or the batsmen complete a run the number of runs scored
+						ceiling or the batters complete a run the number of runs scored
 						shall be credited to the striker, plus the penalty of 1 No Ball to
 						be recorded as No Ball extras.</li>
 
@@ -571,26 +565,26 @@ If two or more teams are equal according to the above criteria, they shall share
 				be credited under "extras"; 1 further run shall be credited under
 				"extras" where the ball goes on to hit any wall at the striker's
 				end; 2 further runs shall be credited under "extras" every time the
-				batsmen complete a run. <br> NOTE: No extra ball will be
+				batters complete a run. <br> NOTE: No extra ball will be
 				allowed except for the FINAL OVER of each innings, when 3 runs will
 				be recorded for a "wide" and an extra ball will be allowed.
 			</li>
 
 			<li>An overthrow hitting any wall or walls shall count as only
-				one run to the batsman or to the total of "extras", as appropriate.
+				one run to the batter or to the total of "extras", as appropriate.
 				Additional overthrows can only ensue from each additional throw,
-				which goes on to hit a wall or walls. If a batsman unintentionally
+				which goes on to hit a wall or walls. If a batter unintentionally
 				diverts a ball thrown at the wicket to which he is running to, on to
 				a wall the ball will automatically become "Dead" when hitting the
-				wall, and the batting side will not gain an overthrow. (The batsmen
+				wall, and the batting side will not gain an overthrow. (The batters
 				shall not change ends).</li>
 
-			<li>No runs shall be scored if the batsman is out caught off the
+			<li>No runs shall be scored if the batter is out caught off the
 				walls or ceiling.</li>
 
 			<li>If a ball becomes lodged in netting, any obstacle or passes
 				into the adjacent court, the Umpire shall call and signal "Dead
-				Ball" and award 1 run. The batsmen shall return to their original
+				Ball" and award 1 run. The batters shall return to their original
 				ends.</li>
 
 			<li>If "short run" is called, the run called short does not
@@ -608,14 +602,14 @@ If two or more teams are equal according to the above criteria, they shall share
 		variations shall apply:-
 		<ol>
 
-			<li>The batsman shall be caught out by a fielder after the ball
+			<li>The batter shall be caught out by a fielder after the ball
 				has hit the ceiling, the netting or any wall except direct from the
 				boundary wall, provided the ball has not touched the floor.</li>
 
-			<li>The last not-out batsman shall be given out if the
+			<li>The last not-out batter shall be given out if the
 				non-striker running with him is given out.</li>
 
-			<li>The batsman or the non-striker shall be given NOT OUT if the
+			<li>The batter or the non-striker shall be given NOT OUT if the
 				ball rebounds from a wall or ceiling and hits a wicket without being
 				touched by a fielder.</li>
 
@@ -669,12 +663,12 @@ If two or more teams are equal according to the above criteria, they shall share
 	<li>The pitch length will be the ECB recommended length for Under-13 cricket.
 		(As of 2019 this is 19 yards.) </li>
 
-	<li>When a batsman reaches a personal total of 20 runs he shall
+	<li>When a batter reaches a personal total of 20 runs he shall
 		retire, but may return to the crease at the fall of the fifth wicket.
-		Retired batsmen MUST return in the order of retirement and take the
-		place of the dismissed or retiring batsman. Two "live" batsmen shall
+		Retired batters MUST return in the order of retirement and take the
+		place of the dismissed or retiring batter. Two "live" batters shall
 		be at the wicket until such time as the fifth wicket has fallen. The
-		batsman shall retire again when he has scored an additional 20 runs on
+		batter shall retire again when he has scored an additional 20 runs on
 		his return to the crease.</li>
 
 	<li>Clubs must provide their own competent scorer.</li>
