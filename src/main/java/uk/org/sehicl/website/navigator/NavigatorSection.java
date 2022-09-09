@@ -44,7 +44,7 @@ public enum NavigatorSection
     private static Stream<NavigatorItem> divisionSubItems(String uriTemplate)
     {
         return IntStream
-                .of(1, 2, 3, 4, 5, 16, 13)
+                .of(1, 2, 3, 4, 16, 13)
                 .mapToObj(div -> String.format(div < 10 ? "Division %d" : "Colts Under-%d", div))
                 .map(divName -> new NavigatorItem(divName,
                         String.format(uriTemplate, divName.replaceAll("\\W+", ""))));
