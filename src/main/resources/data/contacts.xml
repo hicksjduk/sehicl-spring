@@ -10,14 +10,6 @@
 	</person>
 
 	<person>
-		<name>Bob Marchant</name>
-		<phone>07771771867</phone>
-		<role name="Vice-Chairman">
-			<email id="vicechairman" />
-		</role>
-	</person>
-
-	<person>
 		<name>Sally Priddy</name>
 		<role name="Secretary">
 			<email id="secretary" />
