@@ -24,7 +24,8 @@
 	of events, and the awards that will be presented.-->
 	 <a href="/archive/presentation/2022">
 	The 2022 presentation evening</a> was on Sunday 3rd April;
-	click the link for information and pictures from the evening.
+	click the link for information and pictures from the evening. The 2023
+	presentation evening will be on Sunday 2nd April.
 </p>
 <p>Please report any broken links, mis-spelled names or other errors
 	to 	<@mailto address="website" description="SEHICL Webmaster">
