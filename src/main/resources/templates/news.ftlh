@@ -16,7 +16,7 @@
 	</#if>
 </#macro>
 
-<@news end="2022-10-31">
+<@news end="2022-10-10">
 <b><a href="/fixtures">The fixtures for the 2022-23 season</a> are now available.</b>
 The first games of the season are on Sunday 9th October. 
 </@news>
