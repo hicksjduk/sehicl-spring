@@ -15,6 +15,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.ScanOptions.ScanOptionsBuilder;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
@@ -30,9 +31,9 @@ import uk.org.sehicl.website.users.UserDatastore;
 public class RedisDatastore implements UserDatastore
 {
     private final JedisConnectionFactory connectionFactory;
-    private final RedisAtomicLong keyGenerator;
-    private final RedisTemplate<String, String> template;
-    private final HashOperations<String, Object, Object> ops;
+    private RedisAtomicLong keyGenerator;
+    private RedisTemplate<String, String> template;
+    private HashOperations<String, Object, Object> ops;
 
     public RedisDatastore()
     {
@@ -57,6 +58,9 @@ public class RedisDatastore implements UserDatastore
     private RedisDatastore(JedisConnectionFactory connectionFactory)
     {
         (this.connectionFactory = connectionFactory).afterPropertiesSet();
+    }
+    
+    private void init() {
         keyGenerator = new RedisAtomicLong("counter", connectionFactory);
         template = createTemplate();
         ops = template.opsForHash();
@@ -127,6 +131,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public User getUserByEmail(String email)
     {
+        if (ops == null)
+            init();
         final User answer = (User) ops.get("email", email);
         return answer;
     }
@@ -134,6 +140,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public User getUserById(long id)
     {
+        if (ops == null)
+            init();
         final User answer = (User) ops.get("user", id);
         return answer;
     }
@@ -141,6 +149,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public SessionData getSessionByUserId(long id)
     {
+        if (ops == null)
+            init();
         SessionData answer = null;
         answer = (SessionData) ops.get("usersession", id);
         return answer;
@@ -149,6 +159,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public SessionData getSessionBySessionId(long id)
     {
+        if (ops == null)
+            init();
         SessionData answer = null;
         answer = (SessionData) ops.get("session", id);
         return answer;
@@ -157,6 +169,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public SessionData setSession(User user)
     {
+        if (ops == null)
+            init();
         final long expiry = new Date().getTime() + TimeUnit.DAYS.toMillis(1);
         SessionData answer = getSessionByUserId(user.getId());
         if (answer == null)
@@ -174,6 +188,8 @@ public class RedisDatastore implements UserDatastore
 
     long getSessionId(User user)
     {
+        if (ops == null)
+            init();
         long factor = 10000000000L;
         final long time = new Date().getTime();
         long answer = user.getId() * factor + time % factor;
@@ -183,10 +199,12 @@ public class RedisDatastore implements UserDatastore
     @Override
     public void clearExpiredSessions()
     {
+        if (ops == null)
+            init();
         long now = new Date().getTime();
         List<SessionData> expiredSessions = new ArrayList<>();
         try (Cursor<Entry<Object, Object>> c = ops
-                .scan("session", new ScanOptionsBuilder().build()))
+                .scan("session", ScanOptions.scanOptions().build()))
         {
             c.forEachRemaining(e ->
             {
@@ -196,10 +214,6 @@ public class RedisDatastore implements UserDatastore
                     expiredSessions.add(s);
                 }
             });
-        }
-        catch (IOException ex)
-        {
-            throw new RuntimeException("Error closing cursor", ex);
         }
         if (!expiredSessions.isEmpty())
         {
@@ -213,6 +227,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public User createUser(String email, String name, String club, Status status, String password)
     {
+        if (ops == null)
+            init();
         User answer = new User(name, email, club, status, 0, password, true);
         answer.setId(keyGenerator.getAndIncrement());
         updateUser(answer);
@@ -221,6 +237,8 @@ public class RedisDatastore implements UserDatastore
 
     public void createUser(User user)
     {
+        if (ops == null)
+            init();
         user.setId(keyGenerator.getAndIncrement());
         updateUser(user);
     }
@@ -228,6 +246,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public void updateUser(User user)
     {
+        if (ops == null)
+            init();
         ops.put("user", user.getId(), user);
         ops.put("email", user.getEmail(), user);
     }
@@ -235,6 +255,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public PasswordReset generatePasswordReset(String email)
     {
+        if (ops == null)
+            init();
         PasswordReset answer = null;
         final User user = getUserByEmail(email);
         if (user != null)
@@ -248,6 +270,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public PasswordReset getPasswordReset(long id)
     {
+        if (ops == null)
+            init();
         PasswordReset answer = (PasswordReset) ops.get("reset", id);
         return answer;
     }
@@ -255,9 +279,11 @@ public class RedisDatastore implements UserDatastore
     @Override
     public void clearExpiredResets()
     {
+        if (ops == null)
+            init();
         long now = new Date().getTime();
         List<PasswordReset> expiredResets = new ArrayList<>();
-        try (Cursor<Entry<Object, Object>> c = ops.scan("reset", new ScanOptionsBuilder().build()))
+        try (Cursor<Entry<Object, Object>> c = ops.scan("reset", ScanOptions.scanOptions().build()))
         {
             c.forEachRemaining(e ->
             {
@@ -268,10 +294,6 @@ public class RedisDatastore implements UserDatastore
                 }
             });
         }
-        catch (IOException ex)
-        {
-            throw new RuntimeException("Error closing cursor", ex);
-        }
         if (!expiredResets.isEmpty())
         {
             ops.delete("reset", expiredResets.stream().mapToLong(PasswordReset::getId).toArray());
@@ -281,6 +303,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public Collection<Long> getAllUserIds()
     {
+        if (ops == null)
+            init();
         String bucket = "user";
         Collection<Long> answer = ops
                 .keys(bucket)
@@ -293,6 +317,8 @@ public class RedisDatastore implements UserDatastore
     @Override
     public void deleteUser(long id)
     {
+        if (ops == null)
+            init();
         User user = getUserById(id);
         if (user == null)
             return;
