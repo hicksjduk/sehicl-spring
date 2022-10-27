@@ -3,6 +3,7 @@ package uk.org.sehicl.admin;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -25,7 +26,8 @@ public class UsersExporter
         StringWriter writer = new StringWriter();
         try (StringWriter sw = writer)
         {
-            new ObjectMapper(new YAMLFactory()).writeValue(sw, userManager.allUsers().toList());
+            new ObjectMapper(new YAMLFactory())
+                    .writeValue(sw, userManager.allUsers().collect(Collectors.toList()));
         }
         return writer.toString();
     }
