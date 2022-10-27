@@ -3,6 +3,7 @@ package uk.org.sehicl.website.users;
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -271,5 +272,10 @@ public class UserManager
     public void deleteUser(long userId)
     {
         datastore.deleteUser(userId);
+    }
+    
+    public Stream<User> allUsers()
+    {
+        return datastore.getAllUserIds().stream().map(datastore::getUserById);
     }
 }

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ActivatePage;
 import uk.org.sehicl.website.page.ArchiveIndexPage;
@@ -69,6 +70,8 @@ public class Controller
 {
     @Autowired
     private UserManager userManager;
+    @Autowired
+    private UsersExporter usersExporter;
 
     private String getRequestUri(HttpServletRequest req)
     {
@@ -544,6 +547,12 @@ public class Controller
                 .toString();
         userManager.sendReconfirmationEmails(reconfirmationPageAddress);
         return "Emails sent";
+    }
+    
+    @RequestMapping(path="/admin/userExport")
+    public String exportUsers(HttpServletRequest req) throws IOException
+    {
+        return usersExporter.export(req.getHeader("adminSecret"));
     }
 
     @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")

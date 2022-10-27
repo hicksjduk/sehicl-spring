@@ -15,6 +15,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.ScanOptions.ScanOptionsBuilder;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
@@ -203,7 +204,7 @@ public class RedisDatastore implements UserDatastore
         long now = new Date().getTime();
         List<SessionData> expiredSessions = new ArrayList<>();
         try (Cursor<Entry<Object, Object>> c = ops
-                .scan("session", new ScanOptionsBuilder().build()))
+                .scan("session", ScanOptions.scanOptions().build()))
         {
             c.forEachRemaining(e ->
             {
@@ -213,10 +214,6 @@ public class RedisDatastore implements UserDatastore
                     expiredSessions.add(s);
                 }
             });
-        }
-        catch (IOException ex)
-        {
-            throw new RuntimeException("Error closing cursor", ex);
         }
         if (!expiredSessions.isEmpty())
         {
@@ -286,7 +283,7 @@ public class RedisDatastore implements UserDatastore
             init();
         long now = new Date().getTime();
         List<PasswordReset> expiredResets = new ArrayList<>();
-        try (Cursor<Entry<Object, Object>> c = ops.scan("reset", new ScanOptionsBuilder().build()))
+        try (Cursor<Entry<Object, Object>> c = ops.scan("reset", ScanOptions.scanOptions().build()))
         {
             c.forEachRemaining(e ->
             {
@@ -296,10 +293,6 @@ public class RedisDatastore implements UserDatastore
                     expiredResets.add(r);
                 }
             });
-        }
-        catch (IOException ex)
-        {
-            throw new RuntimeException("Error closing cursor", ex);
         }
         if (!expiredResets.isEmpty())
         {

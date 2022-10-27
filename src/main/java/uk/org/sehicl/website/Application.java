@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.website.users.EmailSender;
 import uk.org.sehicl.website.users.UserDatastore;
 import uk.org.sehicl.website.users.UserManager;
@@ -43,5 +44,11 @@ public class Application
     EmailSender emailSender()
     {
         return new SendgridSender();
+    }
+    
+    @Bean
+    public UsersExporter usersExporter(UserManager userManager)
+    {
+        return new UsersExporter(userManager);
     }
 }
