@@ -11,6 +11,8 @@ import uk.org.sehicl.website.users.UserManager;
 import uk.org.sehicl.website.users.impl.RedisDatastore;
 import uk.org.sehicl.website.users.impl.SendgridSender;
 
+//[START gae_java11_sehicl-website]
+
 @SpringBootApplication
 public class Application
 {
@@ -52,3 +54,4 @@ public class Application
         return new UsersExporter(userManager);
     }
 }
+//[END gae_java11_sehicl-website]
