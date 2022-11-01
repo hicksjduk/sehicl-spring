@@ -37,17 +37,17 @@ public class GoogleCloudDatastore implements UserDatastore
 
         public String toString()
         {
-            return "%s-".formatted(name().toLowerCase());
+            return String.format("%s-", name().toLowerCase());
         }
 
         public String key(String value)
         {
-            return "%s%s".formatted(this, value);
+            return String.format("%s%s", this, value);
         }
 
         public String key(long value)
         {
-            return "%d%s".formatted(this, value);
+            return String.format("%d%s", this, value);
         }
     }
 

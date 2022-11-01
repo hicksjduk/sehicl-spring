@@ -581,7 +581,7 @@ public class Controller
             resp.setStatus(HttpStatus.BAD_REQUEST.value());
             return "";
         }
-        return "%d user(s) imported".formatted(usersImporter.importUsers(req.getReader()));
+        return String.format("%d user(s) imported", usersImporter.importUsers(req.getReader()));
     }
 
     @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")
