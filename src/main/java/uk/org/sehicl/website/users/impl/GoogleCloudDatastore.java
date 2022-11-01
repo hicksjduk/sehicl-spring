@@ -1,6 +1,23 @@
 package uk.org.sehicl.website.users.impl;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.Storage.BlobListOption;
+import com.google.cloud.storage.StorageOptions;
 
 import uk.org.sehicl.website.users.PasswordReset;
 import uk.org.sehicl.website.users.SessionData;
@@ -10,61 +27,169 @@ import uk.org.sehicl.website.users.UserDatastore;
 
 public class GoogleCloudDatastore implements UserDatastore
 {
+    private static enum Prefix
+    {
+        EMAIL,
+        USERID,
+        SESSIONID,
+        SESSIONUSER,
+        PWRESET;
+
+        public String toString()
+        {
+            return "%s-".formatted(name().toLowerCase());
+        }
+
+        public String key(String value)
+        {
+            return "%s%s".formatted(this, value);
+        }
+
+        public String key(long value)
+        {
+            return "%d%s".formatted(this, value);
+        }
+    }
+
+    private static final Logger LOG = LoggerFactory.getLogger(GoogleCloudDatastore.class);
+
+    public GoogleCloudDatastore()
+    {
+        Storage storage = StorageOptions.getDefaultInstance().getService();
+        storage.get("sehicl-users").list().iterateAll().forEach(b -> LOG.info(b.getName()));
+    }
+
+    private Bucket usersBucket()
+    {
+        return StorageOptions.getDefaultInstance().getService().get("sehicl-users");
+    }
+
+    private <T> String toYaml(T obj)
+    {
+        try
+        {
+            return new ObjectMapper(new YAMLFactory()).writeValueAsString(obj);
+        }
+        catch (JsonProcessingException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private <T> Function<Blob, T> fromBlob(Class<T> type)
+    {
+        return blob ->
+        {
+            if (blob == null)
+                return null;
+            try
+            {
+                return new ObjectMapper(new YAMLFactory()).readValue(blob.getContent(), type);
+            }
+            catch (Exception e)
+            {
+                throw new RuntimeException(e);
+            }
+        };
+    }
 
     @Override
     public User getUserByEmail(String email)
     {
-        // TODO Auto-generated method stub
-        return null;
+        return fromBlob(User.class).apply(usersBucket().get(Prefix.EMAIL.key(email)));
     }
 
     @Override
     public User getUserById(long id)
     {
-        // TODO Auto-generated method stub
-        return null;
+        return fromBlob(User.class).apply(usersBucket().get(Prefix.EMAIL.key(id)));
     }
 
     @Override
     public Collection<Long> getAllUserIds()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return StreamSupport
+                .stream(usersBucket()
+                        .list(BlobListOption.prefix(Prefix.USERID.toString()))
+                        .iterateAll()
+                        .spliterator(), false)
+                .map(Blob::getName)
+                .map(s -> s.substring(1))
+                .map(Long::parseLong)
+                .collect(Collectors.toList());
     }
 
     @Override
     public SessionData getSessionByUserId(long id)
     {
-        // TODO Auto-generated method stub
-        return null;
+        SessionData answer = fromBlob(SessionData.class).apply(usersBucket().get(Prefix.SESSIONUSER.key(id)));
+        if (answer.getExpiry() < new Date().getTime())
+            return null;
+        return answer;
     }
 
     @Override
     public SessionData getSessionBySessionId(long id)
     {
-        // TODO Auto-generated method stub
-        return null;
+        SessionData answer = fromBlob(SessionData.class).apply(usersBucket().get(Prefix.SESSIONID.key(id)));
+        if (answer.getExpiry() < new Date().getTime())
+            return null;
+        return answer;
     }
 
     @Override
     public SessionData setSession(User user)
     {
-        // TODO Auto-generated method stub
-        return null;
+        final long expiry = new Date().getTime() + TimeUnit.DAYS.toMillis(1);
+        SessionData answer = getSessionByUserId(user.getId());
+        if (answer == null)
+        {
+            answer = new SessionData(getSessionId(user), user.getId(), expiry);
+        }
+        else
+        {
+            answer.setExpiry(expiry);
+        }
+        Bucket bucket = usersBucket();
+        byte[] data = toYaml(answer).getBytes();
+        bucket.create(Prefix.SESSIONID.key(answer.getId()), data);
+        bucket.create(Prefix.SESSIONUSER.key(answer.getUserId()), data);
+        return answer;
+    }
+
+    long getSessionId(User user)
+    {
+        long factor = 10000000000L;
+        final long time = new Date().getTime();
+        long answer = user.getId() * factor + time % factor;
+        return answer;
     }
 
     @Override
     public void clearExpiredSessions()
     {
-        // TODO Auto-generated method stub
-
+        // Deletions not supported to avoid early deletion charges
+        // long now = new Date().getTime();
+        // Bucket bucket = usersBucket();
+        // String[] keysToDelete = StreamUtils
+        // .createStreamFromIterator(bucket.list().iterateAll().iterator())
+        // .map(fromBlob(SessionData.class)::apply)
+        // .filter(sd -> sd.getExpiry() < now)
+        // .mapToLong(SessionData::getId)
+        // .mapToObj(Prefix.SESSIONID::key).toArray(String[]::new);
+        // bucket.
     }
 
     @Override
     public User createUser(String email, String name, String club, Status status, String password)
     {
-        // TODO Auto-generated method stub
-        return null;
+        long nextId = getAllUserIds().stream().max(Long::compare).orElse(-1L) + 1;
+        User user = new User(nextId, name, email, club, status, 0, password, true);
+        Bucket bucket = usersBucket();
+        byte[] data = toYaml(user).getBytes();
+        bucket.create(Prefix.USERID.key(nextId), data);
+        bucket.create(Prefix.EMAIL.key(email), data);
+        return user;
     }
 
     @Override
@@ -77,21 +202,30 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public PasswordReset generatePasswordReset(String email)
     {
-        // TODO Auto-generated method stub
-        return null;
+        PasswordReset answer = null;
+        final User user = getUserByEmail(email);
+        if (user != null)
+        {
+            answer = new PasswordReset(user.getId(), email);
+            usersBucket().create(Prefix.PWRESET.key(answer.getId()), toYaml(answer).getBytes());
+        }
+        return answer;
     }
 
     @Override
     public PasswordReset getPasswordReset(long id)
     {
-        // TODO Auto-generated method stub
-        return null;
+        long now = new Date().getTime();
+        PasswordReset answer = fromBlob(PasswordReset.class).apply(usersBucket().get(Prefix.PWRESET.key(id)));
+        if (answer.getExpiryTime() < now)
+            return null;
+        return answer;
     }
 
     @Override
     public void clearExpiredResets()
     {
-        // TODO Auto-generated method stub
+        // Not for now
 
     }
 
@@ -99,7 +233,7 @@ public class GoogleCloudDatastore implements UserDatastore
     public void deleteUser(long id)
     {
         // TODO Auto-generated method stub
-
+        // Not for now
     }
 
 }

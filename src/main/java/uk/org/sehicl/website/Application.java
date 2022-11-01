@@ -1,5 +1,7 @@
 package uk.org.sehicl.website;
 
+import java.util.Objects;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +10,7 @@ import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.website.users.EmailSender;
 import uk.org.sehicl.website.users.UserDatastore;
 import uk.org.sehicl.website.users.UserManager;
+import uk.org.sehicl.website.users.impl.GoogleCloudDatastore;
 import uk.org.sehicl.website.users.impl.RedisDatastore;
 import uk.org.sehicl.website.users.impl.SendgridSender;
 
@@ -37,7 +40,10 @@ public class Application
     @Bean
     public UserDatastore userDatastore()
     {
-        return new RedisDatastore(System.getenv("REDIS_URL"));
+        String redisAddr = System.getenv("REDIS_URL");
+        if (Objects.nonNull(redisAddr))
+            return new RedisDatastore(redisAddr);
+        return new GoogleCloudDatastore();
     }
 
     @Bean
