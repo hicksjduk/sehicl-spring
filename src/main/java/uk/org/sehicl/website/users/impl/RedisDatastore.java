@@ -225,22 +225,13 @@ public class RedisDatastore implements UserDatastore
     }
 
     @Override
-    public User createUser(String email, String name, String club, Status status, String password)
-    {
-        if (ops == null)
-            init();
-        User answer = new User(name, email, club, status, 0, password, true);
-        answer.setId(keyGenerator.getAndIncrement());
-        updateUser(answer);
-        return answer;
-    }
-
-    public void createUser(User user)
+    public User createUser(User user)
     {
         if (ops == null)
             init();
         user.setId(keyGenerator.getAndIncrement());
         updateUser(user);
+        return user;
     }
 
     @Override

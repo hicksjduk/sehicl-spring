@@ -2,7 +2,6 @@ package uk.org.sehicl.admin;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,10 +18,8 @@ public class UsersExporter
         this.userManager = userManager;
     }
 
-    public String export(String adminSecret) throws IOException
+    public String export() throws IOException
     {
-        if (!Objects.equals(System.getenv("ADMIN_SECRET"), adminSecret))
-            return "Not authorised";
         StringWriter writer = new StringWriter();
         try (StringWriter sw = writer)
         {

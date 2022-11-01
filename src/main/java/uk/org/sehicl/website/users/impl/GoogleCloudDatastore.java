@@ -181,14 +181,14 @@ public class GoogleCloudDatastore implements UserDatastore
     }
 
     @Override
-    public User createUser(String email, String name, String club, Status status, String password)
+    public User createUser(User user)
     {
         long nextId = getAllUserIds().stream().max(Long::compare).orElse(-1L) + 1;
-        User user = new User(nextId, name, email, club, status, 0, password, true);
+        user.setId(nextId);
         Bucket bucket = usersBucket();
         byte[] data = toYaml(user).getBytes();
         bucket.create(Prefix.USERID.key(nextId), data);
-        bucket.create(Prefix.EMAIL.key(email), data);
+        bucket.create(Prefix.EMAIL.key(user.getEmail()), data);
         return user;
     }
 

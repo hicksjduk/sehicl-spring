@@ -23,11 +23,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import uk.org.sehicl.admin.UsersExporter;
+import uk.org.sehicl.admin.UsersImporter;
 import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.page.ActivatePage;
 import uk.org.sehicl.website.page.ArchiveIndexPage;
@@ -72,6 +74,8 @@ public class Controller
     private UserManager userManager;
     @Autowired
     private UsersExporter usersExporter;
+    @Autowired
+    private UsersImporter usersImporter;
 
     private String getRequestUri(HttpServletRequest req)
     {
@@ -307,9 +311,11 @@ public class Controller
     }
 
     @RequestMapping("/fixtures/league/{leagueId}/{season}")
-    public String leagueFixtures(HttpServletRequest req, @PathVariable String leagueId, @PathVariable int season)
+    public String leagueFixtures(HttpServletRequest req, @PathVariable String leagueId,
+            @PathVariable int season)
     {
-        return new PageTemplate(new LeagueFixturesPage(season, leagueId, getRequestUri(req))).process();
+        return new PageTemplate(new LeagueFixturesPage(season, leagueId, getRequestUri(req)))
+                .process();
     }
 
     @RequestMapping("/results")
@@ -548,11 +554,34 @@ public class Controller
         userManager.sendReconfirmationEmails(reconfirmationPageAddress);
         return "Emails sent";
     }
-    
-    @RequestMapping(path="/admin/userExport")
-    public String exportUsers(HttpServletRequest req) throws IOException
+
+    @RequestMapping(path = "/admin/userExport")
+    public String exportUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
-        return usersExporter.export(req.getHeader("adminSecret"));
+        String adminSecret = req.getHeader("adminSecret");
+        if (!Objects.equals(System.getenv("ADMIN_SECRET"), adminSecret))
+        {
+            resp.setStatus(HttpStatus.UNAUTHORIZED.value());
+            return "";
+        }
+        return usersExporter.export();
+    }
+
+    @PostMapping(path = "/admin/userImport")
+    public String importUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    {
+        String adminSecret = req.getHeader("adminSecret");
+        if (!Objects.equals(System.getenv("ADMIN_SECRET"), adminSecret))
+        {
+            resp.setStatus(HttpStatus.UNAUTHORIZED.value());
+            return "";
+        }
+        if (req.getContentLength() == 0)
+        {
+            resp.setStatus(HttpStatus.BAD_REQUEST.value());
+            return "";
+        }
+        return "%d user(s) imported".formatted(usersImporter.importUsers(req.getReader()));
     }
 
     @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")

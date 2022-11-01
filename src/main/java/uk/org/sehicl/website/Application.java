@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import uk.org.sehicl.admin.UsersExporter;
+import uk.org.sehicl.admin.UsersImporter;
 import uk.org.sehicl.website.users.EmailSender;
 import uk.org.sehicl.website.users.UserDatastore;
 import uk.org.sehicl.website.users.UserManager;
@@ -56,5 +57,11 @@ public class Application
     public UsersExporter usersExporter(UserManager userManager)
     {
         return new UsersExporter(userManager);
+    }
+    
+    @Bean
+    public UsersImporter usersImporter(UserDatastore datastore)
+    {
+        return new UsersImporter(datastore);
     }
 }

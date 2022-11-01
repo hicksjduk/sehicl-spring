@@ -20,8 +20,12 @@ public interface UserDatastore
 
     void clearExpiredSessions();
 
-    User createUser(String email, String name, String club, Status status,
-            String password);
+    default User createUser(String email, String name, String club, Status status,
+            String password) {
+        return createUser(new User(email, name, club, status, 0, password, true));
+    }
+
+    User createUser(User user);
 
     void updateUser(User user);
     
