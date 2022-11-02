@@ -1,5 +1,6 @@
 package uk.org.sehicl.website;
 
+import java.util.Collections;
 import java.util.Objects;
 
 import org.springframework.boot.SpringApplication;
@@ -24,7 +25,11 @@ public class Application
     {
         try
         {
-            SpringApplication.run(Application.class, args);
+            SpringApplication app = new SpringApplication(Application.class);
+            String port = System.getenv("PORT");
+            if (port != null)
+                app.setDefaultProperties(Collections.singletonMap("server.port", port));
+            app.run(args);
         }
         catch (Throwable ex)
         {
@@ -52,13 +57,13 @@ public class Application
     {
         return new SendgridSender();
     }
-    
+
     @Bean
     public UsersExporter usersExporter(UserManager userManager)
     {
         return new UsersExporter(userManager);
     }
-    
+
     @Bean
     public UsersImporter usersImporter(UserDatastore datastore)
     {

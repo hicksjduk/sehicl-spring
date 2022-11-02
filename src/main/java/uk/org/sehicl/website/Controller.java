@@ -18,6 +18,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.JsonParserFactory;
@@ -27,6 +29,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
+import com.google.cloud.secretmanager.v1beta1.ProjectName;
 
 import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.admin.UsersImporter;
@@ -70,6 +75,8 @@ import uk.org.sehicl.website.users.UserManager;
 @RestController
 public class Controller
 {
+    private static Logger LOG = LoggerFactory.getLogger(Controller.class);
+    
     @Autowired
     private UserManager userManager;
     @Autowired
@@ -559,7 +566,7 @@ public class Controller
     public String exportUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         String adminSecret = req.getHeader("adminSecret");
-        if (!Objects.equals(System.getenv("ADMIN_SECRET"), adminSecret))
+        if (adminSecret == null || !Objects.equals(getAdminSecret(), adminSecret))
         {
             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
             return "";
@@ -571,7 +578,7 @@ public class Controller
     public String importUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         String adminSecret = req.getHeader("adminSecret");
-        if (!Objects.equals(System.getenv("ADMIN_SECRET"), adminSecret))
+        if (adminSecret == null || !Objects.equals(getAdminSecret(), adminSecret))
         {
             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
             return "";
@@ -582,6 +589,22 @@ public class Controller
             return "";
         }
         return String.format("%d user(s) imported", usersImporter.importUsers(req.getReader()));
+    }
+
+    private String getAdminSecret()
+    {
+        String answer = System.getenv("ADMIN_SECRET");
+        if (answer != null)
+            return answer;
+        try (SecretManagerServiceClient cl = SecretManagerServiceClient.create())
+        {
+            return cl.accessSecretVersion("projects/752089782506/secrets/ADMIN_SECRET").getPayload().getData().toString();
+        }
+        catch (IOException e)
+        {
+            LOG.error("Error accessing Secret Manager", e);
+            throw new RuntimeException();
+        }
     }
 
     @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")
