@@ -6,8 +6,10 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Spliterator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,8 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
-import com.google.cloud.secretmanager.v1beta1.ProjectName;
+import com.google.cloud.secretmanager.v1.SecretName;
+import com.google.cloud.secretmanager.v1.SecretPayload;
+import com.google.cloud.secretmanager.v1.SecretVersion;
+import com.google.protobuf.ByteString;
 
 import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.admin.UsersImporter;
@@ -76,7 +82,7 @@ import uk.org.sehicl.website.users.UserManager;
 public class Controller
 {
     private static Logger LOG = LoggerFactory.getLogger(Controller.class);
-    
+
     @Autowired
     private UserManager userManager;
     @Autowired
@@ -598,7 +604,18 @@ public class Controller
             return answer;
         try (SecretManagerServiceClient cl = SecretManagerServiceClient.create())
         {
-            return cl.accessSecretVersion("projects/752089782506/secrets/ADMIN_SECRET").getPayload().getData().toString();
+            return StreamSupport
+                    .stream(cl
+                            .listSecretVersions(SecretName.of("sehicl-website", "ADMIN_SECRET"))
+                            .iterateAll()
+                            .spliterator(), false)
+                    .map(SecretVersion::getName)
+                    .map(cl::accessSecretVersion)
+                    .map(AccessSecretVersionResponse::getPayload)
+                    .map(SecretPayload::getData)
+                    .map(ByteString::toStringUtf8)
+                    .findFirst()
+                    .orElse(null);
         }
         catch (IOException e)
         {
