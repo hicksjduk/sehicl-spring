@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.slf4j.Logger;
@@ -107,13 +108,14 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public Collection<Long> getAllUserIds()
     {
+        int prefixLength = Prefix.USERID.toString().length();
         return StreamSupport
                 .stream(usersBucket()
                         .list(BlobListOption.prefix(Prefix.USERID.toString()))
                         .iterateAll()
                         .spliterator(), false)
                 .map(Blob::getName)
-                .map(s -> s.substring(Prefix.USERID.toString().length()))
+                .map(s -> s.substring(prefixLength))
                 .map(Long::parseLong)
                 .collect(Collectors.toList());
     }
@@ -121,18 +123,22 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public SessionData getSessionByUserId(long id)
     {
-        SessionData answer = fromBlob(SessionData.class).apply(usersBucket().get(Prefix.SESSIONUSER.key(id)));
-        if (answer.getExpiry() < new Date().getTime())
-            return null;
+        SessionData answer = fromBlob(SessionData.class)
+                .apply(usersBucket().get(Prefix.SESSIONUSER.key(id)));
+        if (answer != null)
+            if (answer.getExpiry() < new Date().getTime())
+                return null;
         return answer;
     }
 
     @Override
     public SessionData getSessionBySessionId(long id)
     {
-        SessionData answer = fromBlob(SessionData.class).apply(usersBucket().get(Prefix.SESSIONID.key(id)));
-        if (answer.getExpiry() < new Date().getTime())
-            return null;
+        SessionData answer = fromBlob(SessionData.class)
+                .apply(usersBucket().get(Prefix.SESSIONID.key(id)));
+        if (answer != null)
+            if (answer.getExpiry() < new Date().getTime())
+                return null;
         return answer;
     }
 
@@ -215,9 +221,11 @@ public class GoogleCloudDatastore implements UserDatastore
     public PasswordReset getPasswordReset(long id)
     {
         long now = new Date().getTime();
-        PasswordReset answer = fromBlob(PasswordReset.class).apply(usersBucket().get(Prefix.PWRESET.key(id)));
-        if (answer.getExpiryTime() < now)
-            return null;
+        PasswordReset answer = fromBlob(PasswordReset.class)
+                .apply(usersBucket().get(Prefix.PWRESET.key(id)));
+        if (answer != null)
+            if (answer.getExpiryTime() < new Date().getTime())
+                return null;
         return answer;
     }
 
