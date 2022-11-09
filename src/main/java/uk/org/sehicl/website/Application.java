@@ -69,4 +69,10 @@ public class Application
     {
         return new UsersImporter(datastore);
     }
+    
+    @Bean
+    public SehiclEnvironment environmentVars()
+    {
+        return new SehiclEnvironment();
+    }
 }

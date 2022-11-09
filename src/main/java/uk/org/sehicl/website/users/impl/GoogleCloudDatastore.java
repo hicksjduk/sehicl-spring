@@ -22,7 +22,6 @@ import com.google.cloud.storage.StorageOptions;
 import uk.org.sehicl.website.users.PasswordReset;
 import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
-import uk.org.sehicl.website.users.User.Status;
 import uk.org.sehicl.website.users.UserDatastore;
 
 public class GoogleCloudDatastore implements UserDatastore
@@ -47,7 +46,7 @@ public class GoogleCloudDatastore implements UserDatastore
 
         public String key(long value)
         {
-            return String.format("%d%s", this, value);
+            return String.format("%s%d", this, value);
         }
     }
 
@@ -114,7 +113,7 @@ public class GoogleCloudDatastore implements UserDatastore
                         .iterateAll()
                         .spliterator(), false)
                 .map(Blob::getName)
-                .map(s -> s.substring(1))
+                .map(s -> s.substring(Prefix.USERID.toString().length()))
                 .map(Long::parseLong)
                 .collect(Collectors.toList());
     }
