@@ -71,8 +71,8 @@ public class Application
     }
     
     @Bean
-    public SehiclEnvironment environmentVars()
+    public EnvironmentVars environmentVars()
     {
-        return new SehiclEnvironment();
+        return new EnvironmentVars();
     }
 }

@@ -80,8 +80,6 @@ public class Controller
     private UsersExporter usersExporter;
     @Autowired
     private UsersImporter usersImporter;
-    @Autowired
-    private SehiclEnvironment environment;
 
     private String getRequestUri(HttpServletRequest req)
     {
@@ -565,7 +563,7 @@ public class Controller
     public String exportUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         String adminSecret = req.getHeader("adminSecret");
-        if (adminSecret == null || !Objects.equals(getAdminSecret(), adminSecret))
+        if (adminSecret == null || !Objects.equals(System.getenv("ADMIN_SECRET"), adminSecret))
         {
             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
             return "";
@@ -577,7 +575,7 @@ public class Controller
     public String importUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         String adminSecret = req.getHeader("adminSecret");
-        if (adminSecret == null || !Objects.equals(getAdminSecret(), adminSecret))
+        if (adminSecret == null || !Objects.equals(System.getenv("ADMIN_SECRET"), adminSecret))
         {
             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
             return "";
@@ -588,15 +586,6 @@ public class Controller
             return "";
         }
         return String.format("%d user(s) imported", usersImporter.importUsers(req.getReader()));
-    }
-
-    private String getAdminSecret()
-    {
-        String key = "ADMIN_SECRET";
-        String answer = System.getenv(key);
-        if (answer != null)
-            return answer;
-        return environment.get().getAdminSecret();
     }
 
     @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")
