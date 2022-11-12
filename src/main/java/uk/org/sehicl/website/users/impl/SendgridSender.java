@@ -44,7 +44,6 @@ public class SendgridSender implements EmailSender
     
     private void send(Mail mail) throws EmailException
     {
-        LOG.info("Sending message via sendgrid server '{}'", sendGridServer);
         boolean serverConfigured = !StringUtils.isEmpty(sendGridServer);
         SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"), serverConfigured);
         if (serverConfigured)
@@ -59,7 +58,7 @@ public class SendgridSender implements EmailSender
         }
         catch (IOException e)
         {
-            throw new EmailException("Unable to send email message", e);
+            throw new EmailException("Unable to send email message to '%s'".formatted(sendGridServer), e);
         }
     }
 
