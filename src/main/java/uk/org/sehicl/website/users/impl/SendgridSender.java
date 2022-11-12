@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.sendgrid.Content;
@@ -19,6 +21,8 @@ import uk.org.sehicl.website.users.EmailSender;
 
 public class SendgridSender implements EmailSender
 {
+    private static final Logger LOG = LoggerFactory.getLogger(SendgridSender.class);
+    
     @Value("${sendgrid.server:}")
     private String sendGridServer;
     
@@ -40,6 +44,7 @@ public class SendgridSender implements EmailSender
     
     private void send(Mail mail) throws EmailException
     {
+        LOG.info("Sending message via sendgrid server '{}'", sendGridServer);
         boolean serverConfigured = !StringUtils.isEmpty(sendGridServer);
         SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"), serverConfigured);
         if (serverConfigured)
