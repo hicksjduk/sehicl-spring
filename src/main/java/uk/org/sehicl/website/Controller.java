@@ -402,11 +402,11 @@ public class Controller
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public String register(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
-        if (!realPerson(req))
-        {
-            resp.sendRedirect("/register");
-            return "";
-        }
+//        if (!realPerson(req))
+//        {
+//            resp.sendRedirect("/register");
+//            return "";
+//        }
         Register register = new Register(userManager, req.getParameter("email"),
                 req.getParameter("name"), req.getParameter("club"), req.getParameter("password"),
                 req.getParameter("passwordConf"), req.getParameter("agreement") != null);
