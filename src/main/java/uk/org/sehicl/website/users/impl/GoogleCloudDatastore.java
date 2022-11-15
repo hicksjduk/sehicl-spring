@@ -2,10 +2,12 @@ package uk.org.sehicl.website.users.impl;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.slf4j.Logger;
@@ -123,23 +125,21 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public SessionData getSessionByUserId(long id)
     {
-        SessionData answer = fromBlob(SessionData.class)
-                .apply(usersBucket().get(Prefix.SESSIONUSER.key(id)));
-        if (answer != null)
-            if (answer.getExpiry() < new Date().getTime())
-                return null;
-        return answer;
+        return Optional
+                .ofNullable(fromBlob(SessionData.class)
+                        .apply(usersBucket().get(Prefix.SESSIONUSER.key(id))))
+                .filter(notExpired(SessionData::getExpiry))
+                .orElse(null);
     }
 
     @Override
     public SessionData getSessionBySessionId(long id)
     {
-        SessionData answer = fromBlob(SessionData.class)
-                .apply(usersBucket().get(Prefix.SESSIONID.key(id)));
-        if (answer != null)
-            if (answer.getExpiry() < new Date().getTime())
-                return null;
-        return answer;
+        return Optional
+                .ofNullable(fromBlob(SessionData.class)
+                        .apply(usersBucket().get(Prefix.SESSIONID.key(id))))
+                .filter(notExpired(SessionData::getExpiry))
+                .orElse(null);
     }
 
     @Override
@@ -220,13 +220,21 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public PasswordReset getPasswordReset(long id)
     {
-        long now = new Date().getTime();
-        PasswordReset answer = fromBlob(PasswordReset.class)
-                .apply(usersBucket().get(Prefix.PWRESET.key(id)));
-        if (answer != null)
-            if (answer.getExpiryTime() < new Date().getTime())
-                return null;
-        return answer;
+        return Optional
+                .ofNullable(fromBlob(PasswordReset.class)
+                        .apply(usersBucket().get(Prefix.PWRESET.key(id))))
+                .filter(notExpired(PasswordReset::getExpiryTime))
+                .orElse(null);
+    }
+
+    private final <T> Predicate<T> notExpired(ToLongFunction<T> expiryGetter)
+    {
+        return obj -> {
+            long expiry = expiryGetter.applyAsLong(obj);
+            long now = new Date().getTime();
+            LOG.debug("Expiry: {}. now: {}", new Date(expiry), new Date(now));
+            return expiry >= now;
+        };
     }
 
     @Override
