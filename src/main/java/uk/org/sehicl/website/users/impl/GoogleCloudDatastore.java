@@ -178,11 +178,7 @@ public class GoogleCloudDatastore implements UserDatastore
         storage()
                 .delete(StreamSupport
                         .stream(bucket
-                                .list(Stream
-                                        .of(Prefix.SESSIONID, Prefix.SESSIONUSER)
-                                        .map(Object::toString)
-                                        .map(BlobListOption::prefix)
-                                        .toArray(BlobListOption[]::new))
+                                .list(BlobListOption.prefix("session"))
                                 .iterateAll()
                                 .spliterator(), false)
                         .filter(expired(fromBlob(SessionData.class), SessionData::getExpiry))
