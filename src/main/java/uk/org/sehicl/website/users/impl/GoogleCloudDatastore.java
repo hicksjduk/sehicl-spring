@@ -232,7 +232,7 @@ public class GoogleCloudDatastore implements UserDatastore
         return obj -> {
             long expiry = expiryGetter.applyAsLong(obj);
             long now = new Date().getTime();
-            LOG.debug("Expiry: {}. now: {}", new Date(expiry), new Date(now));
+            LOG.info("Expiry: {}. now: {}", new Date(expiry), new Date(now));
             return expiry >= now;
         };
     }
