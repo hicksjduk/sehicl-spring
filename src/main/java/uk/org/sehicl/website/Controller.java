@@ -80,6 +80,8 @@ public class Controller
     private UsersExporter usersExporter;
     @Autowired
     private UsersImporter usersImporter;
+    @Autowired
+    private EnvironmentVars envVars;
 
     private String getRequestUri(HttpServletRequest req)
     {
@@ -563,7 +565,7 @@ public class Controller
     public String exportUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         String adminSecret = req.getHeader("adminSecret");
-        if (adminSecret == null || !Objects.equals(System.getenv("ADMIN_SECRET"), adminSecret))
+        if (adminSecret == null || !Objects.equals(envVars.get("ADMIN_SECRET"), adminSecret))
         {
             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
             return "";
@@ -575,7 +577,7 @@ public class Controller
     public String importUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         String adminSecret = req.getHeader("adminSecret");
-        if (adminSecret == null || !Objects.equals(System.getenv("ADMIN_SECRET"), adminSecret))
+        if (adminSecret == null || !Objects.equals(envVars.get("ADMIN_SECRET"), adminSecret))
         {
             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
             return "";

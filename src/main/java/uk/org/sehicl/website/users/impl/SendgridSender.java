@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.sendgrid.Content;
@@ -16,6 +17,7 @@ import com.sendgrid.Personalization;
 import com.sendgrid.Request;
 import com.sendgrid.SendGrid;
 
+import uk.org.sehicl.website.EnvironmentVars;
 import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.EmailSender;
 
@@ -26,6 +28,13 @@ public class SendgridSender implements EmailSender
     @Value("${sendgrid.server:}")
     private String sendGridServer;
     
+    private final EnvironmentVars envVars;
+    
+    public SendgridSender(EnvironmentVars envVars)
+    {
+        this.envVars = envVars;
+    }
+
     @Override
     public void sendEmail(String subject, String messageText, Addressee... addressees)
             throws EmailException
@@ -45,7 +54,7 @@ public class SendgridSender implements EmailSender
     private void send(Mail mail) throws EmailException
     {
         boolean serverConfigured = !StringUtils.isEmpty(sendGridServer);
-        String apiKey = System.getenv("SENDGRID_API_KEY");
+        String apiKey = envVars.get("SENDGRID_API_KEY");
         SendGrid sg = new SendGrid(apiKey, serverConfigured);
         if (serverConfigured)
             sg.setHost(sendGridServer);
@@ -59,7 +68,6 @@ public class SendgridSender implements EmailSender
         }
         catch (IOException e)
         {
-            LOG.error("Error sending message: {}", apiKey, e);
             throw new EmailException("Unable to send email message", e);
         }
     }
