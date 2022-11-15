@@ -24,13 +24,13 @@
 		<tr>
 			<td>Password</td>
 			<td>*</td>
-			<td><input type="password" name="password""></td>
+			<td><input type="password" name="password"></td>
 			<td>${(register.validation.passwordMessage)!""}</td>
 		</tr>
 		<tr>
 			<td>Confirm password</td>
 			<td>*</td>
-			<td><input type="password" name="passwordConf""></td>
+			<td><input type="password" name="passwordConf"></td>
 			<td>${(register.validation.passwordConfMessage)!""}</td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
