@@ -97,7 +97,7 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public User getUserById(long id)
     {
-        return fromBlob(User.class).apply(usersBucket().get(Prefix.EMAIL.key(id)));
+        return fromBlob(User.class).apply(usersBucket().get(Prefix.USERID.key(id)));
     }
 
     @Override
