@@ -18,7 +18,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket;
-import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.Storage.BlobListOption;
 import com.google.cloud.storage.StorageOptions;
 
@@ -54,12 +53,6 @@ public class GoogleCloudDatastore implements UserDatastore
     }
 
     private static final Logger LOG = LoggerFactory.getLogger(GoogleCloudDatastore.class);
-
-    public GoogleCloudDatastore()
-    {
-        Storage storage = StorageOptions.getDefaultInstance().getService();
-        storage.get("sehicl-users").list().iterateAll().forEach(b -> LOG.info(b.getName()));
-    }
 
     private Bucket usersBucket()
     {
@@ -229,13 +222,7 @@ public class GoogleCloudDatastore implements UserDatastore
 
     private final <T> Predicate<T> notExpired(ToLongFunction<T> expiryGetter)
     {
-        return obj -> {
-            long expiry = expiryGetter.applyAsLong(obj);
-            long now = new Date().getTime();
-            boolean answer = expiry >= now;
-            LOG.info("expiry: {}, now: {}, answer: {}", new Date(expiry), new Date(now), answer);
-            return answer;
-        };
+        return obj -> expiryGetter.applyAsLong(obj) >= new Date().getTime();
     }
 
     @Override

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import uk.org.sehicl.website.template.ActivationMailTemplate;
@@ -17,6 +19,8 @@ import uk.org.sehicl.website.users.UserException.Message;
 
 public class UserManager
 {
+    private static final Logger LOG = LoggerFactory.getLogger(UserManager.class);
+    
     @Autowired
     private UserDatastore datastore;
 
@@ -145,17 +149,6 @@ public class UserManager
         }
     }
 
-    public PasswordReset getPasswordReset(long id) throws UserException
-    {
-        datastore.clearExpiredResets();
-        final PasswordReset answer = datastore.getPasswordReset(id);
-        if (answer == null)
-        {
-            throw new UserException(Message.resetTokenNotFound);
-        }
-        return answer;
-    }
-
     public User activateUser(long id) throws UserException
     {
         return setUserStatusNoNotify(id, Status.ACTIVE);
@@ -235,7 +228,9 @@ public class UserManager
     {
         datastore.clearExpiredResets();
         final PasswordReset passwordReset = datastore.getPasswordReset(resetId);
-        return passwordReset == null ? null : datastore.getUserById(passwordReset.getUserId());
+        User answer = passwordReset == null ? null : datastore.getUserById(passwordReset.getUserId());
+        LOG.info("User for password reset {}, {}, {}", resetId, passwordReset, answer);
+        return answer;
     }
 
     public User getUserById(long userId)
