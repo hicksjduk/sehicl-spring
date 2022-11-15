@@ -176,15 +176,14 @@ public class GoogleCloudDatastore implements UserDatastore
     {
         Storage storage = storage();
         Bucket bucket = usersBucket(storage);
-        storage
-                .delete(StreamSupport
-                        .stream(bucket
-                                .list(BlobListOption.prefix("session"))
-                                .iterateAll()
-                                .spliterator(), false)
-                        .filter(expired(fromBlob(SessionData.class), SessionData::getExpiry))
-                        .map(Blob::getBlobId)
-                        .toArray(BlobId[]::new));
+        BlobId[] toDelete = StreamSupport
+                .stream(bucket.list(BlobListOption.prefix("session")).iterateAll().spliterator(),
+                        false)
+                .filter(expired(fromBlob(SessionData.class), SessionData::getExpiry))
+                .map(Blob::getBlobId)
+                .toArray(BlobId[]::new);
+        if (toDelete.length > 1)
+            storage.delete(toDelete);
     }
 
     @Override
