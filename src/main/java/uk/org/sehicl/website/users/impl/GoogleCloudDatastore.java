@@ -232,8 +232,9 @@ public class GoogleCloudDatastore implements UserDatastore
         return obj -> {
             long expiry = expiryGetter.applyAsLong(obj);
             long now = new Date().getTime();
-            LOG.info("Expiry: {}. now: {}", new Date(expiry), new Date(now));
-            return expiry >= now;
+            boolean answer = expiry >= now;
+            LOG.info("expiry: {}, now: {}, answer: {}", new Date(expiry), new Date(now), answer);
+            return answer;
         };
     }
 
