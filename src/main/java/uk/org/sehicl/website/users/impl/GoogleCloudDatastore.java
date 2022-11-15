@@ -214,7 +214,8 @@ public class GoogleCloudDatastore implements UserDatastore
         if (user != null)
         {
             answer = new PasswordReset(user.getId(), email);
-            usersBucket(storage()).create(Prefix.PWRESET.key(answer.getId()), toYaml(answer).getBytes());
+            usersBucket(storage())
+                    .create(Prefix.PWRESET.key(answer.getId()), toYaml(answer).getBytes());
         }
         return answer;
     }
@@ -244,15 +245,16 @@ public class GoogleCloudDatastore implements UserDatastore
     public void clearExpiredResets()
     {
         Bucket bucket = usersBucket(storage());
-        storage()
-                .delete(StreamSupport
-                        .stream(bucket
-                                .list(BlobListOption.prefix(Prefix.PWRESET.toString()))
-                                .iterateAll()
-                                .spliterator(), false)
-                        .filter(expired(fromBlob(PasswordReset.class), PasswordReset::getExpiry))
-                        .map(Blob::getBlobId)
-                        .toArray(BlobId[]::new));
+        BlobId[] toDelete = StreamSupport
+                .stream(bucket
+                        .list(BlobListOption.prefix(Prefix.PWRESET.toString()))
+                        .iterateAll()
+                        .spliterator(), false)
+                .filter(expired(fromBlob(PasswordReset.class), PasswordReset::getExpiry))
+                .map(Blob::getBlobId)
+                .toArray(BlobId[]::new);
+        if (toDelete.length > 0)
+            storage().delete(toDelete);
     }
 
     @Override
