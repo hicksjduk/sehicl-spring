@@ -8,6 +8,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.slf4j.Logger;
@@ -17,7 +18,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.Storage.BlobListOption;
 import com.google.cloud.storage.StorageOptions;
 
@@ -56,7 +59,12 @@ public class GoogleCloudDatastore implements UserDatastore
 
     private Bucket usersBucket()
     {
-        return StorageOptions.getDefaultInstance().getService().get("sehicl-users");
+        return storage().get("sehicl-users");
+    }
+
+    private Storage storage()
+    {
+        return StorageOptions.getDefaultInstance().getService();
     }
 
     private <T> String toYaml(T obj)
@@ -121,7 +129,7 @@ public class GoogleCloudDatastore implements UserDatastore
         return Optional
                 .ofNullable(fromBlob(SessionData.class)
                         .apply(usersBucket().get(Prefix.SESSIONUSER.key(id))))
-                .filter(notExpired(SessionData::getExpiry))
+                .filter(Predicate.not(expired(SessionData::getExpiry)))
                 .orElse(null);
     }
 
@@ -131,7 +139,7 @@ public class GoogleCloudDatastore implements UserDatastore
         return Optional
                 .ofNullable(fromBlob(SessionData.class)
                         .apply(usersBucket().get(Prefix.SESSIONID.key(id))))
-                .filter(notExpired(SessionData::getExpiry))
+                .filter(Predicate.not(expired(SessionData::getExpiry)))
                 .orElse(null);
     }
 
@@ -166,16 +174,20 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public void clearExpiredSessions()
     {
-        // Deletions not supported to avoid early deletion charges
-        // long now = new Date().getTime();
-        // Bucket bucket = usersBucket();
-        // String[] keysToDelete = StreamUtils
-        // .createStreamFromIterator(bucket.list().iterateAll().iterator())
-        // .map(fromBlob(SessionData.class)::apply)
-        // .filter(sd -> sd.getExpiry() < now)
-        // .mapToLong(SessionData::getId)
-        // .mapToObj(Prefix.SESSIONID::key).toArray(String[]::new);
-        // bucket.
+        Bucket bucket = usersBucket();
+        storage()
+                .delete(StreamSupport
+                        .stream(bucket
+                                .list(Stream
+                                        .of(Prefix.SESSIONID, Prefix.SESSIONUSER)
+                                        .map(Object::toString)
+                                        .map(BlobListOption::prefix)
+                                        .toArray(BlobListOption[]::new))
+                                .iterateAll()
+                                .spliterator(), false)
+                        .filter(expired(fromBlob(SessionData.class), SessionData::getExpiry))
+                        .map(Blob::getBlobId)
+                        .toArray(BlobId[]::new));
     }
 
     @Override
@@ -216,20 +228,34 @@ public class GoogleCloudDatastore implements UserDatastore
         return Optional
                 .ofNullable(fromBlob(PasswordReset.class)
                         .apply(usersBucket().get(Prefix.PWRESET.key(id))))
-                .filter(notExpired(PasswordReset::getExpiryTime))
+                .filter(Predicate.not(expired(PasswordReset::getExpiry)))
                 .orElse(null);
     }
 
-    private final <T> Predicate<T> notExpired(ToLongFunction<T> expiryGetter)
+    private final <T> Predicate<Blob> expired(Function<Blob, T> extractor,
+            ToLongFunction<T> expiryGetter)
     {
-        return obj -> expiryGetter.applyAsLong(obj) >= new Date().getTime();
+        return blob -> expired(expiryGetter).test(extractor.apply(blob));
+    }
+
+    private final <T> Predicate<T> expired(ToLongFunction<T> expiryGetter)
+    {
+        return obj -> expiryGetter.applyAsLong(obj) < new Date().getTime();
     }
 
     @Override
     public void clearExpiredResets()
     {
-        // Not for now
-
+        Bucket bucket = usersBucket();
+        storage()
+                .delete(StreamSupport
+                        .stream(bucket
+                                .list(BlobListOption.prefix(Prefix.PWRESET.toString()))
+                                .iterateAll()
+                                .spliterator(), false)
+                        .filter(expired(fromBlob(PasswordReset.class), PasswordReset::getExpiry))
+                        .map(Blob::getBlobId)
+                        .toArray(BlobId[]::new));
     }
 
     @Override

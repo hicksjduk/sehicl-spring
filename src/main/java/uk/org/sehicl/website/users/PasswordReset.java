@@ -60,7 +60,7 @@ public class PasswordReset
         return id;
     }
 
-    public long getExpiryTime()
+    public long getExpiry()
     {
         return expiryTime;
     }

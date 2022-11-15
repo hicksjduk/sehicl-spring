@@ -279,7 +279,7 @@ public class RedisDatastore implements UserDatastore
             c.forEachRemaining(e ->
             {
                 final PasswordReset r = (PasswordReset) e.getValue();
-                if (r.getExpiryTime() < now)
+                if (r.getExpiry() < now)
                 {
                     expiredResets.add(r);
                 }
