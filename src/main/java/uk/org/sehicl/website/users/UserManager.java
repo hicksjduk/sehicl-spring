@@ -3,6 +3,7 @@ package uk.org.sehicl.website.users;
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.slf4j.Logger;
@@ -20,7 +21,7 @@ import uk.org.sehicl.website.users.UserException.Message;
 public class UserManager
 {
     private static final Logger LOG = LoggerFactory.getLogger(UserManager.class);
-    
+
     @Autowired
     private UserDatastore datastore;
 
@@ -77,9 +78,9 @@ public class UserManager
     private boolean isBlocked(User user)
     {
         return false;
-//        if (isBlocked(user.getEmail()))
-//            return true;
-//        return StringUtils.equals(user.getName(), user.getClub());
+        // if (isBlocked(user.getEmail()))
+        // return true;
+        // return StringUtils.equals(user.getName(), user.getClub());
     }
 
     private boolean isBlocked(String email)
@@ -94,8 +95,9 @@ public class UserManager
         new ActivationMailTemplate(user, serverAddress).process(sw);
         try
         {
-            emailer.sendEmail("Activate your SEHICL account", sw.toString(),
-                    new Addressee(user.getEmail(), user.getName()));
+            emailer
+                    .sendEmail("Activate your SEHICL account", sw.toString(),
+                            new Addressee(user.getEmail(), user.getName()));
         }
         catch (Exception e)
         {
@@ -110,8 +112,9 @@ public class UserManager
         new PasswordResetMailTemplate(reset, resetAddress).process(sw);
         try
         {
-            emailer.sendEmail("SEHICL password reset", sw.toString(),
-                    new Addressee(reset.getUserEmail()));
+            emailer
+                    .sendEmail("SEHICL password reset", sw.toString(),
+                            new Addressee(reset.getUserEmail()));
         }
         catch (EmailException e)
         {
@@ -125,8 +128,9 @@ public class UserManager
         new AdminNotifyMailTemplate(user, serverAddress).process(sw);
         try
         {
-            emailer.sendEmail(String.format("User action: %s", action), sw.toString(),
-                    new Addressee("admin@sehicl.org.uk"));
+            emailer
+                    .sendEmail(String.format("User action: %s", action), sw.toString(),
+                            new Addressee("admin@sehicl.org.uk"));
         }
         catch (EmailException e)
         {
@@ -173,8 +177,8 @@ public class UserManager
         return answer;
     }
 
-    private User setUserStatus(long id, Status status, String userDetailsPageAddress, boolean notifyAdmin)
-            throws UserException, EmailException
+    private User setUserStatus(long id, Status status, String userDetailsPageAddress,
+            boolean notifyAdmin) throws UserException, EmailException
     {
         final User answer = datastore.getUserById(id);
         if (answer == null)
@@ -227,10 +231,11 @@ public class UserManager
     public User getUserByResetId(long resetId)
     {
         datastore.clearExpiredResets();
-        final PasswordReset passwordReset = datastore.getPasswordReset(resetId);
-        User answer = passwordReset == null ? null : datastore.getUserById(passwordReset.getUserId());
-        LOG.info("User for password reset {}, {}, {}", resetId, passwordReset, answer);
-        return answer;
+        return Optional
+                .ofNullable(datastore.getPasswordReset(resetId))
+                .map(PasswordReset::getUserId)
+                .map(datastore::getUserById)
+                .orElse(null);
     }
 
     public User getUserById(long userId)
@@ -254,8 +259,9 @@ public class UserManager
                 User user = setUserStatusNoNotify(id, Status.AWAITING_RECONFIRMATION);
                 StringWriter sw = new StringWriter();
                 new ReconfirmationMailTemplate(user, reconfirmationPageAddress).process(sw);
-                emailer.sendEmail("ACTION REQUIRED - Reconfirm your SEHICL account", sw.toString(),
-                        new Addressee(user.getEmail(), user.getName()));
+                emailer
+                        .sendEmail("ACTION REQUIRED - Reconfirm your SEHICL account", sw.toString(),
+                                new Addressee(user.getEmail(), user.getName()));
             }
             catch (Exception e)
             {
@@ -263,12 +269,12 @@ public class UserManager
             }
         });
     }
-    
+
     public void deleteUser(long userId)
     {
         datastore.deleteUser(userId);
     }
-    
+
     public Stream<User> allUsers()
     {
         return datastore.getAllUserIds().stream().map(datastore::getUserById);
