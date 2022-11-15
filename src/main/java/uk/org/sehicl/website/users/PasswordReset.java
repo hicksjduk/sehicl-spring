@@ -8,7 +8,7 @@ public class PasswordReset
     private long userId;
     private String userEmail;
     private long id;
-    private long expiryTime;
+    private long expiry;
     
     @SuppressWarnings("unused")
     private PasswordReset()
@@ -22,7 +22,7 @@ public class PasswordReset
         setUserEmail(userEmail);
         final long time = new Date().getTime();
         setId(userId * factor + time % factor);
-        setExpiryTime(time + TimeUnit.HOURS.toMillis(3));
+        setExpiry(time + TimeUnit.HOURS.toMillis(3));
     }
 
     public void setUserId(long userId)
@@ -40,9 +40,9 @@ public class PasswordReset
         this.id = id;
     }
 
-    public void setExpiryTime(long expiryTime)
+    public void setExpiry(long expiry)
     {
-        this.expiryTime = expiryTime;
+        this.expiry = expiry;
     }
 
     public long getUserId()
@@ -62,6 +62,6 @@ public class PasswordReset
 
     public long getExpiry()
     {
-        return expiryTime;
+        return expiry;
     }
 }
