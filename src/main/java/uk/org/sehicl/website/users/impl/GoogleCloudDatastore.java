@@ -57,9 +57,9 @@ public class GoogleCloudDatastore implements UserDatastore
 
     private static final Logger LOG = LoggerFactory.getLogger(GoogleCloudDatastore.class);
 
-    private Bucket usersBucket()
+    private Bucket usersBucket(Storage storage)
     {
-        return storage().get("sehicl-users");
+        return storage.get("sehicl-users");
     }
 
     private Storage storage()
@@ -99,13 +99,13 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public User getUserByEmail(String email)
     {
-        return fromBlob(User.class).apply(usersBucket().get(Prefix.EMAIL.key(email)));
+        return fromBlob(User.class).apply(usersBucket(storage()).get(Prefix.EMAIL.key(email)));
     }
 
     @Override
     public User getUserById(long id)
     {
-        return fromBlob(User.class).apply(usersBucket().get(Prefix.USERID.key(id)));
+        return fromBlob(User.class).apply(usersBucket(storage()).get(Prefix.USERID.key(id)));
     }
 
     @Override
@@ -113,7 +113,7 @@ public class GoogleCloudDatastore implements UserDatastore
     {
         int prefixLength = Prefix.USERID.toString().length();
         return StreamSupport
-                .stream(usersBucket()
+                .stream(usersBucket(storage())
                         .list(BlobListOption.prefix(Prefix.USERID.toString()))
                         .iterateAll()
                         .spliterator(), false)
@@ -128,7 +128,7 @@ public class GoogleCloudDatastore implements UserDatastore
     {
         return Optional
                 .ofNullable(fromBlob(SessionData.class)
-                        .apply(usersBucket().get(Prefix.SESSIONUSER.key(id))))
+                        .apply(usersBucket(storage()).get(Prefix.SESSIONUSER.key(id))))
                 .filter(Predicate.not(expired(SessionData::getExpiry)))
                 .orElse(null);
     }
@@ -138,7 +138,7 @@ public class GoogleCloudDatastore implements UserDatastore
     {
         return Optional
                 .ofNullable(fromBlob(SessionData.class)
-                        .apply(usersBucket().get(Prefix.SESSIONID.key(id))))
+                        .apply(usersBucket(storage()).get(Prefix.SESSIONID.key(id))))
                 .filter(Predicate.not(expired(SessionData::getExpiry)))
                 .orElse(null);
     }
@@ -156,7 +156,7 @@ public class GoogleCloudDatastore implements UserDatastore
         {
             answer.setExpiry(expiry);
         }
-        Bucket bucket = usersBucket();
+        Bucket bucket = usersBucket(storage());
         byte[] data = toYaml(answer).getBytes();
         bucket.create(Prefix.SESSIONID.key(answer.getId()), data);
         bucket.create(Prefix.SESSIONUSER.key(answer.getUserId()), data);
@@ -174,8 +174,9 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public void clearExpiredSessions()
     {
-        Bucket bucket = usersBucket();
-        storage()
+        Storage storage = storage();
+        Bucket bucket = usersBucket(storage);
+        storage
                 .delete(StreamSupport
                         .stream(bucket
                                 .list(BlobListOption.prefix("session"))
@@ -191,7 +192,7 @@ public class GoogleCloudDatastore implements UserDatastore
     {
         long nextId = getAllUserIds().stream().max(Long::compare).orElse(-1L) + 1;
         user.setId(nextId);
-        Bucket bucket = usersBucket();
+        Bucket bucket = usersBucket(storage());
         byte[] data = toYaml(user).getBytes();
         bucket.create(Prefix.USERID.key(nextId), data);
         bucket.create(Prefix.EMAIL.key(user.getEmail()), data);
@@ -213,7 +214,7 @@ public class GoogleCloudDatastore implements UserDatastore
         if (user != null)
         {
             answer = new PasswordReset(user.getId(), email);
-            usersBucket().create(Prefix.PWRESET.key(answer.getId()), toYaml(answer).getBytes());
+            usersBucket(storage()).create(Prefix.PWRESET.key(answer.getId()), toYaml(answer).getBytes());
         }
         return answer;
     }
@@ -223,7 +224,7 @@ public class GoogleCloudDatastore implements UserDatastore
     {
         return Optional
                 .ofNullable(fromBlob(PasswordReset.class)
-                        .apply(usersBucket().get(Prefix.PWRESET.key(id))))
+                        .apply(usersBucket(storage()).get(Prefix.PWRESET.key(id))))
                 .filter(Predicate.not(expired(PasswordReset::getExpiry)))
                 .orElse(null);
     }
@@ -242,7 +243,7 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public void clearExpiredResets()
     {
-        Bucket bucket = usersBucket();
+        Bucket bucket = usersBucket(storage());
         storage()
                 .delete(StreamSupport
                         .stream(bucket
