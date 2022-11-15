@@ -53,9 +53,9 @@ public class Application
     }
 
     @Bean
-    EmailSender emailSender()
+    EmailSender emailSender(EnvironmentVars vars)
     {
-        return new SendgridSender();
+        return new SendgridSender(vars);
     }
 
     @Bean
