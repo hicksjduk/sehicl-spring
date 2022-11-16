@@ -75,7 +75,7 @@ public class SendgridSender implements EmailSender
                     .map(Personalization::getTos)
                     .flatMap(Collection::stream)
                     .map(Email::getEmail)
-                    .collect(Collectors.joining(" ... "));
+                    .collect(Collectors.joining(", "));
             LOG.error("Unable to send email message to {}", addressees, e);
             throw new EmailException("Unable to send email message", e);
         }
