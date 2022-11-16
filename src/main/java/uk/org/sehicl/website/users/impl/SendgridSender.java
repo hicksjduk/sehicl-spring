@@ -1,12 +1,13 @@
 package uk.org.sehicl.website.users.impl;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.sendgrid.Content;
@@ -24,12 +25,12 @@ import uk.org.sehicl.website.users.EmailSender;
 public class SendgridSender implements EmailSender
 {
     private static final Logger LOG = LoggerFactory.getLogger(SendgridSender.class);
-    
+
     @Value("${sendgrid.server:}")
     private String sendGridServer;
-    
+
     private final EnvironmentVars envVars;
-    
+
     public SendgridSender(EnvironmentVars envVars)
     {
         this.envVars = envVars;
@@ -50,7 +51,7 @@ public class SendgridSender implements EmailSender
         mail.addPersonalization(mailInfo);
         send(mail);
     }
-    
+
     private void send(Mail mail) throws EmailException
     {
         boolean serverConfigured = !StringUtils.isEmpty(sendGridServer);
@@ -68,7 +69,14 @@ public class SendgridSender implements EmailSender
         }
         catch (IOException e)
         {
-            LOG.error("Unable to send email message", e);
+            var addressees = mail
+                    .getPersonalization()
+                    .stream()
+                    .map(Personalization::getTos)
+                    .flatMap(Collection::stream)
+                    .map(Object::toString)
+                    .collect(Collectors.joining(" ... "));
+            LOG.error("Unable to send email message to {}", addressees, e);
             throw new EmailException("Unable to send email message", e);
         }
     }
