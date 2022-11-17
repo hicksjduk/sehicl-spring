@@ -201,8 +201,10 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public void updateUser(User user)
     {
-        // TODO Auto-generated method stub
-
+        Bucket bucket = usersBucket(storage());
+        byte[] data = toYaml(user).getBytes();
+        bucket.create(Prefix.USERID.key(user.getId()), data);
+        bucket.create(Prefix.EMAIL.key(user.getEmail()), data);
     }
 
     @Override
