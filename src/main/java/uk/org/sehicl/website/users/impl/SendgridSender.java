@@ -69,10 +69,10 @@ public class SendgridSender implements EmailSender
             req.setBody(mail.build());
             sg.api(req);
         }
-        catch (Throwable e)
+        catch (IOException e)
         {
             LOG.error("Unable to send email message {} to {}", mail.getSubject(), addressees, e);
-            throw new EmailException("Unable to send email message", e);
+            throw new EmailException("Unable to send email message to %s".formatted(addressees), e);
         }
     }
 

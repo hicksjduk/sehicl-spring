@@ -178,7 +178,6 @@ public class Register
     }
 
     public User validateAndRegister(String serverAddress)
-            throws EmailException
     {
         User answer = null;
         boolean valid = true;
@@ -225,6 +224,10 @@ public class Register
                                 validation.password, serverAddress);
             }
             catch (UserException e)
+            {
+                validation.setEmailMessage(e.getMessage());
+            }
+            catch (EmailException e)
             {
                 validation.setEmailMessage(e.getMessage());
                 valid = false;

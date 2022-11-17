@@ -408,19 +408,11 @@ public class Controller
         Register register = new Register(userManager, req.getParameter("email"),
                 req.getParameter("name"), req.getParameter("club"), req.getParameter("password"),
                 req.getParameter("passwordConf"), req.getParameter("agreement") != null);
-        try
-        {
             User user = register
                     .validateAndRegister(
                             URI.create(req.getRequestURL().toString()).resolve("/").toString());
             return new PageTemplate(user == null ? new RegisterPage(getRequestUri(req), register)
                     : new RegisterConfPage(getRequestUri(req), user)).process();
-        }
-        catch (EmailException e)
-        {
-            resp.sendRedirect(String.format("/emailError?message=%s", e.getMessage()));
-            return "";
-        }
     }
 
     @RequestMapping(path = "/activate/{userId}")

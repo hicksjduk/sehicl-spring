@@ -1,5 +1,7 @@
 package uk.org.sehicl.website.users;
 
+import static org.mockito.Mockito.*;
+
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
@@ -110,13 +112,19 @@ public class UserManager
     }
 
     private void notifyAdmin(String action, User user, String serverAddress)
-            throws UserException, EmailException
     {
         StringWriter sw = new StringWriter();
         new AdminNotifyMailTemplate(user, serverAddress).process(sw);
-        emailer
-                .sendEmail(String.format("User action: %s", action), sw.toString(),
-                        new Addressee("admin@sehicl.org.uk"));
+        try
+        {
+            emailer
+                    .sendEmail(String.format("User action: %s", action), sw.toString(),
+                            new Addressee("admin@sehicl.org.uk"));
+        }
+        catch (Exception e)
+        {
+            throw (new RuntimeException("Unexpected exception", e));
+        }
     }
 
     public void generatePasswordReset(String email, String resetAddress)
