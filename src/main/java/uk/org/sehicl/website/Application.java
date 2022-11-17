@@ -26,7 +26,7 @@ public class Application
         try
         {
             SpringApplication app = new SpringApplication(Application.class);
-            String port = System.getenv("PORT");
+            String port = EnvVar.PORT.get();
             if (port != null)
                 app.setDefaultProperties(Collections.singletonMap("server.port", port));
             app.run(args);
@@ -46,16 +46,16 @@ public class Application
     @Bean
     public UserDatastore userDatastore()
     {
-        String redisAddr = System.getenv("REDIS_URL");
+        String redisAddr = EnvVar.REDIS_URL.get();
         if (Objects.nonNull(redisAddr))
             return new RedisDatastore(redisAddr);
         return new GoogleCloudDatastore();
     }
 
     @Bean
-    EmailSender emailSender(EnvironmentVars vars)
+    EmailSender emailSender()
     {
-        return new SendgridSender(vars);
+        return new SendgridSender();
     }
 
     @Bean
@@ -68,11 +68,5 @@ public class Application
     public UsersImporter usersImporter(UserDatastore datastore)
     {
         return new UsersImporter(datastore);
-    }
-    
-    @Bean
-    public EnvironmentVars environmentVars()
-    {
-        return new EnvironmentVars();
     }
 }

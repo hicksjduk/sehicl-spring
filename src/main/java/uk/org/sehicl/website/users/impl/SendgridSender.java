@@ -18,7 +18,7 @@ import com.sendgrid.Personalization;
 import com.sendgrid.Request;
 import com.sendgrid.SendGrid;
 
-import uk.org.sehicl.website.EnvironmentVars;
+import uk.org.sehicl.website.EnvVar;
 import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.EmailSender;
 
@@ -28,13 +28,6 @@ public class SendgridSender implements EmailSender
 
     @Value("${sendgrid.server:}")
     private String sendGridServer;
-
-    private final EnvironmentVars envVars;
-
-    public SendgridSender(EnvironmentVars envVars)
-    {
-        this.envVars = envVars;
-    }
 
     @Override
     public void sendEmail(String subject, String messageText, Addressee... addressees)
@@ -55,7 +48,7 @@ public class SendgridSender implements EmailSender
     private void send(Mail mail) throws EmailException
     {
         boolean serverConfigured = !StringUtils.isEmpty(sendGridServer);
-        String apiKey = envVars.get("SENDGRID_API_KEY");
+        String apiKey = EnvVar.SENDGRID_API_KEY.get();
         SendGrid sg = new SendGrid(apiKey, serverConfigured);
         if (serverConfigured)
             sg.setHost(sendGridServer);

@@ -80,8 +80,6 @@ public class Controller
     private UsersExporter usersExporter;
     @Autowired
     private UsersImporter usersImporter;
-    @Autowired
-    private EnvironmentVars envVars;
 
     private String getRequestUri(HttpServletRequest req)
     {
@@ -565,7 +563,7 @@ public class Controller
     public String exportUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         String adminSecret = req.getHeader("adminSecret");
-        if (adminSecret == null || !Objects.equals(envVars.get("ADMIN_SECRET"), adminSecret))
+        if (adminSecret == null || !Objects.equals(EnvVar.ADMIN_SECRET.get(), adminSecret))
         {
             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
             return "";
@@ -577,7 +575,7 @@ public class Controller
     public String importUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         String adminSecret = req.getHeader("adminSecret");
-        if (adminSecret == null || !Objects.equals(envVars.get("ADMIN_SECRET"), adminSecret))
+        if (adminSecret == null || !Objects.equals(EnvVar.ADMIN_SECRET.get(), adminSecret))
         {
             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
             return "";
@@ -598,7 +596,7 @@ public class Controller
         HttpPost post = new HttpPost(recaptchaUrl);
         post
                 .setEntity(new UrlEncodedFormEntity(Arrays
-                        .asList(new BasicNameValuePair("secret", System.getenv("RECAPTCHA_SECRET")),
+                        .asList(new BasicNameValuePair("secret", EnvVar.RECAPTCHA_SECRET.get()),
                                 new BasicNameValuePair("response",
                                         req.getParameter("g-recaptcha-response")))));
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(post))

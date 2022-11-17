@@ -1,2 +1,6 @@
 runtime: java17
 instance_class: F1
+env_variables:
+  ADMIN_SECRET: $ADMIN_SECRET
+  RECAPTCHA_SECRET: $RECAPTCHA_SECRET
+  SENDGRID_API_KEY: $SENDGRID_API_KEY
