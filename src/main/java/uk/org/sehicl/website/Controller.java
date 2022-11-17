@@ -374,19 +374,11 @@ public class Controller
         }
         else
         {
-            try
-            {
-                login
-                        .validateAndRemind(URI
-                                .create(req.getRequestURL().toString())
-                                .resolve("/pwdReset")
-                                .toString());
-            }
-            catch (EmailException e)
-            {
-                resp.sendRedirect(String.format("/emailError?message=%s", e.getMessage()));
-                return "";
-            }
+            login
+                    .validateAndReset(URI
+                            .create(req.getRequestURL().toString())
+                            .resolve("/pwdReset")
+                            .toString());
         }
         return new PageTemplate(new LoginPage(getRequestUri(req), login)).process();
     }
@@ -408,11 +400,11 @@ public class Controller
         Register register = new Register(userManager, req.getParameter("email"),
                 req.getParameter("name"), req.getParameter("club"), req.getParameter("password"),
                 req.getParameter("passwordConf"), req.getParameter("agreement") != null);
-            User user = register
-                    .validateAndRegister(
-                            URI.create(req.getRequestURL().toString()).resolve("/").toString());
-            return new PageTemplate(user == null ? new RegisterPage(getRequestUri(req), register)
-                    : new RegisterConfPage(getRequestUri(req), user)).process();
+        User user = register
+                .validateAndRegister(
+                        URI.create(req.getRequestURL().toString()).resolve("/").toString());
+        return new PageTemplate(user == null ? new RegisterPage(getRequestUri(req), register)
+                : new RegisterConfPage(getRequestUri(req), user)).process();
     }
 
     @RequestMapping(path = "/activate/{userId}")

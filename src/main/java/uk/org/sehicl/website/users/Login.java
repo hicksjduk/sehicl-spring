@@ -112,7 +112,7 @@ public class Login
         return answer;
     }
 
-    public void validateAndRemind(String resetPageAddress) throws EmailException
+    public void validateAndReset(String resetPageAddress)
     {
         boolean allFieldsPresent = true;
         if (StringUtils.isEmpty(validation.email))
@@ -127,7 +127,7 @@ public class Login
                 userManager.generatePasswordReset(validation.email, resetPageAddress);
                 validation.setEmailMessage("A reset e-mail has been sent to this address.");
             }
-            catch (UserException e)
+            catch (UserException | EmailException e)
             {
                 validation.setEmailMessage(e.getMessage());
             }
