@@ -1,3 +1,4 @@
+<!-- This is the Google-hosted version -->
 <h1>Welcome!</h1>
 <#include "news.ftlh"/>
 <p>
