@@ -1,9 +1,10 @@
 package uk.org.sehicl.website;
 
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -20,16 +21,18 @@ import uk.org.sehicl.website.users.impl.SendgridSender;
 @SpringBootApplication
 public class Application
 {
-    // private static final Logger LOG = LoggerFactory.getLogger(Application.class);
+    @SuppressWarnings("unused")
+    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args)
     {
         try
         {
             SpringApplication app = new SpringApplication(Application.class);
-            String port = EnvVar.PORT.get();
-            if (port != null)
-                app.setDefaultProperties(Collections.singletonMap("server.port", port));
+            Optional
+                    .<Object> ofNullable(EnvVar.PORT.get())
+                    .map(p -> Collections.singletonMap("server.port", p))
+                    .ifPresent(app::setDefaultProperties);
             app.run(args);
         }
         catch (Throwable ex)
