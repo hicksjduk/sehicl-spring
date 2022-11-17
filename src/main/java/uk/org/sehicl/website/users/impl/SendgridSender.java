@@ -55,6 +55,15 @@ public class SendgridSender implements EmailSender
         Request req = new Request();
         req.setMethod(Method.POST);
         req.setEndpoint("mail/send");
+        LOG
+                .info("Sending mail: {} to {}", mail.getSubject(),
+                        mail
+                                .getPersonalization()
+                                .stream()
+                                .map(Personalization::getTos)
+                                .flatMap(Collection::stream)
+                                .map(Email::getEmail)
+                                .toList());
         try
         {
             req.setBody(mail.build());
@@ -62,14 +71,6 @@ public class SendgridSender implements EmailSender
         }
         catch (IOException e)
         {
-            var addressees = mail
-                    .getPersonalization()
-                    .stream()
-                    .map(Personalization::getTos)
-                    .flatMap(Collection::stream)
-                    .map(Email::getEmail)
-                    .collect(Collectors.joining(", "));
-            LOG.error("Unable to send email message to {}", addressees, e);
             throw new EmailException("Unable to send email message", e);
         }
     }
