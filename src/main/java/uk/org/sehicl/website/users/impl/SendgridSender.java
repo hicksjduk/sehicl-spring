@@ -71,6 +71,7 @@ public class SendgridSender implements EmailSender
         }
         catch (IOException e)
         {
+            LOG.error("Unable to send email message", e);
             throw new EmailException("Unable to send email message", e);
         }
     }
