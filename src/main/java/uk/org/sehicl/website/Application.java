@@ -2,6 +2,7 @@ package uk.org.sehicl.website;
 
 import java.util.Collections;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -46,10 +47,10 @@ public class Application
     @Bean
     public UserDatastore userDatastore()
     {
-        String redisAddr = EnvVar.REDIS_URL.get();
-        if (Objects.nonNull(redisAddr))
-            return new RedisDatastore(redisAddr);
-        return new GoogleCloudDatastore();
+        return Optional
+                .ofNullable(EnvVar.REDIS_URL.get())
+                .<UserDatastore> map(RedisDatastore::new)
+                .orElseGet(GoogleCloudDatastore::new);
     }
 
     @Bean
