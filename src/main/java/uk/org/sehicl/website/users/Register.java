@@ -223,14 +223,9 @@ public class Register
                         .registerUser(validation.email, validation.name, validation.club,
                                 validation.password, serverAddress);
             }
-            catch (UserException e)
+            catch (UserException | EmailException e)
             {
                 validation.setEmailMessage(e.getMessage());
-            }
-            catch (EmailException e)
-            {
-                validation.setEmailMessage(e.getMessage());
-                valid = false;
             }
         }
         return answer;
