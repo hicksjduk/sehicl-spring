@@ -2,6 +2,7 @@ package uk.org.sehicl.website.users.impl;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -55,15 +56,14 @@ public class SendgridSender implements EmailSender
         Request req = new Request();
         req.setMethod(Method.POST);
         req.setEndpoint("mail/send");
-        LOG
-                .info("Sending mail: {} to {}", mail.getSubject(),
-                        mail
-                                .getPersonalization()
-                                .stream()
-                                .map(Personalization::getTos)
-                                .flatMap(Collection::stream)
-                                .map(Email::getEmail)
-                                .toList());
+        List<String> addressees = mail
+                .getPersonalization()
+                .stream()
+                .map(Personalization::getTos)
+                .flatMap(Collection::stream)
+                .map(Email::getEmail)
+                .toList();
+        LOG.info("Sending mail: {} to {}", mail.getSubject(), addressees);
         try
         {
             req.setBody(mail.build());
@@ -71,8 +71,8 @@ public class SendgridSender implements EmailSender
         }
         catch (IOException e)
         {
-            LOG.error("Unable to send email message", e);
-            throw new EmailException("Unable to send email message", e);
+            LOG.error("Unable to send email message {} to {}", mail.getSubject(), addressees, e);
+//            throw new EmailException("Unable to send email message", e);
         }
     }
 
