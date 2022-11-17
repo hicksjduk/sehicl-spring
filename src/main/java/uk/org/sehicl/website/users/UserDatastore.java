@@ -22,7 +22,7 @@ public interface UserDatastore
 
     default User createUser(String email, String name, String club, Status status,
             String password) {
-        return createUser(new User(email, name, club, status, 0, password, true));
+        return createUser(new User(name, email, club, status, 0, password, true));
     }
 
     User createUser(User user);
