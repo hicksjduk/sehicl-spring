@@ -89,20 +89,14 @@ public class UserManager
         return answer;
     }
 
-    private void sendActivationEmail(User user, String serverAddress) throws UserException
+    private void sendActivationEmail(User user, String serverAddress)
+            throws UserException, EmailException
     {
         StringWriter sw = new StringWriter();
         new ActivationMailTemplate(user, serverAddress).process(sw);
-        try
-        {
-            emailer
-                    .sendEmail("Activate your SEHICL account", sw.toString(),
-                            new Addressee(user.getEmail(), user.getName()));
-        }
-        catch (Exception e)
-        {
-            throw new RuntimeException("Error sending activation e-mail", e);
-        }
+        emailer
+                .sendEmail("Activate your SEHICL account", sw.toString(),
+                        new Addressee(user.getEmail(), user.getName()));
     }
 
     private void sendPasswordResetEmail(PasswordReset reset, String resetAddress)
@@ -110,32 +104,19 @@ public class UserManager
     {
         StringWriter sw = new StringWriter();
         new PasswordResetMailTemplate(reset, resetAddress).process(sw);
-        try
-        {
-            emailer
-                    .sendEmail("SEHICL password reset", sw.toString(),
-                            new Addressee(reset.getUserEmail()));
-        }
-        catch (EmailException e)
-        {
-            throw new RuntimeException("Error sending password reset e-mail", e);
-        }
+        emailer
+                .sendEmail("SEHICL password reset", sw.toString(),
+                        new Addressee(reset.getUserEmail()));
     }
 
-    private void notifyAdmin(String action, User user, String serverAddress) throws UserException
+    private void notifyAdmin(String action, User user, String serverAddress)
+            throws UserException, EmailException
     {
         StringWriter sw = new StringWriter();
         new AdminNotifyMailTemplate(user, serverAddress).process(sw);
-        try
-        {
-            emailer
-                    .sendEmail(String.format("User action: %s", action), sw.toString(),
-                            new Addressee("admin@sehicl.org.uk"));
-        }
-        catch (EmailException e)
-        {
-            throw new RuntimeException("Error sending admin notification", e);
-        }
+        emailer
+                .sendEmail(String.format("User action: %s", action), sw.toString(),
+                        new Addressee("admin@sehicl.org.uk"));
     }
 
     public void generatePasswordReset(String email, String resetAddress)
@@ -243,7 +224,7 @@ public class UserManager
         return datastore.getUserById(userId);
     }
 
-    public User reconfirmUser(long id) throws UserException
+    public User reconfirmUser(long id) throws UserException, EmailException
     {
         final User answer = setUserStatusNoNotify(id, Status.ACTIVE);
         notifyAdmin("reconfirm", answer, null);

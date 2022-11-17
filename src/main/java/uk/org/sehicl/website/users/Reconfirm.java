@@ -41,7 +41,7 @@ public class Reconfirm
         this.userManager = userManager;
     }
 
-    public boolean validateAndReconfirm(boolean agreed)
+    public boolean validateAndReconfirm(boolean agreed) throws EmailException
     {
         boolean valid = true;
         validation = new Validation();

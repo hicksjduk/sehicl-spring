@@ -523,10 +523,17 @@ public class Controller
             @PathVariable long userId) throws IOException
     {
         Reconfirm reconfirm = new Reconfirm(userId, userManager);
-        if (reconfirm.validateAndReconfirm(req.getParameter("agreement") != null))
+        try
         {
-            resp.sendRedirect("/reconfConf");
-            return "";
+            if (reconfirm.validateAndReconfirm(req.getParameter("agreement") != null))
+            {
+                resp.sendRedirect("/reconfConf");
+                return "";
+            }
+        }
+        catch (EmailException ex)
+        {
+            LOG.error("Unexpected exception", ex);
         }
         return new PageTemplate(new ReconfirmPage(getRequestUri(req), reconfirm)).process();
     }
