@@ -1,6 +1,6 @@
 package uk.org.sehicl.admin;
 
-import java.io.BufferedReader;
+import java.io.Reader;
 import java.util.stream.Stream;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +19,7 @@ public class UsersImporter
         this.datastore = datastore;
     }
     
-    public int importUsers(BufferedReader data)
+    public int importUsers(Reader data)
     {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         ArrayType type = mapper.getTypeFactory().constructArrayType(User.class);

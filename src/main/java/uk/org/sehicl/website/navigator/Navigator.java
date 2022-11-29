@@ -1,10 +1,14 @@
 package uk.org.sehicl.website.navigator;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.springframework.util.StringUtils;
 
 public class Navigator
 {
@@ -12,8 +16,16 @@ public class Navigator
 
     public Navigator(Section section, String uri)
     {
-        rows = Arrays.stream(NavigatorSection.values()).map(s -> toRow(section, uri, s)).collect(
-                Collectors.toList());
+        var localPath = Optional
+                .of(uri)
+                .map(URI::create)
+                .map(URI::getPath)
+                .filter(StringUtils::hasLength)
+                .orElse("/");
+        rows = Stream
+                .of(NavigatorSection.values())
+                .map(s -> toRow(section, localPath, s))
+                .collect(Collectors.toList());
     }
 
     public List<NavigatorRow> getRows()
