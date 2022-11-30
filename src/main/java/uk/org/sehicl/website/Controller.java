@@ -116,7 +116,7 @@ public class Controller
             if (userManager.sessionHasRole(userSession.getToken(), null))
                 return new PageTemplate(new FullContactsPage(getRequestUri())).process();
             userSession.setRedirectTarget(getRequestUriPath());
-            resp.sendRedirect("/login");
+            resp.sendRedirect(URI.create(getRequestUri()).resolve("/login").toString());
         }
         catch (Throwable t)
         {
