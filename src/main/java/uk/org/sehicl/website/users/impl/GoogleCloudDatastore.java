@@ -137,8 +137,9 @@ public class GoogleCloudDatastore implements UserDatastore
     public SessionData getSessionBySessionId(long id)
     {
         return Optional
-                .ofNullable(fromBlob(SessionData.class)
-                        .apply(usersBucket(storage()).get(Prefix.SESSIONID.key(id))))
+                .of(Prefix.SESSIONID.key(id))
+                .map(usersBucket(storage())::get)
+                .map(fromBlob(SessionData.class))
                 .filter(Predicate.not(expired(SessionData::getExpiry)))
                 .orElse(null);
     }
