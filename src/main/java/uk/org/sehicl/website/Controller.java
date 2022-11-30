@@ -113,11 +113,12 @@ public class Controller
         try
         {
             final UserSession userSession = new UserSession(req);
+            String requestUri = getRequestUri();
             if (userManager.sessionHasRole(userSession.getToken(), null))
-                return new PageTemplate(new FullContactsPage(getRequestUri())).process();
+                return new PageTemplate(new FullContactsPage(requestUri)).process();
             userSession.setRedirectTarget(getRequestUriPath());
-            String redirectAddr = URI.create(getRequestUri()).resolve("/login").toString();
-            LOG.info("Redirecting to {}", redirectAddr);
+            String redirectAddr = URI.create(requestUri).resolve("/login").toString();
+            LOG.info("Redirecting from {} to {}", requestUri, redirectAddr);
             resp.sendRedirect(redirectAddr);
         }
         catch (Throwable t)
