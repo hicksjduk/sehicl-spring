@@ -7,8 +7,6 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.admin.UsersImporter;
@@ -88,17 +85,14 @@ public class Controller
     @Autowired
     private UsersImporter usersImporter;
 
-    private String getRequestUri(HttpServletRequest req)
-    {
-        return Stream
-                .of(req.getRequestURI(), req.getPathInfo())
-                .filter(Objects::nonNull)
-                .collect(Collectors.joining());
-    }
-
     private String getRequestUri()
     {
         return ServletUriComponentsBuilder.fromCurrentRequest().toUriString();
+    }
+    
+    private String getRequestUriPath()
+    {
+        return URI.create(getRequestUri()).getPath();
     }
 
     @RequestMapping("/")
@@ -121,7 +115,7 @@ public class Controller
             final UserSession userSession = new UserSession(req);
             if (userManager.sessionHasRole(userSession.getToken(), null))
                 return new PageTemplate(new FullContactsPage(getRequestUri())).process();
-            userSession.setRedirectTarget(getRequestUri());
+            userSession.setRedirectTarget(getRequestUriPath());
             resp.sendRedirect("/login");
         }
         catch (Throwable t)
@@ -446,7 +440,7 @@ public class Controller
             User user = userManager.getUserById(userId);
             return new PageTemplate(new UserDetailsPage(getRequestUri(), user)).process();
         }
-        userSession.setRedirectTarget(getRequestUri());
+        userSession.setRedirectTarget(getRequestUriPath());
         resp.sendRedirect("/login");
         return "";
     }
@@ -461,7 +455,7 @@ public class Controller
             User user = userManager.getUserById(userId);
             return new PageTemplate(new DeleteUserPage(getRequestUri(), user, false)).process();
         }
-        userSession.setRedirectTarget(req.getRequestURI());
+        userSession.setRedirectTarget(getRequestUriPath());
         resp.sendRedirect("/login");
         return "";
     }
@@ -477,7 +471,7 @@ public class Controller
             userManager.deleteUser(userId);
             return new PageTemplate(new DeleteUserPage(getRequestUri(), user, true)).process();
         }
-        userSession.setRedirectTarget(req.getRequestURI());
+        userSession.setRedirectTarget(getRequestUriPath());
         resp.sendRedirect("/login");
         return "";
     }
