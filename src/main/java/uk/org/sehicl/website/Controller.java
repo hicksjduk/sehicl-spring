@@ -116,11 +116,18 @@ public class Controller
     @RequestMapping("/fullContacts")
     public String fullContacts(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
-        final UserSession userSession = new UserSession(req);
-        if (userManager.sessionHasRole(userSession.getToken(), null))
-            return new PageTemplate(new FullContactsPage(getRequestUri())).process();
-        userSession.setRedirectTarget(getRequestUri());
-        resp.sendRedirect("/login");
+        try
+        {
+            final UserSession userSession = new UserSession(req);
+            if (userManager.sessionHasRole(userSession.getToken(), null))
+                return new PageTemplate(new FullContactsPage(getRequestUri())).process();
+            userSession.setRedirectTarget(getRequestUri());
+            resp.sendRedirect("/login");
+        }
+        catch (Throwable t)
+        {
+            LOG.error("Error getting full contacts page", t);
+        }
         return "";
     }
 
