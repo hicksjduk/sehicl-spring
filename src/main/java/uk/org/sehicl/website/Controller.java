@@ -102,6 +102,12 @@ public class Controller
     }
 
     @RequestMapping("/fullContacts")
+    public String fullContactsPlaceholder(HttpServletRequest req) throws IOException
+    {
+        return new PageTemplate(new StaticPage("contacts", "fullContactsPlaceholder.ftlh",
+                Section.CONTACTS, getRequestUri(req), "SEHICL Full Contacts")).process();
+    }
+
     public String fullContacts(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         final UserSession userSession = new UserSession(req);
