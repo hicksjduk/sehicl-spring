@@ -36,7 +36,7 @@ public class GoogleCloudDatastore implements UserDatastore
 {
     public static final String USERS_BUCKET = "sehicl-users";
 
-    private static enum Prefix
+    static enum Prefix
     {
         EMAIL,
         USERID,
@@ -283,16 +283,13 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public void deleteUser(long id)
     {
-        Optional
-                .of(Stream
-                        .ofNullable(getUserById(id))
-                        .flatMap(u -> Stream
-                                .of(Prefix.USERID.key(id), Prefix.SESSIONUSER.key(id),
-                                        Prefix.EMAIL.key(u.getEmail())))
-                        .map(k -> BlobId.of(USERS_BUCKET, k))
-                        .toArray(BlobId[]::new))
-                .filter(a -> a.length > 0)
-                .ifPresent(storage::delete);
+        Stream
+                .ofNullable(getUserById(id))
+                .flatMap(u -> Stream
+                        .of(Prefix.USERID.key(id), Prefix.SESSIONUSER.key(id),
+                                Prefix.EMAIL.key(u.getEmail())))
+                .map(k -> BlobId.of(USERS_BUCKET, k))
+                .forEach(storage::delete);
     }
 
 }
