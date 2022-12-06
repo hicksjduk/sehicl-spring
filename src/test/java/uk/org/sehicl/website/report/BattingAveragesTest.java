@@ -1,6 +1,6 @@
 package uk.org.sehicl.website.report;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.League;
@@ -224,8 +224,8 @@ public class BattingAveragesTest
                 validate("BJones", "B Jones", "Hambledon0", "Hambledon", 93, 26, false),
                 validate("SReynolds1", "S Reynolds", "Waterlooville0", "Waterlooville", 91, 22,
                         false),
-                validate("DAitken", "D Aitken", "GosportBorough0", "Gosport Borough", 87, 29,
-                        false),
+                validate(
+                        "DAitken", "D Aitken", "GosportBorough0", "Gosport Borough", 87, 29, false),
                 validate("MCripps", "M Cripps", "Havant0", "Havant", 86, 23, false),
                 validate("AMackie", "A Mackie", "SarisburyAthletic0", "Sarisbury Athletic", 86, 26,
                         true),
@@ -304,16 +304,16 @@ public class BattingAveragesTest
         tableValidator.accept(averages);
         final Iterator<BattingRow> rowIterator = averages.getRows().stream().iterator();
         Arrays.stream(rowValidators).forEach(v -> v.accept(rowIterator.next()));
-        assertFalse(rowIterator.hasNext());
+        assertThat(rowIterator.hasNext()).isFalse();
     }
 
     private Consumer<BattingAverages> validate(Date lastIncludedDate, Status status, int toCome)
     {
         return averages ->
         {
-            assertEquals(lastIncludedDate, averages.getLastIncludedDate());
-            assertEquals(status, averages.getStatus());
-            assertEquals(toCome, averages.getToCome());
+            assertThat(averages.getLastIncludedDate()).isEqualTo(lastIncludedDate);
+            assertThat(averages.getStatus()).isEqualTo(status);
+            assertThat(averages.getToCome()).isEqualTo(toCome);
         };
     }
 
@@ -322,13 +322,13 @@ public class BattingAveragesTest
     {
         return row ->
         {
-            assertEquals(playerId, row.getPlayer().getId());
-            assertEquals(playerName, row.getPlayer().getName());
-            assertEquals(teamId, row.getTeam().getId());
-            assertEquals(teamName, row.getTeam().getName());
-            assertEquals(total, row.getRuns());
-            assertEquals(best, row.getBest().getRunsScored());
-            assertEquals(bestOut, row.getBest().isOut());
+            assertThat(row.getPlayer().getId()).isEqualTo(playerId);
+            assertThat(row.getPlayer().getName()).isEqualTo(playerName);
+            assertThat(row.getTeam().getId()).isEqualTo(teamId);
+            assertThat(row.getTeam().getName()).isEqualTo(teamName);
+            assertThat(row.getRuns()).isEqualTo(total);
+            assertThat(row.getBest().getRunsScored()).isEqualTo(best);
+            assertThat(row.getBest().isOut()).isEqualTo(bestOut);
         };
     }
 
@@ -338,16 +338,16 @@ public class BattingAveragesTest
     {
         return row ->
         {
-            assertEquals(playerId, row.getPlayer().getId());
-            assertEquals(playerName, row.getPlayer().getName());
-            assertEquals(teamId, row.getTeam().getId());
-            assertEquals(teamName, row.getTeam().getName());
-            assertEquals(inns, row.getInnings());
-            assertEquals(notOut, row.getNotOut());
-            assertEquals(total, row.getRuns());
-            assertEquals(best, row.getBest().getRunsScored());
-            assertEquals(bestOut, row.getBest().isOut());
-            assertEquals(average, row.getAverage(), 0.01);
+            assertThat(row.getPlayer().getId()).isEqualTo(playerId);
+            assertThat(row.getPlayer().getName()).isEqualTo(playerName);
+            assertThat(row.getTeam().getId()).isEqualTo(teamId);
+            assertThat(row.getTeam().getName()).isEqualTo(teamName);
+            assertThat(row.getInnings()).isEqualTo(inns);
+            assertThat(row.getNotOut()).isEqualTo(notOut);
+            assertThat(row.getRuns()).isEqualTo(total);
+            assertThat(row.getBest().getRunsScored()).isEqualTo(best);
+            assertThat(row.getBest().isOut()).isEqualTo(bestOut);
+            assertThat(row.getAverage()).isEqualTo(average, offset(0.01));
         };
     }
 

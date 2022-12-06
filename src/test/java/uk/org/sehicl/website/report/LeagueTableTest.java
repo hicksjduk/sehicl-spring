@@ -1,6 +1,7 @@
 package uk.org.sehicl.website.report;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -11,7 +12,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.League;
@@ -104,7 +105,7 @@ public class LeagueTableTest
         tableValidator.accept(table);
         final Iterator<TableRow> rowIterator = table.getRows().stream().iterator();
         Arrays.stream(rowValidators).forEach(v -> v.accept(rowIterator.next()));
-        assertFalse(rowIterator.hasNext());
+        assertThat(rowIterator.hasNext()).isFalse();
     }
 
     private Consumer<LeagueTable> validate(League league, Date lastIncludedDate, Status status,
@@ -112,14 +113,15 @@ public class LeagueTableTest
     {
         return table ->
         {
-            assertSame(league, table.getLeague());
-            assertEquals(lastIncludedDate, table.getLastIncludedDate());
-            assertEquals(status, table.getStatus());
-            assertEquals(toCome, table.getToCome());
+            assertThat(table.getLeague()).isSameAs(league);
+            assertThat(table.getLastIncludedDate()).isEqualTo(lastIncludedDate);
+            assertThat(table.getStatus()).isEqualTo(status);
+            assertThat(table.getToCome()).isEqualTo(toCome);
             final Iterator<String> descIterator = table.getDeductionStrings().iterator();
-            Arrays.stream(deductionDescriptions).forEach(
-                    str -> assertEquals(str, descIterator.next()));
-            assertFalse(descIterator.hasNext());
+            Arrays
+                    .stream(deductionDescriptions)
+                    .forEach(str -> assertThat(descIterator.next()).isEqualTo(str));
+            assertThat(descIterator.hasNext()).isFalse();
         };
     }
 
@@ -129,25 +131,25 @@ public class LeagueTableTest
     {
         return row ->
         {
-            assertEquals(teamName, row.getTeam().getName());
-            assertEquals(played, row.getPlayed());
-            assertEquals(won, row.getWon());
-            assertEquals(tied, row.getTied());
-            assertEquals(lost, row.getLost());
-            assertEquals(batPoints, row.getBattingPoints());
-            assertEquals(bowlPoints, row.getBowlingPoints());
+            assertThat(row.getTeam().getName()).isEqualTo(teamName);
+            assertThat(row.getPlayed()).isEqualTo(played);
+            assertThat(row.getWon()).isEqualTo(won);
+            assertThat(row.getTied()).isEqualTo(tied);
+            assertThat(row.getLost()).isEqualTo(lost);
+            assertThat(row.getBattingPoints()).isEqualTo(batPoints);
+            assertThat(row.getBowlingPoints()).isEqualTo(bowlPoints);
             if (runRate == null)
             {
                 assertNull(row.getRunRate());
             }
             else
             {
-                assertEquals(runRate, row.getRunRate(), 0.01);
+                assertThat(row.getRunRate()).isEqualTo(runRate, offset(0.01));
             }
-            assertEquals(pointsDeducted, row.getPointsDeducted());
-            assertEquals(points, row.getPoints());
+            assertThat(row.getPointsDeducted()).isEqualTo(pointsDeducted);
+            assertThat(row.getPoints()).isEqualTo(points);
             final Iterator<Integer> dkIterator = row.getDeductionKeys().iterator();
-            Arrays.stream(deductionKeys).forEach(k -> assertEquals(k, dkIterator.next()));
+            Arrays.stream(deductionKeys).forEach(k -> assertThat(dkIterator.next()).isEqualTo(k));
             assertFalse(dkIterator.hasNext());
         };
     }
