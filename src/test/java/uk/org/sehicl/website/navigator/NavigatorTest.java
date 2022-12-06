@@ -1,6 +1,10 @@
 package uk.org.sehicl.website.navigator;
 
+<<<<<<< HEAD
 import static org.junit.Assert.*;
+=======
+import static org.assertj.core.api.Assertions.*;
+>>>>>>> rework-datastore
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,7 +13,11 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+<<<<<<< HEAD
 import org.junit.Test;
+=======
+import org.junit.jupiter.api.Test;
+>>>>>>> rework-datastore
 
 import uk.org.sehicl.website.navigator.Navigator.NavigatorRow;
 
@@ -20,12 +28,22 @@ public class NavigatorTest
     public void testSingleItemSectionCurrent()
     {
         final List<NavigatorRow> results = new Navigator(Section.RULES, "/rules").getRows();
+<<<<<<< HEAD
         final Stream<Consumer<NavigatorRow>> expected = Stream.of(validator("Home", "/"),
                 validator("Contacts", "/contacts"), validator("Fixtures", "/fixtures"),
                 validator("Results", "/results"), validator("Tables", "/tables"),
                 validator("Averages", "/averages"), validator("Resources", "/resources"),
                 validator("Rules", null), validator("Records", "/records"),
                 validator("Archive", "/archive"), validator("Data Protection", "/dp"));
+=======
+        final Stream<Consumer<NavigatorRow>> expected = Stream
+                .of(validator("Home", "/"), validator("Contacts", "/contacts"),
+                        validator("Fixtures", "/fixtures"), validator("Results", "/results"),
+                        validator("Tables", "/tables"), validator("Averages", "/averages"),
+                        validator("Resources", "/resources"), validator("Rules", null),
+                        validator("Records", "/records"), validator("Archive", "/archive"),
+                        validator("Data Protection", "/dp"));
+>>>>>>> rework-datastore
         validate(expected, results);
     }
 
@@ -33,6 +51,7 @@ public class NavigatorTest
     public void testMultipleItemSectionCurrent()
     {
         final List<NavigatorRow> results = new Navigator(Section.FIXTURES, "/fixtures").getRows();
+<<<<<<< HEAD
         final Stream<Consumer<NavigatorRow>> expected = Stream.of(validator("Home", "/"),
                 validator("Contacts", "/contacts"),
                 validator("Fixtures", null, validator("Division 1", "/fixtures/league/Division1"),
@@ -47,6 +66,22 @@ public class NavigatorTest
                 validator("Averages", "/averages"), validator("Resources", "/resources"),
                 validator("Rules", "/rules"), validator("Records", "/records"),
                 validator("Archive", "/archive"), validator("Data Protection", "/dp"));
+=======
+        final Stream<Consumer<NavigatorRow>> expected = Stream
+                .of(validator("Home", "/"), validator("Contacts", "/contacts"),
+                        validator("Fixtures", null,
+                                validator("Division 1", "/fixtures/league/Division1"),
+                                validator("Division 2", "/fixtures/league/Division2"),
+                                validator("Division 3", "/fixtures/league/Division3"),
+                                validator("Division 4", "/fixtures/league/Division4"),
+                                validator("Colts Under-16", "/fixtures/league/ColtsUnder16"),
+                                validator("Colts Under-13", "/fixtures/league/ColtsUnder13"),
+                                validator("Duty team rota", "/dutyRota")),
+                        validator("Results", "/results"), validator("Tables", "/tables"),
+                        validator("Averages", "/averages"), validator("Resources", "/resources"),
+                        validator("Rules", "/rules"), validator("Records", "/records"),
+                        validator("Archive", "/archive"), validator("Data Protection", "/dp"));
+>>>>>>> rework-datastore
         validate(expected, results);
     }
 
@@ -55,6 +90,7 @@ public class NavigatorTest
     {
         final List<NavigatorRow> results = new Navigator(Section.CONTACTS, "/fullContacts")
                 .getRows();
+<<<<<<< HEAD
         final Stream<Consumer<NavigatorRow>> expected = Stream.of(validator("Home", "/"),
                 validator("Contacts", "/contacts", validator("Full details", null)),
                 validator("Fixtures", "/fixtures"), validator("Results", "/results"),
@@ -62,6 +98,16 @@ public class NavigatorTest
                 validator("Resources", "/resources"), validator("Rules", "/rules"),
                 validator("Records", "/records"), validator("Archive", "/archive"),
                 validator("Data Protection", "/dp"));
+=======
+        final Stream<Consumer<NavigatorRow>> expected = Stream
+                .of(validator("Home", "/"),
+                        validator("Contacts", "/contacts", validator("Full details", null)),
+                        validator("Fixtures", "/fixtures"), validator("Results", "/results"),
+                        validator("Tables", "/tables"), validator("Averages", "/averages"),
+                        validator("Resources", "/resources"), validator("Rules", "/rules"),
+                        validator("Records", "/records"), validator("Archive", "/archive"),
+                        validator("Data Protection", "/dp"));
+>>>>>>> rework-datastore
         validate(expected, results);
     }
 
@@ -70,6 +116,7 @@ public class NavigatorTest
     {
         final List<NavigatorRow> results = new Navigator(Section.AVERAGES,
                 "/averages/team/OPCSTitchfield").getRows();
+<<<<<<< HEAD
         final Stream<Consumer<NavigatorRow>> expected = Stream.of(validator("Home", "/"),
                 validator("Contacts", "/contacts"), validator("Fixtures", "/fixtures"),
                 validator("Results", "/results"), validator("Tables", "/tables"),
@@ -84,6 +131,27 @@ public class NavigatorTest
                 validator("Resources", "/resources"), validator("Rules", "/rules"),
                 validator("Records", "/records"), validator("Archive", "/archive"),
                 validator("Data Protection", "/dp"));
+=======
+        final Stream<Consumer<NavigatorRow>> expected = Stream
+                .of(validator("Home", "/"), validator("Contacts", "/contacts"),
+                        validator("Fixtures", "/fixtures"), validator("Results", "/results"),
+                        validator("Tables", "/tables"),
+                        validator("Averages", "/averages",
+                                validator("Senior Batting", "/averages/batting/Senior"),
+                                validator("Senior Bowling", "/averages/bowling/Senior"),
+                                validator("Colts Under-16 Batting",
+                                        "/averages/batting/ColtsUnder16"),
+                                validator("Colts Under-16 Bowling",
+                                        "/averages/bowling/ColtsUnder16"),
+                                validator("Colts Under-13 Batting",
+                                        "/averages/batting/ColtsUnder13"),
+                                validator("Colts Under-13 Bowling",
+                                        "/averages/bowling/ColtsUnder13"),
+                                validator("By team", "/averages/byTeam")),
+                        validator("Resources", "/resources"), validator("Rules", "/rules"),
+                        validator("Records", "/records"), validator("Archive", "/archive"),
+                        validator("Data Protection", "/dp"));
+>>>>>>> rework-datastore
         validate(expected, results);
     }
 
@@ -93,10 +161,18 @@ public class NavigatorTest
     {
         return item ->
         {
+<<<<<<< HEAD
             assertEquals(title, item.getTitle());
             assertEquals(uri, item.getUri());
             Arrays.stream(subItems).forEach(
                     v -> validate(Arrays.stream(subItems), item.getSubRows()));
+=======
+            assertThat(item.getTitle()).isEqualTo(title);
+            assertThat(item.getUri()).isEqualTo(uri);
+            Arrays
+                    .stream(subItems)
+                    .forEach(v -> validate(Arrays.stream(subItems), item.getSubRows()));
+>>>>>>> rework-datastore
         };
     }
 
@@ -104,17 +180,28 @@ public class NavigatorTest
     {
         if (objects == null)
         {
+<<<<<<< HEAD
             assertEquals(0L, validators.count());
+=======
+            assertThat(validators.count()).isEqualTo(0L);
+>>>>>>> rework-datastore
         }
         else
         {
             Iterator<T> iterator = objects.iterator();
             validators.forEach(v ->
             {
+<<<<<<< HEAD
                 assertTrue(iterator.hasNext());
                 v.accept(iterator.next());
             });
             assertFalse(iterator.hasNext());
+=======
+                assertThat(iterator.hasNext()).isTrue();
+                v.accept(iterator.next());
+            });
+            assertThat(iterator.hasNext()).isFalse();
+>>>>>>> rework-datastore
         }
     }
 }

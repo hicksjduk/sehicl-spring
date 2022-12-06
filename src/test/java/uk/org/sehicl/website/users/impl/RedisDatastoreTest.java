@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
