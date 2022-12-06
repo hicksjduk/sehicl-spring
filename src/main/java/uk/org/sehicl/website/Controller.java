@@ -101,13 +101,13 @@ public class Controller
         return new PageTemplate(new ContactsPage(getRequestUri(req))).process();
     }
 
-    @RequestMapping("/fullContacts")
     public String fullContactsPlaceholder(HttpServletRequest req) throws IOException
     {
         return new PageTemplate(new StaticPage("contacts", "fullContactsPlaceholder.ftlh",
                 Section.CONTACTS, getRequestUri(req), "SEHICL Full Contacts")).process();
     }
 
+    @RequestMapping("/fullContacts")
     public String fullContacts(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         final UserSession userSession = new UserSession(req);
