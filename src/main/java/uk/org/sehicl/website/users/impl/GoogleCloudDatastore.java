@@ -68,8 +68,8 @@ public class GoogleCloudDatastore implements UserDatastore
         return Optional
                 .of("LOCAL_DATASTORE")
                 .map(System::getenv)
-                .map(s -> StorageOptions.getDefaultInstance())
-                .orElseGet(LocalStorageHelper::getOptions)
+                .map(s -> LocalStorageHelper.getOptions())
+                .orElseGet(StorageOptions::getDefaultInstance)
                 .getService();
     }
 
