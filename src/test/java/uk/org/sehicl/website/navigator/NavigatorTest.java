@@ -39,7 +39,6 @@ public class NavigatorTest
                         validator("Division 2", "/fixtures/league/Division2"),
                         validator("Division 3", "/fixtures/league/Division3"),
                         validator("Division 4", "/fixtures/league/Division4"),
-                        validator("Division 5", "/fixtures/league/Division5"),
                         validator("Colts Under-16", "/fixtures/league/ColtsUnder16"),
                         validator("Colts Under-13", "/fixtures/league/ColtsUnder13"),
                         validator("Duty team rota", "/dutyRota")),
