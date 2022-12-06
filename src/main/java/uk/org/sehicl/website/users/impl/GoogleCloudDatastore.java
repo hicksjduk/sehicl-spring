@@ -1,6 +1,5 @@
 package uk.org.sehicl.website.users.impl;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -21,7 +20,6 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.Storage.BlobListOption;
 import com.google.cloud.storage.StorageOptions;
@@ -34,7 +32,10 @@ import uk.org.sehicl.website.users.UserDatastore;
 
 public class GoogleCloudDatastore implements UserDatastore
 {
-    public static final String USERS_BUCKET = "sehicl-users";
+    public static String USERS_BUCKET = Optional
+            .of("USERS_BUCKET")
+            .map(System::getenv)
+            .orElse("sehicl-users");
 
     static enum Prefix
     {
