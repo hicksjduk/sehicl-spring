@@ -28,7 +28,7 @@ import uk.org.sehicl.website.users.impl.GoogleCloudDatastore.Prefix;
 public class GoogleCloudDatastoreTest
 {
     private final Storage storage = LocalStorageHelper.getOptions().getService();
-    private final GoogleCloudDatastore datastore = new GoogleCloudDatastore(storage);
+    private final GoogleCloudDatastore datastore = new GoogleCloudDatastore(() -> storage);
 
     @BeforeEach
     void clearDb()
