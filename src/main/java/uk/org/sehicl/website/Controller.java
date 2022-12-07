@@ -1,6 +1,8 @@
 package uk.org.sehicl.website;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URI;
 import java.text.ParseException;
 import java.util.Arrays;
@@ -101,13 +103,13 @@ public class Controller
         return new PageTemplate(new ContactsPage(getRequestUri(req))).process();
     }
 
-    @RequestMapping("/fullContacts")
     public String fullContactsPlaceholder(HttpServletRequest req) throws IOException
     {
         return new PageTemplate(new StaticPage("contacts", "fullContactsPlaceholder.ftlh",
                 Section.CONTACTS, getRequestUri(req), "SEHICL Full Contacts")).process();
     }
 
+    @RequestMapping("/fullContacts")
     public String fullContacts(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         final UserSession userSession = new UserSession(req);
@@ -571,6 +573,8 @@ public class Controller
     @PostMapping(path = "/admin/userImport")
     public String importUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
+        try
+        {
         String adminSecret = req.getHeader("adminSecret");
         if (adminSecret == null || !Objects.equals(EnvVar.ADMIN_SECRET.get(), adminSecret))
         {
@@ -583,6 +587,16 @@ public class Controller
             return "";
         }
         return String.format("%d user(s) imported", usersImporter.importUsers(req.getReader()));
+        }
+        catch (Throwable ex)
+        {
+            StringWriter sw = new StringWriter();
+            try (PrintWriter pw = new PrintWriter(sw))
+            {
+                ex.printStackTrace(pw);
+            }
+            return sw.toString();
+        }
     }
 
     @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")

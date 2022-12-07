@@ -8,7 +8,7 @@ import java.util.Deque;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Model;

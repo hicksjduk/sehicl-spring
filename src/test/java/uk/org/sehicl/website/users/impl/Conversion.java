@@ -3,8 +3,6 @@ package uk.org.sehicl.website.users.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Test;
-
 import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.User.Status;
 

@@ -10,7 +10,7 @@
 			src="/graphics/smallgsamlogo.gif" align="middle" hspace="15"
 			border="0" alt="Sponsored by Game Set and Match"></a>
         Colts leagues sponsored by Ency <a href="https://ency.co.uk/"><img
-            src="/graphics/ency logo.png" align="middle" hspace="15" height="30"
+            src="/graphics/encylogo.jpg" align="middle" hspace="15" height="30"
             border="0" alt="Colts leagues sponsored by Ency"></a>
     </p>
 </div>

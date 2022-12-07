@@ -1,6 +1,5 @@
 package uk.org.sehicl.website.page;
 
-import uk.org.sehicl.website.Constants;
 import uk.org.sehicl.website.data.Completeness;
 import uk.org.sehicl.website.data.Model;
 import uk.org.sehicl.website.dataload.ModelLoader;
