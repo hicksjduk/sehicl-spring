@@ -1,5 +1,7 @@
 runtime: java17
 instance_class: F1
+resources:
+  memory_gb: 1
 env_variables:
   ADMIN_SECRET: $ADMIN_SECRET
   RECAPTCHA_SECRET: $RECAPTCHA_SECRET
