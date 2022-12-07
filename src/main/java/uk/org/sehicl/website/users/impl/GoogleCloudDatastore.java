@@ -228,7 +228,7 @@ public class GoogleCloudDatastore implements UserDatastore
         byte[] data = toYaml(user).getBytes();
         Stream
                 .of(Prefix.USERID.key(user.getId()), Prefix.EMAIL.key(user.getEmail()))
-                .map(key -> BlobInfo.newBuilder(usersBucket, key))
+                .map(key -> BlobInfo.newBuilder(usersBucket, key).setContentType("text/yaml"))
                 .map(BlobInfo.Builder::build)
                 .forEach(bi -> storage.create(bi, data));
     }
