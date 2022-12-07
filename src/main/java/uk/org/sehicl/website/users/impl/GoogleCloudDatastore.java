@@ -32,6 +32,8 @@ import uk.org.sehicl.website.users.UserDatastore;
 
 public class GoogleCloudDatastore implements UserDatastore
 {
+    private static final Logger LOG = LoggerFactory.getLogger(GoogleCloudDatastore.class);
+    
     private static String usersBucket()
     {
         return Optional.of("USERS_BUCKET").map(System::getenv).orElse("sehicl-users");
@@ -60,8 +62,6 @@ public class GoogleCloudDatastore implements UserDatastore
             return String.format("%s%d", this, value);
         }
     }
-
-    private static final Logger LOG = LoggerFactory.getLogger(GoogleCloudDatastore.class);
 
     private static Storage createStorage()
     {
@@ -212,9 +212,13 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public User createUser(User user)
     {
+        LOG.info("Getting next ID");
         long nextId = getAllUserIds().stream().max(Long::compare).orElse(-1L) + 1;
+        LOG.info("Next ID is {}", nextId);
         user.setId(nextId);
+        LOG.info("Updating user");
         updateUser(user);
+        LOG.info("User updated");
         return user;
     }
 
