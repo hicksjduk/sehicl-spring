@@ -34,10 +34,7 @@ public class GoogleCloudDatastoreTest
     void clearDb()
     {
         StreamSupport
-                .stream(storage
-                        .list(GoogleCloudDatastore.USERS_BUCKET())
-                        .iterateAll()
-                        .spliterator(), false)
+                .stream(storage.list(datastore.usersBucket).iterateAll().spliterator(), false)
                 .map(Blob::getBlobId)
                 .forEach(storage::delete);
     }
@@ -158,7 +155,7 @@ public class GoogleCloudDatastoreTest
         datastore.clearExpiredResets();
         assertThat(StreamSupport
                 .stream(storage
-                        .list(GoogleCloudDatastore.USERS_BUCKET(),
+                        .list(datastore.usersBucket,
                                 BlobListOption.prefix(Prefix.PWRESET.toString()))
                         .iterateAll()
                         .spliterator(), false)
@@ -188,7 +185,7 @@ public class GoogleCloudDatastoreTest
                 .toArray(Long[]::new);
         assertThat(StreamSupport
                 .stream(storage
-                        .list(GoogleCloudDatastore.USERS_BUCKET(),
+                        .list(datastore.usersBucket,
                                 BlobListOption.prefix(Prefix.PWRESET.toString()))
                         .iterateAll()
                         .spliterator(), false)
@@ -209,7 +206,7 @@ public class GoogleCloudDatastoreTest
         datastore.clearExpiredSessions();
         assertThat(StreamSupport
                 .stream(storage
-                        .list(GoogleCloudDatastore.USERS_BUCKET(),
+                        .list(datastore.usersBucket,
                                 BlobListOption.prefix(Prefix.SESSIONID.toString()))
                         .iterateAll()
                         .spliterator(), false)
@@ -239,7 +236,7 @@ public class GoogleCloudDatastoreTest
                 .toArray(Long[]::new);
         assertThat(StreamSupport
                 .stream(storage
-                        .list(GoogleCloudDatastore.USERS_BUCKET(),
+                        .list(datastore.usersBucket,
                                 BlobListOption.prefix(Prefix.SESSIONID.toString()))
                         .iterateAll()
                         .spliterator(), false)
@@ -278,9 +275,8 @@ public class GoogleCloudDatastoreTest
             try
             {
                 storage
-                        .create(BlobInfo
-                                .newBuilder(GoogleCloudDatastore.USERS_BUCKET(), key)
-                                .build(), new ObjectMapper(new YAMLFactory()).writeValueAsBytes(o));
+                        .create(BlobInfo.newBuilder(datastore.usersBucket, key).build(),
+                                new ObjectMapper(new YAMLFactory()).writeValueAsBytes(o));
             }
             catch (Exception e)
             {

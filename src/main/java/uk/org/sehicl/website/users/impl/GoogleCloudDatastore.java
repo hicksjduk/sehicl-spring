@@ -32,7 +32,7 @@ import uk.org.sehicl.website.users.UserDatastore;
 
 public class GoogleCloudDatastore implements UserDatastore
 {
-    public static String USERS_BUCKET()
+    private static String usersBucket()
     {
         return Optional.of("USERS_BUCKET").map(System::getenv).orElse("sehicl-users");
     }
@@ -74,6 +74,7 @@ public class GoogleCloudDatastore implements UserDatastore
     }
 
     private final Storage storage;
+    public final String usersBucket;
 
     public GoogleCloudDatastore()
     {
@@ -83,6 +84,7 @@ public class GoogleCloudDatastore implements UserDatastore
     public GoogleCloudDatastore(Storage storage)
     {
         this.storage = storage;
+        this.usersBucket = usersBucket();
     }
 
     private <T> String toYaml(T obj)
@@ -117,13 +119,13 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public User getUserByEmail(String email)
     {
-        return fromBlob(User.class).apply(storage.get(USERS_BUCKET(), Prefix.EMAIL.key(email)));
+        return fromBlob(User.class).apply(storage.get(usersBucket, Prefix.EMAIL.key(email)));
     }
 
     @Override
     public User getUserById(long id)
     {
-        return fromBlob(User.class).apply(storage.get(USERS_BUCKET(), Prefix.USERID.key(id)));
+        return fromBlob(User.class).apply(storage.get(usersBucket, Prefix.USERID.key(id)));
     }
 
     @Override
@@ -132,7 +134,7 @@ public class GoogleCloudDatastore implements UserDatastore
         int prefixLength = Prefix.USERID.toString().length();
         return StreamSupport
                 .stream(storage
-                        .list(USERS_BUCKET(), BlobListOption.prefix(Prefix.USERID.toString()))
+                        .list(usersBucket, BlobListOption.prefix(Prefix.USERID.toString()))
                         .iterateAll()
                         .spliterator(), false)
                 .map(Blob::getName)
@@ -146,7 +148,7 @@ public class GoogleCloudDatastore implements UserDatastore
     {
         return Optional
                 .ofNullable(fromBlob(SessionData.class)
-                        .apply(storage.get(USERS_BUCKET(), Prefix.SESSIONUSER.key(id))))
+                        .apply(storage.get(usersBucket, Prefix.SESSIONUSER.key(id))))
                 .filter(Predicate.not(expired(SessionData::getExpiry)))
                 .orElse(null);
     }
@@ -156,7 +158,7 @@ public class GoogleCloudDatastore implements UserDatastore
     {
         return Optional
                 .ofNullable(fromBlob(SessionData.class)
-                        .apply(storage.get(USERS_BUCKET(), Prefix.SESSIONID.key(id))))
+                        .apply(storage.get(usersBucket, Prefix.SESSIONID.key(id))))
                 .filter(Predicate.not(expired(SessionData::getExpiry)))
                 .orElse(null);
     }
@@ -178,7 +180,7 @@ public class GoogleCloudDatastore implements UserDatastore
         Stream
                 .of(Prefix.SESSIONID.key(answer.getId()),
                         Prefix.SESSIONUSER.key(answer.getUserId()))
-                .map(key -> BlobInfo.newBuilder(USERS_BUCKET(), key))
+                .map(key -> BlobInfo.newBuilder(usersBucket, key))
                 .map(BlobInfo.Builder::build)
                 .forEach(bi -> storage.create(bi, data));
         return answer;
@@ -197,7 +199,7 @@ public class GoogleCloudDatastore implements UserDatastore
     {
         BlobId[] toDelete = StreamSupport
                 .stream(storage
-                        .list(USERS_BUCKET(), BlobListOption.prefix("session"))
+                        .list(usersBucket, BlobListOption.prefix("session"))
                         .iterateAll()
                         .spliterator(), false)
                 .filter(expired(fromBlob(SessionData.class), SessionData::getExpiry))
@@ -222,7 +224,7 @@ public class GoogleCloudDatastore implements UserDatastore
         byte[] data = toYaml(user).getBytes();
         Stream
                 .of(Prefix.USERID.key(user.getId()), Prefix.EMAIL.key(user.getEmail()))
-                .map(key -> BlobInfo.newBuilder(USERS_BUCKET(), key))
+                .map(key -> BlobInfo.newBuilder(usersBucket, key))
                 .map(BlobInfo.Builder::build)
                 .forEach(bi -> storage.create(bi, data));
     }
@@ -237,7 +239,7 @@ public class GoogleCloudDatastore implements UserDatastore
             answer = new PasswordReset(user.getId(), email);
             storage
                     .create(BlobInfo
-                            .newBuilder(USERS_BUCKET(), Prefix.PWRESET.key(answer.getId()))
+                            .newBuilder(usersBucket, Prefix.PWRESET.key(answer.getId()))
                             .build(), toYaml(answer).getBytes());
         }
         return answer;
@@ -248,7 +250,7 @@ public class GoogleCloudDatastore implements UserDatastore
     {
         return Optional
                 .ofNullable(fromBlob(PasswordReset.class)
-                        .apply(storage.get(USERS_BUCKET(), Prefix.PWRESET.key(id))))
+                        .apply(storage.get(usersBucket, Prefix.PWRESET.key(id))))
                 .filter(Predicate.not(expired(PasswordReset::getExpiry)))
                 .orElse(null);
     }
@@ -270,8 +272,7 @@ public class GoogleCloudDatastore implements UserDatastore
         Optional
                 .of(StreamSupport
                         .stream(storage
-                                .list(USERS_BUCKET(),
-                                        BlobListOption.prefix(Prefix.PWRESET.toString()))
+                                .list(usersBucket, BlobListOption.prefix(Prefix.PWRESET.toString()))
                                 .iterateAll()
                                 .spliterator(), false)
                         .filter(expired(fromBlob(PasswordReset.class), PasswordReset::getExpiry))
@@ -289,7 +290,7 @@ public class GoogleCloudDatastore implements UserDatastore
                 .flatMap(u -> Stream
                         .of(Prefix.USERID.key(id), Prefix.SESSIONUSER.key(id),
                                 Prefix.EMAIL.key(u.getEmail())))
-                .map(k -> BlobId.of(USERS_BUCKET(), k))
+                .map(k -> BlobId.of(usersBucket, k))
                 .forEach(storage::delete);
     }
 
