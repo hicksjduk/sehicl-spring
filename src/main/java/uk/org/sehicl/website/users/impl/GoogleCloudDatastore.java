@@ -212,9 +212,7 @@ public class GoogleCloudDatastore implements UserDatastore
     @Override
     public User createUser(User user)
     {
-        LOG.info("Getting next ID");
         long nextId = getAllUserIds().stream().max(Long::compare).orElse(-1L) + 1;
-        LOG.info("Next ID is {}", nextId);
         user.setId(nextId);
         LOG.info("Updating user {}/{}", user.getId(), user.getEmail());
         updateUser(user);

@@ -27,10 +27,8 @@ public class UsersImporter
     public int importUsers(BufferedReader data) throws Exception
     {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        LOG.info("Unmarshalling input");
         ArrayType type = mapper.getTypeFactory().constructArrayType(User.class);
         User[] array = (User[]) mapper.readValue(data, type);
-        LOG.info("Creating users");
         Stream.of(array).forEach(datastore::createUser);
         return array.length;
     }
