@@ -24,20 +24,12 @@ public class UsersImporter
         this.datastore = datastore;
     }
 
-    public int importUsers(BufferedReader data)
+    public int importUsers(BufferedReader data) throws Exception
     {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         ArrayType type = mapper.getTypeFactory().constructArrayType(User.class);
-        try
-        {
-            User[] array = (User[]) mapper.readValue(data, type);
-            Stream.of(array).forEach(datastore::createUser);
-            return array.length;
-        }
-        catch (Exception e)
-        {
-            LOG.error("Unable to import users", e);
-            throw new RuntimeException(e);
-        }
+        User[] array = (User[]) mapper.readValue(data, type);
+        Stream.of(array).forEach(datastore::createUser);
+        return array.length;
     }
 }
