@@ -29,19 +29,7 @@ public class UsersImporter
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         ArrayType type = mapper.getTypeFactory().constructArrayType(User.class);
         User[] array = (User[]) mapper.readValue(data, type);
-        Stream.of(array).forEach(this::createAndWait);
+        Stream.of(array).forEach(datastore::createUser);
         return array.length;
-    }
-
-    private void createAndWait(User u)
-    {
-        datastore.createUser(u);
-        try
-        {
-            Thread.sleep(100);
-        }
-        catch (InterruptedException ex)
-        {
-        }
     }
 }
