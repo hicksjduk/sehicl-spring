@@ -216,9 +216,9 @@ public class GoogleCloudDatastore implements UserDatastore
         long nextId = getAllUserIds().stream().max(Long::compare).orElse(-1L) + 1;
         LOG.info("Next ID is {}", nextId);
         user.setId(nextId);
-        LOG.info("Updating user");
+        LOG.info("Updating user {}/{}", user.getId(), user.getEmail());
         updateUser(user);
-        LOG.info("User updated");
+        LOG.info("User {}/{} updated", user.getId(), user.getEmail());
         return user;
     }
 
