@@ -29,6 +29,7 @@ jobs:
         RECAPTCHA_SECRET: ${{ secrets.RECAPTCHA_SECRET }}
         SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         USERS_BUCKET: sehicl-test-users
+        BLOCK_INDEXING: true
       with:
         app_yaml_path: "app.yaml"
 
