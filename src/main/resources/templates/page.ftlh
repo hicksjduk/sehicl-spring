@@ -8,6 +8,9 @@
 </#macro>
 <html>
 <head>
+<#if blockIndexing>
+<meta name="robots" content="noindex">
+</#if>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/sehicl.css" rel="stylesheet" type="text/css">
 <script language="javascript" src="/sehicl.js" type="text/javascript"></script>
