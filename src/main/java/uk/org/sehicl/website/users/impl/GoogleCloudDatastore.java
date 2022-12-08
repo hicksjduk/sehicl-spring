@@ -1,5 +1,8 @@
 package uk.org.sehicl.website.users.impl;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -17,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.ArrayType;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
@@ -66,11 +70,31 @@ public class GoogleCloudDatastore implements UserDatastore
 
     private static Supplier<Storage> createStorageGetter()
     {
-        return Optional
-                .of("LOCAL_DATASTORE")
-                .map(System::getenv)
-                .map(s -> LocalStorageHelper.getOptions())
-                .orElseGet(() -> StorageOptions.getDefaultInstance())::getService;
+        return Optional.of("LOCAL_DATASTORE").map(System::getenv).map(s ->
+        {
+            var storage = LocalStorageHelper.getOptions();
+            fromFile(s).forEach(new GoogleCloudDatastore(storage::getService)::createUser);
+            return storage;
+        }).orElseGet(() -> StorageOptions.getDefaultInstance())::getService;
+    }
+
+    private static Stream<User> fromFile(String fileName)
+    {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName)))
+        {
+            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            ArrayType type = mapper.getTypeFactory().constructArrayType(User.class);
+            User[] array = (User[]) mapper.readValue(br, type);
+            return Stream.of(array);
+        }
+        catch (FileNotFoundException ex)
+        {
+            return Stream.empty();
+        }
+        catch (Exception ex)
+        {
+            throw new RuntimeException("Unable to load users from file", ex);
+        }
     }
 
     private final Supplier<Storage> storageGetter;
