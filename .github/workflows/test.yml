@@ -30,6 +30,7 @@ jobs:
         SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         USERS_BUCKET: sehicl-test-users
         BLOCK_INDEXING: true
+        FORCE_HTTPS: true
       with:
         app_yaml_path: "app.yaml"
 
