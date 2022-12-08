@@ -85,10 +85,12 @@ public class GoogleCloudDatastore implements UserDatastore
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             ArrayType type = mapper.getTypeFactory().constructArrayType(User.class);
             User[] array = (User[]) mapper.readValue(br, type);
+            LOG.info("Loaded {} user(s) from {}", array.length, fileName);
             return Stream.of(array);
         }
         catch (FileNotFoundException ex)
         {
+            LOG.info("File {} not found", fileName);
             return Stream.empty();
         }
         catch (Exception ex)
