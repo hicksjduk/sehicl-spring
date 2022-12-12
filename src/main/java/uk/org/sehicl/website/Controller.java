@@ -79,7 +79,7 @@ public class Controller
     private static final boolean forceHttps = Optional
             .of("FORCE_HTTPS")
             .map(System::getenv)
-            .filter(Boolean::getBoolean)
+            .filter(Boolean::parseBoolean)
             .isPresent();
 
     @Autowired
