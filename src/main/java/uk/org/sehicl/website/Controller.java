@@ -7,9 +7,8 @@ import java.net.URI;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.admin.UsersImporter;
@@ -74,7 +74,13 @@ import uk.org.sehicl.website.users.UserManager;
 @RestController
 public class Controller
 {
-    private static Logger LOG = LoggerFactory.getLogger(Controller.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Controller.class);
+
+    private static final boolean forceHttps = Optional
+            .of("FORCE_HTTPS")
+            .map(System::getenv)
+            .filter(Boolean::parseBoolean)
+            .isPresent();
 
     @Autowired
     private UserManager userManager;
@@ -85,10 +91,13 @@ public class Controller
 
     private String getRequestUri(HttpServletRequest req)
     {
-        return Stream
-                .of(req.getRequestURI(), req.getPathInfo())
-                .filter(Objects::nonNull)
-                .collect(Collectors.joining());
+        var answer = ServletUriComponentsBuilder.fromCurrentRequest().toUriString();
+        return forceHttps ? answer.replace("http://", "https://") : answer;
+    }
+
+    private String getRequestUri(HttpServletRequest req, String pathToResolve)
+    {
+        return URI.create(getRequestUri(req)).resolve(pathToResolve).toString();
     }
 
     @RequestMapping("/")
@@ -115,8 +124,8 @@ public class Controller
         final UserSession userSession = new UserSession(req);
         if (userManager.sessionHasRole(userSession.getToken(), null))
             return new PageTemplate(new FullContactsPage(getRequestUri(req))).process();
-        userSession.setRedirectTarget(req.getRequestURI());
-        resp.sendRedirect("/login");
+        userSession.setRedirectTarget(getRequestUri(req));
+        resp.sendRedirect(getRequestUri(req, "/login"));
         return "";
     }
 
@@ -402,15 +411,13 @@ public class Controller
     {
         if (!realPerson(req))
         {
-            resp.sendRedirect("/register");
+            resp.sendRedirect(getRequestUri(req, "/register"));
             return "";
         }
         Register register = new Register(userManager, req.getParameter("email"),
                 req.getParameter("name"), req.getParameter("club"), req.getParameter("password"),
                 req.getParameter("passwordConf"), req.getParameter("agreement") != null);
-        User user = register
-                .validateAndRegister(
-                        URI.create(req.getRequestURL().toString()).resolve("/").toString());
+        User user = register.validateAndRegister(getRequestUri(req, "/"));
         return new PageTemplate(user == null ? new RegisterPage(getRequestUri(req), register)
                 : new RegisterConfPage(getRequestUri(req), user)).process();
     }
@@ -439,8 +446,8 @@ public class Controller
             User user = userManager.getUserById(userId);
             return new PageTemplate(new UserDetailsPage(getRequestUri(req), user)).process();
         }
-        userSession.setRedirectTarget(req.getRequestURI());
-        resp.sendRedirect("/login");
+        userSession.setRedirectTarget(getRequestUri(req));
+        resp.sendRedirect(getRequestUri(req, "/login"));
         return "";
     }
 
@@ -454,8 +461,8 @@ public class Controller
             User user = userManager.getUserById(userId);
             return new PageTemplate(new DeleteUserPage(getRequestUri(req), user, false)).process();
         }
-        userSession.setRedirectTarget(req.getRequestURI());
-        resp.sendRedirect("/login");
+        userSession.setRedirectTarget(getRequestUri(req));
+        resp.sendRedirect(getRequestUri(req, "/login"));
         return "";
     }
 
@@ -470,8 +477,8 @@ public class Controller
             userManager.deleteUser(userId);
             return new PageTemplate(new DeleteUserPage(getRequestUri(req), user, true)).process();
         }
-        userSession.setRedirectTarget(req.getRequestURI());
-        resp.sendRedirect("/login");
+        userSession.setRedirectTarget(getRequestUri(req));
+        resp.sendRedirect(getRequestUri(req, "/login"));
         return "";
     }
 
@@ -489,13 +496,13 @@ public class Controller
     {
         if (!realPerson(req))
         {
-            resp.sendRedirect(String.format("/pwdReset/%d", resetId));
+            resp.sendRedirect(getRequestUri(req, "/pwdReset/%d".formatted(resetId)));
             return "";
         }
         Reset reset = new Reset(resetId, userManager);
         if (reset.validateAndReset(req.getParameter("password"), req.getParameter("passwordConf")))
         {
-            resp.sendRedirect("/login");
+            resp.sendRedirect(getRequestUri(req, "/login"));
             return "";
         }
         return new PageTemplate(new ResetPage(getRequestUri(req), reset)).process();
@@ -519,7 +526,7 @@ public class Controller
         {
             if (reconfirm.validateAndReconfirm(req.getParameter("agreement") != null))
             {
-                resp.sendRedirect("/reconfConf");
+                resp.sendRedirect(getRequestUri(req, "/reconfConf"));
                 return "";
             }
         }
@@ -575,18 +582,18 @@ public class Controller
     {
         try
         {
-        String adminSecret = req.getHeader("adminSecret");
-        if (adminSecret == null || !Objects.equals(EnvVar.ADMIN_SECRET.get(), adminSecret))
-        {
-            resp.setStatus(HttpStatus.UNAUTHORIZED.value());
-            return "";
-        }
-        if (req.getContentLength() == 0)
-        {
-            resp.setStatus(HttpStatus.BAD_REQUEST.value());
-            return "";
-        }
-        return String.format("%d user(s) imported", usersImporter.importUsers(req.getReader()));
+            String adminSecret = req.getHeader("adminSecret");
+            if (adminSecret == null || !Objects.equals(EnvVar.ADMIN_SECRET.get(), adminSecret))
+            {
+                resp.setStatus(HttpStatus.UNAUTHORIZED.value());
+                return "";
+            }
+            if (req.getContentLength() == 0)
+            {
+                resp.setStatus(HttpStatus.BAD_REQUEST.value());
+                return "";
+            }
+            return String.format("%d user(s) imported", usersImporter.importUsers(req.getReader()));
         }
         catch (Throwable ex)
         {

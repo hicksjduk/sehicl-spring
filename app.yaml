@@ -1,5 +1,5 @@
 runtime: java17
-instance_class: F1
+instance_class: F4
 resources:
   memory_gb: 1
 env_variables:
@@ -8,3 +8,4 @@ env_variables:
   SENDGRID_API_KEY: $SENDGRID_API_KEY
   USERS_BUCKET: $USERS_BUCKET
   BLOCK_INDEXING: $BLOCK_INDEXING
+  FORCE_HTTPS: $FORCE_HTTPS
