@@ -16,9 +16,14 @@
 	</#if>
 </#macro>
 
-<@news end="2022-10-10">
-<b><a href="/fixtures">The fixtures for the 2022-23 season</a> are now available.</b>
-The first games of the season are on Sunday 9th October. 
+<@news end="2023-02-01">
+<b>A number of helmets have been left at the Leisure Centre.</b>
+If you have lost a helmet and would like to reclaim it, please ask at Leisure Centre reception. 
+</@news>
+
+<@news end="2023-02-01">
+<b>The League has a large number of used indoor cricket balls which it no longer needs.</b>
+If anyone would like some, please contact a member of the committee. 
 </@news>
 
 <#if started??>
