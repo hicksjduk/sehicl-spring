@@ -9,8 +9,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.admin.UsersImporter;
@@ -92,10 +91,7 @@ public class Controller
 
     private String getRequestUri(HttpServletRequest req)
     {
-        var answer = Stream
-                .of(req.getRequestURI(), req.getPathInfo())
-                .filter(Objects::nonNull)
-                .collect(Collectors.joining());
+        var answer = ServletUriComponentsBuilder.fromCurrentRequest().toUriString();
         return forceHttps ? answer.replace("http://", "https://") : answer;
     }
 
