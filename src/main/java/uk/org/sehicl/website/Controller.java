@@ -6,8 +6,6 @@ import java.io.StringWriter;
 import java.net.URI;
 import java.text.ParseException;
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.Scanner;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,9 +74,8 @@ public class Controller
 {
     private static final Logger LOG = LoggerFactory.getLogger(Controller.class);
 
-    private static final boolean forceHttps = Optional
-            .of("FORCE_HTTPS")
-            .map(System::getenv)
+    private static final boolean forceHttps = EnvVar.FORCE_HTTPS
+            .get()
             .filter(Boolean::parseBoolean)
             .isPresent();
 
@@ -569,7 +566,7 @@ public class Controller
     public String exportUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         String adminSecret = req.getHeader("adminSecret");
-        if (adminSecret == null || !Objects.equals(EnvVar.ADMIN_SECRET.get(), adminSecret))
+        if (adminSecret == null || EnvVar.ADMIN_SECRET.get().filter(adminSecret::equals).isEmpty())
         {
             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
             return "";
@@ -583,7 +580,8 @@ public class Controller
         try
         {
             String adminSecret = req.getHeader("adminSecret");
-            if (adminSecret == null || !Objects.equals(EnvVar.ADMIN_SECRET.get(), adminSecret))
+            if (adminSecret == null
+                    || EnvVar.ADMIN_SECRET.get().filter(adminSecret::equals).isEmpty())
             {
                 resp.setStatus(HttpStatus.UNAUTHORIZED.value());
                 return "";
@@ -614,7 +612,8 @@ public class Controller
         HttpPost post = new HttpPost(recaptchaUrl);
         post
                 .setEntity(new UrlEncodedFormEntity(Arrays
-                        .asList(new BasicNameValuePair("secret", EnvVar.RECAPTCHA_SECRET.get()),
+                        .asList(new BasicNameValuePair("secret",
+                                EnvVar.RECAPTCHA_SECRET.getAsString()),
                                 new BasicNameValuePair("response",
                                         req.getParameter("g-recaptcha-response")))));
         try (CloseableHttpResponse response = HttpClients.createDefault().execute(post))

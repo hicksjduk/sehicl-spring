@@ -1,7 +1,6 @@
 package uk.org.sehicl.website;
 
 import java.util.Collections;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +28,9 @@ public class Application
         try
         {
             SpringApplication app = new SpringApplication(Application.class);
-            Optional
-                    .<Object> ofNullable(EnvVar.PORT.get())
-                    .map(p -> Collections.singletonMap("server.port", p))
+            EnvVar.PORT
+                    .get()
+                    .map((Object p) -> Collections.singletonMap("server.port", p))
                     .ifPresent(app::setDefaultProperties);
             app.run(args);
         }
@@ -50,8 +49,8 @@ public class Application
     @Bean
     public UserDatastore userDatastore()
     {
-        return Optional
-                .ofNullable(EnvVar.REDIS_URL.get())
+        return EnvVar.REDIS_URL
+                .get()
                 .<UserDatastore> map(RedisDatastore::new)
                 .orElseGet(GoogleCloudDatastore::new);
     }

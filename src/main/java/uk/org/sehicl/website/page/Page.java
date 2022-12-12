@@ -1,7 +1,6 @@
 package uk.org.sehicl.website.page;
 
-import java.util.Optional;
-
+import uk.org.sehicl.website.EnvVar;
 import uk.org.sehicl.website.navigator.Navigator;
 import uk.org.sehicl.website.navigator.Section;
 
@@ -17,11 +16,7 @@ public abstract class Page
         this.pageId = pageId;
         this.contentTemplate = contentTemplate;
         this.navigator = new Navigator(section, uri);
-        this.blockIndexing = Optional
-                .of("BLOCK_INDEXING")
-                .map(System::getenv)
-                .map(Boolean::valueOf)
-                .orElse(false);
+        this.blockIndexing = EnvVar.BLOCK_INDEXING.get().map(Boolean::valueOf).orElse(false);
     }
 
     public abstract String getTitle();
