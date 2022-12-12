@@ -30,6 +30,7 @@ import com.google.cloud.storage.Storage.BlobListOption;
 import com.google.cloud.storage.StorageOptions;
 import com.google.cloud.storage.contrib.nio.testing.LocalStorageHelper;
 
+import uk.org.sehicl.website.EnvVar;
 import uk.org.sehicl.website.users.PasswordReset;
 import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
@@ -41,7 +42,7 @@ public class GoogleCloudDatastore implements UserDatastore
 
     private static String usersBucket()
     {
-        return Optional.of("USERS_BUCKET").map(System::getenv).orElse("sehicl-users");
+        return EnvVar.USERS_BUCKET.get().orElse("sehicl-users");
     }
 
     static enum Prefix
@@ -70,7 +71,7 @@ public class GoogleCloudDatastore implements UserDatastore
 
     private static Supplier<Storage> createStorageGetter()
     {
-        return Optional.of("LOCAL_DATASTORE").map(System::getenv).map(s ->
+        return EnvVar.LOCAL_DATASTORE.get().map(s ->
         {
             var storage = LocalStorageHelper.getOptions();
             fromFile(s).forEach(new GoogleCloudDatastore(storage::getService)::createUser);

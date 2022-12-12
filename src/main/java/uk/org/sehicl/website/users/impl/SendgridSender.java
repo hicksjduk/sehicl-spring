@@ -3,7 +3,6 @@ package uk.org.sehicl.website.users.impl;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
@@ -49,7 +48,7 @@ public class SendgridSender implements EmailSender
     private void send(Mail mail) throws EmailException
     {
         boolean serverConfigured = !StringUtils.isEmpty(sendGridServer);
-        String apiKey = EnvVar.SENDGRID_API_KEY.get();
+        String apiKey = EnvVar.SENDGRID_API_KEY.getAsString();
         SendGrid sg = new SendGrid(apiKey, serverConfigured);
         if (serverConfigured)
             sg.setHost(sendGridServer);
