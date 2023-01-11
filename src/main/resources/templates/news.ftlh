@@ -16,6 +16,12 @@
 	</#if>
 </#macro>
 
+<@news end="2023-03-01">
+We have been asked to draw the attention of participants in the League to the Leisure Centre's
+policy that <b>no filming or photography may take place without first gaining the Centre's
+express permission.</b> 
+</@news>
+
 <@news end="2023-02-01">
 <b>A number of helmets have been left at the Leisure Centre.</b>
 If you have lost a helmet and would like to reclaim it, please ask at Leisure Centre reception. 
