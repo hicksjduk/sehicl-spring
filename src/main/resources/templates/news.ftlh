@@ -28,6 +28,11 @@ express permission.</b> This includes the use of helmet cameras.
 Their next match is a playoff against the Dorset champions on 26th February. 
 </@news>
 
+<@news start="2023-02-21" end="2023-02-25">
+Please note that <b>no updates will be made to the website</b> from Tuesday 21st February,
+until the evening of Saturday 25th at the earliest. 
+</@news>
+
 <#if started??>
 	</div>
 </#if>
