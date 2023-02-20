@@ -23,7 +23,7 @@ express permission.</b> This includes the use of helmet cameras.
 </@news>
 
 <@news end="2023-02-26">
-<b>Congratulations to League champions Havant</b>, who won the Hampshire indoor championships on
+<b>Congratulations to League champions Havant</b>, who won the Hampshire indoor championship on
 18th February.
 Their next match is a playoff against the Dorset champions on 26th February. 
 </@news>
