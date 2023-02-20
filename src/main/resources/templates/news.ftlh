@@ -22,14 +22,10 @@ policy that <b>no filming or photography may take place without first gaining th
 express permission.</b> This includes the use of helmet cameras.
 </@news>
 
-<@news end="2023-02-01">
-<b>A number of helmets have been left at the Leisure Centre.</b>
-If you have lost a helmet and would like to reclaim it, please ask at Leisure Centre reception. 
-</@news>
-
-<@news end="2023-02-01">
-<b>The League has a large number of used indoor cricket balls which it no longer needs.</b>
-If anyone would like some, please contact a member of the committee. 
+<@news end="2023-02-26">
+<b>Congratulations to League champions Havant</b>, who won the Hampshire indoor championships on
+18th February.
+Their next match is a playoff against the Dorset champions on 26th February. 
 </@news>
 
 <#if started??>
