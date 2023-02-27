@@ -16,7 +16,7 @@
 	</#if>
 </#macro>
 
-<@news end="2023-03-01">
+<@news end="2023-04-02">
 We have been asked to draw the attention of participants in the League to the Leisure Centre's
 policy that <b>no filming or photography may take place without first gaining the Centre's
 express permission.</b> This includes the use of helmet cameras.
