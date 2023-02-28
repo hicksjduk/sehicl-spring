@@ -22,15 +22,18 @@ policy that <b>no filming or photography may take place without first gaining th
 express permission.</b> This includes the use of helmet cameras.
 </@news>
 
-<@news end="2023-02-26">
+<@news end="2023-03-12">
 <b>Congratulations to League champions Havant</b>, who won the Hampshire indoor championship on
 18th February.
-Their next match is a playoff against the Dorset champions on 26th February. 
+Unfortunately, their progress towards the national indoor finals was halted on 26th February, when 
+they lost a play-off against the Dorset champions Bournemouth. 
 </@news>
 
-<@news start="2023-02-21" end="2023-02-25">
-Please note that <b>no updates will be made to the website</b> from Tuesday 21st February,
-until the evening of Saturday 25th at the earliest. 
+<@news end="2023-04-30">
+<b>Our sponsors Game Set & Match</b> have asked us to draw attention to the range of cricket equipment
+they currently have available, or are expecting to have in stock soon. 
+<a href="graphics/GSM ad.gif">Click here to see
+more details.</a>
 </@news>
 
 <#if started??>
