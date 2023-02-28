@@ -32,7 +32,7 @@ they lost a play-off against the Dorset champions Bournemouth.
 <@news end="2023-04-30">
 <b>Our sponsors Game Set & Match</b> have asked us to draw attention to the range of cricket equipment
 they currently have available, or are expecting to have in stock soon. 
-<a href="graphics/GSM ad.gif">Click here to see
+<a href="https://www.gsam.co.uk/collections/cricket-2023?sort_by=created-descending">Click here to see
 more details.</a>
 </@news>
 
