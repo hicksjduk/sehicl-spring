@@ -32,6 +32,6 @@ Division 1 Champions (Hambledon A or Waterlooville A) v the Mayor of Fareham's V
 </ul-->
 <p>8.00pm: Exhibition matches
 <ul>
-<li>Division 2 Champions (Portsmouth A) v Division 3 Champions (Hambledon B or Bedhampton)
+<li>Division 2 Champions (Portsmouth A or XIIth Men A) v Division 3 Champions (Hambledon B or Bedhampton)
 <li>Division 4 Champions (Barracuda or Kerala) v Committee/Umpires
 </ul>
