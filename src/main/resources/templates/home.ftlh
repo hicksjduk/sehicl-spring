@@ -16,15 +16,10 @@
 	division winning teams are invited to play a match, and to receive
 	their trophies (club and personal). The League's Patron, the Worshipful
 	the Mayor of Fareham, presents the senior teams' awards, and the
-	evening culminates with an eight-a-side challenge match between the
+	centrepiece of the evening is an eight-a-side challenge match between the
 	Mayor of Fareham's VIII and the Division 1 champions' VIII.
-	<#--<a href="/presentation">The 2022 presentation evening</a>
-	will be on <b>Sunday 3rd April</b>; click the link for details of the order
-	of events, and the awards that will be presented.-->
-	 <a href="/archive/presentation/2022">
-	The 2022 presentation evening</a> was on Sunday 3rd April;
-	click the link for information and pictures from the evening. The 2023
-	presentation evening will be on Sunday 2nd April.
+	<a href="/presentation">The 2023 presentation evening</a>
+	will be on <b>Sunday 2nd April</b>.
 </p>
 <p>Please report any broken links, mis-spelled names or other errors
 	to 	<@mailto address="website" description="SEHICL Webmaster">
