@@ -24,11 +24,10 @@ Division 1 Champions (Hambledon A or Waterlooville A) v the Mayor of Fareham's V
 <li>Sporting and Efficiency: Clanfield B
 <li>Senior batting: Matt Bradley (Clanfield A)
 <li>Senior bowling: Connor Clark (Fareham & Crofton)
-<li>Division 5 champions: Havant C
-<li>Division 4 champions: Droxford
-<li>Division 3 champions: Fareham & Crofton
-<li>Division 2 champions: Havant B
-<li>Division 1 champions: Havant A
+<li>Division 4 champions: Barracuda or Kerala
+<li>Division 3 champions: Hambledon B
+<li>Division 2 champions: Portsmouth A
+<li>Division 1 champions: Hambledon A or Waterlooville A
 </ul-->
 <p>8.00pm: Exhibition matches
 <ul>
