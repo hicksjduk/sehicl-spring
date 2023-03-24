@@ -9,7 +9,7 @@
 </ul>
 <p>6.00pm: Presentation of Colts awards
 <ul>
-<li>Sporting and Efficiency: TBC
+<li>Sporting and Efficiency: Waterlooville Under-16s
 <li>Colts Under-13 batting: Luke Harradine (Waterlooville)
 <li>Colts Under-13 bowling: Jayden Pay (Havant)
 <li>Colts Under-16 batting: Samuel Harradine (Hambledon Jets)
