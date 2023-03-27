@@ -18,19 +18,19 @@
 <li>Colts Under-16 champions: Portsmouth A
 </ul>
 <p>6.30pm: Exhibition match (8-a-side),
-Division 1 Champions (Hambledon A or Waterlooville A) v the Mayor of Fareham's VIII
+Division 1 Champions (Hambledon A) v the Mayor of Fareham's VIII
 <p>7.30pm: Presentation of Senior awards
-<#--ul>
-<li>Sporting and Efficiency: Clanfield B
-<li>Senior batting: Matt Bradley (Clanfield A)
-<li>Senior bowling: Connor Clark (Fareham & Crofton)
-<li>Division 4 champions: Barracuda or Kerala
+<ul>
+<li>Sporting and Efficiency: Gosport Borough A
+<li>Senior batting: TBC
+<li>Senior bowling: TBC
+<li>Division 4 champions: Barracuda
 <li>Division 3 champions: Hambledon B
 <li>Division 2 champions: Portsmouth A
-<li>Division 1 champions: Hambledon A or Waterlooville A
-</ul-->
+<li>Division 1 champions: Hambledon A
+</ul>
 <p>8.00pm: Exhibition matches
 <ul>
 <li>Division 2 Champions (Portsmouth A) v Division 3 Champions (Hambledon B)
-<li>Division 4 Champions (Barracuda or Kerala) v Committee/Umpires
+<li>Division 4 Champions (Barracuda) v Committee/Umpires
 </ul>
