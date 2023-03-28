@@ -23,7 +23,7 @@ Division 1 Champions (Hambledon A) v the Mayor of Fareham's VIII
 <ul>
 <li>Sporting and Efficiency: Gosport Borough A
 <li>Senior batting: Harry Hovey (Barracuda)
-<li>Senior bowling: James Headon (Fareham & Crofton)
+<li>Senior bowling: James Headen (Fareham & Crofton)
 <li>Division 4 champions: Barracuda
 <li>Division 3 champions: Hambledon B
 <li>Division 2 champions: Portsmouth A

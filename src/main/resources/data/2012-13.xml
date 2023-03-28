@@ -53,8 +53,8 @@
 			<player id="SStoddart">
 				<name>S Stoddart</name>
 			</player>
-			<player id="JHeadon">
-				<name>J Headon</name>
+			<player id="JHeaden">
+				<name>J Headen</name>
 			</player>
 			<player id="ASouthon">
 				<name>A Southon</name>
@@ -504,7 +504,7 @@
 							<runs>33</runs>
 							<wickets>2</wickets>
 						</bowler>
-						<bowler player="JHeadon">
+						<bowler player="JHeaden">
 							<ballsBowled>18</ballsBowled>
 							<runs>6</runs>
 							<wickets>2</wickets>
@@ -530,7 +530,7 @@
 							<runs>0</runs>
 							<out>true</out>
 						</batsman>
-						<batsman player="JHeadon">
+						<batsman player="JHeaden">
 							<runs>0</runs>
 							<out>true</out>
 						</batsman>
@@ -1727,7 +1727,7 @@
 							<runs>1</runs>
 							<out>true</out>
 						</batsman>
-						<batsman player="JHeadon">
+						<batsman player="JHeaden">
 							<runs>26</runs>
 							<out>false</out>
 						</batsman>
@@ -1807,7 +1807,7 @@
 							<runs>38</runs>
 							<wickets>0</wickets>
 						</bowler>
-						<bowler player="JHeadon">
+						<bowler player="JHeaden">
 							<ballsBowled>18</ballsBowled>
 							<runs>40</runs>
 							<wickets>0</wickets>
@@ -2314,7 +2314,7 @@
 							<runs>35</runs>
 							<wickets>3</wickets>
 						</bowler>
-						<bowler player="JHeadon">
+						<bowler player="JHeaden">
 							<ballsBowled>18</ballsBowled>
 							<runs>32</runs>
 							<wickets>0</wickets>
@@ -2341,7 +2341,7 @@
 							<runs>25</runs>
 							<out>false</out>
 						</batsman>
-						<batsman player="JHeadon">
+						<batsman player="JHeaden">
 							<runs>1</runs>
 							<out>true</out>
 						</batsman>
@@ -2847,7 +2847,7 @@
 							<runs>0</runs>
 							<out>true</out>
 						</batsman>
-						<batsman player="JHeadon">
+						<batsman player="JHeaden">
 							<runs>6</runs>
 							<out>true</out>
 						</batsman>
@@ -2923,7 +2923,7 @@
 							<runs>22</runs>
 							<wickets>0</wickets>
 						</bowler>
-						<bowler player="JHeadon">
+						<bowler player="JHeaden">
 							<ballsBowled>18</ballsBowled>
 							<runs>29</runs>
 							<wickets>0</wickets>
@@ -3318,7 +3318,7 @@
 							<runs>20</runs>
 							<wickets>0</wickets>
 						</bowler>
-						<bowler player="JHeadon">
+						<bowler player="JHeaden">
 							<ballsBowled>18</ballsBowled>
 							<runs>30</runs>
 							<wickets>0</wickets>
@@ -3344,7 +3344,7 @@
 							<runs>16</runs>
 							<out>true</out>
 						</batsman>
-						<batsman player="JHeadon">
+						<batsman player="JHeaden">
 							<runs>17</runs>
 							<out>true</out>
 						</batsman>
@@ -3749,7 +3749,7 @@
 							<runs>0</runs>
 							<out>true</out>
 						</batsman>
-						<batsman player="JHeadon">
+						<batsman player="JHeaden">
 							<runs>28</runs>
 							<out>true</out>
 						</batsman>
@@ -3816,7 +3816,7 @@
 							<runs>33</runs>
 							<wickets>0</wickets>
 						</bowler>
-						<bowler player="JHeadon">
+						<bowler player="JHeaden">
 							<ballsBowled>6</ballsBowled>
 							<runs>4</runs>
 							<wickets>0</wickets>
@@ -4306,7 +4306,7 @@
 							<runs>8</runs>
 							<out>true</out>
 						</batsman>
-						<batsman player="JHeadon">
+						<batsman player="JHeaden">
 							<runs>14</runs>
 							<out>true</out>
 						</batsman>
@@ -4377,7 +4377,7 @@
 							<runs>23</runs>
 							<wickets>0</wickets>
 						</bowler>
-						<bowler player="JHeadon">
+						<bowler player="JHeaden">
 							<ballsBowled>14</ballsBowled>
 							<runs>11</runs>
 							<wickets>1</wickets>
@@ -5119,7 +5119,7 @@
 							<runs>32</runs>
 							<wickets>2</wickets>
 						</bowler>
-						<bowler player="JHeadon">
+						<bowler player="JHeaden">
 							<ballsBowled>18</ballsBowled>
 							<runs>27</runs>
 							<wickets>1</wickets>
@@ -5145,7 +5145,7 @@
 							<runs>1</runs>
 							<out>true</out>
 						</batsman>
-						<batsman player="JHeadon">
+						<batsman player="JHeaden">
 							<runs>11</runs>
 							<out>true</out>
 						</batsman>
