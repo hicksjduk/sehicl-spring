@@ -17,23 +17,9 @@
 </#macro>
 
 <@news end="2023-04-02">
-Please note that <b>the timing of this year's end-of-season presentation evening has changed</b>
-from what has been the practice in previous years. It will now start at 5pm and end at 9pm.
-The full schedule for the evening, which is on Sunday 2nd April, <a href="presentation">can be viewed 
-here</a>.
-</@news>
-
-<@news end="2023-04-02">
 We have been asked to draw the attention of participants in the League to the Leisure Centre's
 policy that <b>no filming or photography may take place without first gaining the Centre's
 express permission.</b> This includes the use of helmet cameras.
-</@news>
-
-<@news end="2023-03-05">
-<b>Congratulations to League champions Havant</b>, who won the Hampshire indoor championship on
-18th February.
-Unfortunately, their progress towards the national indoor finals was halted on 26th February, when 
-they lost a play-off against the Dorset champions Bournemouth. 
 </@news>
 
 <@news end="2023-04-30">
