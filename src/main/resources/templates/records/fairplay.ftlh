@@ -43,6 +43,7 @@
 <@award 2019 "Gosport Borough B"/>
 <@award 2020 "Clanfield"/>
 <@award 2022 "Clanfield B"/>
+<@award 2023 "Gosport Borough A"/>
 </tbody>
 </table>
 
@@ -73,6 +74,7 @@
 <@award 2019 "Hambledon A Under-16, Hambledon Sharks Under-13 (shared)"/>
 <@award 2020 "Havant Under-16"/>
 <@award 2022 "Hambledon Under-13"/>
+<@award 2023 "Waterlooville Under-16"/>
 </tbody>
 </table>
 </div>
