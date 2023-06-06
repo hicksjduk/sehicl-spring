@@ -29,8 +29,8 @@
 		<@award "u16" "Portsmouth A" "/graphics/presentation2023/U16.jpg"/>
 		<@award "u13" "Waterlooville"  "/graphics/presentation2023/U13.jpg"/>
 		<@award "u16bat" "Samuel Harradine (Hambledon Jets)"  "/graphics/presentation2023/U16Batting.jpg"/>	
-		<@award "u16bowl" "Freddie Hayes (Hambledon Sharks)" "" 
-		"No picture as the award winner was not available to collect his award in person"/>	
+		<@award "u16bowl" "Freddie Hayes (Hambledon Sharks)" "/graphics/presentation2023/U16Bowling.jpg" 
+		"Presented by Mark Le-Clercq at Hambledon's home ground, as Freddie was not available to attend the presentation evening"/>	
 		<@award "u13bat" "Luke Harradine (Waterlooville)" "/graphics/presentation2023/U13Batting.jpg"/>	
 		<@award "u13bowl" "Jayden Pay (Havant)" "/graphics/presentation2023/U13Bowling.jpg"/>	
 		<@award "cfair" "Waterlooville Under-16" "/graphics/presentation2023/ColtsFairplay.jpg"/>	
