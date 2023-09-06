@@ -1,5 +1,5 @@
 <h1>Archive: Season ${(season + 1999)?string.computer}-${season?string("00")}</h1>
-<#assign divs = (season < 18)?then(4, (season == 20)?then(6,5))/>
+<#assign divs = (season < 18 || season > 22)?then(4, (season == 20)?then(6,5))/>
 <table>
 	<thead>
 		<tr>
