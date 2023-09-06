@@ -26,6 +26,14 @@
     </person>
 
     <person>
+        <name>Adam Smith</name>
+        <phone>07988806693</phone>
+        <role name="Umpires' Co-ordinator">
+            <email id="umpires" />
+        </role>
+    </person>
+
+    <person>
         <name>Matt Wake</name>
         <phone>07824 466432</phone>
         <role name="Secretary" club="Barracuda">
@@ -66,8 +74,8 @@
     </person>
 
     <person>
-        <name>Matt Bradley</name>
-        <phone>07788 897780</phone>
+        <name>Sean Swift</name>
+        <phone>07810 698221</phone>
         <role name="Captain" club="Clanfield" />
     </person>
 
@@ -103,6 +111,11 @@
         <role name="Secretary" club="Droxford">
             <email id="droxford.secretary" />
         </role>
+    </person>
+
+    <person>
+        <name>TBC</name>
+        <phone></phone>
         <role name="Captain" club="Droxford" />
     </person>
 
@@ -129,8 +142,8 @@
     </person>
 
     <person>
-        <name>Andrew Martin</name>
-        <phone>07392 018371</phone>
+        <name>Tom Kent</name>
+        <phone>07504 266950</phone>
         <role name="Captain" club="Fareham &amp; Crofton" />
     </person>
 
@@ -141,8 +154,8 @@
     </person>
 
     <person>
-        <name>Jeff Wylde</name>
-        <phone>07579 797870</phone>
+        <name>Paul Grier</name>
+        <phone>07736 975045</phone>
         <role name="Under-13" club="Fareham &amp; Crofton" />
     </person>
 
@@ -152,29 +165,24 @@
         <role name="Secretary" club="Gosport Borough">
             <email id="gosport.secretary" />
         </role>
-    </person>
-
-    <person>
-        <name>Charlie Pennicott</name>
-        <phone>07961 493425</phone>
-        <role name="A team" club="Gosport Borough" />
-    </person>
-
-    <person>
-        <name>Scott Taylor</name>
-        <phone>07734 029699</phone>
         <role name="B team" club="Gosport Borough" />
     </person>
 
     <person>
-        <name>Lucy Boswell</name>
-        <phone>07849 157160</phone>
-        <role name="Under-16" club="Gosport Borough" />
+        <name>Jacob Harris</name>
+        <phone>07717 417020</phone>
+        <role name="A team" club="Gosport Borough" />
     </person>
 
     <person>
         <name>Jordyn Dore</name>
         <phone>07776 817317</phone>
+        <role name="Under-16" club="Gosport Borough" />
+    </person>
+
+    <person>
+        <name>Chris Brett</name>
+        <phone>07979 626949</phone>
         <role name="Under-13" club="Gosport Borough" />
     </person>
 
@@ -217,18 +225,6 @@
     </person>
 
     <person>
-        <name>Adam Smith</name>
-        <phone>07988806693</phone>
-        <role name="Secretary" club="Hampshire Bowman">
-            <email id="bowman.secretary" />
-        </role>
-        <role name="Captain" club="Hampshire Bowman" />
-        <role name="Umpires' Co-ordinator">
-            <email id="umpires" />
-        </role>
-    </person>
-
-    <person>
         <name>Simon Morgan</name>
         <phone>07714 447323</phone>
         <role name="Secretary" club="Havant">
@@ -238,7 +234,7 @@
 
     <person>
         <name>Harry Gadd</name>
-        <phone>07572 620283</phone>
+        <phone>07305 425041</phone>
         <role name="A team" club="Havant" />
     </person>
 
@@ -255,14 +251,9 @@
     </person>
 
     <person>
-        <name>TBC</name>
-        <phone></phone>
+        <name>Ben Pay</name>
+        <phone>07961 732303</phone>
         <role name="Under-16" club="Havant" />
-    </person>
-
-    <person>
-        <name>TBC</name>
-        <phone></phone>
         <role name="Under-13" club="Havant" />
     </person>
 
@@ -272,9 +263,20 @@
         <role name="Secretary" club="Kerala">
             <email id="kerala.secretary" />
         </role>
-        <role name="Captain" club="Kerala" />
     </person>
-
+    
+    <person>
+        <name>Karthick Muthuraman</name>
+        <phone>07983 608353</phone>
+        <role name="A team" club="Kerala" />
+    </person>
+    
+    <person>
+        <name>Imthias Mangatuparambil</name>
+        <phone>07545 594029</phone>
+        <role name="B team" club="Kerala" />
+    </person>
+    
     <person>
         <name>Dan McLeish</name>
         <phone>07876 701019</phone>
@@ -287,6 +289,15 @@
         <name>Simon Izzard</name>
         <phone>07791 675618</phone>
         <role name="Captain" club="Knowle Village" />
+    </person>
+
+    <person>
+        <name>David Swindlehurst</name>
+        <phone>07867 398554</phone>
+        <role name="Secretary" club="Leigh Park United">
+            <email id="leighpark.secretary" />
+        </role>
+        <role name="Captain" club="Leigh Park United"/>
     </person>
 
     <person>
@@ -309,6 +320,15 @@
     </person>
 
     <person>
+        <name>Michael Hand</name>
+        <phone>07545 076563</phone>
+        <role name="Secretary" club="Parco">
+            <email id="parco.secretary" />
+        </role>
+        <role name="Captain" club="Parco"/>
+    </person>
+
+    <person>
         <name>Helen Klemm</name>
         <phone>07816 489496</phone>
         <role name="Secretary" club="Petersfield">
@@ -317,31 +337,30 @@
     </person>
 
     <person>
-        <name>Dan Roots</name>
-        <phone>07906 388856</phone>
+        <name>Olaf Swanzy</name>
+        <phone></phone>
         <role name="Under-13" club="Petersfield" />
-    </person>
-
-    <person>
-        <name>Alan Walton</name>
-        <phone>07703 531369</phone>
-        <role name="Secretary" club="Portsmouth">
-            <email id="portsmouth.secretary" />
-        </role>
-    </person>
-
-    <person>
-        <name>Jo Stretton</name>
-        <phone>07756 261174</phone>
-        <role name="A team" club="Portsmouth" />
     </person>
 
     <person>
         <name>Rick Marston</name>
         <phone>07724138531</phone>
+        <role name="Secretary" club="Portsmouth">
+            <email id="portsmouth.secretary" />
+        </role>
         <role name="B team" club="Portsmouth" />
-        <role name="Under-16 A" club="Portsmouth" />
-        <role name="Under-16 B" club="Portsmouth" />
+    </person>
+
+    <person>
+        <name>Sujeeth Daini</name>
+        <phone>07760 510504</phone>
+        <role name="A team" club="Portsmouth" />
+    </person>
+
+    <person>
+        <name>TBC</name>
+        <phone></phone>
+        <role name="Under-16" club="Portsmouth" />
         <role name="Under-13" club="Portsmouth" />
     </person>
 
@@ -363,7 +382,7 @@
         <name>Louise Etherington</name>
         <phone>07720 248535</phone>
         <role name="Secretary" club="Portsmouth &amp; Southsea">
-            <email id="southsea.secretary" />
+            <email id="pands.secretary" />
         </role>
     </person>
 
@@ -383,15 +402,14 @@
     <person>
         <name>Bernard Harding</name>
         <phone>07747 771808</phone>
-        <phone>02392 232322</phone>
         <role name="Secretary" club="Purbrook">
             <email id="purbrook.secretary" />
         </role>
     </person>
 
     <person>
-        <name>Bradley Mengham</name>
-        <phone>07870 996960</phone>
+        <name>Josh Spiers</name>
+        <phone>07741 294958</phone>
         <role name="Captain" club="Purbrook" />
     </person>
 
@@ -434,15 +452,6 @@
         <phone>07786 477770</phone>
         <role name="Under-16" club="Waterlooville" />
         <role name="Under-13" club="Waterlooville" />
-    </person>
-
-    <person>
-        <name>Ben Cowdry</name>
-        <phone>07761 478596</phone>
-        <role name="Secretary" club="Westbourne">
-            <email id="westbourne.secretary" />
-        </role>
-        <role name="Captain" club="Westbourne" />
     </person>
 
     <person>
