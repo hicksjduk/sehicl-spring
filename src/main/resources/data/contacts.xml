@@ -111,11 +111,6 @@
         <role name="Secretary" club="Droxford">
             <email id="droxford.secretary" />
         </role>
-    </person>
-
-    <person>
-        <name>TBC</name>
-        <phone></phone>
         <role name="Captain" club="Droxford" />
     </person>
 
@@ -356,12 +351,29 @@
         <phone>07760 510504</phone>
         <role name="A team" club="Portsmouth" />
     </person>
+ 
+     <person>
+        <name>Lee Martin</name>
+        <phone>07795 485094</phone>
+        <role name="Under-16 Warrior" club="Portsmouth" />
+    </person>
 
     <person>
-        <name>TBC</name>
-        <phone></phone>
-        <role name="Under-16" club="Portsmouth" />
-        <role name="Under-13" club="Portsmouth" />
+        <name>Paul Watkinson</name>
+        <phone>07803 008166</phone>
+        <role name="Under-16 Daring" club="Portsmouth" />
+    </person>
+
+    <person>
+        <name>Carl Peat</name>
+        <phone>07388 015750</phone>
+        <role name="Under-13 Warrior" club="Portsmouth" />
+    </person>
+
+    <person>
+        <name>Tom Newman</name>
+        <phone>07739 985698</phone>
+        <role name="Under-13 Daring" club="Portsmouth" />
     </person>
 
     <person>
