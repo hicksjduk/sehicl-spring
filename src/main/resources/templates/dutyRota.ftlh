@@ -28,10 +28,10 @@
         <@duty "4th February" "Parco" />
         <@duty "11th February" "Hambledon A" />
         <@duty "18th February" "Clanfield" />
-        <@duty "25th February" "Hambledon B" />
+        <@duty "25th February" "Purbrook" />
         <@duty "3rd March" "XIIth Men A" />
         <@duty "10th March" "Havant A" />
-        <@duty "17th March" "Purbrook" />
+        <@duty "17th March" "Hambledon B" />
 	</tbody>
 </table>
 
