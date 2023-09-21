@@ -4,11 +4,18 @@
 <li>
 	
 <p>
-<a href="/resources/TeamSheet.pdf">Team sheet</a> - <i>PDF document, printing 2 sheets per A4 page.</i>
+<a href="/resources/Rules.pdf">Rules of the League</a> - <i>PDF document.</i>
 </p>
 	
 </li>
 
+<li>
+    
+<p>
+<a href="/resources/TeamSheet.pdf">Team sheet</a> - <i>PDF document, printing 2 sheets per A4 page.</i>
+</p>
+    
+</li>
 	
 <li>
 	
