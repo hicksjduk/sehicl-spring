@@ -1,4 +1,7 @@
 <h1>Rules and Playing Conditions</h1>
+<p class="noprint">Please note that these rules are also available to 
+<a href="/resources/Rules.pdf">download in PDF
+format.</a></p>
 <ul id="index" class="noprint">
 
 	<li><a href="#sectionA">A. Title</a></li>
