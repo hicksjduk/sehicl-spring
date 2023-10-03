@@ -52,8 +52,8 @@
     </person>
 
     <person>
-        <name>Ross Basketter</name>
-        <phone>07970 290358</phone>
+        <name>Paul O'Leary</name>
+        <phone>07817 776720</phone>
         <role name="Captain" club="Bedhampton" />
     </person>
 
@@ -211,13 +211,25 @@
     <person>
         <name>Jamie Lewis</name>
         <phone>‭07415 299017‬</phone>
-        <role name="Under-16" club="Hambledon" />
+        <role name="Under-16 Jets" club="Hambledon" />
     </person>
 
     <person>
-        <name>Ian Pratt</name>
-        <phone>07742 595416</phone>
-        <role name="Under-13" club="Hambledon" />
+        <name>James Jay</name>
+        <phone>‭07973 188205</phone>
+        <role name="Under-16 Sharks" club="Hambledon" />
+    </person>
+
+    <person>
+        <name>Zoe Mitchell</name>
+        <phone>07542 287931</phone>
+        <role name="Under-13 Jets" club="Hambledon" />
+    </person>
+
+    <person>
+        <name>Steve Hayes</name>
+        <phone>07909 784161</phone>
+        <role name="Under-13 Sharks" club="Hambledon" />
     </person>
 
     <person>
@@ -247,9 +259,14 @@
     </person>
 
     <person>
+        <name>Tom Davies</name>
+        <phone>07791 263506</phone>
+        <role name="Under-16" club="Havant" />
+    </person>
+
+    <person>
         <name>Ben Pay</name>
         <phone>07961 732303</phone>
-        <role name="Under-16" club="Havant" />
         <role name="Under-13" club="Havant" />
     </person>
 
@@ -262,7 +279,7 @@
     </person>
     
     <person>
-        <name>Karthick Muthuraman</name>
+        <name>Karthik Muthuraman</name>
         <phone>07983 608353</phone>
         <role name="A team" club="Kerala" />
     </person>
