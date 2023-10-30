@@ -16,17 +16,12 @@
 	</#if>
 </#macro>
 
-<@news end="2023-04-02">
-We have been asked to draw the attention of participants in the League to the Leisure Centre's
-policy that <b>no filming or photography may take place without first gaining the Centre's
-express permission.</b> This includes the use of helmet cameras.
-</@news>
-
-<@news end="2023-04-30">
-<b>Our sponsors Game Set & Match</b> have asked us to draw attention to the range of cricket equipment
-they currently have available, or are expecting to have in stock soon. 
-<a href="https://www.gsam.co.uk/collections/cricket-2023?sort_by=created-descending">Click here to see
-more details.</a>
+<@news>
+We have received reports of players being rude to Centre reception and other staff.  
+This is wholly unacceptable.  Players do not have to pay to enter the Centre, 
+but you may have to be patient to wait for them to open the gate to let you in.  
+Any specific instances brought to the League’s attention will be investigated. 
+<br>Richard Matthews, Chairman
 </@news>
 
 <#if started??>
