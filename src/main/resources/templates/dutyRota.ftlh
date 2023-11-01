@@ -19,7 +19,7 @@
         <@duty "19th November" "Barracuda" />
         <@duty "26th November" "Waterlooville A" />
         <@duty "3rd December" "Portsmouth & Southsea" />
-        <@duty "10th December" "Leigh Park United" />
+        <@duty "10th December" "Bedhampton" />
         <@duty "17th December" "Waterlooville B" />
         <@duty "7th January" "XIIth Men B" />
         <@duty "14th January" "Kerala B" />
