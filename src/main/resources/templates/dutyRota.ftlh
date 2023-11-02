@@ -23,9 +23,9 @@
         <@duty "17th December" "Waterlooville B" />
         <@duty "7th January" "XIIth Men B" />
         <@duty "14th January" "Kerala B" />
-        <@duty "21st January" "Droxford" />
+        <@duty "21st January" "Parco" />
         <@duty "28th January" "Buffalo Portsmouth" />
-        <@duty "4th February" "Parco" />
+        <@duty "4th February" "Droxford" />
         <@duty "11th February" "Hambledon A" />
         <@duty "18th February" "Clanfield" />
         <@duty "25th February" "Purbrook" />
