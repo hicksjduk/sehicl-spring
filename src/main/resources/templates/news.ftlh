@@ -17,11 +17,9 @@
 </#macro>
 
 <@news>
-We have received reports of players being rude to Centre reception and other staff.  
-This is wholly unacceptable.  Players do not have to pay to enter the Centre, 
-but you may have to be patient to wait for them to open the gate to let you in.  
-Any specific instances brought to the League’s attention will be investigated. 
-<br>Richard Matthews, Chairman
+It has been the League's practice to use a new ball for all matches in Divisions 1 and 2.
+Unfortunately, due to supply issues our stock of new balls is running very low; so until
+further notice new balls will only be used in Division 1 matches, not in Division 2. 
 </@news>
 
 <#if started??>
