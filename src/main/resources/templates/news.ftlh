@@ -22,6 +22,11 @@ Unfortunately, due to supply issues our stock of new balls is running very low; 
 further notice new balls will only be used in Division 1 matches, not in Division 2. 
 </@news>
 
+<@news end="2023-12-31">
+Congratulations to <b>Luke Harradine</b> of Purbrook, on taking a hat-trick against OPCS
+Titchfield on 10th December. 
+</@news>
+
 <#if started??>
 	</div>
 </#if>
