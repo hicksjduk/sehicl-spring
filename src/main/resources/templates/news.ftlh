@@ -16,7 +16,7 @@
 	</#if>
 </#macro>
 
-<@news>
+<@news end="2024-01-31">
 It has been the League's practice to use a new ball for all matches in Divisions 1 and 2.
 Unfortunately, due to supply issues our stock of new balls is running very low; so until
 further notice new balls will only be used in Division 1 matches, not in Division 2. 
