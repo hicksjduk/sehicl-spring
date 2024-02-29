@@ -18,8 +18,11 @@
 	the Mayor of Fareham, presents the senior teams' awards, and the
 	centrepiece of the evening is an eight-a-side challenge match between the
 	Mayor of Fareham's VIII and the Division 1 champions' VIII.
+	The 2024 presentation evening is on <b>Sunday 24th March</b>.
+	<#--
 	<a href="/archive/presentation/2023">The 2023 presentation evening</a>
 	was on Sunday 2nd April; click the link to view details of the evening.
+	-->
 </p>
 <p>Please report any broken links, mis-spelled names or other errors
 	to 	<@mailto address="website" description="SEHICL Webmaster">
