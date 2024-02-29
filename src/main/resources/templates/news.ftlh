@@ -16,15 +16,12 @@
 	</#if>
 </#macro>
 
-<@news end="2024-01-31">
-It has been the League's practice to use a new ball for all matches in Divisions 1 and 2.
-Unfortunately, due to supply issues our stock of new balls is running very low; so until
-further notice new balls will only be used in Division 1 matches, not in Division 2. 
-</@news>
-
-<@news end="2023-12-31">
-Congratulations to <b>Luke Harradine</b> of Purbrook, on taking a hat-trick against OPCS
-Titchfield on 10th December. 
+<@news>
+The Committee is considering the possibility of <b>running a women's league</b> next season,
+and would like to gauge interest. Any club (whether or not they are currently a member of the League)
+who would be interested in having a women's team in such a competition is invited to contact
+<@mailto address="secretary" description="SEHICL Secretary">the Secretary</@mailto> as
+soon as possible, and preferably before the Annual General Meeting which is on Monday 3rd June.
 </@news>
 
 <#if started??>
