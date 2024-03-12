@@ -37,5 +37,5 @@ Cllr Fred Birkett
 <p>8.00pm: Exhibition matches
 <ul>
 <li>Division 2 Champions (Hambledon B) v Division 3 Champions (Swanmore)
-<li>Division 4 Champions v Committee/Umpires
+<li>Division 4 Champions (Purbrook) v Committee/Umpires
 </ul>
