@@ -77,6 +77,7 @@
     <@winner 2020 "Havant A"/>
     <@winner 2022 "Havant A"/>
     <@winner 2023 "Hambledon A"/>
+    <@winner 2024 "Hambledon A"/>
 </@div>
 
 <@div "Division 2" "from 1986-87 for the Barretts Shield">
@@ -121,6 +122,7 @@
     <@winner 2020 "Hambledon A"/>
     <@winner 2022 "Havant B"/>
     <@winner 2023 "Portsmouth A"/>
+    <@winner 2024 "Hambledon B"/>
 </@div>
 
 <@div "Division 3" "for the Ferguson Shield">
@@ -160,6 +162,7 @@
     <@winner 2020 "Havant B"/>
     <@winner 2022 "Fareham & Crofton"/>
     <@winner 2023 "Hambledon B"/>
+    <@winner 2024 "Swanmore"/>
 </@div>
 
 <@div "Division 4", "for the Joan Vause Shield">
@@ -198,6 +201,7 @@
     <@winner 2020 "Fareham & Crofton"/>
     <@winner 2022 "Droxford"/>
     <@winner 2023 "Barracuda"/>
+    <@winner 2024 "Purbrook"/>
 </@div>
 
 <@div "Division 5", "for the Brian Ravenhall Memorial Shield">
@@ -256,6 +260,7 @@
     <@winner 2020 "Havant"/>
     <@winner 2022 "Hambledon Jets"/>
     <@winner 2023 "Portsmouth A"/>
+    <@winner 2024 "Hambledon Jets"/>
 </@div>
 
 <@div "Colts Under-13" "for the Ron Cross MBE Trophy">
@@ -284,6 +289,7 @@
     <@winner 2020 "Hambledon"/>
     <@winner 2022 "Grayshott"/>
     <@winner 2023 "Waterlooville"/>
+    <@winner 2024 "Hambledon Sharks"/>
 </@div>
 
 </div>

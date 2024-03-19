@@ -44,6 +44,7 @@
 <@award 2020 "Clanfield"/>
 <@award 2022 "Clanfield B"/>
 <@award 2023 "Gosport Borough A"/>
+<@award 2024 "Emsworth"/>
 </tbody>
 </table>
 
@@ -75,6 +76,7 @@
 <@award 2020 "Havant Under-16"/>
 <@award 2022 "Hambledon Under-13"/>
 <@award 2023 "Waterlooville Under-16"/>
+<@award 2024 "Portsmouth Daring Under-13"/>
 </tbody>
 </table>
 </div>
