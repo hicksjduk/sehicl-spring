@@ -1,5 +1,7 @@
 package uk.org.sehicl.website.rules;
 
+import java.util.Optional;
+
 public class Rules
 {
     private final int pointsPerWin;
@@ -190,20 +192,18 @@ public class Rules
         private int minRunsForBattingHighlight = 20;
         private int minWicketsForBowlingHighlight = 2;
         private boolean orderByAveragePoints = true;
-        
+
         public Builder()
         {
             this(null);
         }
-        
+
         public Builder(Integer season)
         {
-            if (season != null && season < 15)
-            {
-                setBattingPointsForAwardedMatch(3);
-                setBowlingPointsForAwardedMatch(6);
-            }
-            if (season != null && season < 19)
+            var s = Optional.ofNullable(season);
+            if (s.orElse(15) < 15)
+                setBattingPointsForAwardedMatch(3).setBowlingPointsForAwardedMatch(6);
+            if (s.orElse(19) < 19)
                 setOrderByAveragePoints(false);
         }
 
