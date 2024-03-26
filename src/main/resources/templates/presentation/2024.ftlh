@@ -15,8 +15,8 @@
 				alt="Colts Under-13 Select VI"><br>The Colts Under-13 Select side
 		</tr>
 		<@exhibitionMatch "Under-16"
-			innings("Hambledon Sharks", 117, 3, 12, "H Kalra 28*", "T Pritchard 22*")
-            innings("Under-16 Select VI", 118, 3, 11, "L Harradine 27*", "O Parvin 26*")
+			innings("Hambledon Jets", 117, 3, 12, "H Kalra 28*", "T Pritchard 22*")
+            innings("Under-16 Select VI", 115, 3, 11, "L Harradine 27*", "O Parkhurst-Fisher 26*")
 		/>
 		<tr>
 			<td colspan="2"><img border="0" src="/graphics/presentation2024/U16Select.jpg"
