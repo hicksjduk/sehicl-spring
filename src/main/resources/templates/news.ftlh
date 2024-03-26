@@ -24,14 +24,6 @@ who would be interested in having a women's team in such a competition is invite
 soon as possible, and preferably before the Annual General Meeting which is on Monday 3rd June.
 </@news>
 
-<@news>
-We have been informed by the Leisure Centre that complaints were received on Sunday (10th March), about a smell 
-outside the entrance of the Centre which suggested that illegal drugs were being smoked; and
-CCTV footage indicates that cricketers may have been responsible. The Committee will be taking
-steps to identify the culprits, but in the meantime we would like to remind everyone involved in
-the League that this is not acceptable behaviour while people are at the Centre for cricket.
-</@news>
-
 <#if started??>
 	</div>
 </#if>
