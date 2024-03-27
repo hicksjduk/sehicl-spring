@@ -41,7 +41,7 @@
 		<@exhibitionMatch "The Mayor of Fareham's VIII v Division 1 Champions' VIII"
             innings("The Mayor of Fareham's VIII", 154, 5, 12, "T Clark 25*", "A Norris 25*",
                 "S Worsley 22", "A Reynolds 20*", "S Khan 3/21") 
-            innings("Hambledon A", 155, 7, 11.2, "O Bembridge 62*", "G Marshall 30", "C Pratt 22",
+            innings("Hambledon A", 155, 7, 11, "O Bembridge 62*", "G Marshall 30", "C Pratt 22",
                 "L Field 3/6", "K Muthuraman 2/50")
             8/>
 		<tr>
@@ -56,7 +56,7 @@
 
 		</tr>
 		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
-			innings("Hambledon B", 128, 2, 12)
+			innings("Hambledon B", 128, 6, 12, "F Primmer 22", "J Gradwell 2/19")
 			innings("Swanmore", 115, 5, 12, "T Hopkins 30*", "J Gradwell 29*", "J Sparsholt 22")/>
 		<@exhibitionMatch "Division 4 Champions v Committee/Umpires"
 			innings("Purbrook", 152, 1, 8, "A Dean 35*", "J Barber 28*", "F Leslie 25*", "J Spiers 25*",  
