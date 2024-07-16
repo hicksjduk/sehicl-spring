@@ -24,6 +24,15 @@ who would be interested in having a women's team in such a competition is invite
 soon as possible, and preferably before the Annual General Meeting which is on Monday 3rd June.
 </@news>
 
+<@news>
+We have received some new stocks of indoor cricket balls, so normal arrangements should be resumed next
+season with all Division 1 and Division 2 games using a new ball. 
+Many thanks to 
+<a href="http://www.gsam.co.uk/">Game Set and Match</a>
+for their continued support.
+</@news>
+
+
 <#if started??>
 	</div>
 </#if>
