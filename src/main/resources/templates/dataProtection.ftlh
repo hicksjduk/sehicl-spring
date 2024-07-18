@@ -52,19 +52,20 @@ are freely available on the website. Their addresses and phone numbers are held
 on our website server, but are only available to people who register as users of the site and log in. 
 <p>Retained until the person ceases to be a committee member.
 
-<h3>Names, addresses, email addresses and phone numbers of club officers (secretary, 
-alternate contact(s) and team captains/managers)</h3>
+<h3>Names, email addresses and phone numbers of club officers (secretary, 
+alternate contact(s), treasurer and team captains/managers)</h3>
 <p>Supplied on the records update form at the start of each season.
-<p>Entered by the Secretary into a spreadsheet which is shared with the Webmaster.
+<p>Entered by the Secretary into a spreadsheet which is shared with the Webmaster and Treasurer.
 <p>Email addresses are held on our web domain supplier's database, in order to map them to 
 job-specific aliases and distribution lists.
 <p>Used to contact club officers either individually or as a group. Captains' and managers' 
 phone numbers are also used for urgent contacts, for example when a match is called off.
-<p>Names and email aliases are freely available on the website. Addresses and phone numbers 
+<p>Names and email aliases are freely available on the website. Phone numbers 
 are held on our website server, but are only available to people who register as users 
 of the site and log in. 
 <p>Retained until the club in question ceases to be a member of the league, 
-or submits a new records update form.
+or submits a new records update form. Old versions of the contacts
+spreadsheet may be retained, for historical reference only.
 
 <h3>Names and contact details of people on the waiting list to join the league</h3>
 <p>Supplied by the person in question when the request to join is made.
