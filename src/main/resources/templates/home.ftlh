@@ -9,7 +9,7 @@
 		href="https://www.everyoneactive.com/centre/fareham-leisure-centre/">Fareham
 		Leisure Centre</a>, Park Lane, Fareham (<a
 		href="https://www.google.com/maps/place/Fareham+Leisure+Centre/@50.8573839,-1.1872637,17z/data=!3m1!4b1!4m5!3m4!1s0x487468be4997762d:0x27530aee839dab5e!8m2!3d50.8573805!4d-1.185075">map</a>).
-	Matches are held on Sunday evenings, from the beginning of October to March.
+	Matches are held on Sunday evenings, from October to March.
 </p>
 <p>
 	At the end of each season the League holds a presentation evening. All
@@ -24,6 +24,7 @@
     -->
 	<a href="/archive/presentation/2024">The 2024 presentation evening</a>
 	was on Sunday 24th March; click the link to view details of the evening.
+	The 2025 presentation evening will be on Sunday 30th March.
 </p>
 <p>Please report any broken links, mis-spelled names or other errors
 	to 	<@mailto address="website" description="SEHICL Webmaster">

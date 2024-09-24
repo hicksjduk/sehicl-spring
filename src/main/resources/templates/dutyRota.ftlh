@@ -1,12 +1,11 @@
-<h1>Duty team rota 2023-24</h1>
+<h1>Duty team rota 2024-25</h1>
 <p>
 	<a href="/rules#sectionT">Article T</a> of the League's rules states
 	that the designated duty team for each evening must attend and operate
 	the manual scoreboards for all senior (<i>not</i> Colts) games on the designated evening.
 </p>
-<#--
 <p>The duty rota will be published shortly.</p>
--->
+<#--
 <table id="dutyrota">
 	<tbody>
         <@duty "24th September" "Knowle Village" />
@@ -34,6 +33,7 @@
         <@duty "17th March" "Hambledon B" />
 	</tbody>
 </table>
+-->
 
 <#macro duty date team>
 	<tr>
