@@ -35,29 +35,6 @@
     </person>
 
     <person>
-        <name>Matt Wake</name>
-        <phone>07824 466432</phone>
-        <role name="Secretary" club="Barracuda">
-            <email id="barracuda.secretary" />
-        </role>
-        <role name="Captain" club="Barracuda" />
-    </person>
-
-    <person>
-        <name>Phillip Williams</name>
-        <phone>07882 321103</phone>
-        <role name="Secretary" club="Bedhampton">
-            <email id="bedhampton.secretary" />
-        </role>
-    </person>
-
-    <person>
-        <name>Paul O'Leary</name>
-        <phone>07817 776720</phone>
-        <role name="Captain" club="Bedhampton" />
-    </person>
-
-    <person>
         <name>Gulzamir Saddiqi</name>
         <phone>07454 983187</phone>
         <role name="Secretary" club="Buffalo Portsmouth">
@@ -67,8 +44,8 @@
     </person>
 
     <person>
-        <name>John Windebank</name>
-        <phone>07815 749962</phone>
+        <name>Matt Bradley</name>
+        <phone>07788 897780</phone>
         <role name="Secretary" club="Clanfield">
             <email id="clanfield.secretary" />
         </role>
@@ -77,7 +54,13 @@
     <person>
         <name>Sean Swift</name>
         <phone>07810 698221</phone>
-        <role name="Captain" club="Clanfield" />
+        <role name="A team" club="Clanfield" />
+    </person>
+
+    <person>
+        <name>Kris Lane</name>
+        <phone>07462 421356</phone>
+        <role name="B team" club="Clanfield" />
     </person>
 
     <person>
@@ -130,6 +113,20 @@
     </person>
 
     <person>
+        <name>Steven Wood</name>
+        <phone>07595 245502</phone>
+        <role name="Secretary" club="Fair Oak">
+            <email id="fairoak.secretary" />
+        </role>
+    </person>
+
+    <person>
+        <name>Caroline Lewis</name>
+        <phone>07801 913817</phone>
+        <role name="Under-13" club="Fair Oak" />
+    </person>
+
+    <person>
         <name>Mike Townson</name>
         <phone>07753444057</phone>
         <role name="Secretary" club="Fareham &amp; Crofton">
@@ -144,8 +141,8 @@
     </person>
 
     <person>
-        <name>Mike Rayner</name>
-        <phone>07751 866827</phone>
+        <name>Phil Attwood</name>
+        <phone>07718 998939</phone>
         <role name="Under-16" club="Fareham &amp; Crofton" />
     </person>
 
@@ -161,25 +158,27 @@
         <role name="Secretary" club="Gosport Borough">
             <email id="gosport.secretary" />
         </role>
-        <role name="B team" club="Gosport Borough" />
-    </person>
-
-    <person>
-        <name>Jacob Harris</name>
-        <phone>07717 417020</phone>
-        <role name="A team" club="Gosport Borough" />
-    </person>
-
-    <person>
-        <name>Jordyn Dore</name>
-        <phone>07776 817317</phone>
-        <role name="Under-16" club="Gosport Borough" />
     </person>
 
     <person>
         <name>Chris Brett</name>
         <phone>07979 626949</phone>
+        <role name="Under-16" club="Gosport Borough" />
         <role name="Under-13" club="Gosport Borough" />
+    </person>
+
+    <person>
+        <name>Graham Sampson</name>
+        <phone>07826 523227</phone>
+        <role name="Secretary" club="Grayshott">
+            <email id="grayshott.secretary" />
+        </role>
+    </person>
+
+    <person>
+        <name>Mark Le Mare</name>
+        <phone>07488 250642</phone>
+        <role name="Under-16" club="Grayshott" />
     </person>
 
     <person>
@@ -211,25 +210,20 @@
     <person>
         <name>Jamie Lewis</name>
         <phone>‭07415 299017‬</phone>
+        <role name="B team" club="Hambledon" />
         <role name="Under-16 Jets" club="Hambledon" />
     </person>
 
     <person>
         <name>James Jay</name>
         <phone>‭07973 188205</phone>
-        <role name="Under-16 Sharks" club="Hambledon" />
+        <role name="Under-16" club="Hambledon" />
     </person>
 
     <person>
-        <name>Zoe Mitchell</name>
-        <phone>07542 287931</phone>
-        <role name="Under-13 Jets" club="Hambledon" />
-    </person>
-
-    <person>
-        <name>Steve Hayes</name>
-        <phone>07909 784161</phone>
-        <role name="Under-13 Sharks" club="Hambledon" />
+        <name>Ian Pratt</name>
+        <phone>‭07742 595416‬</phone>
+        <role name="Under-13" club="Hambledon" />
     </person>
 
     <person>
@@ -241,51 +235,39 @@
     </person>
 
     <person>
-        <name>Harry Gadd</name>
-        <phone>07305 425041</phone>
-        <role name="A team" club="Havant" />
-    </person>
-
-    <person>
-        <name>Alex Gardner</name>
-        <phone>07920 004412</phone>
-        <role name="B team" club="Havant" />
-    </person>
-
-    <person>
         <name>Andrew Ransley</name>
         <phone>07784 550840</phone>
-        <role name="C team" club="Havant" />
-    </person>
-
-    <person>
-        <name>Tom Davies</name>
-        <phone>07791 263506</phone>
-        <role name="Under-16" club="Havant" />
+        <role name="Captain" club="Havant" />
     </person>
 
     <person>
         <name>Ben Pay</name>
         <phone>07961 732303</phone>
+        <role name="Under-16" club="Havant" />
+    </person>
+
+    <person>
+        <name>Ian Rowlandson</name>
+        <phone>07949 660040</phone>
         <role name="Under-13" club="Havant" />
     </person>
 
     <person>
-        <name>Baiju Kurian</name>
-        <phone>07815 313185</phone>
+        <name>Prasad Panicker</name>
+        <phone>07444 399259</phone>
         <role name="Secretary" club="Kerala">
             <email id="kerala.secretary" />
         </role>
     </person>
     
     <person>
-        <name>Karthik Muthuraman</name>
-        <phone>07983 608353</phone>
-        <role name="A team" club="Kerala" />
+        <name>Baiju Kurian</name>
+        <phone>07815 313185</phone>
+        <role name="A team" club="Kerala"/>
     </person>
     
     <person>
-        <name>Imthias Mangatuparambil</name>
+        <name>Imthias Manga</name>
         <phone>07545 594029</phone>
         <role name="B team" club="Kerala" />
     </person>
@@ -302,6 +284,20 @@
         <name>Simon Izzard</name>
         <phone>07791 675618</phone>
         <role name="Captain" club="Knowle Village" />
+    </person>
+
+    <person>
+        <name>Anthony Lovell</name>
+        <phone>07714 583123</phone>
+        <role name="Secretary" club="Locks Heath">
+            <email id="locksheath.secretary" />
+        </role>
+    </person>
+
+    <person>
+        <name>Charlotte Varney</name>
+        <phone>07786 261603</phone>
+        <role name="Under-16" club="Locks Heath" />
     </person>
 
     <person>
@@ -352,37 +348,19 @@
         <role name="Secretary" club="Portsmouth">
             <email id="portsmouth.secretary" />
         </role>
-        <role name="B team" club="Portsmouth" />
-    </person>
-
-    <person>
-        <name>Sujeeth Daini</name>
-        <phone>07760 510504</phone>
-        <role name="A team" club="Portsmouth" />
-    </person>
- 
-     <person>
-        <name>Lee Martin</name>
-        <phone>07795 485094</phone>
-        <role name="Under-16 Warrior" club="Portsmouth" />
+        <role name="Captain" club="Portsmouth" />
     </person>
 
     <person>
         <name>Paul Watkinson</name>
         <phone>07803 008166</phone>
-        <role name="Under-16 Daring" club="Portsmouth" />
-    </person>
-
-    <person>
-        <name>Carl Peat</name>
-        <phone>07388 015750</phone>
-        <role name="Under-13 Warrior" club="Portsmouth" />
+        <role name="Under-16" club="Portsmouth" />
     </person>
 
     <person>
         <name>Tom Newman</name>
         <phone>07739 985698</phone>
-        <role name="Under-13 Daring" club="Portsmouth" />
+        <role name="Under-13" club="Portsmouth" />
     </person>
 
     <person>
@@ -394,8 +372,8 @@
     </person>
 
     <person>
-        <name>Jon Scowen</name>
-        <phone>07714 243112</phone>
+        <name>Hari Singh</name>
+        <phone>07525 267477</phone>
         <role name="Captain" club="Portsmouth Academics" />
     </person>
 
@@ -414,8 +392,8 @@
     </person>
 
     <person>
-        <name>Sean Kanavan</name>
-        <phone>07890 323072</phone>
+        <name>Matt Wheeler</name>
+        <phone>07846 732450</phone>
         <role name="Under-16" club="Portsmouth &amp; Southsea" />
         <role name="Under-13" club="Portsmouth &amp; Southsea" />
     </person>
@@ -435,17 +413,27 @@
     </person>
 
     <person>
-        <name>Oliver Rowe</name>
-        <phone>07816 332324</phone>
-        <role name="Secretary" club="Swanmore">
-            <email id="swanmore.secretary" />
+        <name>Tom Kitcher</name>
+        <phone>07725 879384</phone>
+        <role name="Secretary" club="Sarisbury Athletic">
+            <email id="sarisbury.secretary" />
         </role>
     </person>
 
     <person>
-        <name>Alex Ball</name>
-        <phone>07867 122816</phone>
-        <role name="Captain" club="Swanmore" />
+        <name>Michael Bond</name>
+        <phone>07890 531462</phone>
+        <role name="Under-16" club="Sarisbury Athletic" />
+        <role name="Under-13" club="Sarisbury Athletic" />
+    </person>
+
+    <person>
+        <name>Karthik Muthuraman</name>
+        <phone>07983 6083534</phone>
+        <role name="Secretary" club="Superkings">
+            <email id="superkings.secretary" />
+        </role>
+        <role name="Captain" club="Superkings" />
     </person>
 
     <person>
@@ -458,7 +446,7 @@
 
     <person>
         <name>Archie Reynolds</name>
-        <phone>07502 949226</phone>
+        <phone>07578 456211</phone>
         <role name="A team" club="Waterlooville" />
     </person>
 
@@ -472,27 +460,21 @@
         <name>Andy Reynolds</name>
         <phone>07786 477770</phone>
         <role name="Under-16" club="Waterlooville" />
-        <role name="Under-13" club="Waterlooville" />
     </person>
 
     <person>
-        <name>Jeremy Penny</name>
-        <phone>07970700837</phone>
+        <name>Andrew Kirby</name>
+        <phone>07736296929</phone>
         <role name="Secretary" club="XIIth Men">
             <email id="xiithmen.secretary" />
         </role>
+        <role name="B team" club="XIIth Men" />
     </person>
 
     <person>
         <name>Gursaant Singh</name>
         <phone>07903 823134</phone>
         <role name="A team" club="XIIth Men" />
-    </person>
-
-    <person>
-        <name>Andrew Kirby</name>
-        <phone>07736296929</phone>
-        <role name="B team" club="XIIth Men" />
     </person>
 
 </contacts>
