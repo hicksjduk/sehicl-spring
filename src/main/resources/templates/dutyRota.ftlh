@@ -4,36 +4,35 @@
 	that the designated duty team for each evening must attend and operate
 	the manual scoreboards for all senior (<i>not</i> Colts) games on the designated evening.
 </p>
-<p>The duty rota will be published shortly.</p>
 <#--
+<p>The duty rota will be published shortly.</p>
+-->
 <table id="dutyrota">
 	<tbody>
-        <@duty "24th September" "Knowle Village" />
-        <@duty "1st October" "Swanmore" />
-        <@duty "15th October" "Curdridge" />
-        <@duty "22nd October" "Havant B" />
-        <@duty "29th October" "Bedhampton" />
-        <@duty "5th November" "Hambledon C" />
-        <@duty "12th November" "Kerala A" />
-        <@duty "19th November" "Barracuda" />
-        <@duty "26th November" "Waterlooville A" />
-        <@duty "3rd December" "Portsmouth & Southsea" />
-        <@duty "10th December" "Bedhampton" />
-        <@duty "17th December" "Waterlooville B" />
-        <@duty "7th January" "XIIth Men B" />
-        <@duty "14th January" "Kerala B" />
-        <@duty "21st January" "Parco" />
-        <@duty "28th January" "Buffalo Portsmouth" />
-        <@duty "4th February" "Droxford" />
-        <@duty "11th February" "Hambledon A" />
-        <@duty "18th February" "Clanfield" />
-        <@duty "25th February" "Purbrook" />
-        <@duty "3rd March" "XIIth Men A" />
-        <@duty "10th March" "Havant A" />
-        <@duty "17th March" "Hambledon B" />
+        <@duty "13th October" "Kerala A" />
+        <@duty "20th October" "Buffalo Portsmouth" />
+        <@duty "27th October" "Hambledon B" />
+        <@duty "3rd November" "Clanfield A" />
+        <@duty "10th November" "Parco" />
+        <@duty "17th November" "Hambledon A" />
+        <@duty "24th November" "Knowle Village" />
+        <@duty "1st December" "Purbrook" />
+        <@duty "8th December" "Havant" />
+        <@duty "15th December" "Curdridge" />
+        <@duty "5th January" "Portsmouth & Southsea" />
+        <@duty "12th January" "Superkings" />
+        <@duty "19th January" "Buffalo Portsmouth" />
+        <@duty "26th January" "XIIth Men B" />
+        <@duty "2nd February" "Clanfield B" />
+        <@duty "9th February" "Kerala A" />
+        <@duty "16th February" "Parco" />
+        <@duty "23rd February" "Hambledon C" />
+        <@duty "2nd March" "Kerala B" />
+        <@duty "9th March" "Hambledon A" />
+        <@duty "16th March" "XIIth Men A" />
+        <@duty "23rd March" "Droxford" />
 	</tbody>
 </table>
--->
 
 <#macro duty date team>
 	<tr>
