@@ -1,6 +1,6 @@
 <h2>G. Subscriptions</h2>
 <ol>
-<li>The Annual Subscription shall be fixed at the AGM and shall be payable by Member Clubs to the Honorary Treasurer by
+<li>The Annual Subscription shall be fixed at the <a href="/rules/constitution/#agm">AGM</a> and shall be payable by Member Clubs to the Honorary Treasurer by
 31st July following. Cheques shall be payable to "The S.E. Hants I.C.L". Failure to do so may result in expulsion from the
 League.
 <li>All Member Clubs must pay their match fees for the coming season, in advance, to the Honorary Treasurer by 31st

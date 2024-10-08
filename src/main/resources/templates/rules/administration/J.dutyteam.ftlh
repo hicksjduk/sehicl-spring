@@ -1,5 +1,5 @@
 <h2>J. Duty Team</h2>
-<p>A Duty Team shall be rostered on the website by the Fixture Secretary to provide for manning of both scoreboards
+<p>A Duty Team shall be <a href="/dutyRota">rostered on the website</a> by the Fixture Secretary to provide for manning of both scoreboards
 throughout the evening senior programme. The Duty Team must be in attendance at all times during senior play and
 ensure that the scoreboards show the up-to-date situation of the game in progress. The Duty Team shall be drawn from
 Member Clubs of all senior divisions, but teams from any Member Club that supplies a member of the Committee and /

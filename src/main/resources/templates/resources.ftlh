@@ -50,7 +50,7 @@
 <p>To submit a result electronically, click one of the 'Result
 sheet' links above and download the document. Then fill in the details
 and e-mail the completed sheet to 
-<@mailto address="fixturesec">Jeremy Hicks, the League Fixture Secretary</@mailto>.
+<@mailto address="fixturesec">the League Fixture Secretary</@mailto>.
 Please note that if you submit a result
 electronically, you do not need to send in the hardcopy result sheet as
 well. However, you must not assume that it has been received until you receive

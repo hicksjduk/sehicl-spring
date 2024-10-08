@@ -29,4 +29,4 @@ innocent team will be awarded 12 points (win) + 5 points (bowling) + 5 points (b
 If a team is unable to fulfil a fixture and only realises this is the case on the Friday (or after) before the match is scheduled
 to be played, the Member Club must telephone their opposition and advise them of the situation. They must also
 telephone the Umpires' Coordinator. Emails and text messages are NOT sufficient in these circumstances. All contact
-numbers are available on the League website.
+numbers are available <a href="/fullContacts">on the League website</a>.

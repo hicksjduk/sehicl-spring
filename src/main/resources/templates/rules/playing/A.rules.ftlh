@@ -6,16 +6,17 @@ preceding cricket season, with the exception of the following playing regulation
 <ol>
 <li>A team shall consist of SIX nominated players one of whom shall be a wicket keeper. For the avoidance
 of doubt, the wicket keeper must wear external leg guards and wicket keeping gloves. The minimum of
-FOUR players will be allowed i.e. to comply with U(a)(3) - number of overs and U(a)(4) - bowling
-limitations. Any team comprising four or five players will compete with a wicket keeper as a member of
+FOUR players will be allowed i.e. to comply with <a href="#numberofovers">A(a)(3) - number of overs</a> and 
+<a href="#bowlerlimits">A(a)(4) - bowling
+limitations</a>. Any team comprising four or five players will compete with a wicket keeper as a member of
 their team. Team captains will hand to the Umpires a completed Team Sheet before the match starts.
 Failure to do so will cause the match to be delayed until a Team Sheet has been completed, and if the
 time taken to do so takes the time beyond the three minutes from the start time, then the Umpires shall
 report the guilty team(s)/teams for a late start and reduce the number of overs in accordance with Rule
 (I) 'Venue and Timings'.
 <li>Each match will consist of ONE innings per team.
-<li>Each innings will consist of the maximum twelve six ball overs.
-<li>No bowler may bowl more than three overs. In the event of a bowler becoming incapacitated, the over
+<li><a name="numberofovers"></a>Each innings will consist of the maximum twelve six ball overs.
+<li><a name="bowlerlimits"></a>No bowler may bowl more than three overs. In the event of a bowler becoming incapacitated, the over
 shall be completed by a bowler who has not bowled three overs, even if he bowled the preceding over.
 <li>The interval between innings is to be kept as short as possible.
 <li>Two batters shall be at the wicket at all times during the innings. In the event of a team losing five wickets
@@ -50,6 +51,7 @@ to the Disciplinary Committee by the Umpires.
 game, should they deem it necessary, and will write a full report to the Disciplinary Committee.
 <li>Law 42 “Players’ Conduct” shall not apply to the League.
 </ol>
+<a name="scoring"></a>
 <li>Scoring
 <br>Scoring for Indoor Cricket shall take place as follows:-
 <ol>
