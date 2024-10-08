@@ -18,7 +18,7 @@ public enum NavigatorSection
     TABLES(Section.TABLES, "Tables", "/tables", tablesSubItems()),
     AVERAGES(Section.AVERAGES, "Averages", "/averages", averagesSubItems()),
     RESOURCES(Section.RESOURCES, "Resources", "/resources"),
-    RULES(Section.RULES, "Rules", "/rules"),
+    RULES(Section.RULES, "Rules", "/rules", rulesSubItems()),
     RECORDS(Section.RECORDS, "Records", "/records", recordsSubItems()),
     ARCHIVE(Section.ARCHIVE, "Archive", "/archive", archiveSubItems()),
     DP(Section.DP, "Data Protection", "/dp");
@@ -39,6 +39,15 @@ public enum NavigatorSection
     private static NavigatorItem[] tablesSubItems()
     {
         return divisionSubItems("/tables/league/%s").toArray(NavigatorItem[]::new);
+    }
+
+    private static NavigatorItem[] rulesSubItems()
+    {
+        return Stream
+                .of(new NavigatorItem("Constitution", "/rules/constitution"),
+                        new NavigatorItem("Administrative Rules", "/rules/administration"),
+                        new NavigatorItem("Rules of Play", "/rules/playing"))
+                .toArray(NavigatorItem[]::new);
     }
 
     private static Stream<NavigatorItem> divisionSubItems(String uriTemplate)

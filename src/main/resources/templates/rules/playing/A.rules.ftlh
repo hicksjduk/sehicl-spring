@@ -96,7 +96,7 @@ and signal “Dead Ball” and award 1 run. The batters shall return to their or
 <br>The team scoring the most runs in its innings shall be the winner. If the scores are equal then the result shall be
 declared a tie and the points allocated as in Article K.
 <li>Methods of Dismissal
-Apart from normal methods of dismissal contained in the Laws of Cricket the following variations shall apply:-
+<br>Apart from normal methods of dismissal contained in the Laws of Cricket the following variations shall apply:-
 <ol>
 <li>The batter shall be caught out by a fielder after the ball has hit the ceiling, the netting or any wall except
 direct from the boundary wall, provided the ball has not touched the floor.
