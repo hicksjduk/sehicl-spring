@@ -143,21 +143,21 @@ public class Controller
     @RequestMapping("/rules/constitution")
     public String constitution(HttpServletRequest req)
     {
-        return new PageTemplate(new StaticPage("constitution", "rules/constitution/index.ftlh", Section.RULES,
+        return new PageTemplate(new StaticPage("rules", "rules/constitution/index.ftlh", Section.RULES,
                 getRequestUri(req), "SEHICL Constitution")).process();
     }
 
     @RequestMapping("/rules/administration")
     public String adminRules(HttpServletRequest req)
     {
-        return new PageTemplate(new StaticPage("administration", "rules/administration/index.ftlh", Section.RULES,
+        return new PageTemplate(new StaticPage("rules", "rules/administration/index.ftlh", Section.RULES,
                 getRequestUri(req), "SEHICL Administrative Rules")).process();
     }
 
     @RequestMapping("/rules/playing")
     public String playingRules(HttpServletRequest req)
     {
-        return new PageTemplate(new StaticPage("playing", "rules/playing/index.ftlh", Section.RULES,
+        return new PageTemplate(new StaticPage("rules", "rules/playing/index.ftlh", Section.RULES,
                 getRequestUri(req), "SEHICL Rules Of Play")).process();
     }
 

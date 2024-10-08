@@ -12,8 +12,9 @@ limitations</a>. Any team comprising four or five players will compete with a wi
 their team. Team captains will hand to the Umpires a completed Team Sheet before the match starts.
 Failure to do so will cause the match to be delayed until a Team Sheet has been completed, and if the
 time taken to do so takes the time beyond the three minutes from the start time, then the Umpires shall
-report the guilty team(s)/teams for a late start and reduce the number of overs in accordance with Rule
-(I) 'Venue and Timings'.
+report the guilty team(s)/teams for a late start and reduce the number of overs in accordance with 
+<a href="/rules/administration#venue.and.timings">Administrative Rule
+(A) 'Venue and Timings'</a>.
 <li>Each match will consist of ONE innings per team.
 <li><a name="numberofovers"></a>Each innings will consist of the maximum twelve six ball overs.
 <li><a name="bowlerlimits"></a>No bowler may bowl more than three overs. In the event of a bowler becoming incapacitated, the over
