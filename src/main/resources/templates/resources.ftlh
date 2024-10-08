@@ -2,9 +2,14 @@
 <ul>
 	
 <li>
-	
 <p>
-<a href="/resources/Rules.pdf">Rules of the League</a> - <i>PDF document.</i>
+Rules of the League - <i>PDF documents</i>
+<br>
+<a href="/resources/rules/constitution.pdf">Constitution</a>
+<br>
+<a href="/resources/rules/admin.pdf">Administrative Rules</a>
+<br>
+<a href="/resources/rules/rules.pdf">Rules of Play</a>
 </p>
 	
 </li>
