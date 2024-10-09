@@ -343,6 +343,20 @@
     </person>
 
     <person>
+        <name>Derek Kelly</name>
+        <phone>07724 899547</phone>
+        <role name="Secretary" club="Portchester">
+            <email id="portchester.secretary" />
+        </role>
+    </person>
+
+    <person>
+        <name>Katie Stares</name>
+        <phone>07724 800547</phone>
+        <role name="Under-13" club="Portchester" />
+    </person>
+
+    <person>
         <name>Rick Marston</name>
         <phone>07724138531</phone>
         <role name="Secretary" club="Portsmouth">
