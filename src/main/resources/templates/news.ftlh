@@ -16,8 +16,13 @@
 	</#if>
 </#macro>
 
-<@news>
-<b><a href="/fixtures">The fixtures are now available</b></a> for the 2024/25 season, which will commence on Sunday 13th October. 
+<@news start="2024-10-15" end="2024-10-24">
+Please be aware that <b>there may be a delay in some results from Sundays 13th and 20th October appearing on the website</b>.
+All results received should be there by Friday 25th.
+</@news>
+
+<@news end="2024-10-13">
+<b><a href="/fixtures">The fixtures are now available</a></b> for the 2024/25 season, which will commence on Sunday 13th October. 
 </@news>
 
 <@news end="2024-10-31">
