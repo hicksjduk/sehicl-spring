@@ -2,6 +2,7 @@ package uk.org.sehicl.website.report;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Optional;
 
 import uk.org.sehicl.website.data.AwardedMatch;
 import uk.org.sehicl.website.data.Innings;
@@ -172,7 +173,7 @@ public class ResultFormatter
         @Override
         public String toString()
         {
-            String answer = String.format("default (%s)", reason);
+            String answer = Optional.ofNullable(reason).map("default (%s)"::formatted).orElse("default");
             return answer;
         }
     }

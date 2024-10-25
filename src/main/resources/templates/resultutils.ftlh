@@ -47,7 +47,8 @@
     <td class="teamscore" colspan="2">
         <a href="/fixtures/team/${res.winnerId}">${res.winnerName}</a> beat 
         <a href="/fixtures/team/${res.loserId}">${res.loserName}</a>  
-            by default (${res.reason})
+            by default 
+        <#if (res.reason)??>(${res.reason})</#if>
     </td>
     </tr>
 </#macro>
