@@ -60,7 +60,7 @@
 		</#if>
 		<#assign lastRes = res/>
 		<#if res.match.playedMatch??>
-			<@match res.firstInnings res.secondInnings res.maxWickets/>
+			<@match res.firstInnings res.secondInnings res.maxWickets res.match.playedMatch.overLimit!12/>
 		<#elseif res.match.awardedMatch??>
 			<@walkover res/>
         <#elseif res.match.unplayedMatch??>

@@ -48,7 +48,7 @@ or to hide them if displayed.</p>
 					<td colspan="6" style="padding-left: 25px">
 						<table id="reslist">
                             <#if res.match.playedMatch??>
-                                <@match res.firstInnings res.secondInnings res.maxWickets/>
+                                <@match res.firstInnings res.secondInnings res.maxWickets res.match.playedMatch.overLimit!12/>
                             <#elseif res.match.awardedMatch??>
                                 <@walkover res/>
                             <#elseif res.match.unplayedMatch??>

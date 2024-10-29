@@ -2,7 +2,7 @@
 	<#return {"team": {"name": team}, "runs": runs, "overs": overs, "wickets": wickets, "highlights": highlights}/>
 </#function>
 
-<#macro match innings1 innings2 maxWickets=6>
+<#macro match innings1 innings2 maxWickets=6 maxOvers=12>
 <tr>
 <#list [innings1, innings2] as inns>
 	<td class="teamscore">
@@ -13,7 +13,8 @@
 		</#if> 
 		${inns.runs} 
 		${(inns.wickets == maxWickets)?then("all out", "for " + inns.wickets)} 
-		<#if (inns.overs >= 0)>(${inns.overs} ov)</#if></td>
+		<#if (inns.overs >= 0)>(${inns.overs}<#if (maxOvers < 12)>/${maxOvers}</#if> ov)</#if>
+	</td>
 </#list>
 </tr>
 <tr>
