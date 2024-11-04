@@ -44,7 +44,7 @@ Rules of the League - <i>PDF documents</i>
 <li>
 	
 <p>
-<a href="/resources/ResultSheet.xls">Result sheet</a> - <i>Excel
+<a href="/resources/ResultSheet.xlsx">Result sheet</a> - <i>Excel
 	spreadsheet</i>
 </p>
 	
