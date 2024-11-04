@@ -16,9 +16,9 @@
 	</#if>
 </#macro>
 
-<@news start="2024-10-15" end="2024-10-24">
-Please be aware that <b>there may be a delay in some results from Sundays 13th and 20th October appearing on the website</b>.
-All results received should be there by Friday 25th.
+<@news end="2024-11-17">
+Congratulations to <b>Xavier Warnes</b> of Havant, whose figures of 5 for 20 against Gosport Borough on 20th October
+were a new Colts Under-13 record, and in fact the first five-for ever taken in the 27-year history of the Under-13 league.
 </@news>
 
 <@news end="2024-10-13">

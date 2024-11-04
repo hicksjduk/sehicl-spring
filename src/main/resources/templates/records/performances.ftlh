@@ -66,7 +66,7 @@
 <@performance "Division 5" "Swanmore" "5 for 11" "2018-19" "J Gradwell"/>
 <@performance "Division 6" "Droxford" "4 for 15" "2019-20" "J Odell"/>
 <@performance "Colts Under-16" "Fareham & Crofton" "5 for 25" "2017-18" "S Khan"/>
-<@performance "Colts Under-13" "Hambledon" "4 for 0" "2008-09" "S Le-Clercq"/>
+<@performance "Colts Under-13" "Havant" "5 for 20" "2024-25" "X Warnes"/>
 </tbody>
 </table>
 </div>
