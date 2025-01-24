@@ -16,7 +16,7 @@
 	</#if>
 </#macro>
 
-<@news end="2025-01-24">
+<@news end="2025-02-24">
 It has been brought to our attention that the number of people in the scoring area has increased recently.<br><br>
 
 For colts' matches, colts' managers and a coach are permitted in the area, as are the players, for safeguarding
