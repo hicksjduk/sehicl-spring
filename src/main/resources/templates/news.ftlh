@@ -16,6 +16,18 @@
 	</#if>
 </#macro>
 
+<@news end="2025-01-24">
+It has been brought to our attention that the number of people in the scoring area has increased recently.<br><br>
+
+For colts' matches, colts' managers and a coach are permitted in the area, as are the players, for safeguarding
+reasons. One extra person to help with the administration of fielders' helmets is preferred, to aid pace of play,
+and a person to update the manual scoreboard is also required. All other team officials and parents must watch from the
+viewing area upstairs.<br><br>
+
+For adult cricket, no players are allowed in the scoring area during their team's match, unless directed by a League 
+official or umpire. Prior to their match, of course, captains must use the area to deal with pre-match admin and the toss.
+</@news>
+
 <@news end="2024-11-17">
 Congratulations to <b>Xavier Warnes</b> of Havant, whose figures of 5 for 20 against Gosport Borough on 20th October
 were a new Colts Under-13 record, and in fact the first five-for ever taken in the 27-year history of the Under-13 league.
