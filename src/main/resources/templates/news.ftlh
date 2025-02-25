@@ -16,6 +16,16 @@
 	</#if>
 </#macro>
 
+<@news end="2025-03-31">
+Can we remind all players that the studio, opposite Court B, is for the storage of bags and equipment only, it is 
+not to be used as a changing room.
+</@news>
+
+<@news end="2025-03-17">
+Hambledon won the Hampshire Indoor Championships last week. We wish them the best of luck for the regional finals
+in Taunton on the 16th March.
+</@news>
+
 <@news end="2025-02-24">
 It has been brought to our attention that the number of people in the scoring area has increased recently.<br><br>
 
