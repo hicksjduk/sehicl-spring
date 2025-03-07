@@ -15,9 +15,6 @@
         <role name="Secretary">
             <email id="secretary" />
         </role>
-        <role name="Fixture Secretary">
-            <email id="fixturesec" />
-        </role>
     </person>
 
     <person>
@@ -302,7 +299,6 @@
         <role name="Under-16" club="Locks Heath" />
     </person>
 
-<!--
     <person>
         <name>Jeremy Hicks</name>
         <address>5 Odell Close, Fareham PO16 7RL</address>
@@ -321,22 +317,7 @@
         </role>
         <role name="Captain" club="OPCS Titchfield" />
     </person>
- -->
  
-    <person>
-        <name>Andy White</name>
-        <phone>07974 607723</phone>
-        <role name="Secretary" club="OPCS Titchfield">
-            <email id="opcs.secretary" />
-        </role>
-    </person>
-
-    <person>
-        <name>Bill Samuel</name>
-        <phone>07528 460527</phone>
-        <role name="Captain" club="OPCS Titchfield" />
-    </person>
-
     <person>
         <name>Michael Hand</name>
         <phone>07545 076563</phone>
