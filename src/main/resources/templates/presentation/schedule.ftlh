@@ -5,7 +5,7 @@
 <p>5.00pm: Exhibition matches
 <ul>
 <li>Colts Under-13 Champions (Portsmouth) v Under-13 Select VI
-<li>Colts Under-16 Champions v Under-16 Select VI
+<li>Colts Under-16 Champions (Portsmouth & Southsea) v Under-16 Select VI
 </ul>
 <p>6.00pm: Presentation of Colts awards
 <#--
@@ -36,6 +36,6 @@ Cllr Pal Hayre
 -->
 <p>8.00pm: Exhibition matches
 <ul>
-<li>Division 2 Champions (Havant) v Division 3 Champions
+<li>Division 2 Champions (Havant) v Division 3 Champions (Portsmouth)
 <li>Division 4 Champions (Clanfield A) v Committee/Umpires
 </ul>
