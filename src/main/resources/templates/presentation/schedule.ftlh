@@ -4,38 +4,34 @@
 <h2>Order of events</h2>
 <p>5.00pm: Exhibition matches
 <ul>
-<li>Colts Under-13 Champions (Portsmouth) v Under-13 Select VI
-<li>Colts Under-16 Champions (Portsmouth & Southsea) v Under-16 Select VI
+<li>Colts Under-13 champions (Portsmouth) v Under-13 Select VI
+<li>Colts Under-16 champions (Portsmouth & Southsea) v Under-16 Select VI
 </ul>
 <p>6.00pm: Presentation of Colts awards
-<#--
 <ul>
-<li>Sporting and Efficiency: Portsmouth Daring Under-13s
-<li>Colts Under-13 batting: Henry Hayes (Hambledon Sharks)
-<li>Colts Under-13 bowling: Jake Peat (Portsmouth Warrior)
-<li>Colts Under-16 batting: Elliot Lewis (Hambledon Jets)
-<li>Colts Under-16 bowling: Toby Rayner (Fareham & Crofton)
-<li>Colts Under-13 champions: Hambledon Sharks
-<li>Colts Under-16 champions: Hambledon Jets
+<li>Sporting and Efficiency: Waterlooville Under-16s
+<li>Colts Under-13 batting: TBC
+<li>Colts Under-13 bowling: TBC
+<li>Colts Under-16 batting: Bradley Giffin (Portsmouth)
+<li>Colts Under-16 bowling: Sam Wheeler (Portsmouth & Southsea)
+<li>Colts Under-13 champions: Portsmouth
+<li>Colts Under-16 champions: Portsmouth & Southsea
 </ul>
--->
 <p>6.30pm: Exhibition match (8-a-side),
-Division 1 Champions v the Mayor of Fareham's VIII
+Division 1 champions (Waterlooville A) v the Mayor of Fareham's VIII
 <p>7.30pm: Presentation of Senior awards by the Mayor of Fareham,
 Cllr Pal Hayre
-<#--
 <ul>
-<li>Sporting and Efficiency: Emsworth
-<li>Senior batting: Harry Hovey (Barracuda)
-<li>Senior bowling: Karthik Muthuraman (Kerala A)
-<li>Division 4 champions: Purbrook
-<li>Division 3 champions: Swanmore
-<li>Division 2 champions: Hambledon B
-<li>Division 1 champions: Hambledon A
+<li>Sporting and Efficiency: Clanfield B
+<li>Senior batting: TBC
+<li>Senior bowling: TBC
+<li>Division 4 champions: Clanfield A
+<li>Division 3 champions: Portsmouth
+<li>Division 2 champions: Havant
+<li>Division 1 champions: Waterlooville A
 </ul>
--->
 <p>8.00pm: Exhibition matches
 <ul>
-<li>Division 2 Champions (Havant) v Division 3 Champions (Portsmouth)
-<li>Division 4 Champions (Clanfield A) v Committee/Umpires
+<li>Division 2 champions (Havant) v Division 3 champions (Portsmouth)
+<li>Division 4 champions (Clanfield A) v Committee/Umpires
 </ul>
