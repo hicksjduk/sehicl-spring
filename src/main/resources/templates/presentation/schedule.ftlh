@@ -26,7 +26,7 @@ Cllr Pal Hayre
 <li>Mementoes to the members of the Mayor of Fareham's VIII
 <li>Trophy to the winner of the Mayor's game
 <li>Sporting and Efficiency: Clanfield B
-<li>Senior batting: Samuel Harradine (Purbrook)
+<li>Senior batting: Sam Harradine (Purbrook)
 <li>Senior bowling: George Wilson (Portsmouth & Southsea)
 <li>Division 4 champions: Clanfield A
 <li>Division 3 champions: Portsmouth
