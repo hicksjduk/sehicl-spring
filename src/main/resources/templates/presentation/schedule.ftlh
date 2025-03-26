@@ -9,9 +9,10 @@
 </ul>
 <p>6.00pm: Presentation of Colts awards
 <ul>
+<li>Mementoes to the members of the Colts Select sides
 <li>Sporting and Efficiency: Waterlooville Under-16s
-<li>Colts Under-13 batting: TBC
-<li>Colts Under-13 bowling: TBC
+<li>Colts Under-13 batting: Jan Rowlandson (Havant)
+<li>Colts Under-13 bowling: Sam Morgan (Havant)
 <li>Colts Under-16 batting: Bradley Giffin (Portsmouth)
 <li>Colts Under-16 bowling: Sam Wheeler (Portsmouth & Southsea)
 <li>Colts Under-13 champions: Portsmouth
@@ -22,9 +23,11 @@ Division 1 champions (Waterlooville A) v the Mayor of Fareham's VIII
 <p>7.30pm: Presentation of Senior awards by the Mayor of Fareham,
 Cllr Pal Hayre
 <ul>
+<li>Mementoes to the members of the Mayor of Fareham's VIII
+<li>Trophy to the winner of the Mayor's game
 <li>Sporting and Efficiency: Clanfield B
-<li>Senior batting: TBC
-<li>Senior bowling: TBC
+<li>Senior batting: Samuel Harradine (Purbrook)
+<li>Senior bowling: George Wilson (Portsmouth & Southsea)
 <li>Division 4 champions: Clanfield A
 <li>Division 3 champions: Portsmouth
 <li>Division 2 champions: Havant
