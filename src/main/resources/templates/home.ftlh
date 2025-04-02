@@ -18,11 +18,13 @@
 	the Mayor of Fareham, presents the senior teams' awards, and the
 	centrepiece of the evening is an eight-a-side challenge match between the
 	Mayor of Fareham's VIII and the Division 1 champions' VIII.
+	<#--
 	The <a href="/presentation">2025 presentation evening</a>
 	is on <b>Sunday 30th March</b>; click the link to view the schedule for the evening.
+	-->
+	<a href="/archive/presentation/2025">The 2025 presentation evening</a>
+	was on Sunday 30th March; click the link to view details of the evening.
     <#--
-	<a href="/archive/presentation/2024">The 2024 presentation evening</a>
-	was on Sunday 24th March; click the link to view details of the evening.
 	The 2025 presentation evening will be on Sunday 30th March.
     -->
 </p>
