@@ -15,12 +15,10 @@
 			<td colspan="2"><img border="0" src="/graphics/presentation2025/U13Select.jpg"
 				alt="Colts Under-13 Select VI"><br>The Colts Under-13 Select side
 		</tr>
-		<#--
 		<@exhibitionMatch "Under-16"
-			innings("Hambledon Jets", 117, 3, 12, "H Kalra 28*", "T Pritchard 22*")
-            innings("Under-16 Select VI", 115, 3, 11, "L Harradine 27*", "O Parkhurst-Fisher 26*")
+            innings("Under-16 Select VI", 121, 5, 12, "H Hayes 33", "B Eddie 27")
+            innings("Portsmouth & Southsea", 106, 4, 12, "J Wheeler 26", "H Hayes 2/9")
 		/>
-		-->
 		<tr>
 			<td colspan="2"><img border="0" src="/graphics/presentation2025/U16Select.jpg"
 				alt="Colts Under-16 Select VI"><br>The Colts Under-16 Select side
