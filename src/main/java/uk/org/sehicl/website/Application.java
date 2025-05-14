@@ -49,7 +49,7 @@ public class Application
     @Bean
     public UserDatastore userDatastore()
     {
-        return EnvVar.REDIS_URL
+        return EnvVar.REDISCLOUD_URL
                 .get()
                 .<UserDatastore> map(RedisDatastore::new)
                 .orElseGet(GoogleCloudDatastore::new);
