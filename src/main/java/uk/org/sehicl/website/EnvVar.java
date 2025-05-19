@@ -6,6 +6,8 @@ public enum EnvVar
 {
     PORT,
     REDISCLOUD_URL,
+    MAILGUN_API_KEY,
+    MAILGUN_DOMAIN,
     ADMIN_SECRET,
     RECAPTCHA_SECRET,
     SENDGRID_API_KEY,
