@@ -34,18 +34,13 @@ public class MailgunSender implements EmailSender
     {
         var msg = Message
                 .builder()
-                .from("SEHICL Admin <admin@sehicl.org.uk")
-                .to(Stream.of(addressees).map(this::getEmail).toList())
+                .from(new Addressee("admin@sehicl.org.uk", "SEHICL Admin").toEmailAddress())
+                .to(Stream.of(addressees).map(Addressee::toEmailAddress).toList())
                 .subject(subject)
                 .text(messageText)
                 .build();
         LOG.info("Sending mail: {} to {}", subject, addressees);
         var resp = mailgunMessagesApi.sendMessage(mailgunDomain, msg).getMessage();
         LOG.info("Response message was: {}", resp);
-    }
-
-    private String getEmail(Addressee addr)
-    {
-        return "%s <%s>".formatted(addr.getName(), addr.getAddress());
     }
 }

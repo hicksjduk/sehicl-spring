@@ -9,7 +9,7 @@ public interface EmailSender
     {
         private final String address;
         private final String name;
-
+        
         public Addressee(String address)
         {
             this(address, null);
@@ -29,6 +29,11 @@ public interface EmailSender
         public String getName()
         {
             return name;
+        }
+        
+        public String toEmailAddress()
+        {
+            return "%s <%s>".formatted(name, address);
         }
 
         @Override
