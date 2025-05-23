@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Bean;
 
 import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.admin.UsersImporter;
+import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.EmailSender;
+import uk.org.sehicl.website.users.EmailSender.Addressee;
 import uk.org.sehicl.website.users.UserDatastore;
 import uk.org.sehicl.website.users.UserManager;
 import uk.org.sehicl.website.users.impl.GoogleCloudDatastore;
@@ -58,8 +60,27 @@ public class Application
     @Bean
     EmailSender emailSender()
     {
-        return new MailgunSender(EnvVar.MAILGUN_API_KEY.get().get(),
-                EnvVar.MAILGUN_DOMAIN.get().get());
+        return EnvVar.MAILGUN_API_KEY
+                .get()
+                .map(apiKey -> EnvVar.MAILGUN_DOMAIN
+                        .get()
+                        .<EmailSender> map(domain -> new MailgunSender(apiKey, domain))
+                        .orElse(dummySender()))
+                .orElse(dummySender());
+    }
+
+    private EmailSender dummySender()
+    {
+        return new EmailSender()
+        {
+
+            @Override
+            public void sendEmail(String subject, String messageText, Addressee... addressees)
+                    throws EmailException
+            {
+            }
+
+        };
     }
 
     @Bean
