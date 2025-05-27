@@ -11,7 +11,7 @@ ${message!""}
 <form action="/login" method="post">
 	<table>
 		<tr>
-			<td>E-mail address</td>
+			<td>Email address</td>
 			<td><input type="text" name="email" value="${login.validation.email!""}"></td>
 			<td>${login.validation.emailMessage!""}</td>
 		</tr>

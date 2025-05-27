@@ -16,7 +16,7 @@
 			<td>${(register.validation.clubMessage)!""}</td>
 		</tr>
 		<tr>
-			<td>E-mail address</td>
+			<td>Email address</td>
 			<td>*</td>
 			<td><input type="text" name="email" value="${(register.validation.email)!""}"></td>
 			<td>${(register.validation.emailMessage)!""}</td>

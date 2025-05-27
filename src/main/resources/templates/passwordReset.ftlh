@@ -10,7 +10,7 @@
 <form action="/pwdReset/${reset.resetId?string.computer}" method="post">
 	<table>
 		<tr>
-			<td>E-mail address</td>
+			<td>Email address</td>
 			<td></td>
 			<td>${reset.user.email}</td>
 		</tr>

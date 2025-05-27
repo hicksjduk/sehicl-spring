@@ -3,7 +3,7 @@
 <p>You are reconfirming the account with the following details:</p>
 <ul>
 	<li>Name: ${reconfirm.user.name}</li>
-	<li>E-mail: ${reconfirm.user.email}</li>
+	<li>Email: ${reconfirm.user.email}</li>
 	<li>Club: ${reconfirm.user.club!"(Not specified)"}</li>
 </ul>
 <p>To reconfirm this account, please read the statements below, tick the box 

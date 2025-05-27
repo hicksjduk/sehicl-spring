@@ -3,7 +3,7 @@
 <p>You have successfully activated the following account:</p>
 <ul>
 	<li>Name: ${user.name}</li>
-	<li>E-mail: ${user.email}</li>
+	<li>Email: ${user.email}</li>
 	<li>Club: ${user.club!"(Not specified)"}</li>
 </ul>
 <#else>
