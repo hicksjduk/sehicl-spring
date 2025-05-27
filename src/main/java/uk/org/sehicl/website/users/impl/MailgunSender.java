@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.mailgun.api.v3.MailgunMessagesApi;
 import com.mailgun.client.MailgunClient;
 import com.mailgun.model.message.Message;
+import com.mailgun.util.Constants;
 
 import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.EmailSender;
@@ -24,7 +25,7 @@ public class MailgunSender implements EmailSender
     {
         this.mailgunDomain = mailgunDomain;
         mailgunMessagesApi = MailgunClient
-                .config(mailgunApiKey)
+                .config(Constants.EU_REGION_BASE_URL, mailgunApiKey)
                 .createApi(MailgunMessagesApi.class);
     }
 
