@@ -1,6 +1,5 @@
 package uk.org.sehicl.website.users.impl;
 
-import java.util.Map;
 import java.util.stream.Stream;
 
 import org.slf4j.Logger;

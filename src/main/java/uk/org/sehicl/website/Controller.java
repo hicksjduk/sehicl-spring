@@ -51,7 +51,6 @@ import uk.org.sehicl.website.page.Page;
 import uk.org.sehicl.website.page.ReconfirmPage;
 import uk.org.sehicl.website.page.RegisterConfPage;
 import uk.org.sehicl.website.page.RegisterPage;
-import uk.org.sehicl.website.page.RegisterxPage;
 import uk.org.sehicl.website.page.ResetPage;
 import uk.org.sehicl.website.page.SeasonArchiveIndexPage;
 import uk.org.sehicl.website.page.StaticPage;
@@ -423,12 +422,6 @@ public class Controller
     public String register(HttpServletRequest req) throws IOException
     {
         return new PageTemplate(new RegisterPage(getRequestUri(req), userManager)).process();
-    }
-
-    @RequestMapping(path = "/registerx", method = RequestMethod.GET)
-    public String registerx(HttpServletRequest req) throws IOException
-    {
-        return new PageTemplate(new RegisterxPage(getRequestUri(req), userManager)).process();
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
