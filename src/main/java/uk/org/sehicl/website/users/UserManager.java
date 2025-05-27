@@ -1,7 +1,5 @@
 package uk.org.sehicl.website.users;
 
-import static org.mockito.Mockito.*;
-
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
@@ -98,7 +96,7 @@ public class UserManager
         new ActivationMailTemplate(user, serverAddress).process(sw);
         emailer
                 .sendEmail("Activate your SEHICL account", sw.toString(),
-                        new Addressee(user.getEmail(), user.getName()));
+                        Addressee.withAddress(user.getEmail()).withName(user.getName()));
     }
 
     private void sendPasswordResetEmail(PasswordReset reset, String resetAddress)
@@ -108,7 +106,7 @@ public class UserManager
         new PasswordResetMailTemplate(reset, resetAddress).process(sw);
         emailer
                 .sendEmail("SEHICL password reset", sw.toString(),
-                        new Addressee(reset.getUserEmail()));
+                        Addressee.withAddress(reset.getUserEmail()));
     }
 
     private void notifyAdmin(String action, User user, String serverAddress)
@@ -119,7 +117,7 @@ public class UserManager
         {
             emailer
                     .sendEmail(String.format("User action: %s", action), sw.toString(),
-                            new Addressee("admin@sehicl.org.uk"));
+                            Addressee.withAddress("admin@sehicl.org.uk"));
         }
         catch (Exception e)
         {
@@ -250,7 +248,7 @@ public class UserManager
                 new ReconfirmationMailTemplate(user, reconfirmationPageAddress).process(sw);
                 emailer
                         .sendEmail("ACTION REQUIRED - Reconfirm your SEHICL account", sw.toString(),
-                                new Addressee(user.getEmail(), user.getName()));
+                                Addressee.withAddress(user.getEmail()).withName(user.getName()));
             }
             catch (Exception e)
             {

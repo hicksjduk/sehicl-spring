@@ -1,5 +1,7 @@
 package uk.org.sehicl.website.users;
 
+import java.util.Optional;
+
 public interface EmailSender
 {
     void sendEmail(String subject, String messageText, Addressee... addressees)
@@ -7,18 +9,28 @@ public interface EmailSender
 
     public static class Addressee
     {
+        public static Addressee withAddress(String address)
+        {
+            return new Addressee(address);
+        }
+
         private final String address;
         private final String name;
-        
-        public Addressee(String address)
+
+        private Addressee(String address)
         {
             this(address, null);
         }
 
-        public Addressee(String address, String name)
+        private Addressee(String address, String name)
         {
             this.address = address;
             this.name = name;
+        }
+
+        public Addressee withName(String name)
+        {
+            return new Addressee(address, name);
         }
 
         public String getAddress()
@@ -30,16 +42,14 @@ public interface EmailSender
         {
             return name;
         }
-        
-        public String toEmailAddress()
-        {
-            return "%s <%s>".formatted(name, address);
-        }
 
         @Override
         public String toString()
         {
-            return "Addressee [address=" + address + ", name=" + name + "]";
+            return Optional
+                    .ofNullable(name)
+                    .map(n -> "%s <%s>".formatted(n, address))
+                    .orElse("%s".formatted(address));
         }
     }
 }

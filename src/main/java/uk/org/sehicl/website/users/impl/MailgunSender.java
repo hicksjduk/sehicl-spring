@@ -35,8 +35,11 @@ public class MailgunSender implements EmailSender
     {
         var msg = Message
                 .builder()
-                .from(new Addressee("admin@sehicl.org.uk", "SEHICL Admin").toEmailAddress())
-                .to(Stream.of(addressees).map(Addressee::toEmailAddress).toList())
+                .from(Addressee
+                        .withAddress("admin@sehicl.org.uk")
+                        .withName("SEHICL Admin")
+                        .toString())
+                .to(Stream.of(addressees).map(Addressee::toString).toList())
                 .subject(subject)
                 .text(messageText)
                 .build();
