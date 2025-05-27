@@ -1,5 +1,6 @@
 package uk.org.sehicl.website.users.impl;
 
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ public class MailgunSender implements EmailSender
     {
         var msg = Message
                 .builder()
+                .headers(Map.of("Content-Type", "text/html"))
                 .from(Addressee
                         .withAddress("admin@sehicl.org.uk")
                         .withName("SEHICL Admin")
