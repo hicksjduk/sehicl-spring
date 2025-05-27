@@ -36,14 +36,13 @@ public class MailgunSender implements EmailSender
     {
         var msg = Message
                 .builder()
-                .headers(Map.of("Content-Type", "text/html"))
                 .from(Addressee
                         .withAddress("admin@sehicl.org.uk")
                         .withName("SEHICL Admin")
                         .toString())
                 .to(Stream.of(addressees).map(Addressee::toString).toList())
                 .subject(subject)
-                .text(messageText)
+                .html(messageText)
                 .build();
         LOG.info("Sending mail: {} to {}", subject, addressees);
         var resp = mailgunMessagesApi.sendMessage(mailgunDomain, msg).getMessage();
