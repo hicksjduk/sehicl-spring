@@ -188,7 +188,7 @@ public class Register
         }
         if (StringUtils.isEmpty(validation.email))
         {
-            validation.setEmailMessage("Please specify your e-mail address.");
+            validation.setEmailMessage("Please specify your email address.");
             valid = false;
         }
         if (StringUtils.isEmpty(validation.password))

@@ -90,7 +90,7 @@ public class Login
         Long answer = null;
         if (StringUtils.isEmpty(validation.email))
         {
-            validation.setEmailMessage("Please specify your e-mail address.");
+            validation.setEmailMessage("Please specify your email address.");
             allFieldsPresent = false;
         }
         if (StringUtils.isEmpty(validation.password))
@@ -117,7 +117,7 @@ public class Login
         boolean allFieldsPresent = true;
         if (StringUtils.isEmpty(validation.email))
         {
-            validation.setEmailMessage("Please specify your e-mail address.");
+            validation.setEmailMessage("Please specify your email address.");
             allFieldsPresent = false;
         }
         if (allFieldsPresent)
@@ -125,7 +125,7 @@ public class Login
             try
             {
                 userManager.generatePasswordReset(validation.email, resetPageAddress);
-                validation.setEmailMessage("A reset e-mail has been sent to this address.");
+                validation.setEmailMessage("A reset email has been sent to this address.");
             }
             catch (UserException | EmailException e)
             {

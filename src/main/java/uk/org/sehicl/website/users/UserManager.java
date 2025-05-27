@@ -252,7 +252,7 @@ public class UserManager
             }
             catch (Exception e)
             {
-                throw new RuntimeException("Error sending activation e-mail", e);
+                throw new RuntimeException("Error sending activation email", e);
             }
         });
     }

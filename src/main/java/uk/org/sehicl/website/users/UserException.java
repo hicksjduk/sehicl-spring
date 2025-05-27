@@ -19,7 +19,7 @@ public class UserException extends Exception
                 "Email address and/or password not found"), userNotActive(
                         "User is not active - you must activate your ID before you can login"), sessionExpired(
                                 "Session expired"), emailAlreadyExists(
-                                        "A user with this e-mail address already exists"), userNotFound(
+                                        "A user with this email address already exists"), userNotFound(
                                                 "User not found"), resetTokenNotFound(
                                                         "Specified reset token does not exist, or has expired");
 

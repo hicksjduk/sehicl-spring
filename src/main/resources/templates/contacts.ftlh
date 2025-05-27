@@ -13,7 +13,7 @@
 	Chichester PO19 8NY (tel: 01243 538800).
 </p>
 <p>
-	The main means of communication on league matters is by e-mail. <b>For
+	The main means of communication on league matters is by email. <b>For
 		urgent contacts, however, it is preferable to telephone; telephone
 		numbers for committee members, club secretaries and team captains and
 		managers are available

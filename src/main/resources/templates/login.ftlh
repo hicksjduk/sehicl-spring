@@ -5,7 +5,7 @@ ${message!""}
 </p>
 <p>If you have already registered, please fill in the fields below
 	and press "Login". If you cannot remember your password, fill in the
-	e-mail address and press "Reset password"; if the e-mail address you specify is
+	email address and press "Reset password"; if the email address you specify is
 	that of a registered user, a password reset link will be sent to that
 	address.</p>
 <form action="/login" method="post">
