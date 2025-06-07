@@ -12,10 +12,8 @@ import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.admin.UsersImporter;
 import uk.org.sehicl.website.users.EmailException;
 import uk.org.sehicl.website.users.EmailSender;
-import uk.org.sehicl.website.users.EmailSender.Addressee;
 import uk.org.sehicl.website.users.UserDatastore;
 import uk.org.sehicl.website.users.UserManager;
-import uk.org.sehicl.website.users.impl.GoogleCloudDatastore;
 import uk.org.sehicl.website.users.impl.MailgunSender;
 import uk.org.sehicl.website.users.impl.RedisDatastore;
 
@@ -51,10 +49,11 @@ public class Application
     @Bean
     public UserDatastore userDatastore()
     {
-        return EnvVar.REDISCLOUD_URL
+        return EnvVar.UPSTASH_REDIS_REST_URL
                 .get()
-                .<UserDatastore> map(RedisDatastore::new)
-                .orElseGet(GoogleCloudDatastore::new);
+                .map(uri -> new RedisDatastore(uri,
+                        EnvVar.UPSTASH_REDIS_REST_TOKEN.get().orElse("hello")))
+                .orElse(null);
     }
 
     @Bean

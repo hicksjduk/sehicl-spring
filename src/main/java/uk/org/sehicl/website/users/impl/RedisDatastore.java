@@ -1,195 +1,209 @@
 package uk.org.sehicl.website.users.impl;
 
-import java.io.IOException;
+import java.io.StringWriter;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
+import java.util.function.Function;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.Cursor;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ScanOptions;
-import org.springframework.data.redis.core.ScanOptions.ScanOptionsBuilder;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.GenericToStringSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.data.redis.support.atomic.RedisAtomicLong;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import uk.org.sehicl.website.users.PasswordReset;
 import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
-import uk.org.sehicl.website.users.User.Status;
 import uk.org.sehicl.website.users.UserDatastore;
 
 public class RedisDatastore implements UserDatastore
 {
-    private final JedisConnectionFactory connectionFactory;
-    private RedisAtomicLong keyGenerator;
-    private RedisTemplate<String, String> template;
-    private HashOperations<String, Object, Object> ops;
-
-    public RedisDatastore()
+    public static enum Bucket
     {
-        this(createConnectionFactory());
+        USER_BY_EMAIL,
+        USER_BY_ID,
+        SESSION_BY_USER_ID,
+        SESSION_BY_SESSION_ID,
+        RESET_BY_USER_ID
     }
 
-    public RedisDatastore(String uri)
+    private static String USER_ID_COUNTER = "USER_ID";
+
+    private final JedisPool pool;
+    private final JsonMapper mapper = new JsonMapper();
+
+    public RedisDatastore(String uri, String auth)
     {
-        this(createConnectionFactory(uri));
+        pool = new JedisPool(URI.create(uri));
     }
 
-    public RedisDatastore(String host, int port)
+    Jedis connect()
     {
-        this(createConnectionFactory(host, port, null));
+        return pool.getResource();
     }
 
-    public RedisDatastore(String host, Integer port, String password)
+    String toStringKey(long key)
     {
-        this(createConnectionFactory(host, port, password));
+        return "%d".formatted(key);
     }
 
-    private RedisDatastore(JedisConnectionFactory connectionFactory)
+    Optional<String> getValue(Jedis conn, Bucket bucket, String key)
     {
-        (this.connectionFactory = connectionFactory).afterPropertiesSet();
-    }
-    
-    private void init() {
-        keyGenerator = new RedisAtomicLong("counter", connectionFactory);
-        template = createTemplate();
-        ops = template.opsForHash();
+        return Optional.ofNullable(conn.hget(bucket.toString(), key));
     }
 
-    private static JedisConnectionFactory createConnectionFactory()
+    Optional<String> getValue(Jedis conn, Bucket bucket, long key)
     {
-        final JedisConnectionFactory answer = new JedisConnectionFactory();
-        answer.setUsePool(true);
-        return answer;
+        return getValue(conn, bucket, toStringKey(key));
     }
 
-    private static JedisConnectionFactory createConnectionFactory(String uriString)
+    <T> Function<String, T> fromJson(Class<T> cl)
     {
-        final JedisConnectionFactory answer = createConnectionFactory();
-        if (uriString != null)
+        return str ->
         {
-            URI uri = URI.create(uriString);
-            answer.setHostName(uri.getHost());
-            answer.setPort(uri.getPort());
-            String userInfo = uri.getUserInfo();
-            if (!StringUtils.isEmpty(userInfo))
+            try
             {
-                final String password = userInfo.split(":")[1];
-                answer.setPassword(password);
+                return mapper.readValue(str, cl);
             }
-        }
-        return answer;
-    }
-
-    private static JedisConnectionFactory createConnectionFactory(String host, Integer port,
-            String password)
-    {
-        final JedisConnectionFactory answer = createConnectionFactory();
-        if (host != null)
-        {
-            answer.setHostName(host);
-        }
-        if (port != null)
-        {
-            answer.setPort(port);
-        }
-        if (password != null)
-        {
-            answer.setPassword(password);
-        }
-        return answer;
-    }
-
-    private RedisTemplate<String, String> createTemplate()
-    {
-        return createTemplate(connectionFactory, String.class, String.class);
-    }
-
-    private static <K, V> RedisTemplate<K, V> createTemplate(
-            JedisConnectionFactory connectionFactory, Class<K> keyType, Class<V> valueType)
-    {
-        final RedisTemplate<K, V> answer = new RedisTemplate<>();
-        answer.setConnectionFactory(connectionFactory);
-        answer.setKeySerializer(new StringRedisSerializer());
-        answer.setValueSerializer(new GenericToStringSerializer<>(Long.class));
-        answer.setHashKeySerializer(new GenericToStringSerializer<>(Long.class));
-        answer.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
-        answer.afterPropertiesSet();
-        return answer;
+            catch (Exception e)
+            {
+                throw new RuntimeException(e);
+            }
+        };
     }
 
     @Override
     public User getUserByEmail(String email)
     {
-        if (ops == null)
-            init();
-        final User answer = (User) ops.get("email", email);
-        return answer;
+        try (var conn = connect())
+        {
+            return getUserByEmail(conn, email);
+        }
+    }
+
+    public User getUserByEmail(Jedis conn, String email)
+    {
+        return getValue(conn, Bucket.USER_BY_EMAIL, email).map(fromJson(User.class)).orElse(null);
     }
 
     @Override
     public User getUserById(long id)
     {
-        if (ops == null)
-            init();
-        final User answer = (User) ops.get("user", id);
-        return answer;
+        try (var conn = connect())
+        {
+            return getUserById(conn, id);
+        }
+    }
+
+    public User getUserById(Jedis conn, long id)
+    {
+        return getValue(conn, Bucket.USER_BY_ID, id).map(fromJson(User.class)).orElse(null);
     }
 
     @Override
     public SessionData getSessionByUserId(long id)
     {
-        if (ops == null)
-            init();
-        SessionData answer = null;
-        answer = (SessionData) ops.get("usersession", id);
-        return answer;
+        try (var conn = connect())
+        {
+            return getSessionByUserId(conn, id);
+        }
+    }
+
+    SessionData getSessionByUserId(Jedis conn, long id)
+    {
+        return getValue(conn, Bucket.SESSION_BY_USER_ID, id)
+                .map(fromJson(SessionData.class))
+                .orElse(null);
     }
 
     @Override
     public SessionData getSessionBySessionId(long id)
     {
-        if (ops == null)
-            init();
-        SessionData answer = null;
-        answer = (SessionData) ops.get("session", id);
-        return answer;
+        try (var conn = connect())
+        {
+            return getSessionBySessionId(conn, id);
+        }
+    }
+
+    SessionData getSessionBySessionId(Jedis conn, long id)
+    {
+        return getValue(conn, Bucket.SESSION_BY_SESSION_ID, id)
+                .map(fromJson(SessionData.class))
+                .orElse(null);
+    }
+
+    <T> void putValue(Jedis conn, Bucket bucket, String key, T obj)
+    {
+        putValue(conn, bucket, key, obj, null);
+    }
+
+    <T> void putValue(Jedis conn, Bucket bucket, long key, T obj)
+    {
+        putValue(conn, bucket, key, obj, null);
+    }
+
+    <T> void putValue(Jedis conn, Bucket bucket, String key, T obj, Long expiry)
+    {
+        var bucketName = bucket.toString();
+        conn.hset(bucketName, key, toJson(obj));
+        if (expiry != null)
+            conn.hexpire(bucketName, expiry, key);
+    }
+
+    void deleteValue(Jedis conn, Bucket bucket, String key)
+    {
+        conn.hdel(bucket.toString(), key);
+    }
+
+    void deleteValue(Jedis conn, Bucket bucket, long key)
+    {
+        deleteValue(conn, bucket, toStringKey(key));
+    }
+
+    <T> void putValue(Jedis conn, Bucket bucket, long key, T obj, Long expiry)
+    {
+        putValue(conn, bucket, toStringKey(key), obj, expiry);
+    }
+
+    <T> String toJson(T obj)
+    {
+        try
+        {
+            var sw = new StringWriter();
+            mapper.writeValue(sw, obj);
+            sw.close();
+            return sw.toString();
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public SessionData setSession(User user)
     {
-        if (ops == null)
-            init();
-        final long expiry = new Date().getTime() + TimeUnit.DAYS.toMillis(1);
-        SessionData answer = getSessionByUserId(user.getId());
-        if (answer == null)
+        var expiryInSeconds = TimeUnit.DAYS.toSeconds(1);
+        return setSession(user, expiryInSeconds);
+    }
+
+    SessionData setSession(User user, long expiryInSeconds)
+    {
+        try (var conn = connect())
         {
-            answer = new SessionData(getSessionId(user), user.getId(), expiry);
+            SessionData answer = getSessionByUserId(conn, user.getId());
+            if (answer == null)
+                answer = new SessionData(getSessionId(user), user.getId(),
+                        TimeUnit.DAYS.toMillis(1));
+            putValue(conn, Bucket.SESSION_BY_SESSION_ID, answer.getId(), answer, expiryInSeconds);
+            putValue(conn, Bucket.SESSION_BY_USER_ID, answer.getUserId(), answer, expiryInSeconds);
+            return answer;
         }
-        else
-        {
-            answer.setExpiry(expiry);
-        }
-        ops.put("session", answer.getId(), answer);
-        ops.put("usersession", answer.getUserId(), answer);
-        return answer;
     }
 
     long getSessionId(User user)
     {
-        if (ops == null)
-            init();
         long factor = 10000000000L;
         final long time = new Date().getTime();
         long answer = user.getId() * factor + time % factor;
@@ -199,122 +213,93 @@ public class RedisDatastore implements UserDatastore
     @Override
     public void clearExpiredSessions()
     {
-        if (ops == null)
-            init();
-        long now = new Date().getTime();
-        List<SessionData> expiredSessions = new ArrayList<>();
-        try (Cursor<Entry<Object, Object>> c = ops
-                .scan("session", ScanOptions.scanOptions().build()))
-        {
-            c.forEachRemaining(e ->
-            {
-                final SessionData s = (SessionData) e.getValue();
-                if (s.getExpiry() < now)
-                {
-                    expiredSessions.add(s);
-                }
-            });
-        }
-        if (!expiredSessions.isEmpty())
-        {
-            ops.delete("session", expiredSessions.stream().mapToLong(SessionData::getId).toArray());
-            ops
-                    .delete("usersession",
-                            expiredSessions.stream().mapToLong(SessionData::getUserId).toArray());
-        }
     }
 
     @Override
     public User createUser(User user)
     {
-        if (ops == null)
-            init();
-        user.setId(keyGenerator.getAndIncrement());
-        updateUser(user);
-        return user;
+        try (var conn = connect())
+        {
+            user.setId(conn.incr(USER_ID_COUNTER));
+            putValue(conn, Bucket.USER_BY_ID, user.getId(), user);
+            putValue(conn, Bucket.USER_BY_EMAIL, user.getEmail(), user);
+            return user;
+        }
     }
 
     @Override
     public void updateUser(User user)
     {
-        if (ops == null)
-            init();
-        ops.put("user", user.getId(), user);
-        ops.put("email", user.getEmail(), user);
+        try (var conn = connect())
+        {
+            putValue(conn, Bucket.USER_BY_ID, user.getId(), user);
+            putValue(conn, Bucket.USER_BY_EMAIL, user.getEmail(), user);
+        }
     }
 
     @Override
     public PasswordReset generatePasswordReset(String email)
     {
-        if (ops == null)
-            init();
+        return generatePasswordReset(email, TimeUnit.HOURS.toSeconds(3));
+    }
+
+    public PasswordReset generatePasswordReset(String email, long expiryInSeconds)
+    {
         PasswordReset answer = null;
-        final User user = getUserByEmail(email);
-        if (user != null)
+        try (var conn = connect())
         {
-            answer = new PasswordReset(user.getId(), email);
-            ops.put("reset", answer.getId(), answer);
+            var user = getUserByEmail(conn, email);
+            if (user != null)
+            {
+                answer = new PasswordReset(user.getId(), email);
+                putValue(conn, Bucket.RESET_BY_USER_ID, user.getId(), answer, expiryInSeconds);
+            }
+            return answer;
         }
-        return answer;
     }
 
     @Override
     public PasswordReset getPasswordReset(long id)
     {
-        if (ops == null)
-            init();
-        PasswordReset answer = (PasswordReset) ops.get("reset", id);
-        return answer;
+        try (var conn = connect())
+        {
+            return getValue(conn, Bucket.RESET_BY_USER_ID, id)
+                    .map(fromJson(PasswordReset.class))
+                    .orElse(null);
+        }
     }
 
     @Override
     public void clearExpiredResets()
     {
-        if (ops == null)
-            init();
-        long now = new Date().getTime();
-        List<PasswordReset> expiredResets = new ArrayList<>();
-        try (Cursor<Entry<Object, Object>> c = ops.scan("reset", ScanOptions.scanOptions().build()))
-        {
-            c.forEachRemaining(e ->
-            {
-                final PasswordReset r = (PasswordReset) e.getValue();
-                if (r.getExpiry() < now)
-                {
-                    expiredResets.add(r);
-                }
-            });
-        }
-        if (!expiredResets.isEmpty())
-        {
-            ops.delete("reset", expiredResets.stream().mapToLong(PasswordReset::getId).toArray());
-        }
     }
 
     @Override
     public Collection<Long> getAllUserIds()
     {
-        if (ops == null)
-            init();
-        String bucket = "user";
-        Collection<Long> answer = ops
-                .keys(bucket)
-                .stream()
-                .map(Long.class::cast)
-                .collect(Collectors.toSet());
-        return answer;
+        try (var conn = connect())
+        {
+            return conn.hkeys(Bucket.USER_BY_ID.toString()).stream().map(Long::parseLong).toList();
+        }
     }
 
     @Override
     public void deleteUser(long id)
     {
-        if (ops == null)
-            init();
-        User user = getUserById(id);
-        if (user == null)
-            return;
-        ops.delete("user", id);
-        ops.delete("email", user.getEmail());
+        try (var conn = connect())
+        {
+            User user = getUserById(conn, id);
+            if (user == null)
+                return;
+            deleteValue(conn, Bucket.USER_BY_ID, id);
+            deleteValue(conn, Bucket.USER_BY_EMAIL, user.getEmail());
+            deleteValue(conn, Bucket.RESET_BY_USER_ID, id);
+            var session = getSessionByUserId(conn, id);
+            if (session == null)
+                return;
+            deleteValue(conn, Bucket.SESSION_BY_USER_ID, id);
+            deleteValue(conn, Bucket.SESSION_BY_SESSION_ID, session.getId());
+        }
     }
 
 }

@@ -2,23 +2,53 @@ package uk.org.sehicl.website.users.impl;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.User.Status;
+import uk.org.sehicl.website.users.impl.RedisDatastore.Bucket;
 
 public class RedisDatastoreTest
 {
-    private final RedisDatastore datastore = new RedisDatastore();
+    private final RedisDatastore datastore = new RedisDatastore("redis://localhost:6379",
+            "hello");
+
+    @BeforeEach
+    void clearDb()
+    {
+        try (var conn = datastore.connect())
+        {
+            conn.flushAll();
+        }
+    }
+
+    void checkTtl(Bucket bucket, String key, long expected, long tolerance)
+    {
+        try (var conn = datastore.connect())
+        {
+            var ttl = conn.httl(bucket.toString(), key);
+            assertThat(ttl.size()).isEqualTo(1);
+            assertThat(ttl.get(0)).isCloseTo(expected, within(tolerance));
+        }
+    }
+
+    void checkTtl(Bucket bucket, long key, long expected, long tolerance)
+    {
+        checkTtl(bucket, datastore.toStringKey(key), expected, tolerance);
+    }
+
+    public void testGetUserIds()
+    {
+        assertThat(datastore.getAllUserIds()).isEmpty();
+    }
 
     @Test
     public void testCreateUser()
     {
-        final User created = datastore.createUser("a", "b", "c", Status.INACTIVE, "d");
+        var created = datastore.createUser("a", "b", "c", Status.INACTIVE, "d");
         assertThat(created).isEqualTo(datastore.getUserById(created.getId()));
         assertThat(created).isEqualTo(datastore.getUserByEmail(created.getEmail()));
     }
@@ -26,7 +56,7 @@ public class RedisDatastoreTest
     @Test
     public void testUpdateUser()
     {
-        final User user = datastore.createUser("X", "Y", "Z", Status.INACTIVE, "afafas");
+        var user = datastore.createUser("X", "Y", "Z", Status.INACTIVE, "afafas");
         user.setStatus(Status.ACTIVE);
         datastore.updateUser(user);
         assertThat(user).isEqualTo(datastore.getUserById(user.getId()));
@@ -36,57 +66,84 @@ public class RedisDatastoreTest
     @Test
     public void testGetUserByEmail()
     {
-        final String email = "hahah";
-        final String name = "sshsdh";
+        var email = "hahah";
+        var name = "sshsdh";
         datastore.createUser(email, name, "asdgsadg", Status.INACTIVE, "asfdafgag");
-        final User user = datastore.getUserByEmail(email);
+        var user = datastore.getUserByEmail(email);
         assertThat(user.getName()).isEqualTo(name);
     }
 
     @Test
     public void testGetUserById()
     {
-        final String email = "ag98gas";
-        final String name = "aagsaas";
-        final long id = datastore
+        var email = "ag98gas";
+        var name = "aagsaas";
+        var id = datastore
                 .createUser(email, name, "agadhadh", Status.INACTIVE, "asdaghdhd")
                 .getId();
-        final User user = datastore.getUserById(id);
+        var user = datastore.getUserById(id);
         assertThat(user.getName()).isEqualTo(name);
     }
 
     @Test
     public void testSetSessionNoSessionForUser()
     {
-        final User user = new User(4L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
-        final SessionData session = datastore.setSession(user);
+        var user = new User(4L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
+        var session = datastore.setSession(user);
         assertThat(session.getUserId()).isEqualTo(user.getId());
-        assertThat(session.getExpiry()).isCloseTo(new Date().getTime() + TimeUnit.DAYS.toMillis(1),
-                within(50L));
+        checkTtl(Bucket.SESSION_BY_SESSION_ID, session.getId(), TimeUnit.DAYS.toSeconds(1), 5L);
+        checkTtl(Bucket.SESSION_BY_USER_ID, session.getUserId(), TimeUnit.DAYS.toSeconds(1), 5L);
+        assertThat(datastore.getSessionBySessionId(session.getId())).isNotNull();
+        assertThat(datastore.getSessionByUserId(session.getUserId())).isNotNull();
     }
 
     @Test
     public void testSetSessionSessionForUser()
     {
-        final User user = new User(4L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
+        var user = new User(4L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
         datastore.setSession(user);
-        final SessionData session = datastore.setSession(user);
+        var session = datastore.setSession(user);
         assertThat(session.getUserId()).isEqualTo(user.getId());
-        assertThat(session.getExpiry()).isCloseTo(new Date().getTime() + TimeUnit.DAYS.toMillis(1),
-                within(50L));
+        checkTtl(Bucket.SESSION_BY_SESSION_ID, session.getId(), TimeUnit.DAYS.toSeconds(1), 5L);
+        checkTtl(Bucket.SESSION_BY_USER_ID, session.getUserId(), TimeUnit.DAYS.toSeconds(1), 5L);
+        assertThat(datastore.getSessionBySessionId(session.getId())).isNotNull();
+        assertThat(datastore.getSessionByUserId(session.getUserId())).isNotNull();
+    }
+
+    @Test
+    public void testSessionExpiry()
+    {
+        var user = new User(5L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
+        var session = datastore.setSession(user, 0);
+        assertThat(datastore.getSessionBySessionId(session.getId())).isNull();
+        assertThat(datastore.getSessionByUserId(session.getUserId())).isNull();
+    }
+
+    @Test
+    public void testGeneratePasswordResetUserDoesNotExist()
+    {
+        var user = new User(6L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
+        var reset = datastore.generatePasswordReset(user.getEmail());
+        assertThat(reset).isNull();
+        assertThat(datastore.getPasswordReset(user.getId())).isNull();
+    }
+
+    @Test
+    public void testGeneratePasswordResetUserExists()
+    {
+        var user = new User(7L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
+        datastore.createUser(user);
+        var reset = datastore.generatePasswordReset(user.getEmail());
+        assertThat(reset).isNotNull();
+        assertThat(datastore.getPasswordReset(user.getId())).isNotNull();
     }
     
     @Test
-    public void testClearExpiredSessions()
+    public void testPasswordResetExpiry()
     {
-        datastore.clearExpiredSessions();
-    }
-    
-    @Test
-    public void testGetSessionId()
-    {
-        User user = new User();
-        user.setId(14141L);
-        final long result = datastore.getSessionId(user);
+        var user = new User(7L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
+        datastore.createUser(user);
+        assertThat(datastore.generatePasswordReset(user.getEmail(), 0L)).isNotNull();
+        assertThat(datastore.getPasswordReset(user.getId())).isNull();
     }
 }
