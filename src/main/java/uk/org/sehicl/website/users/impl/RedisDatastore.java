@@ -10,10 +10,10 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.LongSupplier;
+import java.util.stream.Stream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import redis.clients.jedis.Jedis;
@@ -25,8 +25,8 @@ import uk.org.sehicl.website.users.UserDatastore;
 
 public class RedisDatastore implements UserDatastore
 {
-    private static final Logger LOG = LoggerFactory.getLogger(RedisDatastore.class);
-    private final static JsonMapper MAPPER = new JsonMapper();
+    private final static ObjectMapper MAPPER = new JsonMapper()
+            .configure(DeserializationFeature.USE_LONG_FOR_INTS, true);
 
     public static enum Bucket
     {
@@ -271,6 +271,16 @@ public class RedisDatastore implements UserDatastore
     @Override
     public void clearExpiredSessions()
     {
+        try (var conn = connect())
+        {
+            clearExpiredSessions(conn);
+        }
+    }
+
+    void clearExpiredSessions(Jedis conn)
+    {
+        clearExpiredEntries(conn, Bucket.SESSION_ID_BY_EXPIRY, Bucket.SESSION_BY_SESSION_ID);
+        clearExpiredEntries(conn, Bucket.USER_ID_BY_SESSION_EXPIRY, Bucket.SESSION_BY_USER_ID);
     }
 
     @Override
@@ -332,6 +342,44 @@ public class RedisDatastore implements UserDatastore
     @Override
     public void clearExpiredResets()
     {
+        try (var conn = connect())
+        {
+            clearExpiredResets(conn);
+        }
+    }
+
+    void clearExpiredResets(Jedis conn)
+    {
+        clearExpiredEntries(conn, Bucket.USER_ID_BY_RESET_EXPIRY, Bucket.RESET_BY_USER_ID);
+    }
+
+    void clearExpiredEntries(Jedis conn, Bucket expiryBucket, Bucket objectBucket)
+    {
+        var now = new Date().getTime();
+        var expiryBucketKey = expiryBucket.toString();
+        var pastExpiries = conn
+                .hkeys(expiryBucketKey)
+                .stream()
+                .filter(k -> Long.parseLong(k) < now)
+                .toArray(String[]::new);
+        @SuppressWarnings("unchecked")
+        var expiredKeys = Stream
+                .of(pastExpiries)
+                .map(k -> conn.hget(expiryBucketKey, k))
+                .flatMap(j ->
+                {
+                    try
+                    {
+                        return ((List<Long>) MAPPER.readValue(j, List.class)).stream();
+                    }
+                    catch (Exception e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .toArray(String[]::new);
+        Stream.of(pastExpiries).forEach(k -> conn.hdel(expiryBucketKey, k));
+        Stream.of(expiredKeys).forEach(k -> conn.hdel(objectBucket.toString(), k));
     }
 
     @Override

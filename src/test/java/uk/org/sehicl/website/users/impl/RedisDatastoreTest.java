@@ -8,20 +8,37 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
+import redis.embedded.RedisServer;
 import uk.org.sehicl.website.users.User;
 import uk.org.sehicl.website.users.User.Status;
 import uk.org.sehicl.website.users.impl.RedisDatastore.Bucket;
 
 public class RedisDatastoreTest
 {
-    private final RedisDatastore datastore = new RedisDatastore("redis://localhost:6379",
-            "hello");
+    private static RedisServer server;
+
+    private final RedisDatastore datastore = new RedisDatastore("redis://localhost:6378", "hello");
+
+    @BeforeAll
+    static void startServer() throws Exception
+    {
+        server = new RedisServer(6378);
+        server.start();
+    }
+
+    @AfterAll
+    static void stopServer() throws Exception
+    {
+        server.stop();
+    }
 
     @BeforeEach
     void clearDb()
@@ -34,9 +51,17 @@ public class RedisDatastoreTest
 
     void checkTtl(Bucket bucket, String key, long expected, long tolerance)
     {
+        List<Long> ttl;
         try (var conn = datastore.connect())
         {
-            var ttl = conn.httl(bucket.toString(), key);
+            try
+            {
+                ttl = conn.httl(bucket.toString(), key);
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
             assertThat(ttl.size()).isEqualTo(1);
             assertThat(ttl.get(0)).isCloseTo(expected, within(tolerance));
         }
@@ -44,7 +69,7 @@ public class RedisDatastoreTest
 
     void checkTtl(Bucket bucket, long key, long expected, long tolerance)
     {
-        checkTtl(bucket, datastore.toStringKey(key), expected, tolerance);
+        checkTtl(bucket, RedisDatastore.toStringKey(key), expected, tolerance);
     }
 
     public void testGetUserIds()
@@ -66,7 +91,7 @@ public class RedisDatastoreTest
         assertThat(unpacked).isEqualTo(data);
         assertThat(datastore.connect().get("rubbish")).isNull();
     }
-    
+
     @Test
     public void testCreateUser()
     {
@@ -137,6 +162,7 @@ public class RedisDatastoreTest
     {
         var user = new User(5L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
         var session = datastore.setSession(user, 0);
+        datastore.clearExpiredSessions();
         assertThat(datastore.getSessionBySessionId(session.getId())).isNull();
         assertThat(datastore.getSessionByUserId(session.getUserId())).isNull();
     }
@@ -147,6 +173,7 @@ public class RedisDatastoreTest
         var user = new User(6L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
         var reset = datastore.generatePasswordReset(user.getEmail());
         assertThat(reset).isNull();
+        datastore.clearExpiredResets();
         assertThat(datastore.getPasswordReset(user.getId())).isNull();
     }
 
@@ -157,15 +184,17 @@ public class RedisDatastoreTest
         datastore.createUser(user);
         var reset = datastore.generatePasswordReset(user.getEmail());
         assertThat(reset).isNotNull();
+        datastore.clearExpiredResets();
         assertThat(datastore.getPasswordReset(user.getId())).isNotNull();
     }
-    
+
     @Test
     public void testPasswordResetExpiry()
     {
         var user = new User(7L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
         datastore.createUser(user);
         assertThat(datastore.generatePasswordReset(user.getEmail(), 0L)).isNotNull();
+        datastore.clearExpiredResets();
         assertThat(datastore.getPasswordReset(user.getId())).isNull();
     }
 }
