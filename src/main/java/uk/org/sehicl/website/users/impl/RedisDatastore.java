@@ -4,9 +4,15 @@ import java.io.StringWriter;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.function.LongSupplier;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
@@ -19,19 +25,59 @@ import uk.org.sehicl.website.users.UserDatastore;
 
 public class RedisDatastore implements UserDatastore
 {
+    private static final Logger LOG = LoggerFactory.getLogger(RedisDatastore.class);
+    private final static JsonMapper MAPPER = new JsonMapper();
+
     public static enum Bucket
     {
         USER_BY_EMAIL,
         USER_BY_ID,
         SESSION_BY_USER_ID,
         SESSION_BY_SESSION_ID,
-        RESET_BY_USER_ID
+        SESSION_ID_BY_EXPIRY,
+        USER_ID_BY_SESSION_EXPIRY,
+        RESET_BY_USER_ID,
+        USER_ID_BY_RESET_EXPIRY
     }
+
+    private static record ExpiryInfo(Bucket expiryBucket, long objKey, LongSupplier expiryGetter)
+    {
+        @SuppressWarnings("unchecked")
+        void storeExpiryInDatabase(Jedis conn)
+        {
+            var bucketKey = expiryBucket.toString();
+            var expKey = toStringKey(expiryGetter.getAsLong());
+            var sKey = toStringKey(objKey);
+            var keySet = new HashSet<>(List.of(sKey));
+            var hget = conn.hget(bucketKey, expKey);
+            Optional.ofNullable(hget).ifPresent(str ->
+            {
+                try
+                {
+                    var l = (List<String>) MAPPER.readValue(str, List.class);
+                    keySet.addAll(l);
+                }
+                catch (Exception e)
+                {
+                    throw new RuntimeException(e);
+                }
+            });
+            StringWriter sw = new StringWriter();
+            try
+            {
+                MAPPER.writeValue(sw, keySet);
+            }
+            catch (Exception e)
+            {
+                throw new RuntimeException(e);
+            }
+            conn.hset(bucketKey, expKey, sw.toString());
+        }
+    };
 
     private static String USER_ID_COUNTER = "USER_ID";
 
     private final JedisPool pool;
-    private final JsonMapper mapper = new JsonMapper();
 
     public RedisDatastore(String uri, String auth)
     {
@@ -43,7 +89,7 @@ public class RedisDatastore implements UserDatastore
         return pool.getResource();
     }
 
-    String toStringKey(long key)
+    static String toStringKey(long key)
     {
         return "%d".formatted(key);
     }
@@ -64,7 +110,7 @@ public class RedisDatastore implements UserDatastore
         {
             try
             {
-                return mapper.readValue(str, cl);
+                return MAPPER.readValue(str, cl);
             }
             catch (Exception e)
             {
@@ -143,12 +189,22 @@ public class RedisDatastore implements UserDatastore
         putValue(conn, bucket, key, obj, null);
     }
 
-    <T> void putValue(Jedis conn, Bucket bucket, String key, T obj, Long expiry)
+    <T> void putValue(Jedis conn, Bucket bucket, String key, T obj, ExpiryInfo expiry)
     {
         var bucketName = bucket.toString();
         conn.hset(bucketName, key, toJson(obj));
-        if (expiry != null)
-            conn.hexpire(bucketName, expiry, key);
+        try
+        {
+            if (expiry != null)
+                conn
+                        .hexpireAt(bucketName,
+                                TimeUnit.MILLISECONDS.toSeconds(expiry.expiryGetter.getAsLong()),
+                                key);
+        }
+        catch (Exception ex)
+        {
+            expiry.storeExpiryInDatabase(conn);
+        }
     }
 
     void deleteValue(Jedis conn, Bucket bucket, String key)
@@ -161,7 +217,7 @@ public class RedisDatastore implements UserDatastore
         deleteValue(conn, bucket, toStringKey(key));
     }
 
-    <T> void putValue(Jedis conn, Bucket bucket, long key, T obj, Long expiry)
+    <T> void putValue(Jedis conn, Bucket bucket, long key, T obj, ExpiryInfo expiry)
     {
         putValue(conn, bucket, toStringKey(key), obj, expiry);
     }
@@ -171,7 +227,7 @@ public class RedisDatastore implements UserDatastore
         try
         {
             var sw = new StringWriter();
-            mapper.writeValue(sw, obj);
+            MAPPER.writeValue(sw, obj);
             sw.close();
             return sw.toString();
         }
@@ -195,9 +251,11 @@ public class RedisDatastore implements UserDatastore
             SessionData answer = getSessionByUserId(conn, user.getId());
             if (answer == null)
                 answer = new SessionData(getSessionId(user), user.getId(),
-                        TimeUnit.DAYS.toMillis(1));
-            putValue(conn, Bucket.SESSION_BY_SESSION_ID, answer.getId(), answer, expiryInSeconds);
-            putValue(conn, Bucket.SESSION_BY_USER_ID, answer.getUserId(), answer, expiryInSeconds);
+                        new Date().getTime() + TimeUnit.SECONDS.toMillis(expiryInSeconds));
+            putValue(conn, Bucket.SESSION_BY_SESSION_ID, answer.getId(), answer,
+                    new ExpiryInfo(Bucket.SESSION_ID_BY_EXPIRY, answer.getId(), answer::getExpiry));
+            putValue(conn, Bucket.SESSION_BY_USER_ID, answer.getUserId(), answer, new ExpiryInfo(
+                    Bucket.USER_ID_BY_SESSION_EXPIRY, answer.getUserId(), answer::getExpiry));
             return answer;
         }
     }
@@ -252,7 +310,9 @@ public class RedisDatastore implements UserDatastore
             if (user != null)
             {
                 answer = new PasswordReset(user.getId(), email);
-                putValue(conn, Bucket.RESET_BY_USER_ID, user.getId(), answer, expiryInSeconds);
+                answer.setExpiry(new Date().getTime() + TimeUnit.SECONDS.toMillis(expiryInSeconds));
+                putValue(conn, Bucket.RESET_BY_USER_ID, user.getId(), answer, new ExpiryInfo(
+                        Bucket.USER_ID_BY_RESET_EXPIRY, user.getId(), answer::getExpiry));
             }
             return answer;
         }
