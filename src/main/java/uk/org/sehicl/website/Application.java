@@ -49,11 +49,7 @@ public class Application
     @Bean
     public UserDatastore userDatastore()
     {
-        return EnvVar.UPSTASH_REDIS_REST_URL
-                .get()
-                .map(uri -> new RedisDatastore(uri,
-                        EnvVar.UPSTASH_REDIS_REST_TOKEN.get().orElse("hello")))
-                .orElse(null);
+        return EnvVar.UPSTASH_REDIS_URL.get().map(RedisDatastore::new).orElse(null);
     }
 
     @Bean

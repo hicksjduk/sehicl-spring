@@ -8,8 +8,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.LongSupplier;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -17,7 +19,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 import uk.org.sehicl.website.users.PasswordReset;
 import uk.org.sehicl.website.users.SessionData;
 import uk.org.sehicl.website.users.User;
@@ -77,16 +78,32 @@ public class RedisDatastore implements UserDatastore
 
     private static String USER_ID_COUNTER = "USER_ID";
 
-    private final JedisPool pool;
+    private final Supplier<Jedis> connector;
 
-    public RedisDatastore(String uri, String auth)
+    public RedisDatastore(String url)
     {
-        pool = new JedisPool(URI.create(uri));
+        URI uri = URI.create(url);
+        var password = Optional
+                .ofNullable(uri.getUserInfo())
+                .map(str -> str.split(":"))
+                .filter(a -> a.length > 1)
+                .map(a -> a[1])
+                .orElse(null);
+        var host = uri.getHost();
+        var port = new AtomicInteger(uri.getPort());
+        port.compareAndSet(-1, 6379);
+        connector = () ->
+        {
+            var answer = new Jedis(host, port.get());
+            if (password != null)
+                answer.auth(password);
+            return answer;
+        };
     }
 
     Jedis connect()
     {
-        return pool.getResource();
+        return connector.get();
     }
 
     static String toStringKey(long key)

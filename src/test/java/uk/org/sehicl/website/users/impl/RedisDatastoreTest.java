@@ -2,19 +2,13 @@ package uk.org.sehicl.website.users.impl;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.io.StringWriter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import redis.embedded.RedisServer;
 import uk.org.sehicl.website.users.User;
@@ -25,7 +19,7 @@ public class RedisDatastoreTest
 {
     private static RedisServer server;
 
-    private final RedisDatastore datastore = new RedisDatastore("redis://localhost:6378", "hello");
+    private final RedisDatastore datastore = new RedisDatastore("redis://localhost:6378");
 
     @BeforeAll
     static void startServer() throws Exception
@@ -75,21 +69,6 @@ public class RedisDatastoreTest
     public void testGetUserIds()
     {
         assertThat(datastore.getAllUserIds()).isEmpty();
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    void testJsonListPackUnpack() throws Exception
-    {
-        var data = LongStream.range(1L, 5L).boxed().toList();
-        var mapper = new JsonMapper().configure(DeserializationFeature.USE_LONG_FOR_INTS, true);
-        var sw = new StringWriter();
-        mapper.writeValue(sw, data.stream().collect(Collectors.toSet()));
-        var packed = sw.toString();
-        assertThat(packed).isEqualTo("[1,2,3,4]");
-        var unpacked = mapper.readValue(packed, List.class);
-        assertThat(unpacked).isEqualTo(data);
-        assertThat(datastore.connect().get("rubbish")).isNull();
     }
 
     @Test

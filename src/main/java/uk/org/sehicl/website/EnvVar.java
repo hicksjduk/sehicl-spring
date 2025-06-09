@@ -5,8 +5,7 @@ import java.util.Optional;
 public enum EnvVar
 {
     PORT,
-    UPSTASH_REDIS_REST_URL,
-    UPSTASH_REDIS_REST_TOKEN,
+    UPSTASH_REDIS_URL,
     MAILGUN_API_KEY,
     MAILGUN_DOMAIN,
     ADMIN_SECRET,
