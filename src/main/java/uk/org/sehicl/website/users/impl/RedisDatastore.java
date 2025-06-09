@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.LongSupplier;
 import java.util.function.Supplier;
@@ -83,6 +82,7 @@ public class RedisDatastore implements UserDatastore
     public RedisDatastore(String url)
     {
         URI uri = URI.create(url);
+        var ssl = uri.getScheme().endsWith("ss");
         var password = Optional
                 .ofNullable(uri.getUserInfo())
                 .map(str -> str.split(":"))
@@ -90,11 +90,11 @@ public class RedisDatastore implements UserDatastore
                 .map(a -> a[1])
                 .orElse(null);
         var host = uri.getHost();
-        var port = new AtomicInteger(uri.getPort());
-        port.compareAndSet(-1, 6379);
+        var p = uri.getPort();
+        var port = p == -1 ? 6379 : p;
         connector = () ->
         {
-            var answer = new Jedis(host, port.get());
+            var answer = new Jedis(host, port, ssl);
             if (password != null)
                 answer.auth(password);
             return answer;
