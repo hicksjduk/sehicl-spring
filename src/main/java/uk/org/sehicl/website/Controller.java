@@ -8,6 +8,7 @@ import java.net.URI;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
@@ -392,11 +393,11 @@ public class Controller
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(HttpSession session, HttpServletResponse resp, @RequestParam String email,
-            @RequestParam String password, @RequestParam("Login") String loginCmd)
+            @RequestParam String password, @RequestParam("Login") Optional<String> loginCmd)
             throws IOException
     {
         Login login = new Login(userManager, email, password);
-        if (loginCmd != null)
+        if (loginCmd.isPresent())
         {
             Long token = login.validateAndLogin();
             if (token != null)
@@ -633,14 +634,24 @@ public class Controller
     @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")
     private String recaptchaUrl;
 
-    private boolean realPerson(String recaptchaResponse) throws IOException
+    private boolean realPerson(String recaptchaResponse)
     {
-        var restTemplate = new RestTemplate();
-        var requestMap = new LinkedMultiValueMap<String, String>();
-        requestMap.add("secret", EnvVar.RECAPTCHA_SECRET.getAsString());
-        requestMap.add("response", recaptchaResponse);
-        var apiResponse = restTemplate
-                .postForObject(recaptchaUrl, requestMap, CaptchaResponse.class);
-        return apiResponse != null && Boolean.TRUE.equals(apiResponse.success);
+        return EnvVar.RECAPTCHA_SECRET.get().map(recaptchaSecret ->
+        {
+            try
+            {
+                var restTemplate = new RestTemplate();
+                var requestMap = new LinkedMultiValueMap<String, String>();
+                requestMap.add("secret", recaptchaSecret);
+                requestMap.add("response", recaptchaResponse);
+                var apiResponse = restTemplate
+                        .postForObject(recaptchaUrl, requestMap, CaptchaResponse.class);
+                return apiResponse != null && Boolean.TRUE.equals(apiResponse.success);
+            }
+            catch (Exception e)
+            {
+                throw new RuntimeException(e);
+            }
+        }).orElse(true);
     }
 }
