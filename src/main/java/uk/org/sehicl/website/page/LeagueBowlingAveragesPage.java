@@ -12,18 +12,18 @@ public class LeagueBowlingAveragesPage extends Page
     private final String title;
     private final boolean current;
 
-    public LeagueBowlingAveragesPage(LeagueSelector selector, String uri)
+    public LeagueBowlingAveragesPage(LeagueSelector selector)
     {
-        super("averages", "leaguebowlingaverages.ftlh", Section.AVERAGES, uri);
+        super("averages", "leaguebowlingaverages.ftlh", Section.AVERAGES);
         averages = new BowlingAverages.Builder(selector, Completeness.CONSISTENT, 50,
                 new ModelAndRules()).build();
         title = String.format("%s Bowling", selector.getName());
         current = true;
     }
 
-    public LeagueBowlingAveragesPage(LeagueSelector selector, int season, String uri)
+    public LeagueBowlingAveragesPage(LeagueSelector selector, int season)
     {
-        super("averages", "leaguebowlingaverages.ftlh", Section.ARCHIVE, uri);
+        super("averages", "leaguebowlingaverages.ftlh", Section.ARCHIVE);
         averages = new BowlingAverages.Builder(selector, Completeness.COMPLETE, 50,
                 new ModelAndRules(season)).build();
         title = String.format("%s Bowling - Season %d-%02d", selector.getName(), season + 1999,

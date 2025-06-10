@@ -1,5 +1,7 @@
 package uk.org.sehicl.website.page;
 
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import uk.org.sehicl.website.EnvVar;
 import uk.org.sehicl.website.navigator.Navigator;
 import uk.org.sehicl.website.navigator.Section;
@@ -11,8 +13,9 @@ public abstract class Page
     private final Navigator navigator;
     private final boolean blockIndexing;
 
-    public Page(String pageId, String contentTemplate, Section section, String uri)
+    public Page(String pageId, String contentTemplate, Section section)
     {
+        var uri = ServletUriComponentsBuilder.fromCurrentRequestUri().toUriString();
         this.pageId = pageId;
         this.contentTemplate = contentTemplate;
         this.navigator = new Navigator(section, uri);

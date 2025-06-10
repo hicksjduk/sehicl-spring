@@ -16,9 +16,9 @@ public class TeamAveragesIndexPage extends Page
 {
     private final SortedMap<League, SortedSet<Team>> teamsByLeague;
 
-    public TeamAveragesIndexPage(String uri)
+    public TeamAveragesIndexPage()
     {
-        super("averages", "teamaveragesindex.ftlh", Section.AVERAGES, uri);
+        super("averages", "teamaveragesindex.ftlh", Section.AVERAGES);
         final Model model = ModelLoader.getModel();
         teamsByLeague = new TreeMap<>();
         model

@@ -6,9 +6,9 @@ public class ActivatePage extends Page
 {
     private final User user;
 
-    public ActivatePage(String uri, User user)
+    public ActivatePage(User user)
     {
-        super("activate", "activate.ftlh", null, uri);
+        super("activate", "activate.ftlh", null);
         this.user = user;
     }
 

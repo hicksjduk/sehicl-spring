@@ -13,24 +13,24 @@ public class LeagueFixturesPage extends Page
     private final String title;
     private final Integer season;
 
-    public LeagueFixturesPage(String uri)
+    public LeagueFixturesPage()
     {
-        this(null, null, uri);
+        this(null, null);
     }
 
-    public LeagueFixturesPage(String leagueId, String uri)
+    public LeagueFixturesPage(String leagueId)
     {
-        this(null, leagueId, uri);
+        this(null, leagueId);
     }
 
-    public LeagueFixturesPage(int season, String uri)
+    public LeagueFixturesPage(int season)
     {
-        this(season, null, uri);
+        this(season, null);
     }
 
-    public LeagueFixturesPage(Integer season, String leagueId, String uri)
+    public LeagueFixturesPage(Integer season, String leagueId)
     {
-        super("fixtures", "leaguefixtures.ftlh", Section.FIXTURES, uri);
+        super("fixtures", "leaguefixtures.ftlh", Section.FIXTURES);
         this.season = season;
         final Model model = season == null ? ModelLoader.getModel() : ModelLoader.getModel(season);
         fixtures = new LeagueFixtures.Builder(model, season, leagueId, Completeness.CONSISTENT,

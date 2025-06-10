@@ -7,14 +7,14 @@ public class RegisterPage extends Page
 {
     private final Register register;
 
-    public RegisterPage(String uri, UserManager userManager)
+    public RegisterPage(UserManager userManager)
     {
-        this(uri, new Register(userManager));
+        this(new Register(userManager));
     }
 
-    public RegisterPage(String uri, Register register)
+    public RegisterPage(Register register)
     {
-        super("register", "register.ftlh", null, uri);
+        super("register", "register.ftlh", null);
         this.register = register;
     }
 

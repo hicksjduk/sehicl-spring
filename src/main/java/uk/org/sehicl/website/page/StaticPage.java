@@ -6,9 +6,9 @@ public class StaticPage extends Page
 {
     private final String title;
 
-    public StaticPage(String pageId, String contentTemplate, Section section, String uri, String title)
+    public StaticPage(String pageId, String contentTemplate, Section section,String title)
     {
-        super(pageId, contentTemplate, section, uri);
+        super(pageId, contentTemplate, section);
         this.title = title;
     }
 

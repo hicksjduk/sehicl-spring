@@ -4,9 +4,9 @@ import uk.org.sehicl.website.navigator.Section;
 
 public class HomePage extends Page
 {
-    public HomePage(String uri)
+    public HomePage()
     {
-        super("home", "home.ftlh", Section.HOME, uri);
+        super("home", "home.ftlh", Section.HOME);
     }
 
     @Override

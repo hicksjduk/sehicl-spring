@@ -13,9 +13,9 @@ public class LeagueTablePage extends Page
     private final String title;
     private final boolean current;
 
-    public LeagueTablePage(String leagueId, String uri)
+    public LeagueTablePage(String leagueId)
     {
-        super("table", "leaguetable.ftlh", Section.TABLES, uri);
+        super("table", "leaguetable.ftlh", Section.TABLES);
         final League league = ModelLoader.getModel().getLeague(leagueId);
         table = new LeagueTable.Builder(league, new Rules.Builder().build(),
                 Completeness.CONSISTENT).build();
@@ -23,9 +23,9 @@ public class LeagueTablePage extends Page
         current = true;
     }
 
-    public LeagueTablePage(String leagueId, int season, String uri)
+    public LeagueTablePage(String leagueId, int season)
     {
-        super("table", "leaguetable.ftlh", Section.ARCHIVE, uri);
+        super("table", "leaguetable.ftlh", Section.ARCHIVE);
         final League league = ModelLoader.getModel(season).getLeague(leagueId);
         table = new LeagueTable.Builder(league, new Rules.Builder(season).build(),
                 Completeness.COMPLETE).build();

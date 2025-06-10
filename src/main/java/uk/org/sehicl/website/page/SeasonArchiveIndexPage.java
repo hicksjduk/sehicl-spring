@@ -6,9 +6,9 @@ public class SeasonArchiveIndexPage extends Page
 {
     private final int season;
 
-    public SeasonArchiveIndexPage(String uri, int season)
+    public SeasonArchiveIndexPage(int season)
     {
-        super("archive", "seasonarchiveindex.ftlh", Section.ARCHIVE, uri);
+        super("archive", "seasonarchiveindex.ftlh", Section.ARCHIVE);
         this.season = season;
     }
 

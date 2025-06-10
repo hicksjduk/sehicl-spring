@@ -11,9 +11,9 @@ public class LeagueResultsPage extends Page
     private final LeagueResults results;
     private final String title;
 
-    public LeagueResultsPage(String leagueId, String uri)
+    public LeagueResultsPage(String leagueId)
     {
-        super("results", "results.ftlh", Section.RESULTS, uri);
+        super("results", "results.ftlh", Section.RESULTS);
         results = new LeagueResults.Builder(ModelLoader.getModel(), leagueId, Completeness.CONSISTENT,
                 new Rules.Builder().build()).build();
         title = String.format("Results: %s", results.getLeague().getName());

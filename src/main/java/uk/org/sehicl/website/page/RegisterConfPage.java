@@ -6,9 +6,9 @@ public class RegisterConfPage extends Page
 {
     private final User user;
 
-    public RegisterConfPage(String uri, User user)
+    public RegisterConfPage(User user)
     {
-        super("register", "registerConf.ftlh", null, uri);
+        super("register", "registerConf.ftlh", null);
         this.user = user;
     }
 

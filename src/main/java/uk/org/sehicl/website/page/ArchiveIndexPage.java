@@ -7,9 +7,9 @@ public class ArchiveIndexPage extends Page
 {
     private final int currentSeason = Constants.CURRENT_SEASON;
 
-    public ArchiveIndexPage(String uri)
+    public ArchiveIndexPage()
     {
-        super("archive", "archiveindex.ftlh", Section.ARCHIVE, uri);
+        super("archive", "archiveindex.ftlh", Section.ARCHIVE);
     }
 
     @Override

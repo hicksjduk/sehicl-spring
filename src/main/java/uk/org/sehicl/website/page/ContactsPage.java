@@ -8,9 +8,9 @@ public class ContactsPage extends Page
 {
     private final ContactsReport contacts;
 
-    public ContactsPage(String uri)
+    public ContactsPage()
     {
-        super("contacts", "contacts.ftlh", Section.CONTACTS, uri);
+        super("contacts", "contacts.ftlh", Section.CONTACTS);
         contacts = new ContactsReport(Contacts.getContacts(), true);
     }
 

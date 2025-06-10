@@ -15,9 +15,9 @@ public class LeagueTablesPage extends Page
     private final String title;
     private final boolean current;
 
-    public LeagueTablesPage(String uri)
+    public LeagueTablesPage()
     {
-        super("table", "leaguetable.ftlh", Section.TABLES, uri);
+        super("table", "leaguetable.ftlh", Section.TABLES);
         final Rules rules = new Rules.Builder().build();
         ModelLoader
                 .getModel()

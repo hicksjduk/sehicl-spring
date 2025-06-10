@@ -6,9 +6,9 @@ public class UserDetailsPage extends Page
 {
     private final User user;
 
-    public UserDetailsPage(String uri, User user)
+    public UserDetailsPage(User user)
     {
-        super("userDetails", "userDetails.ftlh", null, uri);
+        super("userDetails", "userDetails.ftlh", null);
         this.user = user;
     }
 

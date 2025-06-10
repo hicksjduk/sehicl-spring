@@ -2,12 +2,16 @@ package uk.org.sehicl.website;
 
 import java.util.Collections;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import redis.embedded.RedisServer;
 import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.admin.UsersImporter;
 import uk.org.sehicl.website.users.EmailException;
@@ -49,7 +53,33 @@ public class Application
     @Bean
     public UserDatastore userDatastore()
     {
-        return EnvVar.UPSTASH_REDIS_URL.get().map(RedisDatastore::new).orElse(null);
+        var url = EnvVar.UPSTASH_REDIS_URL.get().orElse(embeddedServerUrl());
+        var datastore = new RedisDatastore(url);
+        return datastore;
+    }
+
+    RedisServer dbServer = null;;
+
+    String embeddedServerUrl()
+    {
+        try
+        {
+            var port = 6378;
+            dbServer = new RedisServer(port);
+            dbServer.start();
+            return "redis://localhost:%d".formatted(port);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PreDestroy
+    void shutdown() throws Exception
+    {
+        if (dbServer != null)
+            dbServer.stop();
     }
 
     @Bean
@@ -88,5 +118,5 @@ public class Application
     public UsersImporter usersImporter(UserDatastore datastore)
     {
         return new UsersImporter(datastore);
-    }
+    }   
 }

@@ -13,6 +13,9 @@ import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -25,6 +28,8 @@ import uk.org.sehicl.website.users.UserDatastore;
 
 public class RedisDatastore implements UserDatastore
 {
+    private final static Logger LOG = LoggerFactory.getLogger(RedisDatastore.class);
+    
     private final static ObjectMapper MAPPER = new JsonMapper()
             .configure(DeserializationFeature.USE_LONG_FOR_INTS, true);
 
@@ -308,6 +313,7 @@ public class RedisDatastore implements UserDatastore
             user.setId(conn.incr(USER_ID_COUNTER));
             putValue(conn, Bucket.USER_BY_ID, user.getId(), user);
             putValue(conn, Bucket.USER_BY_EMAIL, user.getEmail(), user);
+            LOG.info("User added: %s".formatted(user.getEmail()));
             return user;
         }
     }

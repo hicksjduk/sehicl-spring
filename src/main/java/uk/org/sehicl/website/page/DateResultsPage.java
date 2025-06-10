@@ -23,14 +23,14 @@ public class DateResultsPage extends Page
     private final DateResults results;
     private final String title;
 
-    public DateResultsPage(String uri)
+    public DateResultsPage()
     {
-        this(null, uri);
+        this(null);
     }
 
-    public DateResultsPage(Date date, String uri)
+    public DateResultsPage(Date date)
     {
-        super("results", "results.ftlh", Section.RESULTS, uri);
+        super("results", "results.ftlh", Section.RESULTS);
         if (date == null)
         {
             results = new DateResults.Builder(ModelLoader.getModel(), date, Completeness.CONSISTENT,

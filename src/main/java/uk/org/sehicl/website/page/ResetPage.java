@@ -6,9 +6,9 @@ public class ResetPage extends Page
 {
     private final Reset reset;
 
-    public ResetPage(String uri, Reset reset)
+    public ResetPage(Reset reset)
     {
-        super("passwordReset", "passwordReset.ftlh", null, uri);
+        super("passwordReset", "passwordReset.ftlh", null);
         this.reset = reset;
     }
 

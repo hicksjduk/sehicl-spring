@@ -20,9 +20,9 @@ public class TeamAveragesPage extends Page
     private final Team team;
     private final boolean current;
 
-    public TeamAveragesPage(String teamId, String uri)
+    public TeamAveragesPage(String teamId)
     {
-        super("averages", "teamaverages.ftlh", Section.AVERAGES, uri);
+        super("averages", "teamaverages.ftlh", Section.AVERAGES);
         this.selector = new TeamSelector(teamId);
         final Completeness completenessThreshold = Completeness.CONSISTENT;
         final ModelAndRules modelAndRules = new ModelAndRules();
@@ -35,9 +35,9 @@ public class TeamAveragesPage extends Page
         current = true;
     }
 
-    public TeamAveragesPage(String teamId, Integer season, String uri)
+    public TeamAveragesPage(String teamId, Integer season)
     {
-        super("averages", "teamaverages.ftlh", Section.ARCHIVE, uri);
+        super("averages", "teamaverages.ftlh", Section.ARCHIVE);
         this.selector = new TeamSelector(teamId);
         final ModelAndRules[] seasonData = IntStream
                 .rangeClosed(season == null ? Constants.FIRST_SEASON : season,

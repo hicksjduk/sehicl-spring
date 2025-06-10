@@ -6,10 +6,10 @@ public class ReconfirmPage extends Page
 {
     private final Reconfirm reconfirm;
 
-    public ReconfirmPage(String uri, Reconfirm reset)
+    public ReconfirmPage(Reconfirm reconfirm)
     {
-        super("reconfirm", "reconfirm.ftlh", null, uri);
-        this.reconfirm = reset;
+        super("reconfirm", "reconfirm.ftlh", null);
+        this.reconfirm = reconfirm;
     }
 
     @Override

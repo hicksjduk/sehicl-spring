@@ -1,5 +1,8 @@
 package uk.org.sehicl.website.users;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +12,10 @@ import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.ArrayType;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import uk.org.sehicl.website.template.ActivationMailTemplate;
 import uk.org.sehicl.website.template.AdminNotifyMailTemplate;
@@ -21,6 +28,27 @@ import uk.org.sehicl.website.users.UserException.Message;
 public class UserManager
 {
     private static final Logger LOG = LoggerFactory.getLogger(UserManager.class);
+    
+    public static Stream<User> fromFile(String fileName)
+    {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName)))
+        {
+            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            ArrayType type = mapper.getTypeFactory().constructArrayType(User.class);
+            User[] array = (User[]) mapper.readValue(br, type);
+            LOG.info("Loaded {} user(s) from {}", array.length, fileName);
+            return Stream.of(array);
+        }
+        catch (FileNotFoundException ex)
+        {
+            LOG.info("File {} not found", fileName);
+            return Stream.empty();
+        }
+        catch (Exception ex)
+        {
+            throw new RuntimeException("Unable to load users from file", ex);
+        }
+    }
 
     @Autowired
     private UserDatastore datastore;

@@ -7,9 +7,9 @@ public class DeleteUserPage extends Page
     private final User user;
     private final boolean confirmed;
     
-    public DeleteUserPage(String uri, User user, boolean confirmed)
+    public DeleteUserPage(User user, boolean confirmed)
     {
-        super("deleteUser", "deleteUserConfirm.ftlh", null, uri);
+        super("deleteUser", "deleteUserConfirm.ftlh", null);
         this.user = user;
         this.confirmed = confirmed;
     }

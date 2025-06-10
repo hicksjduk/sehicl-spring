@@ -7,14 +7,14 @@ public class LoginPage extends Page
 {
     private final Login login;
 
-    public LoginPage(String uri, UserManager userManager)
+    public LoginPage(UserManager userManager)
     {
-        this(uri, new Login(userManager));
+        this(new Login(userManager));
     }
 
-    public LoginPage(String uri, Login login)
+    public LoginPage(Login login)
     {
-        super("login", "login.ftlh", null, uri);
+        super("login", "login.ftlh", null);
         this.login = login;
     }
 
