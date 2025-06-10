@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -102,18 +101,18 @@ public class Controller
     }
 
     @RequestMapping("/")
-    public String home(UriComponentsBuilder uriBuilder)
+    public String home()
     {
         return new PageTemplate(new HomePage()).process();
     }
 
     @RequestMapping("/contacts")
-    public String contacts(UriComponentsBuilder uriBuilder)
+    public String contacts()
     {
         return new PageTemplate(new ContactsPage()).process();
     }
 
-    public String fullContactsPlaceholder(UriComponentsBuilder uriBuilder) throws IOException
+    public String fullContactsPlaceholder() throws IOException
     {
         return new PageTemplate(new StaticPage("contacts", "fullContactsPlaceholder.ftlh",
                 Section.CONTACTS, "SEHICL Full Contacts")).process();
@@ -131,42 +130,42 @@ public class Controller
     }
 
     @RequestMapping("/resources")
-    public String resources(UriComponentsBuilder uriBuilder)
+    public String resources()
     {
         return new PageTemplate(new StaticPage("resources", "resources.ftlh", Section.RESOURCES,
                 "SEHICL Resources")).process();
     }
 
     @RequestMapping("/rules")
-    public String rules(UriComponentsBuilder uriBuilder)
+    public String rules()
     {
         return new PageTemplate(
                 new StaticPage("rules", "rules.ftlh", Section.RULES, "SEHICL Rules")).process();
     }
 
     @RequestMapping("/rules/constitution")
-    public String constitution(UriComponentsBuilder uriBuilder)
+    public String constitution()
     {
         return new PageTemplate(new StaticPage("rules", "rules/constitution/index.ftlh",
                 Section.RULES, "SEHICL Constitution")).process();
     }
 
     @RequestMapping("/rules/administration")
-    public String adminRules(UriComponentsBuilder uriBuilder)
+    public String adminRules()
     {
         return new PageTemplate(new StaticPage("rules", "rules/administration/index.ftlh",
                 Section.RULES, "SEHICL Administrative Rules")).process();
     }
 
     @RequestMapping("/rules/playing")
-    public String playingRules(UriComponentsBuilder uriBuilder)
+    public String playingRules()
     {
         return new PageTemplate(new StaticPage("rules", "rules/playing/index.ftlh", Section.RULES,
                 "SEHICL Rules Of Play")).process();
     }
 
     @RequestMapping("/records")
-    public String recordsIndex(UriComponentsBuilder uriBuilder)
+    public String recordsIndex()
     {
         return new PageTemplate(
                 new StaticPage("records", "records/index.ftlh", Section.RECORDS, "SEHICL Records"))
@@ -174,35 +173,35 @@ public class Controller
     }
 
     @RequestMapping("/records/performances")
-    public String recordPerformances(UriComponentsBuilder uriBuilder)
+    public String recordPerformances()
     {
         return new PageTemplate(new StaticPage("records", "records/performances.ftlh",
                 Section.RECORDS, "SEHICL Record Performances")).process();
     }
 
     @RequestMapping("/records/winners")
-    public String divisionalWinners(UriComponentsBuilder uriBuilder)
+    public String divisionalWinners()
     {
         return new PageTemplate(new StaticPage("divwinners", "records/divwinners.ftlh",
                 Section.RECORDS, "SEHICL Divisional Winners")).process();
     }
 
     @RequestMapping("/records/awards")
-    public String individualAwards(UriComponentsBuilder uriBuilder)
+    public String individualAwards()
     {
         return new PageTemplate(new StaticPage("awards", "records/individualawards.ftlh",
                 Section.RECORDS, "SEHICL Individual Awards")).process();
     }
 
     @RequestMapping("/records/fairplay")
-    public String fairplay(UriComponentsBuilder uriBuilder)
+    public String fairplay()
     {
         return new PageTemplate(new StaticPage("fairplay", "records/fairplay.ftlh", Section.RECORDS,
                 "SEHICL Sporting & Efficiency")).process();
     }
 
     @RequestMapping("/presentation")
-    public String presentationEvening(UriComponentsBuilder uriBuilder)
+    public String presentationEvening()
     {
         return new PageTemplate(new StaticPage("presentation", "presentation/schedule.ftlh",
                 Section.HOME, "SEHICL Presentation Evening")).process();
@@ -218,7 +217,7 @@ public class Controller
     }
 
     @RequestMapping("/tables")
-    public String currentTables(UriComponentsBuilder uriBuilder)
+    public String currentTables()
     {
         return new PageTemplate(new LeagueTablesPage()).process();
     }
@@ -240,8 +239,7 @@ public class Controller
     }
 
     @RequestMapping("/averages/batting/{selector}")
-    public String currentBattingAverages(UriComponentsBuilder uriBuilder,
-            @PathVariable String selector)
+    public String currentBattingAverages(@PathVariable String selector)
     {
         return new PageTemplate(
                 new LeagueBattingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase())))
@@ -249,8 +247,7 @@ public class Controller
     }
 
     @RequestMapping("/archive/batting/{selector}/{season}")
-    public String archiveBattingAverages(UriComponentsBuilder uriBuilder,
-            @PathVariable String selector, @PathVariable int season)
+    public String archiveBattingAverages(@PathVariable String selector, @PathVariable int season)
     {
         Page page = season <= 5
                 ? new StaticPage("archive",
@@ -262,8 +259,7 @@ public class Controller
     }
 
     @RequestMapping("/averages/bowling/{selector}")
-    public String currentBowlingAverages(UriComponentsBuilder uriBuilder,
-            @PathVariable String selector)
+    public String currentBowlingAverages(@PathVariable String selector)
     {
         return new PageTemplate(
                 new LeagueBowlingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase())))
@@ -271,8 +267,7 @@ public class Controller
     }
 
     @RequestMapping("/archive/bowling/{selector}/{season}")
-    public String archiveBowlingAverages(UriComponentsBuilder uriBuilder,
-            @PathVariable String selector, @PathVariable int season)
+    public String archiveBowlingAverages(@PathVariable String selector, @PathVariable int season)
     {
         Page page = season <= 5
                 ? new StaticPage("archive",
@@ -302,20 +297,20 @@ public class Controller
     }
 
     @RequestMapping("/averages/byTeam")
-    public String teamAveragesIndex(UriComponentsBuilder uriBuilder)
+    public String teamAveragesIndex()
     {
         return new PageTemplate(new TeamAveragesIndexPage()).process();
     }
 
     @RequestMapping("/averages")
-    public String averagesIndex(UriComponentsBuilder uriBuilder)
+    public String averagesIndex()
     {
         return new PageTemplate(new StaticPage("averages", "averagesindex.ftlh", Section.AVERAGES,
                 "SEHICL Averages")).process();
     }
 
     @RequestMapping("/archive")
-    public String archiveIndex(UriComponentsBuilder uriBuilder)
+    public String archiveIndex()
     {
         return new PageTemplate(new ArchiveIndexPage()).process();
     }
@@ -339,7 +334,7 @@ public class Controller
     }
 
     @RequestMapping("/fixtures")
-    public String leagueFixtures(UriComponentsBuilder uriBuilder)
+    public String leagueFixtures()
     {
         return new PageTemplate(new LeagueFixturesPage()).process();
     }
@@ -363,7 +358,7 @@ public class Controller
     }
 
     @RequestMapping("/results")
-    public String dateResultsLatest(UriComponentsBuilder uriBuilder)
+    public String dateResultsLatest()
     {
         return new PageTemplate(new DateResultsPage()).process();
     }
@@ -382,7 +377,7 @@ public class Controller
     }
 
     @RequestMapping("/dutyRota")
-    public String dutyRota(UriComponentsBuilder uriBuilder)
+    public String dutyRota()
     {
         return new PageTemplate(
                 new StaticPage("dutyRota", "dutyRota.ftlh", Section.FIXTURES, "SEHICL Duty Rota"))
@@ -390,7 +385,7 @@ public class Controller
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
-    public String login(UriComponentsBuilder uriBuilder)
+    public String login()
     {
         return new PageTemplate(new LoginPage(userManager)).process();
     }
@@ -420,7 +415,7 @@ public class Controller
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
-    public String register(UriComponentsBuilder uriBuilder) throws IOException
+    public String register() throws IOException
     {
         return new PageTemplate(new RegisterPage(userManager)).process();
     }
@@ -555,14 +550,14 @@ public class Controller
     }
 
     @RequestMapping(path = "/reconfConf")
-    public String confirmReconfirmation(UriComponentsBuilder uriBuilder) throws IOException
+    public String confirmReconfirmation() throws IOException
     {
         return new PageTemplate(new StaticPage("reconfirm", "reconfConf.ftlh", null, "Thank you"))
                 .process();
     }
 
     @RequestMapping(path = "/dp")
-    public String dataProtection(UriComponentsBuilder uriBuilder) throws IOException
+    public String dataProtection() throws IOException
     {
         return new PageTemplate(new StaticPage("dp", "dataProtection.ftlh", Section.DP,
                 "SEHICL Data Protection Policy")).process();

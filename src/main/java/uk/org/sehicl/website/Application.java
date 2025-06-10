@@ -1,6 +1,8 @@
 package uk.org.sehicl.website;
 
 import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -98,11 +100,19 @@ public class Application
     {
         return new EmailSender()
         {
+            private static final Logger LOG = LoggerFactory.getLogger(EmailSender.class);
 
             @Override
             public void sendEmail(String subject, String messageText, Addressee... addressees)
                     throws EmailException
             {
+                LOG
+                        .info("Message sent to {}",
+                                Stream
+                                        .of(addressees)
+                                        .map(Object::toString)
+                                        .collect(Collectors.joining(", ")));
+                LOG.info("Content: {}", messageText);
             }
 
         };
@@ -118,5 +128,5 @@ public class Application
     public UsersImporter usersImporter(UserDatastore datastore)
     {
         return new UsersImporter(datastore);
-    }   
+    }
 }
