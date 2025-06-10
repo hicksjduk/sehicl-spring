@@ -1,6 +1,6 @@
 package uk.org.sehicl.admin;
 
-import java.io.BufferedReader;
+import java.io.Reader;
 import java.util.stream.Stream;
 
 import org.slf4j.Logger;
@@ -24,7 +24,7 @@ public class UsersImporter
         this.datastore = datastore;
     }
 
-    public int importUsers(BufferedReader data) throws Exception
+    public int importUsers(Reader data) throws Exception
     {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         ArrayType type = mapper.getTypeFactory().constructArrayType(User.class);

@@ -2,34 +2,35 @@ package uk.org.sehicl.website;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URI;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Scanner;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.admin.UsersImporter;
 import uk.org.sehicl.website.navigator.Section;
@@ -86,322 +87,341 @@ public class Controller
     @Autowired
     private UsersImporter usersImporter;
 
-    private String getRequestUri(HttpServletRequest req)
+    private String getRequestUri(UriComponentsBuilder uriBuilder)
     {
-        var answer = ServletUriComponentsBuilder.fromCurrentRequest().toUriString();
-        return forceHttps ? answer.replace("http://", "https://") : answer;
+        if (forceHttps)
+            uriBuilder.scheme("https://");
+        return uriBuilder.toUriString();
     }
 
-    private String getRequestUri(HttpServletRequest req, String pathToResolve)
+    private String getRequestUri(UriComponentsBuilder uriBuilder, String pathToResolve)
     {
-        return URI.create(getRequestUri(req)).resolve(pathToResolve).toString();
+        return URI.create(getRequestUri(uriBuilder)).resolve(pathToResolve).toString();
     }
 
     @RequestMapping("/")
-    public String home(HttpServletRequest req)
+    public String home(UriComponentsBuilder uriBuilder)
     {
-        return new PageTemplate(new HomePage(getRequestUri(req))).process();
+        return new PageTemplate(new HomePage(getRequestUri(uriBuilder))).process();
     }
 
     @RequestMapping("/contacts")
-    public String contacts(HttpServletRequest req)
+    public String contacts(UriComponentsBuilder uriBuilder)
     {
-        return new PageTemplate(new ContactsPage(getRequestUri(req))).process();
+        return new PageTemplate(new ContactsPage(getRequestUri(uriBuilder))).process();
     }
 
-    public String fullContactsPlaceholder(HttpServletRequest req) throws IOException
+    public String fullContactsPlaceholder(UriComponentsBuilder uriBuilder) throws IOException
     {
         return new PageTemplate(new StaticPage("contacts", "fullContactsPlaceholder.ftlh",
-                Section.CONTACTS, getRequestUri(req), "SEHICL Full Contacts")).process();
+                Section.CONTACTS, getRequestUri(uriBuilder), "SEHICL Full Contacts")).process();
     }
 
     @RequestMapping("/fullContacts")
-    public String fullContacts(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    public String fullContacts(UriComponentsBuilder uriBuilder, HttpSession session,
+            HttpServletResponse resp) throws IOException
     {
-        final UserSession userSession = new UserSession(req);
+        final UserSession userSession = new UserSession(session);
         if (userManager.sessionHasRole(userSession.getToken(), null))
-            return new PageTemplate(new FullContactsPage(getRequestUri(req))).process();
-        userSession.setRedirectTarget(getRequestUri(req));
-        resp.sendRedirect(getRequestUri(req, "/login"));
+            return new PageTemplate(new FullContactsPage(getRequestUri(uriBuilder))).process();
+        userSession.setRedirectTarget(getRequestUri(uriBuilder));
+        resp.sendRedirect(getRequestUri(uriBuilder, "/login"));
         return "";
     }
 
     @RequestMapping("/resources")
-    public String resources(HttpServletRequest req)
+    public String resources(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("resources", "resources.ftlh", Section.RESOURCES,
-                getRequestUri(req), "SEHICL Resources")).process();
+                getRequestUri(uriBuilder), "SEHICL Resources")).process();
     }
 
     @RequestMapping("/rules")
-    public String rules(HttpServletRequest req)
+    public String rules(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("rules", "rules.ftlh", Section.RULES,
-                getRequestUri(req), "SEHICL Rules")).process();
+                getRequestUri(uriBuilder), "SEHICL Rules")).process();
     }
 
     @RequestMapping("/rules/constitution")
-    public String constitution(HttpServletRequest req)
+    public String constitution(UriComponentsBuilder uriBuilder)
     {
-        return new PageTemplate(new StaticPage("rules", "rules/constitution/index.ftlh", Section.RULES,
-                getRequestUri(req), "SEHICL Constitution")).process();
+        return new PageTemplate(new StaticPage("rules", "rules/constitution/index.ftlh",
+                Section.RULES, getRequestUri(uriBuilder), "SEHICL Constitution")).process();
     }
 
     @RequestMapping("/rules/administration")
-    public String adminRules(HttpServletRequest req)
+    public String adminRules(UriComponentsBuilder uriBuilder)
     {
-        return new PageTemplate(new StaticPage("rules", "rules/administration/index.ftlh", Section.RULES,
-                getRequestUri(req), "SEHICL Administrative Rules")).process();
+        return new PageTemplate(new StaticPage("rules", "rules/administration/index.ftlh",
+                Section.RULES, getRequestUri(uriBuilder), "SEHICL Administrative Rules")).process();
     }
 
     @RequestMapping("/rules/playing")
-    public String playingRules(HttpServletRequest req)
+    public String playingRules(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("rules", "rules/playing/index.ftlh", Section.RULES,
-                getRequestUri(req), "SEHICL Rules Of Play")).process();
+                getRequestUri(uriBuilder), "SEHICL Rules Of Play")).process();
     }
 
     @RequestMapping("/records")
-    public String recordsIndex(HttpServletRequest req)
+    public String recordsIndex(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("records", "records/index.ftlh", Section.RECORDS,
-                getRequestUri(req), "SEHICL Records")).process();
+                getRequestUri(uriBuilder), "SEHICL Records")).process();
     }
 
     @RequestMapping("/records/performances")
-    public String recordPerformances(HttpServletRequest req)
+    public String recordPerformances(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("records", "records/performances.ftlh",
-                Section.RECORDS, getRequestUri(req), "SEHICL Record Performances")).process();
+                Section.RECORDS, getRequestUri(uriBuilder), "SEHICL Record Performances"))
+                        .process();
     }
 
     @RequestMapping("/records/winners")
-    public String divisionalWinners(HttpServletRequest req)
+    public String divisionalWinners(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("divwinners", "records/divwinners.ftlh",
-                Section.RECORDS, getRequestUri(req), "SEHICL Divisional Winners")).process();
+                Section.RECORDS, getRequestUri(uriBuilder), "SEHICL Divisional Winners")).process();
     }
 
     @RequestMapping("/records/awards")
-    public String individualAwards(HttpServletRequest req)
+    public String individualAwards(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("awards", "records/individualawards.ftlh",
-                Section.RECORDS, getRequestUri(req), "SEHICL Individual Awards")).process();
+                Section.RECORDS, getRequestUri(uriBuilder), "SEHICL Individual Awards")).process();
     }
 
     @RequestMapping("/records/fairplay")
-    public String fairplay(HttpServletRequest req)
+    public String fairplay(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("fairplay", "records/fairplay.ftlh", Section.RECORDS,
-                getRequestUri(req), "SEHICL Sporting & Efficiency")).process();
+                getRequestUri(uriBuilder), "SEHICL Sporting & Efficiency")).process();
     }
 
     @RequestMapping("/presentation")
-    public String presentationEvening(HttpServletRequest req)
+    public String presentationEvening(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("presentation", "presentation/schedule.ftlh",
-                Section.HOME, getRequestUri(req), "SEHICL Presentation Evening")).process();
+                Section.HOME, getRequestUri(uriBuilder), "SEHICL Presentation Evening")).process();
     }
 
     @RequestMapping("/archive/presentation/{season}")
-    public String presentationEvening(HttpServletRequest req, @PathVariable String season)
+    public String presentationEvening(UriComponentsBuilder uriBuilder, @PathVariable String season)
     {
         return new PageTemplate(new StaticPage("presentation",
-                String.format("presentation/%s.ftlh", season), Section.ARCHIVE, getRequestUri(req),
-                String.format("SEHICL Presentation Evening %s", season))).process();
+                String.format("presentation/%s.ftlh", season), Section.ARCHIVE,
+                getRequestUri(uriBuilder), String.format("SEHICL Presentation Evening %s", season)))
+                        .process();
     }
 
     @RequestMapping("/tables")
-    public String currentTables(HttpServletRequest req)
+    public String currentTables(UriComponentsBuilder uriBuilder)
     {
-        return new PageTemplate(new LeagueTablesPage(getRequestUri(req))).process();
+        return new PageTemplate(new LeagueTablesPage(getRequestUri(uriBuilder))).process();
     }
 
     @RequestMapping("/tables/league/{leagueId}")
-    public String currentTable(HttpServletRequest req, @PathVariable String leagueId)
+    public String currentTable(UriComponentsBuilder uriBuilder, @PathVariable String leagueId)
     {
-        return new PageTemplate(new LeagueTablePage(leagueId, getRequestUri(req))).process();
+        return new PageTemplate(new LeagueTablePage(leagueId, getRequestUri(uriBuilder))).process();
     }
 
     @RequestMapping("/archive/table/{leagueId}/{season}")
-    public String archiveTable(HttpServletRequest req, @PathVariable String leagueId,
+    public String archiveTable(UriComponentsBuilder uriBuilder, @PathVariable String leagueId,
             @PathVariable int season)
     {
+        var uri = getRequestUri(uriBuilder);
         Page page = season <= 5
                 ? new StaticPage("archive", String.format("archive%d/%s.html", season, leagueId),
-                        Section.ARCHIVE, getRequestUri(req), "SEHICL Archive")
-                : new LeagueTablePage(leagueId, season, getRequestUri(req));
+                        Section.ARCHIVE, uri, "SEHICL Archive")
+                : new LeagueTablePage(leagueId, season, uri);
         return new PageTemplate(page).process();
     }
 
     @RequestMapping("/averages/batting/{selector}")
-    public String currentBattingAverages(HttpServletRequest req, @PathVariable String selector)
+    public String currentBattingAverages(UriComponentsBuilder uriBuilder,
+            @PathVariable String selector)
     {
         return new PageTemplate(new LeagueBattingAveragesPage(
-                LeagueSelector.valueOf(selector.toUpperCase()), getRequestUri(req))).process();
+                LeagueSelector.valueOf(selector.toUpperCase()), getRequestUri(uriBuilder)))
+                        .process();
     }
 
     @RequestMapping("/archive/batting/{selector}/{season}")
-    public String archiveBattingAverages(HttpServletRequest req, @PathVariable String selector,
-            @PathVariable int season)
+    public String archiveBattingAverages(UriComponentsBuilder uriBuilder,
+            @PathVariable String selector, @PathVariable int season)
     {
+        var uri = getRequestUri(uriBuilder);
         Page page = season <= 5
                 ? new StaticPage("archive",
                         String.format("archive%d/%sBatting.html", season, selector),
-                        Section.ARCHIVE, getRequestUri(req), "SEHICL Archive")
+                        Section.ARCHIVE, uri, "SEHICL Archive")
                 : new LeagueBattingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()),
-                        season, getRequestUri(req));
+                        season, uri);
         return new PageTemplate(page).process();
     }
 
     @RequestMapping("/averages/bowling/{selector}")
-    public String currentBowlingAverages(HttpServletRequest req, @PathVariable String selector)
+    public String currentBowlingAverages(UriComponentsBuilder uriBuilder,
+            @PathVariable String selector)
     {
         return new PageTemplate(new LeagueBowlingAveragesPage(
-                LeagueSelector.valueOf(selector.toUpperCase()), getRequestUri(req))).process();
+                LeagueSelector.valueOf(selector.toUpperCase()), getRequestUri(uriBuilder)))
+                        .process();
     }
 
     @RequestMapping("/archive/bowling/{selector}/{season}")
-    public String archiveBowlingAverages(HttpServletRequest req, @PathVariable String selector,
-            @PathVariable int season)
+    public String archiveBowlingAverages(UriComponentsBuilder uriBuilder,
+            @PathVariable String selector, @PathVariable int season)
     {
+        var uri = getRequestUri(uriBuilder);
         Page page = season <= 5
                 ? new StaticPage("archive",
                         String.format("archive%d/%sBowling.html", season, selector),
-                        Section.ARCHIVE, getRequestUri(req), "SEHICL Archive")
+                        Section.ARCHIVE, uri, "SEHICL Archive")
                 : new LeagueBowlingAveragesPage(LeagueSelector.valueOf(selector.toUpperCase()),
-                        season, getRequestUri(req));
+                        season, uri);
         return new PageTemplate(page).process();
     }
 
     @RequestMapping("/averages/team/{teamId}")
-    public String currentTeamAverages(HttpServletRequest req, @PathVariable String teamId)
+    public String currentTeamAverages(UriComponentsBuilder uriBuilder, @PathVariable String teamId)
     {
-        return new PageTemplate(new TeamAveragesPage(teamId, getRequestUri(req))).process();
+        return new PageTemplate(new TeamAveragesPage(teamId, getRequestUri(uriBuilder))).process();
     }
 
     @RequestMapping("/archive/teamAverages/{teamId}")
-    public String archiveTeamAverages(HttpServletRequest req, @PathVariable String teamId)
+    public String archiveTeamAverages(UriComponentsBuilder uriBuilder, @PathVariable String teamId)
     {
-        return new PageTemplate(new TeamAveragesPage(teamId, null, getRequestUri(req))).process();
+        return new PageTemplate(new TeamAveragesPage(teamId, null, getRequestUri(uriBuilder)))
+                .process();
     }
 
     @RequestMapping("/archive/teamAverages/{teamId}/{season}")
-    public String archiveTeamAverages(HttpServletRequest req, @PathVariable String teamId,
+    public String archiveTeamAverages(UriComponentsBuilder uriBuilder, @PathVariable String teamId,
             @PathVariable int season)
     {
-        return new PageTemplate(new TeamAveragesPage(teamId, season, getRequestUri(req))).process();
+        return new PageTemplate(new TeamAveragesPage(teamId, season, getRequestUri(uriBuilder)))
+                .process();
     }
 
     @RequestMapping("/averages/byTeam")
-    public String teamAveragesIndex(HttpServletRequest req)
+    public String teamAveragesIndex(UriComponentsBuilder uriBuilder)
     {
-        return new PageTemplate(new TeamAveragesIndexPage(getRequestUri(req))).process();
+        return new PageTemplate(new TeamAveragesIndexPage(getRequestUri(uriBuilder))).process();
     }
 
     @RequestMapping("/averages")
-    public String averagesIndex(HttpServletRequest req)
+    public String averagesIndex(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("averages", "averagesindex.ftlh", Section.AVERAGES,
-                getRequestUri(req), "SEHICL Averages")).process();
+                getRequestUri(uriBuilder), "SEHICL Averages")).process();
     }
 
     @RequestMapping("/archive")
-    public String archiveIndex(HttpServletRequest req)
+    public String archiveIndex(UriComponentsBuilder uriBuilder)
     {
-        return new PageTemplate(new ArchiveIndexPage(getRequestUri(req))).process();
+        return new PageTemplate(new ArchiveIndexPage(getRequestUri(uriBuilder))).process();
     }
 
     @RequestMapping("/archive/season/{season}")
-    public String seasonArchiveIndex(HttpServletRequest req, @PathVariable int season)
+    public String seasonArchiveIndex(UriComponentsBuilder uriBuilder, @PathVariable int season)
     {
-        return new PageTemplate(new SeasonArchiveIndexPage(getRequestUri(req), season)).process();
+        return new PageTemplate(new SeasonArchiveIndexPage(getRequestUri(uriBuilder), season))
+                .process();
     }
 
     @RequestMapping("/fixtures/team/{teamId}")
-    public String teamFixtures(HttpServletRequest req, @PathVariable String teamId)
+    public String teamFixtures(UriComponentsBuilder uriBuilder, @PathVariable String teamId)
     {
-        return new PageTemplate(new TeamFixturesPage(teamId, getRequestUri(req))).process();
+        return new PageTemplate(new TeamFixturesPage(teamId, getRequestUri(uriBuilder))).process();
     }
 
     @RequestMapping("/fixtures/team/{teamId}/{season}")
-    public String archiveTeamFixtures(HttpServletRequest req, @PathVariable String teamId,
+    public String archiveTeamFixtures(UriComponentsBuilder uriBuilder, @PathVariable String teamId,
             @PathVariable int season)
     {
-        return new PageTemplate(new TeamFixturesPage(teamId, season, getRequestUri(req))).process();
+        return new PageTemplate(new TeamFixturesPage(teamId, season, getRequestUri(uriBuilder)))
+                .process();
     }
 
     @RequestMapping("/fixtures")
-    public String leagueFixtures(HttpServletRequest req)
+    public String leagueFixtures(UriComponentsBuilder uriBuilder)
     {
-        return new PageTemplate(new LeagueFixturesPage(getRequestUri(req))).process();
+        return new PageTemplate(new LeagueFixturesPage(getRequestUri(uriBuilder))).process();
     }
 
     @RequestMapping("/fixtures/{season}")
-    public String leagueFixtures(HttpServletRequest req, @PathVariable int season)
+    public String leagueFixtures(UriComponentsBuilder uriBuilder, @PathVariable int season)
     {
-        return new PageTemplate(new LeagueFixturesPage(season, getRequestUri(req))).process();
+        return new PageTemplate(new LeagueFixturesPage(season, getRequestUri(uriBuilder)))
+                .process();
     }
 
     @RequestMapping("/fixtures/league/{leagueId}")
-    public String leagueFixtures(HttpServletRequest req, @PathVariable String leagueId)
+    public String leagueFixtures(UriComponentsBuilder uriBuilder, @PathVariable String leagueId)
     {
-        return new PageTemplate(new LeagueFixturesPage(leagueId, getRequestUri(req))).process();
+        return new PageTemplate(new LeagueFixturesPage(leagueId, getRequestUri(uriBuilder)))
+                .process();
     }
 
     @RequestMapping("/fixtures/league/{leagueId}/{season}")
-    public String leagueFixtures(HttpServletRequest req, @PathVariable String leagueId,
+    public String leagueFixtures(UriComponentsBuilder uriBuilder, @PathVariable String leagueId,
             @PathVariable int season)
     {
-        return new PageTemplate(new LeagueFixturesPage(season, leagueId, getRequestUri(req)))
+        return new PageTemplate(new LeagueFixturesPage(season, leagueId, getRequestUri(uriBuilder)))
                 .process();
     }
 
     @RequestMapping("/results")
-    public String dateResultsLatest(HttpServletRequest req)
+    public String dateResultsLatest(UriComponentsBuilder uriBuilder)
     {
-        return new PageTemplate(new DateResultsPage(getRequestUri(req))).process();
+        return new PageTemplate(new DateResultsPage(getRequestUri(uriBuilder))).process();
     }
 
     @RequestMapping("/results/date/{date}")
-    public String dateResults(HttpServletRequest req, @PathVariable String date)
+    public String dateResults(UriComponentsBuilder uriBuilder, @PathVariable String date)
             throws ParseException
     {
-        return new PageTemplate(
-                new DateResultsPage(DateUtils.parseDate(date, "yyyyMMdd"), getRequestUri(req)))
-                        .process();
+        return new PageTemplate(new DateResultsPage(DateUtils.parseDate(date, "yyyyMMdd"),
+                getRequestUri(uriBuilder))).process();
     }
 
     @RequestMapping("/results/league/{leagueId}")
-    public String leagueResults(HttpServletRequest req, @PathVariable String leagueId)
+    public String leagueResults(UriComponentsBuilder uriBuilder, @PathVariable String leagueId)
     {
-        return new PageTemplate(new LeagueResultsPage(leagueId, getRequestUri(req))).process();
+        return new PageTemplate(new LeagueResultsPage(leagueId, getRequestUri(uriBuilder)))
+                .process();
     }
 
     @RequestMapping("/dutyRota")
-    public String dutyRota(HttpServletRequest req)
+    public String dutyRota(UriComponentsBuilder uriBuilder)
     {
         return new PageTemplate(new StaticPage("dutyRota", "dutyRota.ftlh", Section.FIXTURES,
-                getRequestUri(req), "SEHICL Duty Rota")).process();
+                getRequestUri(uriBuilder), "SEHICL Duty Rota")).process();
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
-    public String login(HttpServletRequest req)
+    public String login(UriComponentsBuilder uriBuilder)
     {
-        return new PageTemplate(new LoginPage(getRequestUri(req), userManager)).process();
+        return new PageTemplate(new LoginPage(getRequestUri(uriBuilder), userManager)).process();
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String login(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    public String login(UriComponentsBuilder uriBuilder, HttpSession session,
+            HttpServletResponse resp, @RequestParam String email, @RequestParam String password,
+            @RequestParam String loginCmd) throws IOException
     {
-        Login login = new Login(userManager, req.getParameter("email"),
-                req.getParameter("password"));
-        if (req.getParameter("Login") != null)
+        Login login = new Login(userManager, email, password);
+        var uri = getRequestUri(uriBuilder);
+        if (loginCmd != null)
         {
             Long token = login.validateAndLogin();
             if (token != null)
             {
-                UserSession userSession = new UserSession(req);
+                UserSession userSession = new UserSession(session);
                 userSession.setToken(token);
                 resp.sendRedirect(userSession.getRedirectTarget());
                 return "";
@@ -409,39 +429,39 @@ public class Controller
         }
         else
         {
-            login
-                    .validateAndReset(URI
-                            .create(req.getRequestURL().toString())
-                            .resolve("/pwdReset")
-                            .toString());
+            login.validateAndReset(URI.create(uri).resolve("/pwdReset").toString());
         }
-        return new PageTemplate(new LoginPage(getRequestUri(req), login)).process();
+        return new PageTemplate(new LoginPage(uri, login)).process();
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
-    public String register(HttpServletRequest req) throws IOException
+    public String register(UriComponentsBuilder uriBuilder) throws IOException
     {
-        return new PageTemplate(new RegisterPage(getRequestUri(req), userManager)).process();
+        return new PageTemplate(new RegisterPage(getRequestUri(uriBuilder), userManager)).process();
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public String register(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    public String register(UriComponentsBuilder uriBuilder, HttpServletResponse resp,
+            @RequestParam String email, @RequestParam String name, @RequestParam String club,
+            @RequestParam String password, @RequestParam String passwordConf,
+            @RequestParam String agreement,
+            @RequestParam("g-recaptcha-response") String recaptchaResponse) throws IOException
     {
-        if (!realPerson(req))
+        if (!realPerson(recaptchaResponse))
         {
-            resp.sendRedirect(getRequestUri(req, "/register"));
+            resp.sendRedirect(getRequestUri(uriBuilder, "/register"));
             return "";
         }
-        Register register = new Register(userManager, req.getParameter("email"),
-                req.getParameter("name"), req.getParameter("club"), req.getParameter("password"),
-                req.getParameter("passwordConf"), req.getParameter("agreement") != null);
-        User user = register.validateAndRegister(getRequestUri(req, "/"));
-        return new PageTemplate(user == null ? new RegisterPage(getRequestUri(req), register)
-                : new RegisterConfPage(getRequestUri(req), user)).process();
+        Register register = new Register(userManager, email, name, club, password, passwordConf,
+                agreement != null);
+        User user = register.validateAndRegister(getRequestUri(uriBuilder, "/"));
+        return new PageTemplate(user == null ? new RegisterPage(getRequestUri(uriBuilder), register)
+                : new RegisterConfPage(getRequestUri(uriBuilder), user)).process();
     }
 
     @RequestMapping(path = "/activate/{userId}")
-    public String activate(HttpServletRequest req, @PathVariable long userId) throws IOException
+    public String activate(UriComponentsBuilder uriBuilder, @PathVariable long userId)
+            throws IOException
     {
         User user = null;
         try
@@ -451,100 +471,105 @@ public class Controller
         catch (UserException ex)
         {
         }
-        return new PageTemplate(new ActivatePage(getRequestUri(req), user)).process();
+        return new PageTemplate(new ActivatePage(getRequestUri(uriBuilder), user)).process();
     }
 
     @RequestMapping(path = "/userDetails/{userId}")
-    public String userDetails(HttpServletRequest req, HttpServletResponse resp,
-            @PathVariable long userId) throws IOException
+    public String userDetails(UriComponentsBuilder uriBuilder, HttpSession session,
+            HttpServletResponse resp, @PathVariable long userId) throws IOException
     {
-        UserSession userSession = new UserSession(req);
+        UserSession userSession = new UserSession(session);
         if (userManager.sessionHasRole(userSession.getToken(), "admin"))
         {
             User user = userManager.getUserById(userId);
-            return new PageTemplate(new UserDetailsPage(getRequestUri(req), user)).process();
+            return new PageTemplate(new UserDetailsPage(getRequestUri(uriBuilder), user)).process();
         }
-        userSession.setRedirectTarget(getRequestUri(req));
-        resp.sendRedirect(getRequestUri(req, "/login"));
+        userSession.setRedirectTarget(getRequestUri(uriBuilder));
+        resp.sendRedirect(getRequestUri(uriBuilder, "/login"));
         return "";
     }
 
     @RequestMapping(path = "/deleteUser/{userId}", method = RequestMethod.GET)
-    public String deleteUser(HttpServletRequest req, HttpServletResponse resp,
-            @PathVariable long userId) throws IOException
+    public String deleteUser(UriComponentsBuilder uriBuilder, HttpSession session,
+            HttpServletResponse resp, @PathVariable long userId) throws IOException
     {
-        UserSession userSession = new UserSession(req);
+        UserSession userSession = new UserSession(session);
         if (userManager.sessionHasRole(userSession.getToken(), "admin"))
         {
             User user = userManager.getUserById(userId);
-            return new PageTemplate(new DeleteUserPage(getRequestUri(req), user, false)).process();
+            return new PageTemplate(new DeleteUserPage(getRequestUri(uriBuilder), user, false))
+                    .process();
         }
-        userSession.setRedirectTarget(getRequestUri(req));
-        resp.sendRedirect(getRequestUri(req, "/login"));
+        userSession.setRedirectTarget(getRequestUri(uriBuilder));
+        resp.sendRedirect(getRequestUri(uriBuilder, "/login"));
         return "";
     }
 
     @RequestMapping(path = "/deleteUser/{userId}", method = RequestMethod.POST)
-    public String deleteUserConfirmed(HttpServletRequest req, HttpServletResponse resp,
-            @PathVariable long userId) throws IOException
+    public String deleteUserConfirmed(UriComponentsBuilder uriBuilder, HttpSession session,
+            HttpServletResponse resp, @PathVariable long userId) throws IOException
     {
-        UserSession userSession = new UserSession(req);
+        UserSession userSession = new UserSession(session);
         if (userManager.sessionHasRole(userSession.getToken(), "admin"))
         {
             User user = userManager.getUserById(userId);
             userManager.deleteUser(userId);
-            return new PageTemplate(new DeleteUserPage(getRequestUri(req), user, true)).process();
+            return new PageTemplate(new DeleteUserPage(getRequestUri(uriBuilder), user, true))
+                    .process();
         }
-        userSession.setRedirectTarget(getRequestUri(req));
-        resp.sendRedirect(getRequestUri(req, "/login"));
+        userSession.setRedirectTarget(getRequestUri(uriBuilder));
+        resp.sendRedirect(getRequestUri(uriBuilder, "/login"));
         return "";
     }
 
     @RequestMapping(path = "/pwdReset/{resetId}", method = RequestMethod.GET)
-    public String passwordReset(HttpServletRequest req, @PathVariable long resetId)
-            throws IOException
-    {
-        return new PageTemplate(new ResetPage(getRequestUri(req), new Reset(resetId, userManager)))
-                .process();
-    }
-
-    @RequestMapping(path = "/pwdReset/{resetId}", method = RequestMethod.POST)
-    public String passwordReset(HttpServletRequest req, HttpServletResponse resp,
-            @PathVariable long resetId) throws IOException
-    {
-        if (!realPerson(req))
-        {
-            resp.sendRedirect(getRequestUri(req, "/pwdReset/%d".formatted(resetId)));
-            return "";
-        }
-        Reset reset = new Reset(resetId, userManager);
-        if (reset.validateAndReset(req.getParameter("password"), req.getParameter("passwordConf")))
-        {
-            resp.sendRedirect(getRequestUri(req, "/login"));
-            return "";
-        }
-        return new PageTemplate(new ResetPage(getRequestUri(req), reset)).process();
-    }
-
-    @RequestMapping(path = "/reconfirm/{userId}", method = RequestMethod.GET)
-    public String reconfirmUser(HttpServletRequest req, @PathVariable long userId)
+    public String passwordReset(UriComponentsBuilder uriBuilder, @PathVariable long resetId)
             throws IOException
     {
         return new PageTemplate(
-                new ReconfirmPage(getRequestUri(req), new Reconfirm(userId, userManager)))
+                new ResetPage(getRequestUri(uriBuilder), new Reset(resetId, userManager)))
+                        .process();
+    }
+
+    @RequestMapping(path = "/pwdReset/{resetId}", method = RequestMethod.POST)
+    public String passwordReset(UriComponentsBuilder uriBuilder, HttpServletResponse resp,
+            @PathVariable long resetId, @RequestParam String password,
+            @RequestParam String passwordConf,
+            @RequestParam("g-recaptcha-response") String recaptchaResponse) throws IOException
+    {
+        if (!realPerson(recaptchaResponse))
+        {
+            resp.sendRedirect(getRequestUri(uriBuilder, "/pwdReset/%d".formatted(resetId)));
+            return "";
+        }
+        Reset reset = new Reset(resetId, userManager);
+        if (reset.validateAndReset(password, passwordConf))
+        {
+            resp.sendRedirect(getRequestUri(uriBuilder, "/login"));
+            return "";
+        }
+        return new PageTemplate(new ResetPage(getRequestUri(uriBuilder), reset)).process();
+    }
+
+    @RequestMapping(path = "/reconfirm/{userId}", method = RequestMethod.GET)
+    public String reconfirmUser(UriComponentsBuilder uriBuilder, @PathVariable long userId)
+            throws IOException
+    {
+        return new PageTemplate(
+                new ReconfirmPage(getRequestUri(uriBuilder), new Reconfirm(userId, userManager)))
                         .process();
     }
 
     @RequestMapping(path = "/reconfirm/{userId}", method = RequestMethod.POST)
-    public String reconfirm(HttpServletRequest req, HttpServletResponse resp,
-            @PathVariable long userId) throws IOException
+    public String reconfirm(UriComponentsBuilder uriBuilder, HttpServletResponse resp,
+            @PathVariable long userId, @RequestParam String agreement) throws IOException
     {
         Reconfirm reconfirm = new Reconfirm(userId, userManager);
         try
         {
-            if (reconfirm.validateAndReconfirm(req.getParameter("agreement") != null))
+            if (reconfirm.validateAndReconfirm(agreement != null))
             {
-                resp.sendRedirect(getRequestUri(req, "/reconfConf"));
+                resp.sendRedirect(getRequestUri(uriBuilder, "/reconfConf"));
                 return "";
             }
         }
@@ -552,31 +577,32 @@ public class Controller
         {
             LOG.error("Unexpected exception", ex);
         }
-        return new PageTemplate(new ReconfirmPage(getRequestUri(req), reconfirm)).process();
+        return new PageTemplate(new ReconfirmPage(getRequestUri(uriBuilder), reconfirm)).process();
     }
 
     @RequestMapping(path = "/reconfConf")
-    public String confirmReconfirmation(HttpServletRequest req) throws IOException
+    public String confirmReconfirmation(UriComponentsBuilder uriBuilder) throws IOException
     {
         return new PageTemplate(new StaticPage("reconfirm", "reconfConf.ftlh", null,
-                getRequestUri(req), "Thank you")).process();
+                getRequestUri(uriBuilder), "Thank you")).process();
     }
 
     @RequestMapping(path = "/dp")
-    public String dataProtection(HttpServletRequest req) throws IOException
+    public String dataProtection(UriComponentsBuilder uriBuilder) throws IOException
     {
         return new PageTemplate(new StaticPage("dp", "dataProtection.ftlh", Section.DP,
-                getRequestUri(req), "SEHICL Data Protection Policy")).process();
+                getRequestUri(uriBuilder), "SEHICL Data Protection Policy")).process();
     }
 
     @RequestMapping(path = "/admin/reconf")
-    public String sendUserReconfirmRequests(HttpServletRequest req) throws IOException
+    public String sendUserReconfirmRequests(UriComponentsBuilder uriBuilder, HttpSession session)
+            throws IOException
     {
-        final UserSession userSession = new UserSession(req);
+        final UserSession userSession = new UserSession(session);
         if (!userManager.sessionHasRole(userSession.getToken(), "admin"))
             return "Not authorised";
         String reconfirmationPageAddress = URI
-                .create(req.getRequestURL().toString())
+                .create(getRequestUri(uriBuilder))
                 .resolve("/reconfirm")
                 .toString();
         userManager.sendReconfirmationEmails(reconfirmationPageAddress);
@@ -584,9 +610,9 @@ public class Controller
     }
 
     @RequestMapping(path = "/admin/userExport")
-    public String exportUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    public String exportUsers(UriComponentsBuilder uriBuilder, @RequestHeader String adminSecret,
+            HttpServletResponse resp) throws IOException
     {
-        String adminSecret = req.getHeader("adminSecret");
         if (adminSecret == null || EnvVar.ADMIN_SECRET.get().filter(adminSecret::equals).isEmpty())
         {
             resp.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -596,23 +622,25 @@ public class Controller
     }
 
     @PostMapping(path = "/admin/userImport")
-    public String importUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException
+    public String importUsers(UriComponentsBuilder uriBuilder, @RequestHeader String adminSecret,
+            @RequestBody String content, HttpServletResponse resp) throws IOException
     {
         try
         {
-            String adminSecret = req.getHeader("adminSecret");
             if (adminSecret == null
                     || EnvVar.ADMIN_SECRET.get().filter(adminSecret::equals).isEmpty())
             {
                 resp.setStatus(HttpStatus.UNAUTHORIZED.value());
                 return "";
             }
-            if (req.getContentLength() == 0)
+            if (content.length() == 0)
             {
                 resp.setStatus(HttpStatus.BAD_REQUEST.value());
                 return "";
             }
-            return String.format("%d user(s) imported", usersImporter.importUsers(req.getReader()));
+            return String
+                    .format("%d user(s) imported",
+                            usersImporter.importUsers(new StringReader(content)));
         }
         catch (Throwable ex)
         {
@@ -625,36 +653,26 @@ public class Controller
         }
     }
 
+    static class CaptchaResponse
+    {
+        Boolean success;
+        Date timestamp;
+        String hostname;
+        @JsonProperty("error-codes")
+        List<String> errorCodes;
+    }
+
     @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")
     private String recaptchaUrl;
 
-    private boolean realPerson(HttpServletRequest req) throws IOException
+    private boolean realPerson(String recaptchaResponse) throws IOException
     {
-        HttpPost post = new HttpPost(recaptchaUrl);
-        post
-                .setEntity(new UrlEncodedFormEntity(Arrays
-                        .asList(new BasicNameValuePair("secret",
-                                EnvVar.RECAPTCHA_SECRET.getAsString()),
-                                new BasicNameValuePair("response",
-                                        req.getParameter("g-recaptcha-response")))));
-        try (CloseableHttpResponse response = HttpClients.createDefault().execute(post))
-        {
-            if (response.getStatusLine().getStatusCode() != HttpStatus.OK.value())
-                return false;
-            try (Scanner scanner = new Scanner(response.getEntity().getContent()))
-            {
-                return JsonParserFactory
-                        .getJsonParser()
-                        .parseMap(scanner.useDelimiter("\\A").next())
-                        .getOrDefault("success", Boolean.FALSE)
-                        .equals(Boolean.TRUE);
-            }
-        }
-    }
-
-    String getParameter(HttpServletRequest req, String name)
-    {
-        String value = req.getParameter(name);
-        return value == null ? null : value.trim();
+        var restTemplate = new RestTemplate();
+        var requestMap = new LinkedMultiValueMap<String, String>();
+        requestMap.add("secret", EnvVar.RECAPTCHA_SECRET.getAsString());
+        requestMap.add("response", recaptchaResponse);
+        var apiResponse = restTemplate
+                .postForObject(recaptchaUrl, requestMap, CaptchaResponse.class);
+        return apiResponse != null && Boolean.TRUE.equals(apiResponse.success);
     }
 }

@@ -1,7 +1,6 @@
 package uk.org.sehicl.website;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 public class UserSession
 {
@@ -9,9 +8,9 @@ public class UserSession
     private Long token;
     private String redirectTarget;
 
-    public UserSession(HttpServletRequest req)
+    public UserSession(HttpSession session)
     {
-        session = req.getSession();
+        this.session = session;
         token = (Long) session.getAttribute("token");
         redirectTarget = (String) session.getAttribute("redirectTarget");
     }
