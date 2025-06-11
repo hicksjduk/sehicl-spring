@@ -41,8 +41,8 @@ public class RedisDatastore implements UserDatastore
         SESSION_BY_SESSION_ID,
         SESSION_ID_BY_EXPIRY,
         USER_ID_BY_SESSION_EXPIRY,
-        RESET_BY_USER_ID,
-        USER_ID_BY_RESET_EXPIRY
+        RESET_BY_ID,
+        RESET_ID_BY_EXPIRY
     }
 
     private static record ExpiryInfo(Bucket expiryBucket, long objKey, LongSupplier expiryGetter)
@@ -344,8 +344,8 @@ public class RedisDatastore implements UserDatastore
             {
                 answer = new PasswordReset(user.getId(), email);
                 answer.setExpiry(new Date().getTime() + TimeUnit.SECONDS.toMillis(expiryInSeconds));
-                putValue(conn, Bucket.RESET_BY_USER_ID, user.getId(), answer, new ExpiryInfo(
-                        Bucket.USER_ID_BY_RESET_EXPIRY, user.getId(), answer::getExpiry));
+                putValue(conn, Bucket.RESET_BY_ID, answer.getId(), answer, new ExpiryInfo(
+                        Bucket.RESET_ID_BY_EXPIRY, answer.getId(), answer::getExpiry));
             }
             return answer;
         }
@@ -356,7 +356,7 @@ public class RedisDatastore implements UserDatastore
     {
         try (var conn = connect())
         {
-            return getValue(conn, Bucket.RESET_BY_USER_ID, id)
+            return getValue(conn, Bucket.RESET_BY_ID, id)
                     .map(fromJson(PasswordReset.class))
                     .orElse(null);
         }
@@ -373,7 +373,7 @@ public class RedisDatastore implements UserDatastore
 
     void clearExpiredResets(Jedis conn)
     {
-        clearExpiredEntries(conn, Bucket.USER_ID_BY_RESET_EXPIRY, Bucket.RESET_BY_USER_ID);
+        clearExpiredEntries(conn, Bucket.RESET_ID_BY_EXPIRY, Bucket.RESET_BY_ID);
     }
 
     void clearExpiredEntries(Jedis conn, Bucket expiryBucket, Bucket objectBucket)
@@ -424,7 +424,7 @@ public class RedisDatastore implements UserDatastore
                 return;
             deleteValue(conn, Bucket.USER_BY_ID, id);
             deleteValue(conn, Bucket.USER_BY_EMAIL, user.getEmail());
-            deleteValue(conn, Bucket.RESET_BY_USER_ID, id);
+            deleteValue(conn, Bucket.RESET_BY_ID, id);
             var session = getSessionByUserId(conn, id);
             if (session == null)
                 return;

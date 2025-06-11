@@ -152,8 +152,6 @@ public class RedisDatastoreTest
         var user = new User(6L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
         var reset = datastore.generatePasswordReset(user.getEmail());
         assertThat(reset).isNull();
-        datastore.clearExpiredResets();
-        assertThat(datastore.getPasswordReset(user.getId())).isNull();
     }
 
     @Test
@@ -164,7 +162,7 @@ public class RedisDatastoreTest
         var reset = datastore.generatePasswordReset(user.getEmail());
         assertThat(reset).isNotNull();
         datastore.clearExpiredResets();
-        assertThat(datastore.getPasswordReset(user.getId())).isNotNull();
+        assertThat(datastore.getPasswordReset(reset.getId())).isNotNull();
     }
 
     @Test
@@ -172,8 +170,9 @@ public class RedisDatastoreTest
     {
         var user = new User(7L, "fa", "sgsd", "asaf", Status.ACTIVE, 4, "afsafas", true);
         datastore.createUser(user);
-        assertThat(datastore.generatePasswordReset(user.getEmail(), 0L)).isNotNull();
+        var reset = datastore.generatePasswordReset(user.getEmail(), 0L);
+        assertThat(reset).isNotNull();
         datastore.clearExpiredResets();
-        assertThat(datastore.getPasswordReset(user.getId())).isNull();
+        assertThat(datastore.getPasswordReset(reset.getId())).isNull();
     }
 }
