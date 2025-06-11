@@ -512,12 +512,14 @@ public class Controller
     {
         if (!realPerson(recaptchaResponse))
         {
+            LOG.error("Recaptcha validation failed");
             resp.sendRedirect(getRequestUri("/pwdReset/%d".formatted(resetId)));
             return "";
         }
         Reset reset = new Reset(resetId, userManager);
         if (reset.validateAndReset(password, passwordConf))
         {
+            LOG.error("Recaptcha validation succeeded");
             resp.sendRedirect(getRequestUri("/login"));
             return "";
         }
