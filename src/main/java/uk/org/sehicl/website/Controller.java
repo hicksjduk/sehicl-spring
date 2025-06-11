@@ -8,6 +8,7 @@ import java.net.URI;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -622,22 +623,6 @@ public class Controller
         }
     }
 
-    static class CaptchaResponse
-    {
-        Boolean success;
-        Date timestamp;
-        String hostname;
-        @JsonProperty("error-codes")
-        List<String> errorCodes;
-
-        @Override
-        public String toString()
-        {
-            return "CaptchaResponse [success=" + success + ", timestamp=" + timestamp
-                    + ", hostname=" + hostname + ", errorCodes=" + errorCodes + "]";
-        }
-    }
-
     @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")
     private String recaptchaUrl;
 
@@ -652,10 +637,12 @@ public class Controller
                 requestMap.add("secret", recaptchaSecret);
                 requestMap.add("response", recaptchaResponse);
                 var apiResponse = restTemplate
-                        .postForObject(recaptchaUrl, requestMap, CaptchaResponse.class);
-                var answer = apiResponse != null && Boolean.TRUE.equals(apiResponse.success);
+                        .postForObject(recaptchaUrl, requestMap, String.class);
+                LOG.info(apiResponse.toString());
+                var answer = apiResponse != null
+                        && apiResponse.indexOf("\"success\": true") > -1;
                 if (answer)
-                    LOG.info("Recaptcha validation succeeded");
+                    LOG.info("Recaptcha validation succeeded: {}", apiResponse);
                 else
                     LOG.error("Recaptcha validation failed: {}", apiResponse);
                 return answer;
