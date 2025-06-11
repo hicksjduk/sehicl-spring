@@ -512,14 +512,12 @@ public class Controller
     {
         if (!realPerson(recaptchaResponse))
         {
-            LOG.error("Recaptcha validation failed");
             resp.sendRedirect(getRequestUri("/pwdReset/%d".formatted(resetId)));
             return "";
         }
         Reset reset = new Reset(resetId, userManager);
         if (reset.validateAndReset(password, passwordConf))
         {
-            LOG.error("Recaptcha validation succeeded");
             resp.sendRedirect(getRequestUri("/login"));
             return "";
         }
@@ -631,6 +629,13 @@ public class Controller
         String hostname;
         @JsonProperty("error-codes")
         List<String> errorCodes;
+
+        @Override
+        public String toString()
+        {
+            return "CaptchaResponse [success=" + success + ", timestamp=" + timestamp
+                    + ", hostname=" + hostname + ", errorCodes=" + errorCodes + "]";
+        }
     }
 
     @Value("${recaptcha.url:https://www.google.com/recaptcha/api/siteverify}")
@@ -648,7 +653,12 @@ public class Controller
                 requestMap.add("response", recaptchaResponse);
                 var apiResponse = restTemplate
                         .postForObject(recaptchaUrl, requestMap, CaptchaResponse.class);
-                return apiResponse != null && Boolean.TRUE.equals(apiResponse.success);
+                var answer = apiResponse != null && Boolean.TRUE.equals(apiResponse.success);
+                if (answer)
+                    LOG.info("Recaptcha validation succeeded");
+                else
+                    LOG.error("Recaptcha validation failed: {}", apiResponse);
+                return answer;
             }
             catch (Exception e)
             {
