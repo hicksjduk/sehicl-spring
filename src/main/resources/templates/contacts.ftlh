@@ -28,7 +28,7 @@
 <p>Non-member clubs who wish to enter one or more teams in the
 	League are asked to contact <@mailto address="secretary">the Secretary</@mailto> in the first instance.</p>
 <p>
-	Result sheets may be sent electronically to <@mailto address="fixturesec">the Fixture Secretary</@mailto>,
+	Result sheets are to be sent electronically to <@mailto address="fixturesec">the Fixture Secretary</@mailto>,
 	using one of the template documents available on the <a
 		href="/resources">Resources</a> page.
 </p>

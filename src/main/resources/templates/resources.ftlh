@@ -52,11 +52,9 @@ Rules of the League - <i>PDF documents</i>
 
 	
 </ul>
-<p>To submit a result electronically, click one of the 'Result
-sheet' links above and download the document. Then fill in the details
+<p>Results are submitted electronically. To do this, click one of the &lsquo;Result
+sheet&rsquo; links above and download the document. Then fill in the details
 and email the completed sheet to 
 <@mailto address="fixturesec">the League Fixture Secretary</@mailto>.
-Please note that if you submit a result
-electronically, you do not need to send in the hardcopy result sheet as
-well. However, you must not assume that it has been received until you receive
+You must not assume that it has been received until you receive
 an acknowledgement, or see the result appear on the website.</p>
