@@ -4,15 +4,18 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.filter.UrlHandlerFilter;
 
+import jakarta.servlet.Filter;
 import redis.embedded.RedisServer;
 import uk.org.sehicl.admin.UsersExporter;
 import uk.org.sehicl.admin.UsersImporter;
@@ -128,5 +131,17 @@ public class Application
     public UsersImporter usersImporter(UserDatastore datastore)
     {
         return new UsersImporter(datastore);
+    }
+
+    @Bean
+    public FilterRegistrationBean<Filter> urlHandlerRegistration()
+    {
+        var answer = new FilterRegistrationBean<>();
+        var urlHandler = UrlHandlerFilter
+                .trailingSlashHandler("/**")
+                .redirect(HttpStatus.PERMANENT_REDIRECT)
+                .build();
+        answer.setFilter(urlHandler);
+        return answer;
     }
 }
