@@ -101,7 +101,6 @@
         <role name="Secretary" club="Emsworth">
             <email id="emsworth.secretary" />
         </role>
-        <role name="Under-13" club="Emsworth" />
     </person>
 
     <person>
@@ -435,6 +434,15 @@
         <role name="Secretary" club="Sarisbury Athletic">
             <email id="sarisbury.secretary" />
         </role>
+    </person>
+
+    <person>
+        <name>Bright Mugochi</name>
+        <phone>07412 917096</phone>
+        <role name="Secretary" club="S&amp;B Academy">
+            <email id="sandb.secretary" />
+        </role>
+        <role name="Under-13" club="S&amp;B Academy"/>
     </person>
 
     <person>
