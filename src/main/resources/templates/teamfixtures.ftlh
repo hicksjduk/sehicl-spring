@@ -21,9 +21,14 @@ or to hide them if displayed.</p>
 	<tbody>
 		<#list fixtures.rows as row>
 			<tr>
-				<td class="date"><@ordinalDate row.dateTime "MMM" "yy"/></td>
-				<td class="time">${row.dateTime?string("h:mm")}</td>
-				<td class="court">${row.court}</td>
+                <#if (row.dateTime)??>		    
+				    <td class="date"><@ordinalDate row.dateTime "MMM" "yy"/></td>
+				    <td class="time">${row.dateTime?string("h:mm")}</td>
+				<#else>
+                    <td class="date">TBA</td>
+                    <td class="time"></td>
+				</#if>
+				<td class="court">${row.court!}</td>
 				<td class="opponent">
 				    <#if row.opponent.excludedFromTables>
 				        ${row.opponent.name}

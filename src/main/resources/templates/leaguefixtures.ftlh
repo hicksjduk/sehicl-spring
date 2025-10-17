@@ -34,7 +34,7 @@
 			<tr>
 				<td class="time">${(time != lastTime)?then(time, "")}</td>
 				<#assign lastTime = time/>
-				<td class="court">${row.match.court}</td>
+				<td class="court">${(row.match.court)!}</td>
 				<td class="teams">
 					<a href="/fixtures/team/${row.homeTeam.id}${season}">${row.homeTeam.name}</a> 
 						v 
