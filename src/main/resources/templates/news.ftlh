@@ -16,9 +16,12 @@
 	</#if>
 </#macro>
 
-<@news end="2025-03-31">
-Can we remind all players that the studio, opposite Court B, is for the storage of bags and equipment only, it is 
-not to be used as a changing room.
+<@news end="2025-11-01">
+Please note that the Fixture Secretary will have no access to his computer during the week commencing 27th October.
+If you send in a result by email, you should receive an auto-response to confirm that it has been received,
+but the result will not be checked, or uploaded to the website, until Friday evening at the earliest.
+If you do not receive an auto-response, you should assume that it has not been received, and send it 
+again.
 </@news>
 
 <#if started??>
