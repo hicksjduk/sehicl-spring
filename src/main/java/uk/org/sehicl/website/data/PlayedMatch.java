@@ -1,9 +1,9 @@
 package uk.org.sehicl.website.data;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,8 +15,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import uk.org.sehicl.website.rules.Rules;
 
-@JsonPropertyOrder(value =
-{ "overLimit", "submittedByEmail", "teamInMatch" })
+@JsonPropertyOrder(value = { "overLimit", "submittedByEmail", "teamInMatch" })
 public class PlayedMatch implements Outcome
 {
     private boolean submittedByEmail;
@@ -67,38 +66,53 @@ public class PlayedMatch implements Outcome
     @Override
     public Completeness getCompleteness(Rules rules)
     {
-        Completeness answer = Completeness.INCOMPLETE;
-        if (teams.size() == 2 && teams.stream().filter(TeamInMatch::isBattingFirst).count() == 1)
+        var teamsByBatting1st = teams
+                .stream()
+                .collect(Collectors.partitioningBy(TeamInMatch::isBattingFirst));
+        var firstInns = Optional
+                .ofNullable(teamsByBatting1st.get(true))
+                .filter(c -> c.size() == 1)
+                .map(c -> c.get(0))
+                .map(TeamInMatch::getInnings);
+        var secondInns = Optional
+                .ofNullable(teamsByBatting1st.get(false))
+                .filter(c -> c.size() == 1)
+                .map(c -> c.get(0))
+                .map(TeamInMatch::getInnings);
+        if (Stream.of(firstInns, secondInns).anyMatch(Optional::isEmpty))
+            return Completeness.INCOMPLETE;
+        var maxBalls = Optional.ofNullable(overLimit).orElse(rules.getOversPerInnings())
+                * rules.getBallsPerOver();
+        var maxWickets = rules.getMaxWickets();
+        var bat2ndWon = firstInns.get().getRunsScored() < secondInns.get().getRunsScored();
+        var winningSecondInns = secondInns.filter(i -> bat2ndWon);
+        Function<Innings, Completeness> oversCheck = i ->
         {
-            int maxBalls = (overLimit == null ? rules.getOversPerInnings() : overLimit)
-                    * rules.getBallsPerOver();
-            int maxWickets = rules.getMaxWickets();
-            final List<Innings> innings = teams
-                    .stream()
-                    .sorted((t1, t2) -> Boolean.compare(t2.isBattingFirst(), t1.isBattingFirst()))
-                    .map(TeamInMatch::getInnings)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
-            if (innings.size() == 2)
-            {
-                final Iterator<Innings> iterator = innings.iterator();
-                Innings firstInnings = iterator.next();
-                Innings secondInnings = iterator.next();
-                final boolean bat2ndWon = secondInnings.getRunsScored() > firstInnings
-                        .getRunsScored();
-                answer = Stream
-                        .of(firstInnings.getCompleteness(
-                                firstInnings.isAllOut(maxWickets) ? null : maxBalls, null),
-                                secondInnings
-                                        .getCompleteness(
-                                                bat2ndWon || secondInnings.isAllOut(maxWickets)
-                                                        ? null : maxBalls,
-                                                bat2ndWon ? maxWickets - 1 : null))
-                        .reduce((a, b) -> a.compareTo(b) < 0 ? a : b)
-                        .get();
-            }
-        }
-        return answer;
+            var balls = i.getBallsBowled(maxBalls);
+            if (balls > maxBalls)
+                return Completeness.INCOMPLETE;
+            if (i.isAllOut(maxWickets))
+                return Completeness.CONSISTENT;
+            if (winningSecondInns.orElse(null) == i)
+                return Completeness.CONSISTENT;
+            if (balls < maxBalls)
+                return Completeness.INCOMPLETE;
+            return Completeness.CONSISTENT;
+        };
+        Function<Innings, Completeness> wicketsCheck = i ->
+        {
+            if (winningSecondInns.orElse(null) == i)
+                if (i.getWicketsLost(maxWickets) == maxWickets)
+                    return Completeness.INCOMPLETE;
+            return Completeness.CONSISTENT;
+        };
+        return Stream
+                .of(firstInns, secondInns)
+                .map(Optional::get)
+                .flatMap(i -> Stream.of(oversCheck, wicketsCheck).map(f -> f.apply(i)))
+                .sorted()
+                .findFirst()
+                .get();
     }
 
     @Override

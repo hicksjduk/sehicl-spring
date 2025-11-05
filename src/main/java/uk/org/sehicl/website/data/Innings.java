@@ -115,17 +115,6 @@ public class Innings
                 + ", ballsBowled=" + ballsBowled + ", performances=" + performances + "]";
     }
 
-    public Completeness getCompleteness(Integer minBalls, Integer maxWickets)
-    {
-        Completeness answer = Completeness.CONSISTENT;
-        if ((minBalls != null && ballsBowled != null && ballsBowled < minBalls)
-                || (maxWickets != null && wicketsLost != null && wicketsLost > maxWickets))
-        {
-            answer = Completeness.COMPLETE;
-        }
-        return answer;
-    }
-    
     public boolean isAllOut(int maxWickets)
     {
         return getWicketsLost(maxWickets) == maxWickets;
