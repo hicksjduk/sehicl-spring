@@ -15,11 +15,6 @@ import uk.org.sehicl.website.rules.Rules;
 
 class TestDataCompleteness
 {
-    void test()
-    {
-        fail("Not yet implemented");
-    }
-
     @ParameterizedTest
     @MethodSource
     void testAllMatchesComplete(int season)
