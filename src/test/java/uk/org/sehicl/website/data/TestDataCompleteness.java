@@ -32,9 +32,18 @@ class TestDataCompleteness
                 .map(League::getMatches)
                 .flatMap(Collection::stream)
                 .filter(m -> m.getPlayedMatch() != null)
-                .forEach(m -> assertThat(m.getCompleteness(rules))
+                .forEach(m -> assertThat(completeness(m, rules))
                         .as("%s", m)
                         .isNotEqualTo(Completeness.INCOMPLETE));
+    }
+
+    Completeness completeness(Match m, Rules rules)
+    {
+        return Stream
+                .of(m.getCompleteness(rules), checkPerformances(m.getPlayedMatch(), rules))
+                .sorted()
+                .findFirst()
+                .get();
     }
 
     Completeness checkPerformances(PlayedMatch m, Rules rules)
