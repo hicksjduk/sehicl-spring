@@ -2,7 +2,10 @@ package uk.org.sehicl.website.data;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,12 +18,20 @@ import uk.org.sehicl.website.rules.Rules;
 
 class TestDataCompleteness
 {
+    final static DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
+
     @ParameterizedTest
     @MethodSource
     void testAllMatchesComplete(int season)
     {
         var rules = new Rules.Builder(season).build();
         var model = ModelLoader.getModel(season);
+        var teamNames = model
+                .getLeagues()
+                .stream()
+                .map(League::getTeams)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toMap(Team::getId, Team::getName));
         model
                 .getLeagues()
                 .stream()
@@ -28,7 +39,8 @@ class TestDataCompleteness
                 .flatMap(Collection::stream)
                 .filter(m -> m.getPlayedMatch() != null)
                 .forEach(m -> assertThat(completeness(m, rules))
-                        .as("%s", m)
+                        .as("%s %s v %s", DF.format(m.getDateTime()),
+                                teamNames.get(m.getHomeTeamId()), teamNames.get(m.getAwayTeamId()))
                         .isNotEqualTo(Completeness.INCOMPLETE));
     }
 
