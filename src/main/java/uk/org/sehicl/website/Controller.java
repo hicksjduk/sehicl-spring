@@ -6,9 +6,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URI;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -28,8 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -289,7 +285,11 @@ public class Controller
     @RequestMapping("/archive/teamAverages/{teamId}")
     public String archiveTeamAverages(@PathVariable String teamId)
     {
-        return new PageTemplate(new TeamAveragesPage(teamId, null)).process();
+        var page = teamId.equals("OPCSTitchfield")
+                ? new TeamAveragesPage(
+                        List.of("OPCSTitchfield", "OPCSTitchfieldA", "OPCSTitchfieldB"), null)
+                : new TeamAveragesPage(teamId, null);
+        return new PageTemplate(page).process();
     }
 
     @RequestMapping("/archive/teamAverages/{teamId}/{season}")
@@ -639,8 +639,7 @@ public class Controller
                 var apiResponse = restTemplate
                         .postForObject(recaptchaUrl, requestMap, String.class);
                 LOG.info(apiResponse.toString());
-                var answer = apiResponse != null
-                        && apiResponse.indexOf("\"success\": true") > -1;
+                var answer = apiResponse != null && apiResponse.indexOf("\"success\": true") > -1;
                 if (answer)
                     LOG.info("Recaptcha validation succeeded: {}", apiResponse);
                 else

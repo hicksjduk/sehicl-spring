@@ -1,6 +1,9 @@
 package uk.org.sehicl.website.page;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import uk.org.sehicl.website.Constants;
 import uk.org.sehicl.website.data.Completeness;
@@ -37,8 +40,13 @@ public class TeamAveragesPage extends Page
 
     public TeamAveragesPage(String teamId, Integer season)
     {
+        this(List.of(teamId), season);
+    }
+
+    public TeamAveragesPage(List<String> teamIds, Integer season)
+    {
         super("averages", "teamaverages.ftlh", Section.ARCHIVE);
-        this.selector = new TeamSelector(teamId);
+        this.selector = new TeamSelector(teamIds);
         final ModelAndRules[] seasonData = IntStream
                 .rangeClosed(season == null ? Constants.FIRST_SEASON : season,
                         season == null ? Constants.CURRENT_SEASON : season)
@@ -51,7 +59,13 @@ public class TeamAveragesPage extends Page
                 .build();
         bowling = new BowlingAverages.Builder(selector, completenessThreshold, null, seasonData)
                 .build();
-        team = seasonData[0].model.getTeam(teamId);
+        team = Stream
+                .of(seasonData)
+                .map(sd -> sd.model)
+                .map(m -> m.getTeam(teamIds.get(0)))
+                .filter(Objects::nonNull)
+                .findFirst()
+                .get();
         title = String.format("Averages: %s", team.getName());
         current = false;
     }
