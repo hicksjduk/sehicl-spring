@@ -16,8 +16,8 @@
 	</#if>
 </#macro>
 
-<@news end="2025-12-31">
-Unfortunately, <b>Fair Oak have decided to withdraw from the Under-13 league</b>. All
+<@news end="2026-01-31">
+Unfortunately, <b>Knowle Village have decided to withdraw from the League</b>. All
 their results to date have been expunged from the record, and their forthcoming matches
 will not take place. 
 </@news>
