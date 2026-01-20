@@ -59,7 +59,7 @@ class TestDataCompleteness
                 .getTeams()
                 .stream()
                 .map(TeamInMatch::getInnings)
-                .map(Innings::getPerformances)
+                .flatMap(i -> Stream.of(i.getBatsmen(), i.getBowlers()))
                 .anyMatch(Collection::isEmpty))
             return Completeness.INCOMPLETE;
         return Completeness.CONSISTENT;
