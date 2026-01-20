@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import uk.org.sehicl.website.Constants;
-import uk.org.sehicl.website.dataload.ModelLoader;
+import uk.org.sehicl.website.report.ModelAndRules;
 import uk.org.sehicl.website.rules.Rules;
 
 class TestDataCompleteness
@@ -24,21 +24,20 @@ class TestDataCompleteness
     @MethodSource
     void testAllMatchesComplete(int season)
     {
-        var rules = new Rules.Builder(season).build();
-        var model = ModelLoader.getModel(season);
-        var teamNames = model
+        var mr = new ModelAndRules(season);
+        var teamNames = mr.model
                 .getLeagues()
                 .stream()
                 .map(League::getTeams)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toMap(Team::getId, Team::getName));
-        model
+        mr.model
                 .getLeagues()
                 .stream()
                 .map(League::getMatches)
                 .flatMap(Collection::stream)
                 .filter(m -> m.getPlayedMatch() != null)
-                .forEach(m -> assertThat(completeness(m, rules))
+                .forEach(m -> assertThat(completeness(m, mr.rules))
                         .as("%s %s v %s", DF.format(m.getDateTime()),
                                 teamNames.get(m.getHomeTeamId()), teamNames.get(m.getAwayTeamId()))
                         .isNotEqualTo(Completeness.INCOMPLETE));
@@ -47,13 +46,13 @@ class TestDataCompleteness
     Completeness completeness(Match m, Rules rules)
     {
         return Stream
-                .of(m.getCompleteness(rules), checkPerformances(m.getPlayedMatch(), rules))
+                .of(m.getCompleteness(rules), checkPerformances(m.getPlayedMatch()))
                 .sorted()
                 .findFirst()
                 .get();
     }
 
-    Completeness checkPerformances(PlayedMatch m, Rules rules)
+    Completeness checkPerformances(PlayedMatch m)
     {
         if (m
                 .getTeams()
