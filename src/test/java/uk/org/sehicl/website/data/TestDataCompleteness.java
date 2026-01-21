@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -38,9 +39,15 @@ class TestDataCompleteness
                 .flatMap(Collection::stream)
                 .filter(m -> m.getPlayedMatch() != null)
                 .forEach(m -> assertThat(completeness(m, mr.rules))
-                        .as("%s %s v %s", DF.format(m.getDateTime()),
-                                teamNames.get(m.getHomeTeamId()), teamNames.get(m.getAwayTeamId()))
+                        .as(matchString(m, teamNames))
                         .isNotEqualTo(Completeness.INCOMPLETE));
+    }
+
+    String matchString(Match m, Map<String, String> teamNames)
+    {
+        return "%s %s v %s"
+                .formatted(DF.format(m.getDateTime()), teamNames.get(m.getHomeTeamId()),
+                        teamNames.get(m.getAwayTeamId()));
     }
 
     Completeness completeness(Match m, Rules rules)
