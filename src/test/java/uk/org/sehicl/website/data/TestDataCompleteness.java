@@ -20,13 +20,14 @@ import uk.org.sehicl.website.rules.Rules;
 class TestDataCompleteness
 {
     final static DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");
+    Map<String, String> teamNamesById;
 
     @ParameterizedTest
     @MethodSource
     void testAllMatchesComplete(int season)
     {
         var mr = new ModelAndRules(season);
-        var teamNames = mr.model
+        teamNamesById = mr.model
                 .getLeagues()
                 .stream()
                 .map(League::getTeams)
@@ -39,15 +40,15 @@ class TestDataCompleteness
                 .flatMap(Collection::stream)
                 .filter(m -> m.getPlayedMatch() != null)
                 .forEach(m -> assertThat(completeness(m, mr.rules))
-                        .as(matchString(m, teamNames))
+                        .as(matchString(m))
                         .isNotEqualTo(Completeness.INCOMPLETE));
     }
 
-    String matchString(Match m, Map<String, String> teamNames)
+    String matchString(Match m)
     {
         return "%s %s v %s"
-                .formatted(DF.format(m.getDateTime()), teamNames.get(m.getHomeTeamId()),
-                        teamNames.get(m.getAwayTeamId()));
+                .formatted(DF.format(m.getDateTime()), teamNamesById.get(m.getHomeTeamId()),
+                        teamNamesById.get(m.getAwayTeamId()));
     }
 
     Completeness completeness(Match m, Rules rules)
