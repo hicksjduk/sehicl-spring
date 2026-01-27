@@ -63,36 +63,27 @@ class TestDataCompleteness
 
     Completeness checkPerformances(PlayedMatch m)
     {
-        if (m
-                .getTeams()
+        var innings = m.getTeams().stream().map(TeamInMatch::getInnings).toList();
+        if (innings
                 .stream()
-                .map(TeamInMatch::getInnings)
                 .flatMap(i -> Stream.of(i.getBatsmen(), i.getBowlers()))
                 .anyMatch(Collection::isEmpty))
             return Completeness.INCOMPLETE;
-        var battersByInnings = m
-                .getTeams()
+        var battersByInnings = innings
                 .stream()
-                .map(TeamInMatch::getInnings)
                 .map(i -> i.getBatsmen().stream().map(Performance::getPlayerId).toList())
                 .toList();
-        var bowlersByInnings = m
-                .getTeams()
+        var bowlersByInnings = innings
                 .stream()
-                .map(TeamInMatch::getInnings)
                 .map(i -> i.getBowlers().stream().map(Performance::getPlayerId).toList())
                 .toList();
-        if (Stream
-                .of(battersByInnings.get(0), bowlersByInnings.get(1))
-                .flatMap(Collection::stream)
-                .distinct()
-                .count() > 6)
-            return Completeness.INCOMPLETE;
-        if (Stream
-                .of(battersByInnings.get(1), bowlersByInnings.get(0))
-                .flatMap(Collection::stream)
-                .distinct()
-                .count() > 6)
+        var playerCounts = IntStream
+                .of(0, 1)
+                .mapToObj(i -> Stream.of(battersByInnings.get(i), bowlersByInnings.get(1 - i)))
+                .map(str -> str.flatMap(Collection::stream))
+                .map(Stream::distinct)
+                .mapToLong(Stream::count);
+        if (playerCounts.anyMatch(c -> c > 6))
             return Completeness.INCOMPLETE;
         return Completeness.CONSISTENT;
     }
