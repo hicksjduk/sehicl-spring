@@ -177,16 +177,23 @@ public class BowlingAverages implements Averages<BowlingRow>
 
         public BowlingAverages build()
         {
-            Stream.of(seasonData).forEach(
-                    sd -> sd.model.getLeagues().stream().filter(selector::isSelected).forEach(
-                            l -> this.add(l, sd.rules)));
+            Stream
+                    .of(seasonData)
+                    .forEach(sd -> sd.model
+                            .getLeagues()
+                            .stream()
+                            .filter(selector::isSelected)
+                            .forEach(l -> this.add(l, sd.rules)));
             return new BowlingAverages(this);
         }
 
         private void add(League league, Rules rules)
         {
-            league.getMatches().stream().filter(m -> selector.isSelected(m)).forEach(
-                    m -> this.add(league, m, rules));
+            league
+                    .getMatches()
+                    .stream()
+                    .filter(m -> selector.isSelected(m))
+                    .forEach(m -> this.add(league, m, rules));
         }
 
         private void add(League league, Match match, Rules rules)
@@ -195,11 +202,11 @@ public class BowlingAverages implements Averages<BowlingRow>
             status.add(match, complete);
             if (complete && match.getPlayedMatch() != null)
             {
-                match
-                        .getPlayedMatch()
-                        .getTeams()
+                var teams = match.getPlayedMatch().getTeams();
+                var bothTeamsSelected = teams.stream().allMatch(selector::isSelected);
+                teams
                         .stream()
-                        .filter(t -> selector.isSelected(t, false))
+                        .filter(t -> bothTeamsSelected || !selector.isSelected(t))
                         .forEach(t -> this.add(league, match, t, rules));
             }
         }
@@ -209,8 +216,11 @@ public class BowlingAverages implements Averages<BowlingRow>
             String teamId = match.getOpponentId(teamInMatch.getTeamId());
             Team opponent = league.getTeam(teamInMatch.getTeamId());
             final Team team = league.getTeam(teamId);
-            teamInMatch.getInnings().getBowlers().stream().forEach(
-                    b -> this.add(team, b, rules, match.getDateTime(), opponent));
+            teamInMatch
+                    .getInnings()
+                    .getBowlers()
+                    .stream()
+                    .forEach(b -> this.add(team, b, rules, match.getDateTime(), opponent));
         }
 
         private void add(Team team, Bowler bowler, Rules rules, Date matchDate, Team opponent)

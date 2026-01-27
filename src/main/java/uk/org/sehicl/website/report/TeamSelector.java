@@ -1,41 +1,40 @@
 package uk.org.sehicl.website.report;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.stream.Stream;
 
 import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Match;
 import uk.org.sehicl.website.data.Player;
+import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.data.TeamInMatch;
 
 public class TeamSelector implements AveragesSelector
 {
-    private final String teamId;
-    
-    public TeamSelector(String teamId)
+    private final String teamIdPattern;
+
+    public TeamSelector(String teamIdPattern)
     {
-        this.teamId = teamId;
+        this.teamIdPattern = teamIdPattern;
     }
 
     @Override
     public boolean isSelected(League league)
     {
-        boolean answer = league.getTeam(teamId) != null;
-        return answer;
+        return league.getTeams().stream().map(Team::getId).anyMatch(s -> s.matches(teamIdPattern));
     }
 
     @Override
     public boolean isSelected(Match match)
     {
-        boolean answer = Arrays.asList(match.getHomeTeamId(), match.getAwayTeamId()).contains(teamId);
-        return answer;
+        return Stream
+                .of(match.getHomeTeamId(), match.getAwayTeamId())
+                .anyMatch(s -> s.matches(teamIdPattern));
     }
 
     @Override
-    public boolean isSelected(TeamInMatch teamInMatch, boolean batting)
+    public boolean isSelected(TeamInMatch teamInMatch)
     {
-        boolean answer = batting == Objects.equals(teamInMatch.getTeamId(), teamId);
-        return answer;
+        return teamInMatch.getTeamId().matches(teamIdPattern);
     }
 
     @Override

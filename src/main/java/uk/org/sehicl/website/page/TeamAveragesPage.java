@@ -1,9 +1,11 @@
 package uk.org.sehicl.website.page;
 
+import java.util.Collection;
 import java.util.stream.IntStream;
 
 import uk.org.sehicl.website.Constants;
 import uk.org.sehicl.website.data.Completeness;
+import uk.org.sehicl.website.data.League;
 import uk.org.sehicl.website.data.Team;
 import uk.org.sehicl.website.navigator.Section;
 import uk.org.sehicl.website.report.BattingAverages;
@@ -51,7 +53,14 @@ public class TeamAveragesPage extends Page
                 .build();
         bowling = new BowlingAverages.Builder(selector, completenessThreshold, null, seasonData)
                 .build();
-        team = seasonData[0].model.getTeam(teamId);
+        team = seasonData[0].model
+                .getLeagues()
+                .stream()
+                .map(League::getTeams)
+                .flatMap(Collection::stream)
+                .filter(t -> t.getId().matches(teamId))
+                .findFirst()
+                .get();
         title = String.format("Averages: %s", team.getName());
         current = false;
     }

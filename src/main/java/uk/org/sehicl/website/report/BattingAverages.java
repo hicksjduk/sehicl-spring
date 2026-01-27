@@ -186,7 +186,7 @@ public class BattingAverages implements Averages<BattingRow>
                         .getPlayedMatch()
                         .getTeams()
                         .stream()
-                        .filter(t -> selector.isSelected(t, true))
+                        .filter(t -> selector.isSelected(t))
                         .forEach(t -> this.add(league, t, match.getDateTime(),
                                 league.getTeam(match.getOpponentId(t.getTeamId()))));
             }

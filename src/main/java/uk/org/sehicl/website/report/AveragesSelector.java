@@ -11,7 +11,7 @@ public interface AveragesSelector
     
     boolean isSelected(Match match);
     
-    boolean isSelected(TeamInMatch teamInMatch, boolean batting);
+    boolean isSelected(TeamInMatch teamInMatch);
     
     String getUniqueId(Player player);
 }

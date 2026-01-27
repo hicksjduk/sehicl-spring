@@ -34,7 +34,7 @@ public enum LeagueSelector implements AveragesSelector
     }
 
     @Override
-    public boolean isSelected(TeamInMatch teamInMatch, boolean batting)
+    public boolean isSelected(TeamInMatch teamInMatch)
     {
         return true;
     }
