@@ -110,20 +110,6 @@
     </person>
 
     <person>
-        <name>Steven Wood</name>
-        <phone>07595 245502</phone>
-        <role name="Secretary" club="Fair Oak">
-            <email id="fairoak.secretary" />
-        </role>
-    </person>
-
-    <person>
-        <name>Nick Dempsey</name>
-        <phone>07519 506683</phone>
-        <role name="Under-13" club="Fair Oak" />
-    </person>
-
-    <person>
         <name>Claire Hewitt</name>
         <phone>07786377966</phone>
         <role name="Secretary" club="Fareham &amp; Crofton">
@@ -256,20 +242,6 @@
         <role name="B team" club="Kerala"/>
     </person>
     
-    <person>
-        <name>Dan McLeish</name>
-        <phone>07876 701019</phone>
-        <role name="Secretary" club="Knowle Village">
-            <email id="knowle.secretary" />
-        </role>
-    </person>
-
-    <person>
-        <name>Simon Izzard</name>
-        <phone>07791 675618</phone>
-        <role name="Captain" club="Knowle Village" />
-    </person>
-
     <person>
         <name>Anthony Lovell</name>
         <phone>07714 583123</phone>
@@ -409,8 +381,8 @@
     </person>
 
     <person>
-        <name>Bernard Harding</name>
-        <phone>07747 771808</phone>
+        <name>Wayne Musselwhite</name>
+        <phone>07704 562971</phone>
         <role name="Secretary" club="Purbrook">
             <email id="purbrook.secretary" />
         </role>
