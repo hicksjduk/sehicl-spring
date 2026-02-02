@@ -74,12 +74,7 @@ class TestDataCompleteness
     Completeness checkPerformances(PlayedMatch m, Rules r)
     {
         var innings = m.getTeams().stream().map(TeamInMatch::getInnings).toList();
-        if (innings
-                .stream()
-                .map(i -> checkWickets(i, r))
-                .filter(Completeness.INCOMPLETE::equals)
-                .findFirst()
-                .isPresent())
+        if (innings.stream().map(i -> checkWickets(i, r)).anyMatch(Completeness.INCOMPLETE::equals))
             return Completeness.INCOMPLETE;
         if (innings
                 .stream()
@@ -94,13 +89,13 @@ class TestDataCompleteness
                 .stream()
                 .map(i -> i.getBowlers().stream().map(Performance::getPlayerId).toList())
                 .toList();
-        var playerCounts = IntStream
+        if (IntStream
                 .of(0, 1)
                 .mapToObj(i -> Stream.of(battersByInnings.get(i), bowlersByInnings.get(1 - i)))
                 .map(str -> str.flatMap(Collection::stream))
                 .map(Stream::distinct)
-                .mapToLong(Stream::count);
-        if (playerCounts.anyMatch(c -> c > 6))
+                .mapToLong(Stream::count)
+                .anyMatch(c -> c > 6))
             return Completeness.INCOMPLETE;
         return Completeness.CONSISTENT;
     }
