@@ -55,15 +55,32 @@ class TestDataCompleteness
     Completeness completeness(Match m, Rules rules)
     {
         return Stream
-                .of(m.getCompleteness(rules), checkPerformances(m.getPlayedMatch()))
+                .of(m.getCompleteness(rules), checkPerformances(m.getPlayedMatch(), rules))
                 .sorted()
                 .findFirst()
                 .get();
     }
 
-    Completeness checkPerformances(PlayedMatch m)
+    Completeness checkWickets(Innings i, Rules r)
+    {
+        var wkts = i.getWicketsLost(r.getMaxWickets());
+        if (i.getBatsmen().stream().filter(Batsman::isOut).count() > wkts)
+            return Completeness.INCOMPLETE;
+        if (i.getBowlers().stream().mapToInt(Bowler::getWicketsTaken).sum() > wkts)
+            return Completeness.INCOMPLETE;
+        return Completeness.CONSISTENT;
+    }
+
+    Completeness checkPerformances(PlayedMatch m, Rules r)
     {
         var innings = m.getTeams().stream().map(TeamInMatch::getInnings).toList();
+        if (innings
+                .stream()
+                .map(i -> checkWickets(i, r))
+                .filter(Completeness.INCOMPLETE::equals)
+                .findFirst()
+                .isPresent())
+            return Completeness.INCOMPLETE;
         if (innings
                 .stream()
                 .flatMap(i -> Stream.of(i.getBatsmen(), i.getBowlers()))
