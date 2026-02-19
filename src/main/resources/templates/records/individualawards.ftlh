@@ -62,6 +62,7 @@
     <@award 2022 "M Bradley" "Clanfield A" "217"/>
     <@award 2023 "H Hovey" "Barracuda" "378"/>
     <@award 2024 "H Hovey" "Barracuda" "403"/>
+    <@award 2025 "S Harradine" "Purbrook" "287"/>
 </tbody>
 </table>
 
@@ -100,6 +101,7 @@
     <@award 2022 "C Clark" "Fareham & Crofton" "11"/>
     <@award 2023 "J Headen" "Fareham & Crofton" "14"/>
     <@award 2024 "K Muthuraman" "Kerala A" "13"/>
+    <@award 2025 "G Wilson" "Portsmouth & Southsea" "14"/>
 </tbody>
 </table>
 
@@ -135,6 +137,7 @@
     <@award 2022 "E Royle" "Gosport Borough" "153"/>
     <@award 2023 "S Harradine" "Hambledon Jets" "203"/>
     <@award 2024 "E Lewis" "Hambledon Jets" "257"/>
+    <@award 2025 "B Giffin" "Portsmouth" "330"/>
 </tbody>
 </table>
 
@@ -170,6 +173,7 @@
     <@award 2022 "A Cole" "Portsmouth A" "6"/>
     <@award 2023 "F Hayes" "Hambledon Sharks" "5"/>
     <@award 2024 "T Rayner" "Fareham & Crofton" "10"/>
+    <@award 2025 "S Wheeler" "Portsmouth & Southsea" "10"/>
 </tbody>
 </table>
 
@@ -205,6 +209,7 @@
     <@award 2022 "H O'Hara" "Portsmouth & Southsea" "179"/>
     <@award 2023 "L Harradine" "Waterlooville" "240"/>
     <@award 2024 "H Hayes" "Hambledon Sharks" "221"/>
+    <@award 2025 "J Rowlandson" "Havant" "289"/>
 </tbody>
 </table>
 
@@ -240,6 +245,7 @@
     <@award 2022 "H Ferrett" "Portsmouth & Southsea" "9"/>
     <@award 2023 "J Pay" "Havant" "8"/>
     <@award 2024 "J Peat" "Portsmouth Warrior" "11"/>
+    <@award 2025 "S Morgan" "Havant" "15"/>
 </tbody>
 </table>
 </div>
