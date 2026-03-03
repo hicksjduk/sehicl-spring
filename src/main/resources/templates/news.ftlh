@@ -16,10 +16,10 @@
 	</#if>
 </#macro>
 
-<@news end="2026-01-31">
-Unfortunately, <b>Knowle Village have decided to withdraw from the League</b>. All
-their results to date have been expunged from the record, and their forthcoming matches
-will not take place. 
+<@news>
+We have been asked to inform all players that <b>all kit bags should be stored while games are in
+progress in Studio 3</b>, which is the room immediately opposite the hall entrance that leads to the
+walkway between the courts. They must not be left in corridors, changing rooms or toilets. 
 </@news>
 
 <#if started??>
