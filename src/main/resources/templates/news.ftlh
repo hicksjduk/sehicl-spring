@@ -16,6 +16,12 @@
 	</#if>
 </#macro>
 
+<@news end="2026-03-29">
+<b>Congratulations to last year's League champions Waterlooville</b>, who have reached the
+finals of the national indoor championships. They will head to Lord's on Sunday 29th March,
+and we wish them every success. 
+</@news>
+
 <@news>
 We have been asked to inform all players that <b>all kit bags should be stored while games are in
 progress in Studio 3</b>, which is the room immediately opposite the hall entrance that leads to the
