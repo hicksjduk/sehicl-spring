@@ -22,9 +22,9 @@ finals of the national indoor championships. They will head to Lord's on Sunday 
 and we wish them every success. 
 </@news>
 
-<@news>
-We have been asked to inform all players that <b>all kit bags should be stored while games are in
-progress in Studio 3</b>, which is the room immediately opposite the hall entrance that leads to the
+<@news end="2026-03-29">
+We have been asked to inform all players that <b>all kit bags should be stored, while games are in
+progress, in Studio 3</b>, which is the room immediately opposite the hall entrance that leads to the
 walkway between the courts. They must not be left in corridors, changing rooms or toilets. 
 </@news>
 
