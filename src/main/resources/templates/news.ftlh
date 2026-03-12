@@ -23,9 +23,9 @@ and we wish them every success.
 </@news>
 
 <@news end="2026-04-19">
-<b>As a consequence of Waterlooville's success in reaching the national indoor finals, the
+As a consequence of Waterlooville's success in reaching the national indoor finals, the
 League's end-of-season presentation evening has been postponed from 29th March to 
-<b>Sunday 19th April</b> All are welcome to come along and celebrate the success of all
+<b>Sunday 19th April</b>. All are welcome to come along and celebrate the success of all
 our divisional champions and award winners. 
 </@news>
 
