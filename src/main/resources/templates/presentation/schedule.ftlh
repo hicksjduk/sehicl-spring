@@ -4,7 +4,7 @@
 <h2>Order of events</h2>
 <p>5.00pm: Exhibition matches
 <ul>
-<li>Colts Under-13 champions (TBC) v Under-13 Select VI
+<li>Colts Under-13 champions (Havant) v Under-13 Select VI
 <li>Colts Under-16 champions (Waterlooville) v Under-16 Select VI
 </ul>
 <p>6.00pm: Presentation of Colts awards
@@ -37,10 +37,8 @@ Cllr Louise Clubley
 <li>Division 1 champions: Waterlooville A
 </ul>
 -->
-<p>8.00pm: Exhibition matches: schedule TBC
-<#--
+<p>8.00pm: Exhibition matches:
 <ul>
-<li>Division 2 champions (Havant) v Division 3 champions (Portsmouth)
-<li>Division 4 champions (Clanfield A) v Committee/Umpires
+<li>Division 2 champions (Portsmouth A) v Division 3 champions (TBC)
+<li>Division 4 champions (Superkings) v Committee/Umpires
 </ul>
--->
