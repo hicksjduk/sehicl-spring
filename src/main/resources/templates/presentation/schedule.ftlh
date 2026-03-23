@@ -16,12 +16,12 @@
 <li>Colts Under-13 bowling: Sam Morgan (Havant)
 <li>Colts Under-16 batting: Bradley Giffin (Portsmouth)
 <li>Colts Under-16 bowling: Sam Wheeler (Portsmouth & Southsea)
-<li>Colts Under-13 champions: Portsmouth
-<li>Colts Under-16 champions: Portsmouth & Southsea
+<li>Colts Under-13 champions: Havant
+<li>Colts Under-16 champions: Waterlooville
 </ul>
 -->
 <p>6.30pm: Exhibition match (8-a-side),
-Division 1 champions (TBC) v the Mayor of Fareham's VIII
+Division 1 champions (Waterlooville A) v the Mayor of Fareham's VIII
 <p>7.30pm: Presentation of Senior awards by the Mayor of Fareham,
 Cllr Louise Clubley
 <#--
@@ -31,14 +31,14 @@ Cllr Louise Clubley
 <li>Sporting and Efficiency: Clanfield B
 <li>Senior batting: Sam Harradine (Purbrook)
 <li>Senior bowling: George Wilson (Portsmouth & Southsea)
-<li>Division 4 champions: Clanfield A
-<li>Division 3 champions: Portsmouth
-<li>Division 2 champions: Havant
+<li>Division 4 champions: Superkings
+<li>Division 3 champions: Hambledon C
+<li>Division 2 champions: Portsmouth A
 <li>Division 1 champions: Waterlooville A
 </ul>
 -->
 <p>8.00pm: Exhibition matches:
 <ul>
-<li>Division 2 champions (Portsmouth A) v Division 3 champions (TBC)
+<li>Division 2 champions (Portsmouth A) v Division 3 champions (Hambledon C)
 <li>Division 4 champions (Superkings) v Committee/Umpires
 </ul>
