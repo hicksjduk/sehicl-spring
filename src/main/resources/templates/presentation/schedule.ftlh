@@ -11,11 +11,11 @@
 <#--
 <ul>
 <li>Mementoes to the members of the Colts Select sides
-<li>Sporting and Efficiency: Waterlooville Under-16s
-<li>Colts Under-13 batting: Jan Rowlandson (Havant)
-<li>Colts Under-13 bowling: Sam Morgan (Havant)
-<li>Colts Under-16 batting: Bradley Giffin (Portsmouth)
-<li>Colts Under-16 bowling: Sam Wheeler (Portsmouth & Southsea)
+<li>Sporting and Efficiency: ?
+<li>Colts Under-13 batting: Teddy Moore (Gosport Borough)
+<li>Colts Under-13 bowling: H Freemantle (Sarisbury Athletic)
+<li>Colts Under-16 batting: Alex Varney (Locks Heath)
+<li>Colts Under-16 bowling: Louie De Bohan (Waterlooville)
 <li>Colts Under-13 champions: Havant
 <li>Colts Under-16 champions: Waterlooville
 </ul>
@@ -28,9 +28,9 @@ Cllr Louise Clubley
 <ul>
 <li>Mementoes to the members of the Mayor of Fareham's VIII
 <li>Trophy to the winner of the Mayor's game
-<li>Sporting and Efficiency: Clanfield B
-<li>Senior batting: Sam Harradine (Purbrook)
-<li>Senior bowling: George Wilson (Portsmouth & Southsea)
+<li>Sporting and Efficiency: ?
+<li>Senior batting: ?
+<li>Senior bowling: Jamie Lewis (Hambledon B)
 <li>Division 4 champions: Superkings
 <li>Division 3 champions: Hambledon C
 <li>Division 2 champions: Portsmouth A
