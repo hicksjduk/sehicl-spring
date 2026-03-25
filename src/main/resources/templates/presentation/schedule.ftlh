@@ -8,10 +8,9 @@
 <li>Colts Under-16 champions (Waterlooville) v Under-16 Select VI
 </ul>
 <p>6.00pm: Presentation of Colts awards
-<#--
 <ul>
 <li>Mementoes to the members of the Colts Select sides
-<li>Sporting and Efficiency: ?
+<li>Sporting and Efficiency: TBC
 <li>Colts Under-13 batting: Teddy Moore (Gosport Borough)
 <li>Colts Under-13 bowling: Harry Freemantle (Sarisbury Athletic)
 <li>Colts Under-16 batting: Alex Varney (Locks Heath)
@@ -19,16 +18,14 @@
 <li>Colts Under-13 champions: Havant
 <li>Colts Under-16 champions: Waterlooville
 </ul>
--->
 <p>6.30pm: Exhibition match (8-a-side),
 Division 1 champions (Waterlooville A) v the Mayor of Fareham's VIII
 <p>7.30pm: Presentation of Senior awards by the Mayor of Fareham,
 Cllr Louise Clubley
-<#--
 <ul>
 <li>Mementoes to the members of the Mayor of Fareham's VIII
 <li>Trophy to the winner of the Mayor's game
-<li>Sporting and Efficiency: ?
+<li>Sporting and Efficiency: TBC
 <li>Senior batting: Matt Bradley (Clanfield A)
 <li>Senior bowling: Jamie Lewis (Hambledon B)
 <li>Division 4 champions: Superkings
@@ -36,7 +33,6 @@ Cllr Louise Clubley
 <li>Division 2 champions: Portsmouth A
 <li>Division 1 champions: Waterlooville A
 </ul>
--->
 <p>8.00pm: Exhibition matches:
 <ul>
 <li>Division 2 champions (Portsmouth A) v Division 3 champions (Hambledon C)
