@@ -29,7 +29,7 @@ Cllr Louise Clubley
 <li>Mementoes to the members of the Mayor of Fareham's VIII
 <li>Trophy to the winner of the Mayor's game
 <li>Sporting and Efficiency: ?
-<li>Senior batting: ?
+<li>Senior batting: Matt Bradley (Clanfield A)
 <li>Senior bowling: Jamie Lewis (Hambledon B)
 <li>Division 4 champions: Superkings
 <li>Division 3 champions: Hambledon C
