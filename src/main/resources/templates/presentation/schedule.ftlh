@@ -13,7 +13,7 @@
 <li>Mementoes to the members of the Colts Select sides
 <li>Sporting and Efficiency: ?
 <li>Colts Under-13 batting: Teddy Moore (Gosport Borough)
-<li>Colts Under-13 bowling: H Freemantle (Sarisbury Athletic)
+<li>Colts Under-13 bowling: Harry Freemantle (Sarisbury Athletic)
 <li>Colts Under-16 batting: Alex Varney (Locks Heath)
 <li>Colts Under-16 bowling: Louie De Bohan (Waterlooville)
 <li>Colts Under-13 champions: Havant
