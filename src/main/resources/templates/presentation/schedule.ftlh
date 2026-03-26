@@ -10,7 +10,7 @@
 <p>6.00pm: Presentation of Colts awards
 <ul>
 <li>Mementoes to the members of the Colts Select sides
-<li>Sporting and Efficiency: TBC
+<li>Sporting and Efficiency: Waterlooville Under-16
 <li>Colts Under-13 batting: Teddy Moore (Gosport Borough)
 <li>Colts Under-13 bowling: Harry Freemantle (Sarisbury Athletic)
 <li>Colts Under-16 batting: Alex Varney (Locks Heath)
@@ -25,7 +25,7 @@ Cllr Louise Clubley
 <ul>
 <li>Mementoes to the members of the Mayor of Fareham's VIII
 <li>Trophy to the winner of the Mayor's game
-<li>Sporting and Efficiency: TBC
+<li>Sporting and Efficiency: Emsworth
 <li>Senior batting: Matt Bradley (Clanfield A)
 <li>Senior bowling: Jamie Lewis (Hambledon B)
 <li>Division 4 champions: Superkings
