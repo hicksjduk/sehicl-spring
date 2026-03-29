@@ -22,7 +22,7 @@ indoor championships at Lord's on Sunday 29th March.
 <br>In the semi-final they bowled out Cambridgeshire champions AK XI for 42 (Joseph Mitchell
 taking 2 for 4 and Ray Reynolds 2 for 10) and scored 43 for 0 in 4.3 overs.
 <br>In the final they bowled out Whitstable (Kent) for 79 (Ray Reynolds 2 for 18) and reached
-the target with three wickets and ten balls to spare (Charlie Whitfield 22 not out). 
+the target with three wickets and eight balls to spare (Charlie Whitfield 22 not out). 
 </@news>
 
 <@news end="2026-04-19">
