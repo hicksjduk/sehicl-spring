@@ -18,12 +18,12 @@
 	the Mayor of Fareham, presents the senior teams' awards, and the
 	centrepiece of the evening is an eight-a-side challenge match between the
 	Mayor of Fareham's VIII and the Division 1 champions' VIII.
+	<a href="/archive/presentation/2026">The 2026 presentation evening</a>
+	was on Sunday 19th April; click the link to view details of the evening.
 	<#--
-	<a href="/archive/presentation/2025">The 2025 presentation evening</a>
-	was on Sunday 30th March; click the link to view details of the evening.
-	-->
     The <a href="/presentation">2026 presentation evening</a>
     is on Sunday 19th April; click the link to view the schedule for the evening.
+    -->
 </p>
 <p>Please report any broken links, mis-spelled names or other errors
 	to 	<@mailto address="website" description="SEHICL Webmaster">

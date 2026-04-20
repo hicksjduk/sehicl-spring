@@ -1,10 +1,17 @@
 <#include "../resultutils.ftlh"/>
 
-<#macro exhibitionMatch title innings1 innings2 maxWickets=6>
+<#macro exhibitionMatch title innings1={} innings2={} maxWickets=6>
 <tr>
 	<td colspan="2" class="division">${title}</td>
 </tr>
+<#if (innings1.team)??>
 <@match innings1 innings2 maxWickets/>
+<#else>
+<tr>
+    <td colspan="2">Match details to be added.</td> 
+</td>
+</tr>
+</#if>
 </#macro>
 
 <#macro section title>
