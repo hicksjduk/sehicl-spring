@@ -15,10 +15,9 @@
 				alt="Colts Under-13 Select VI"><br>The Colts Under-13 Select side
 		</tr>
 		<@exhibitionMatch "Under-16"
-		      <#--
-            innings("Under-16 Select VI", 121, 5, 12, "H Hayes 33", "B Eddie 27")
-            innings("Portsmouth & Southsea", 106, 4, 12, "J Wheeler 26", "H Hayes 2/9")
-                -->
+            innings("Waterlooville", 104, 6, 9.1, "H Miller 34", "R Reynolds 28", 
+                "H Ainsworth 3/20", "J Pay 2/28")
+            innings("Under-16 Select VI", 105, 4, 10.4, "J Pay 40*")
 		/>
 		<tr>
 			<td colspan="2"><img border="0" src="/graphics/presentation2026/U16Select.JPG"
