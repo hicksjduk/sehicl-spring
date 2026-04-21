@@ -58,10 +58,8 @@
 		</tr>
 		-->
 		<@exhibitionMatch "Division 2 Champions v Division 3 Champions"
-		<#--
-			innings("Havant", 93, 6, 10, "P Hopson 35", "S Jones 2/19")
-			innings("Portsmouth", 94, 0, 5.3, "H Gadd 29*", "Y Fernando 27*", "J Kooner-Evans 26*")
-		-->
+            innings("Portsmouth", 99, 6, 12, "T Garne 2/26")
+			innings("Hambledon C", 91, 4, 12, "B Poole 30*", "A Sahaq 2/20")
 		/>
 		<@exhibitionMatch "Division 4 Champions v Committee/Umpires"
 			innings("Superkings", 177, 0, 10, "B Varghese 38*", "N Joy 29*",
