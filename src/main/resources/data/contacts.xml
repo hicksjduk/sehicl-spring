@@ -291,8 +291,8 @@
     </person>
 
     <person>
-        <name>Emma Dudley</name>
-        <phone>07707 714085</phone>
+        <name>TBC</name>
+        <!--phone>07707 714085</phone-->
         <role name="Secretary" club="Petersfield">
             <email id="petersfield.secretary" />
         </role>
