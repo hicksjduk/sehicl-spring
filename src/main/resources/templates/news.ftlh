@@ -16,7 +16,7 @@
 	</#if>
 </#macro>
 
-<@news>
+<@news end="2026-05-01">
 <b>Many congratulations to last year's League champions Waterlooville</b>, who won the national 
 indoor championships at Lord's on Sunday 29th March.
 <br>In the semi-final they bowled out Cambridgeshire champions AK XI for 42 (Joseph Mitchell
