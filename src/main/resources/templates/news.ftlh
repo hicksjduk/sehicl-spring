@@ -16,26 +16,15 @@
 	</#if>
 </#macro>
 
-<@news end="2026-05-01">
-<b>Many congratulations to last year's League champions Waterlooville</b>, who won the national 
-indoor championships at Lord's on Sunday 29th March.
-<br>In the semi-final they bowled out Cambridgeshire champions AK XI for 42 (Joseph Mitchell
-taking 2 for 4 and Ray Reynolds 2 for 10) and scored 43 for 0 in 4.3 overs.
-<br>In the final they bowled out Whitstable (Kent) for 79 (Ray Reynolds 2 for 18) and reached
-the target with three wickets and eight balls to spare (Charlie Whitfield 22 not out). 
-</@news>
-
-<@news end="2026-04-19">
-As a consequence of Waterlooville's success in reaching the national indoor finals, the
-League's end-of-season presentation evening has been postponed from 29th March to 
-<b>Sunday 19th April</b>. All are welcome to come along and celebrate the success of all
-our divisional champions and award winners. 
-</@news>
-
-<@news end="2026-03-29">
-We have been asked to inform all players that <b>all kit bags should be stored, while games are in
-progress, in Studio 3</b>, which is the room immediately opposite the hall entrance that leads to the
-walkway between the courts. They must not be left in corridors, changing rooms or toilets. 
+<@news>
+<b>The 2026-27 season of the League will commence on Sunday 20th September.</b>
+The fixtures will be published not later than the weekend of 5th and 6th 
+September.
+<br>Any teams that have Sunday outdoor matches on 20th and/or 27th September,
+and would therefore prefer not to play indoor on those dates, are requested
+to inform <@mailto address="fixturesec" description="SEHICL Fixture Secretary">
+    the Fixture Secretary
+    </@mailto> of this not later than Friday 28th August. 
 </@news>
 
 <#if started??>

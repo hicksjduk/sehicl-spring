@@ -9,7 +9,7 @@
 		href="https://www.everyoneactive.com/centre/fareham-leisure-centre/">Fareham
 		Leisure Centre</a>, Park Lane, Fareham (<a
 		href="https://www.google.com/maps/place/Fareham+Leisure+Centre/@50.8573839,-1.1872637,17z/data=!3m1!4b1!4m5!3m4!1s0x487468be4997762d:0x27530aee839dab5e!8m2!3d50.8573805!4d-1.185075">map</a>).
-	Matches are held on Sunday evenings, from October to March.
+	Matches are held on Sunday evenings, from September to March.
 </p>
 <p>
 	At the end of each season the League holds a presentation evening. All
@@ -20,6 +20,7 @@
 	Mayor of Fareham's VIII and the Division 1 champions' VIII.
 	<a href="/archive/presentation/2026">The 2026 presentation evening</a>
 	was on Sunday 19th April; click the link to view details of the evening.
+	The 2027 presentation evening will be on Sunday 21st March.
 	<#--
     The <a href="/presentation">2026 presentation evening</a>
     is on Sunday 19th April; click the link to view the schedule for the evening.
