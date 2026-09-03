@@ -17,14 +17,8 @@
 </#macro>
 
 <@news>
-<b>The 2026-27 season of the League will commence on Sunday 20th September.</b>
-The fixtures will be published not later than the weekend of 5th and 6th 
-September.
-<br>Any teams that have Sunday outdoor matches on 20th and/or 27th September,
-and would therefore prefer not to play indoor on those dates, are requested
-to inform <@mailto address="fixturesec" description="SEHICL Fixture Secretary">
-    the Fixture Secretary
-    </@mailto> of this not later than Friday 28th August. 
+The 2026-27 season of the League will commence on Sunday 20th September.
+<a href="/fixtures"><b>The fixtures are now available.</b></a>
 </@news>
 
 <#if started??>
