@@ -32,8 +32,7 @@ until such time as the fifth wicket has fallen. The batter shall retire again wh
 <li>A “No Ball” shall be called if any ball pitches short of the line on the mat, or if the ball rises and passes
 above shoulder height of the batter standing in his normal stance, irrespective of where the ball had
 pitched. A “No Ball” will also be called if the ball pitches, or would pitch, off the artificial wicket (commonly
-known as the mat). The one exception to this is for Under 13 matches when the call will be “wide”. This is
-to maintain pace of play in that competition.
+known as the mat).
 <li>The laws relating to wides shall be strictly interpreted by the Umpires.
 <br>LAW 22.1 - WIDE BALL - judging a “wide”.
 <br>Umpires are instructed to apply a very strict and consistent interpretation in regard to this law in order
@@ -72,19 +71,20 @@ In each case if the batters complete a run, 2 additional “extras” shall be s
 <li>2 Byes or 2 Leg-Byes shall be scored if the batters complete a run without the ball hitting a wall.
 <li>NO BALL
 <ol type="i">
-<li>If the batters do not run when a No Ball is called, a penalty of 1 run shall be credited under
+<li>If the batters do not run when a No Ball is called, a penalty of 3 runs shall be credited under
 “extras”.
-<li>If the batter does not strike the ball and completes a run, 3 runs shall be credited under “extras”.
+<li>If the batter does not strike the ball and completes a run, 5 runs shall be credited under “extras”, made up of 3 no-ball
+extras and 2 byes or leg-byes.
 <li>If the Striker hits a No Ball, that strikes a wall or ceiling or the batters complete a run, the number
-of runs scored shall be credited to the striker, plus the penalty of 1 No Ball to be recorded as No
+of runs scored shall be credited to the striker, plus the penalty of 3 runs to be recorded as No
 Ball “extras”.
+<br>NOTE: No extra ball will be allowed except for the FINAL OVER of each innings.
 </ol>
 <li>WIDE
 <br>If a “Wide” ball is called then 3 runs shall be credited under “extras”; 1 further run shall be credited under
 “extras” where the ball goes on to hit any wall at the striker's end; 2 further runs shall be credited under
 “extras” every time the batters complete a run.
-<br>NOTE: No extra ball will be allowed except for the FINAL OVER of each innings, when 3 runs will be
-recorded for a “wide” and an extra ball will be allowed.
+<br>NOTE: No extra ball will be allowed except for the FINAL OVER of each innings.
 <li>An overthrow hitting any wall or walls shall count as only 1 run to the batter or to the total of “extras”, as
 appropriate. Additional overthrows can only ensue from each additional throw, which goes on to hit a
 wall or walls. If a batter unintentionally diverts a ball thrown at the wicket to which he is running to, on

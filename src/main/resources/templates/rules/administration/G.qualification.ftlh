@@ -7,8 +7,13 @@ MCC University side shall be eligible.
 <li>Overseas Players: Only such overseas players as are qualified to play in the ECB Indoor Six-a-Side Championship
 under the rules currently in force will be permitted to play in the League.
 <li>A professional cricketer, whether appointed to the club in question or to another club shall not be eligible to play.
-<li>No player is eligible for selection unless he is a fully paid-up bona fide playing member of the club for which he is
-playing. No payments shall be made to players representing clubs in the League.
+<li>No player may play for more than one team in the League, and their eligibility for a team is established once they have played their
+first match in any particular season. The only exception to this is that “B”, “C” (and so on)
+team players are able to be promoted to higher sides within the same club, including in higher
+divisions, to fulfil fixtures. In the event of this being necessary prior to the establishment of an
+individual’s normal eligibility, notification should be made to the fixture secretary prior to the
+match being played, otherwise their eligibility will have been established in the higher team
+and no transfer to the lower team will be allowed for the remainder of that season.
 <li>No player may play for more than one side in the League. NOTE – ECB deem each team as a separate club.
 <li>No player may play for a club in Division 1 of the League if, during the current season (from 1st September to 30th
 April), he has played in another indoor competition from which clubs may qualify for the National Indoor
@@ -24,5 +29,4 @@ at time of delivery.
 Committee considers that his or her exclusion would be contrary to the spirit of the eligibility rules.
 <li>If eligibility is in doubt, it is strongly recommended that permission is granted by the League prior to their first
 appearance. This is to make sure that no rules are infringed and that no subsequent sanctions will apply.
-<li>Club cricketers are allowed to represent their firm's team providing they are employees of that firm.
 </ol>
