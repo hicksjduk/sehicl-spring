@@ -16,12 +16,6 @@
 	</#if>
 </#macro>
 
-<@news>
-The 2026-27 season of the League will commence on Sunday 20th September.
-<a href="/fixtures"><b>The fixtures are now available,</a>
-as is <a href="/dutyRota">the duty team rota.</a></b>
-</@news>
-
 <#if started??>
 	</div>
 </#if>
