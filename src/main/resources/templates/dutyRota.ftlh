@@ -15,7 +15,7 @@
 <@duty "18th October" "Hambledon A" />
 <@duty "25th October" "Clanfield B" />
 <@duty "1st November" "Portsmouth Community" />
-<@duty "8th November" "XIIth Men A" />
+<@duty "8th November" "XIIth Men B" />
 <@duty "15th November" "Bedhampton Mariners" />
 <@duty "22nd November" "Kerala A" />
 <@duty "29th November" "Clanfield A" />
@@ -29,7 +29,7 @@
 <@duty "3rd January" "Portsmouth & Southsea" />
 <@duty "7th February" "Kerala B" />
 <@duty "14th February" "Portsmouth B" />
-<@duty "21st February" "XIIth Men B" />
+<@duty "21st February" "XIIth Men A" />
 <@duty "28th February" "Havant B" />
 <@duty "7th March" "Havant A" />
 <@duty "14th March" "Waterlooville B" />
