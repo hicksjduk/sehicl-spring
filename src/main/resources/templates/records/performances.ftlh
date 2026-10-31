@@ -18,7 +18,7 @@
 <@performance "Division 1" "Havant A" "206 for 3" "2009-10"/>
 <@performance "Division 2" "United Services" "192 for 3" "1991-92"/>
 <@performance "Division 3" "United Services" "207 for 1" "1997-98"/>
-<@performance "Division 4" "Fareham & Crofton" "211 all out" "2019-20"/>
+<@performance "Division 4" "Havant B" "212 for 5" "2026-27"/>
 <@performance "Division 5" "Portsmouth C" "214 for 2" "2017-18"/>
 <@performance "Division 6" "Droxford" "162 for 1" "2019-20"/>
 <@performance "Colts Under-16" "Havant" "269 for 1" "2003-04"/>
@@ -47,7 +47,7 @@
 <@performance "Division 1" "Bedhampton A" "85" "2018-19" "H Hovey"/>
 <@performance "Division 2" "United Services" "102*" "1988-89" "P Barsby"/>
 <@performance "Division 3" "Locks Heath B" "84" "1999-2000" "R Higgins"/>
-<@performance "Division 4" "OPCS Titchfield" "95*" "2016-17" "A Jagadeesh"/>
+<@performance "Division 4" "Havant B" "98*" "2026-27" "B Pay"/>
 <@performance "Division 5" "Afghan Society Portsmouth" "71*" "2017-18" "H Peruzi"/>
 <@performance "" "XIIth Men B" "71" "2018-19" "Saleem"/>
 <@performance "Division 6" "Knowle Village" "65" "2019-20" "P Dennis"/>
