@@ -5,9 +5,8 @@ ensure that the scoreboards show the up-to-date situation of the game in progres
 Member Clubs of all senior divisions, but teams from any Member Club that supplies a member of the Committee and /
 or an Umpire may be excused from the Duty Rota, at the discretion of the Committee.
 <p>PENALTIES: In the event of the Duty Team being reported by the Umpires of a match that no scoreboard service was
-provided by the Duty Team, then EIGHT points shall be deducted from the playing record of the Duty Team for EACH MATCH
-so reported by the Umpires. In addition, the Committee reserves
-the right to double and / or defer the penalty to the following season's points total if the absence is perceived to be
+provided by the Duty Team, then EIGHT points shall be deducted from the playing record of the Duty Team. In addition, the Committee reserves
+the right to double and/or defer the penalty to the following season's points total if the absence is perceived to be
 because of an apathetic attitude to their responsibilities.
 <p>The Duty Team rota shall also be used for the supply of Umpires when required. Duty Teams will supply a competent
 Umpire to stand at square leg when required to so by the Umpires Co-ordinator. They will be given at least 7 days’ notice
